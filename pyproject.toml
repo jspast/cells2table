@@ -1,0 +1,46 @@
+[project]
+name = "cells2table"
+version = "0.1.0"
+description = "Table image parsing with cell detection models"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+  { name = "jspast", email = "140563347+jspast@users.noreply.github.com" }
+]
+keywords = ["docling", "plugin"]
+dependencies = [
+  "huggingface-hub>=0.36.0",
+  "numpy>=2.2.0",
+  "opencv-python>=4.11.0.86",
+]
+
+[project.scripts]
+cells2table = "cells2table.cli:main"
+
+[project.entry-points.docling]
+"cells2table" = "src.cells2table.docling_plugin"
+
+[project.optional-dependencies]
+cpu = [
+  "onnxruntime>=1.23.2",
+]
+cuda = [
+  "onnxruntime-gpu>=1.23.2",
+]
+docling = [
+  "docling>=2.66.0",
+]
+openvino = [
+  "onnxruntime-openvino>=1.23.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.17,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+
+[tool.uv]
+package = true
+conflicts = [[{ extra = "cpu" }, { extra = "cuda" }, { extra = "openvino" }]]
