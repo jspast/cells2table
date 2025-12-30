@@ -3,7 +3,7 @@ from pathlib import Path
 
 import cv2
 
-from .models.PaddlePaddle import PaddlePaddleTablePipeline
+from .models import DefaultPipeline
 from .utils.visualize import visualize_table
 
 
@@ -25,7 +25,7 @@ def main() -> None:
     print(f"Shape: {image.shape} (H, W, C)")
     print(f"Data type: {image.dtype}")
 
-    table_pipeline = PaddlePaddleTablePipeline()
+    table_pipeline = DefaultPipeline()
     tables = table_pipeline([image])  # type: ignore
 
     for table in tables:

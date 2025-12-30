@@ -21,9 +21,18 @@ def visualize_table(
     for cell in table.cells:
         cv2.rectangle(
             img,
-            (int(cell.bbox.l), int(cell.bbox.t)),
-            (int(cell.bbox.r), int(cell.bbox.b)),
+            (round(cell.bbox.l), round(cell.bbox.t)),
+            (round(cell.bbox.r), round(cell.bbox.b)),
             color,
+            thickness,
+        )
+        cv2.putText(
+            img,
+            f"{cell.row},{cell.col} : {cell.row_span},{cell.col_span}",
+            (round(cell.bbox.l), round(cell.bbox.t) + 10),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.5,
+            (128, 192, 0),
             thickness,
         )
 
