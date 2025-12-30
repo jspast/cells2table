@@ -18,7 +18,7 @@ dependencies = [
 cells2table = "cells2table.cli:main"
 
 [project.entry-points.docling]
-"cells2table" = "src.cells2table.docling_plugin"
+cells2table = "cells2table.docling"
 
 [project.optional-dependencies]
 cpu = [

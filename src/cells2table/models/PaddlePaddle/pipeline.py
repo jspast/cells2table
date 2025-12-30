@@ -1,4 +1,5 @@
-from typing import Iterable
+from pathlib import Path
+from typing import Iterable, Optional
 
 import numpy as np
 from numpy.typing import NDArray
@@ -9,10 +10,10 @@ from .table_classification import PaddlePaddleTableClassification
 
 
 class PaddlePaddleTablePipeline:
-    def __init__(self):
-        self.cls_predictor = PaddlePaddleTableClassification()
-        self.wired_predictor = PaddlePaddleWiredCellDetection()
-        self.wireless_predictor = PaddlePaddleWirelessCellDetection()
+    def __init__(self, model_path: Optional[Path | str] = None):
+        self.cls_predictor = PaddlePaddleTableClassification(model_path)
+        self.wired_predictor = PaddlePaddleWiredCellDetection(model_path)
+        self.wireless_predictor = PaddlePaddleWirelessCellDetection(model_path)
 
     def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[Table]:
         wired_images, wireless_images, output = [], [], []
