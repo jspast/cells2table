@@ -4,8 +4,8 @@ from pathlib import Path
 
 import cv2
 
-from .models import DefaultPipeline
-from .utils.visualize import visualize_table
+from cells2table import DefaultPipeline
+from cells2table.utils.visualize import visualize_table
 
 logger = logging.getLogger(__name__)
 

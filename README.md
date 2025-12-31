@@ -16,7 +16,7 @@ Using [ONNX weights](https://huggingface.co/jspast/paddlepaddle-table-models-onn
 With [uv](https://docs.astral.sh/uv/), add to your project with:
 
 ```sh
-uv add git+https://github.com/jspast/cells2table
+uv add cells2table
 ```
 
 ONNX models need a [ONNX Runtime](https://onnxruntime.ai/getting-started) installed to run. You can install one on your own or use one of the optionals already configured.
