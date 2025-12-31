@@ -15,7 +15,7 @@ class OnnxModel(BaseModel, ABC):
 
     def __init__(self, model_path: Optional[Path | str] = None) -> None:
         if model_path is None:
-            model_path = self.download()
+           model_path = self.download()
 
         providers_priority = [
             "CUDAExecutionProvider",

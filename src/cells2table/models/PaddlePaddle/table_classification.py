@@ -1,11 +1,10 @@
 import logging
-from pathlib import Path
 from typing import Iterable, Sequence
 
 import numpy as np
 from numpy.typing import NDArray
 
-from ..utils.download import download_hf_model
+from ..utils.download import DownloadOptions, DownloadPlatform
 from ..utils.runtimes import OnnxModel
 from ..utils.tasks import ClassificationModel, ClassificationResult
 
@@ -15,9 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 class PaddlePaddleTableClassification(ClassificationModel, OnnxModel):
-    @staticmethod
-    def download() -> Path:
-        return download_hf_model(HF_REPO_ID) / "table_cls.onnx"
+    download_options = DownloadOptions(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, "table_cls.onnx")
 
     def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
         logger.debug("Started preprocessing")

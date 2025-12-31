@@ -1,11 +1,10 @@
 import logging
-from pathlib import Path
 from typing import Iterable, Iterator, Sequence
 
 import numpy as np
 from numpy.typing import NDArray
 
-from ..utils.download import download_hf_model
+from ..utils.download import DownloadOptions, DownloadPlatform
 from ..utils.runtimes import OnnxModel
 from ..utils.tasks import DetectionModel, DetectionResult
 
@@ -17,10 +16,6 @@ logger = logging.getLogger(__name__)
 
 class PaddlePaddleCellDetection(DetectionModel, OnnxModel):
     """Table cell detection model from PaddlePaddle."""
-
-    @staticmethod
-    def download() -> Path:
-        return download_hf_model(HF_REPO_ID) / "table_cls.onnx"
 
     @property
     def input_shape(self):
@@ -85,12 +80,12 @@ class PaddlePaddleCellDetection(DetectionModel, OnnxModel):
 
 
 class PaddlePaddleWiredCellDetection(PaddlePaddleCellDetection):
-    @staticmethod
-    def download() -> Path:
-        return download_hf_model(HF_REPO_ID) / "wired_table_cell_det.onnx"
+    download_options = DownloadOptions(
+        DownloadPlatform.HUGGINGFACE, HF_REPO_ID, "wired_table_cell_det.onnx"
+    )
 
 
 class PaddlePaddleWirelessCellDetection(PaddlePaddleCellDetection):
-    @staticmethod
-    def download() -> Path:
-        return download_hf_model(HF_REPO_ID) / "wireless_table_cell_det.onnx"
+    download_options = DownloadOptions(
+        DownloadPlatform.HUGGINGFACE, HF_REPO_ID, "wireless_table_cell_det.onnx"
+    )

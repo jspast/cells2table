@@ -15,10 +15,18 @@ logger = logging.getLogger(__name__)
 class PaddlePaddleTablePipeline:
     """A table pipeline combining PaddlePaddle classification and detection models."""
 
-    def __init__(self, model_path: Optional[Path | str] = None):
-        self.cls_predictor = PaddlePaddleTableClassification(model_path)
-        self.wired_predictor = PaddlePaddleWiredCellDetection(model_path)
-        self.wireless_predictor = PaddlePaddleWirelessCellDetection(model_path)
+    def __init__(self, models_path: Optional[Path | str] = None):
+        cls_path, wired_path, wireless_path = None, None, None
+
+        if models_path is not None:
+            models_path = Path(models_path)
+            cls_path = models_path / PaddlePaddleTableClassification.download_options.model_path
+            wired_path = models_path / PaddlePaddleWiredCellDetection.download_options.model_path
+            wireless_path = models_path / PaddlePaddleWiredCellDetection.download_options.model_path
+
+        self.cls_predictor = PaddlePaddleTableClassification(cls_path)
+        self.wired_predictor = PaddlePaddleWiredCellDetection(wired_path)
+        self.wireless_predictor = PaddlePaddleWirelessCellDetection(wireless_path)
 
     def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[Table]:
         wired_images, wireless_images, output = [], [], []

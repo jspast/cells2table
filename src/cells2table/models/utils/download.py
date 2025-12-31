@@ -1,9 +1,27 @@
 import logging
+from enum import Enum
 from pathlib import Path
-
-
+from typing import NamedTuple
 
 logger = logging.getLogger(__name__)
+
+
+class DownloadPlatform(Enum):
+    HUGGINGFACE = "huggingface"
+
+
+class DownloadOptions(NamedTuple):
+    platform: DownloadPlatform
+    repo_id: str
+    model_path: str
+
+
+def download(options: DownloadOptions) -> Path:
+    match options.platform:
+        case DownloadPlatform.HUGGINGFACE:
+            path = download_hf_model(options.repo_id)
+
+    return path / options.model_path
 
 
 def download_hf_model(repo_id: str) -> Path:
