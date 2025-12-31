@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 from typing import Iterable, Optional
 
@@ -8,8 +9,12 @@ from ...utils.table import Table
 from .cell_detection import PaddlePaddleWiredCellDetection, PaddlePaddleWirelessCellDetection
 from .table_classification import PaddlePaddleTableClassification
 
+logger = logging.getLogger(__name__)
+
 
 class PaddlePaddleTablePipeline:
+    """A table pipeline combining PaddlePaddle classification and detection models."""
+
     def __init__(self, model_path: Optional[Path | str] = None):
         self.cls_predictor = PaddlePaddleTableClassification(model_path)
         self.wired_predictor = PaddlePaddleWiredCellDetection(model_path)
@@ -20,8 +25,9 @@ class PaddlePaddleTablePipeline:
 
         cls_result = self.cls_predictor(input)
 
-        for img, p in zip(input, cls_result):
+        for i, (img, p) in enumerate(zip(input, cls_result)):
             (wired_images if p.cls == "wired" else wireless_images).append(img)
+            logger.info("Image %d classified as %s", i, p.cls)
 
         if len(wired_images):
             wired_cells = self.wired_predictor(wired_images)

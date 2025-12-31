@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 from typing import Iterable, Iterator, Sequence
 
@@ -11,8 +12,12 @@ from ..utils.tasks import DetectionModel, DetectionResult
 HF_REPO_ID = "jspast/paddlepaddle-table-models-onnx"
 CONFIDENCE_THRESHOLD = 0.5
 
+logger = logging.getLogger(__name__)
+
 
 class PaddlePaddleCellDetection(DetectionModel, OnnxModel):
+    """Table cell detection model from PaddlePaddle."""
+
     @staticmethod
     def download() -> Path:
         return download_hf_model(HF_REPO_ID) / "table_cls.onnx"
@@ -22,6 +27,8 @@ class PaddlePaddleCellDetection(DetectionModel, OnnxModel):
         return self.session.get_inputs()[1].shape[2:]  # assuming NCHW
 
     def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[Iterator[DetectionResult]]:
+        logger.debug("Started preprocessing")
+
         original_shapes = []
         scale_factors = []
         for img in input:
@@ -35,9 +42,19 @@ class PaddlePaddleCellDetection(DetectionModel, OnnxModel):
 
         input_dict = dict(zip(self.input_names, [original_shapes, imgs, scale_factors]))
 
+        logger.debug("Done preprocessing")
+        logger.debug("Started running the model")
+
         output = self.session.run(self.output_names, input_dict)
 
-        return self.postprocess(output, scale_factors)  # type: ignore
+        logger.debug("Done running the model")
+        logger.debug("Started postprocessing")
+
+        result = self.postprocess(output, scale_factors)  # type: ignore
+
+        logger.debug("Done postprocessing")
+
+        return result
 
     def postprocess(
         self,

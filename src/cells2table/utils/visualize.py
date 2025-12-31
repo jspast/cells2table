@@ -11,8 +11,9 @@ def visualize_table(
     color=(0, 255, 0),
     thickness=2,
     window_name="Bounding Boxes",
-):
-    """
+) -> None:
+    """Simple table visualization on top of the image.
+
     image: np.ndarray (BGR image loaded with cv2)
     """
 

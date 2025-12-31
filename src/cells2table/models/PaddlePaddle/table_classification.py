@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 from typing import Iterable, Sequence
 
@@ -10,6 +11,8 @@ from ..utils.tasks import ClassificationModel, ClassificationResult
 
 HF_REPO_ID = "jspast/paddlepaddle-table-models-onnx"
 
+logger = logging.getLogger(__name__)
+
 
 class PaddlePaddleTableClassification(ClassificationModel, OnnxModel):
     @staticmethod
@@ -17,13 +20,24 @@ class PaddlePaddleTableClassification(ClassificationModel, OnnxModel):
         return download_hf_model(HF_REPO_ID) / "table_cls.onnx"
 
     def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
+        logger.debug("Started preprocessing")
         input = self.preprocess(input)
 
         input_dict = dict(zip(self.input_names, [input]))
 
+        logger.debug("Done preprocessing")
+        logger.debug("Started running the model")
+
         output = self.session.run(self.output_names, input_dict)[0]
 
-        return self.postprocess(output)  # type: ignore
+        logger.debug("Done running the model")
+        logger.debug("Started postprocessing")
+
+        result = self.postprocess(output)  # type: ignore
+
+        logger.debug("Done postprocessing")
+
+        return result
 
     @staticmethod
     def postprocess(pred: Sequence[Sequence[float]]) -> list[ClassificationResult]:

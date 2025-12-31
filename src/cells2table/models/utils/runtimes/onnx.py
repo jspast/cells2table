@@ -11,7 +11,7 @@ from ..tasks.base import BaseModel
 
 
 class OnnxModel(BaseModel, ABC):
-    """Base interface for ONNX models"""
+    """Base interface for ONNX models."""
 
     def __init__(self, model_path: Optional[Path | str] = None) -> None:
         if model_path is None:
