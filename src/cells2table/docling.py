@@ -4,20 +4,23 @@ from pathlib import Path
 from typing import ClassVar, Literal, Optional, Sequence, Type
 
 import numpy
-from docling.datamodel.accelerator_options import AcceleratorOptions
-from docling.datamodel.base_models import Cluster, Page, Table, TableStructurePrediction
-from docling.datamodel.document import ConversionResult
-from docling.datamodel.pipeline_options import BaseTableStructureOptions
-from docling.datamodel.settings import settings
-from docling.models.base_table_model import BaseTableStructureModel
-from docling.utils.profiling import TimeRecorder
-from docling_core.types.doc.base import BoundingBox
-from docling_core.types.doc.document import TableCell
-from docling_core.types.doc.labels import DocItemLabel
-from docling_core.types.doc.page import BoundingRectangle, TextCellUnit
-from PIL import ImageDraw
 
-# from docling.utils.accelerator_utils import decide_device
+try:
+    from docling.datamodel.accelerator_options import AcceleratorOptions
+    from docling.datamodel.base_models import Cluster, Page, Table, TableStructurePrediction
+    from docling.datamodel.document import ConversionResult
+    from docling.datamodel.pipeline_options import BaseTableStructureOptions
+    from docling.datamodel.settings import settings
+    from docling.models.base_table_model import BaseTableStructureModel
+    from docling.utils.profiling import TimeRecorder
+    from docling_core.types.doc.base import BoundingBox
+    from docling_core.types.doc.document import TableCell
+    from docling_core.types.doc.labels import DocItemLabel
+    from docling_core.types.doc.page import BoundingRectangle, TextCellUnit
+    from PIL import ImageDraw
+except ImportError:
+    raise ImportError("docling is not installed. Unable to use plugin.")
+
 from .models import DefaultPipeline
 
 

@@ -21,12 +21,13 @@ uv add cells2table
 
 ONNX models need a [ONNX Runtime](https://onnxruntime.ai/getting-started) installed to run. You can install one on your own or use one of the optionals already configured.
 
-| Optional   | Description             |
-| ---------- | ----------------------- |
-| `cuda`     | For NVIDIA GPUs         |
-| `openvino` | For Intel GPUs and CPUs |
-| `cpu`      | Default CPU runtime     |
-| `docling`  | For docling usage       |
+| Optional        | Description             |
+| --------------- | ----------------------- |
+| `docling`       | For docling usage       |
+| `huggingface`   | For downloading models  |
+| `onnx_cuda`     | For NVIDIA GPUs         |
+| `onnx_openvino` | For Intel GPUs and CPUs |
+| `onnx_cpu`      | Default CPU runtime     |
 
 ## Usage
 

@@ -69,39 +69,41 @@ wheels = [
 
 [[package]]
 name = "cells2table"
-version = "0.1.0"
+version = "0.2.2"
 source = { editable = "." }
 dependencies = [
-    { name = "huggingface-hub" },
     { name = "numpy" },
     { name = "opencv-python" },
 ]
 
 [package.optional-dependencies]
-cpu = [
-    { name = "onnxruntime" },
-]
-cuda = [
-    { name = "onnxruntime-gpu" },
-]
 docling = [
     { name = "docling" },
 ]
-openvino = [
+huggingface = [
+    { name = "huggingface-hub" },
+]
+onnx-cpu = [
+    { name = "onnxruntime" },
+]
+onnx-cuda = [
+    { name = "onnxruntime-gpu" },
+]
+onnx-openvino = [
     { name = "onnxruntime-openvino" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "docling", marker = "extra == 'docling'", specifier = ">=2.66.0" },
-    { name = "huggingface-hub", specifier = ">=0.36.0" },
+    { name = "huggingface-hub", marker = "extra == 'huggingface'", specifier = ">=0.36.0" },
     { name = "numpy", specifier = ">=2.2.0" },
-    { name = "onnxruntime", marker = "extra == 'cpu'", specifier = ">=1.23.2" },
-    { name = "onnxruntime-gpu", marker = "extra == 'cuda'", specifier = ">=1.23.2" },
-    { name = "onnxruntime-openvino", marker = "extra == 'openvino'", specifier = ">=1.23.0" },
+    { name = "onnxruntime", marker = "extra == 'onnx-cpu'", specifier = ">=1.23.2" },
+    { name = "onnxruntime-gpu", marker = "extra == 'onnx-cuda'", specifier = ">=1.23.2" },
+    { name = "onnxruntime-openvino", marker = "extra == 'onnx-openvino'", specifier = ">=1.23.0" },
     { name = "opencv-python", specifier = ">=4.11.0.86" },
 ]
-provides-extras = ["cpu", "cuda", "docling", "openvino"]
+provides-extras = ["docling", "huggingface", "onnx-cpu", "onnx-cuda", "onnx-openvino"]
 
 [[package]]
 name = "certifi"
@@ -458,7 +460,7 @@ name = "humanfriendly"
 version = "10.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pyreadline3", marker = "sys_platform == 'win32'" },
+    { name = "pyreadline3", marker = "sys_platform == 'win32' or (extra == 'extra-11-cells2table-cpu' and extra == 'extra-11-cells2table-cuda') or (extra == 'extra-11-cells2table-cpu' and extra == 'extra-11-cells2table-openvino') or (extra == 'extra-11-cells2table-cuda' and extra == 'extra-11-cells2table-openvino')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/cc/3f/2c29224acb2e2df4d2046e4c73ee2662023c58ff5b113c4c1adac0886c43/humanfriendly-10.0.tar.gz", hash = "sha256:6b0b831ce8f15f7300721aa49829fc4e83921a9a301cc7f606be6686a2288ddc", size = 360702, upload-time = "2021-09-17T21:40:43.31Z" }
 wheels = [

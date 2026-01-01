@@ -15,7 +15,6 @@ classifiers = [
   "Programming Language :: Python :: 3",
 ]
 dependencies = [
-  "huggingface-hub>=0.36.0",
   "numpy>=2.2.0",
   "opencv-python>=4.11.0.86",
 ]
@@ -31,16 +30,19 @@ cells2table = "cli:main"
 cells2table = "cells2table.docling"
 
 [project.optional-dependencies]
-cpu = [
-  "onnxruntime>=1.23.2",
-]
-cuda = [
-  "onnxruntime-gpu>=1.23.2",
-]
 docling = [
   "docling>=2.66.0",
 ]
-openvino = [
+huggingface = [
+  "huggingface-hub>=0.36.0",
+]
+onnx_cpu = [
+  "onnxruntime>=1.23.2",
+]
+onnx_cuda = [
+  "onnxruntime-gpu>=1.23.2",
+]
+onnx_openvino = [
   "onnxruntime-openvino>=1.23.0",
 ]
 
