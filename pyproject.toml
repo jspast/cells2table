@@ -25,7 +25,7 @@ Homepage = "https://github.com/jspast/cells2table"
 Issues = "https://github.com/jspast/cells2table/issues"
 
 [project.scripts]
-cells2table = "cells2table.cli:main"
+cells2table = "cli:main"
 
 [project.entry-points.docling]
 cells2table = "cells2table.docling"
