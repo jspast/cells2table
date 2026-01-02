@@ -4,9 +4,9 @@ from typing import Iterable, Iterator, Sequence
 import numpy as np
 from numpy.typing import NDArray
 
-from ..utils.download import DownloadOptions, DownloadPlatform
-from ..utils.runtimes import OnnxModel
-from ..utils.tasks import DetectionModel, DetectionResult
+from ..download import DownloadOptions, DownloadPlatform
+from ..runtimes.onnx import OnnxModel
+from ..tasks import DetectionModel, DetectionResult
 
 HF_REPO_ID = "jspast/paddlepaddle-table-models-onnx"
 CONFIDENCE_THRESHOLD = 0.5
@@ -14,7 +14,7 @@ CONFIDENCE_THRESHOLD = 0.5
 logger = logging.getLogger(__name__)
 
 
-class PaddlePaddleCellDetection(DetectionModel, OnnxModel):
+class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel):
     """Table cell detection model from PaddlePaddle."""
 
     @property
@@ -51,8 +51,9 @@ class PaddlePaddleCellDetection(DetectionModel, OnnxModel):
 
         return result
 
+    @classmethod
     def postprocess(
-        self,
+        cls,
         pred: NDArray,
         scale_factors: Sequence[tuple[int, int]],
     ) -> list[Iterator[DetectionResult]]:
@@ -79,13 +80,15 @@ class PaddlePaddleCellDetection(DetectionModel, OnnxModel):
         return generators
 
 
-class PaddlePaddleWiredCellDetection(PaddlePaddleCellDetection):
+class PaddlePaddleWiredCellDetectionModel(PaddlePaddleCellDetectionModel):
+    classes = ["wired"]
     download_options = DownloadOptions(
         DownloadPlatform.HUGGINGFACE, HF_REPO_ID, "wired_table_cell_det.onnx"
     )
 
 
-class PaddlePaddleWirelessCellDetection(PaddlePaddleCellDetection):
+class PaddlePaddleWirelessCellDetectionModel(PaddlePaddleCellDetectionModel):
+    classes = ["wireless"]
     download_options = DownloadOptions(
         DownloadPlatform.HUGGINGFACE, HF_REPO_ID, "wireless_table_cell_det.onnx"
     )

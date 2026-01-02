@@ -8,6 +8,7 @@ from ..download import DownloadOptions, download
 class BaseModel(ABC):
     """Base interface for models of any type."""
 
+    model_path: Path
     download_options: Optional[DownloadOptions] = None
 
     @abstractmethod

@@ -1,3 +1,3 @@
-from .models import DefaultPipeline
+from .pipelines import PaddlePaddleTablePipeline as DefaultPipeline
 
 __all__ = [DefaultPipeline]

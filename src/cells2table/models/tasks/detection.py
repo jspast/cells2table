@@ -16,6 +16,8 @@ class DetectionResult(NamedTuple):
 class DetectionModel(BaseModel, ABC):
     """Base interface for detection models."""
 
+    classes: list[str] = []
+
     @abstractmethod
     def __call__(self, input: Any) -> list[Iterator[DetectionResult]]:
         pass

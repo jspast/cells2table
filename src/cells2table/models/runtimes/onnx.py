@@ -13,9 +13,12 @@ from ..tasks.base import BaseModel
 class OnnxModel(BaseModel, ABC):
     """Base interface for ONNX models."""
 
+    scale = 1 / 255.0
+    mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
+    std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
+
     def __init__(self, model_path: Optional[Path | str] = None) -> None:
-        if model_path is None:
-           model_path = self.download()
+        self.model_path = self.download() if model_path is None else Path(model_path)
 
         providers_priority = [
             "CUDAExecutionProvider",
@@ -26,13 +29,9 @@ class OnnxModel(BaseModel, ABC):
         available_providers = ort.get_available_providers()  # type: ignore
 
         self.session = ort.InferenceSession(
-            model_path,
+            self.model_path,
             providers=[p for p in providers_priority if p in available_providers],
         )
-
-        self.scale = 1 / 255.0
-        self.mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
-        self.std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
 
     @property
     def input_shape(self):

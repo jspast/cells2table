@@ -19,9 +19,9 @@ try:
     from docling_core.types.doc.page import BoundingRectangle, TextCellUnit
     from PIL import ImageDraw
 except ImportError:
-    raise ImportError("docling is not installed. Unable to use plugin.")
+    raise ImportError("docling is not installed. Unable to initialize plugin.")
 
-from .models import DefaultPipeline
+from . import DefaultPipeline
 
 
 def get_tokens(page: Page, table_cluster: Cluster, scale: float) -> list[str]:

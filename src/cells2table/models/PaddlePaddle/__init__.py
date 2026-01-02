@@ -1,15 +1,13 @@
 from .cell_detection import (
-    PaddlePaddleCellDetection,
-    PaddlePaddleWiredCellDetection,
-    PaddlePaddleWirelessCellDetection,
+    PaddlePaddleCellDetectionModel,
+    PaddlePaddleWiredCellDetectionModel,
+    PaddlePaddleWirelessCellDetectionModel,
 )
-from .pipeline import PaddlePaddleTablePipeline
-from .table_classification import PaddlePaddleTableClassification
+from .table_classification import PaddlePaddleTableClassificationModel
 
 __all__ = [
-    PaddlePaddleCellDetection,
-    PaddlePaddleWiredCellDetection,
-    PaddlePaddleWirelessCellDetection,
-    PaddlePaddleTablePipeline,
-    PaddlePaddleTableClassification,
+    PaddlePaddleCellDetectionModel,
+    PaddlePaddleWiredCellDetectionModel,
+    PaddlePaddleWirelessCellDetectionModel,
+    PaddlePaddleTableClassificationModel,
 ]

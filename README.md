@@ -4,12 +4,12 @@ Parsing tables in document images with cell detection models
 
 ## Implemented pipelines
 
-### PaddlePaddle models
+### PaddlePaddle
 
 - Classification model (wired / wireless)
 - Cell detection model with different weights for each class
 
-Using [ONNX weights](https://huggingface.co/jspast/paddlepaddle-table-models-onnx) (downloaded automatically on first use with `huggingface_hub`)
+Uses ONNX weights downloaded automatically from [Hugging Face](https://huggingface.co/jspast/paddlepaddle-table-models-onnx) on first use.
 
 ## Instalation
 

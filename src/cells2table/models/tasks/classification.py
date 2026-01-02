@@ -14,6 +14,8 @@ class ClassificationResult(NamedTuple):
 class ClassificationModel(BaseModel, ABC):
     """Base interface for table classification models."""
 
+    classes: list[str]
+
     @abstractmethod
     def __call__(self, input: Any) -> list[ClassificationResult]:
         pass

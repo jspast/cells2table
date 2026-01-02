@@ -4,16 +4,17 @@ from typing import Iterable, Sequence
 import numpy as np
 from numpy.typing import NDArray
 
-from ..utils.download import DownloadOptions, DownloadPlatform
-from ..utils.runtimes import OnnxModel
-from ..utils.tasks import ClassificationModel, ClassificationResult
+from ..download import DownloadOptions, DownloadPlatform
+from ..runtimes.onnx import OnnxModel
+from ..tasks import ClassificationModel, ClassificationResult
 
 HF_REPO_ID = "jspast/paddlepaddle-table-models-onnx"
 
 logger = logging.getLogger(__name__)
 
 
-class PaddlePaddleTableClassification(ClassificationModel, OnnxModel):
+class PaddlePaddleTableClassificationModel(ClassificationModel, OnnxModel):
+    classes = ["wired", "wireless"]
     download_options = DownloadOptions(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, "table_cls.onnx")
 
     def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
@@ -36,8 +37,6 @@ class PaddlePaddleTableClassification(ClassificationModel, OnnxModel):
 
         return result
 
-    @staticmethod
-    def postprocess(pred: Sequence[Sequence[float]]) -> list[ClassificationResult]:
-        return [
-            ClassificationResult({0: "wired", 1: "wireless"}[np.argmax(p)], max(p)) for p in pred
-        ]
+    @classmethod
+    def postprocess(cls, pred: Sequence[Sequence[float]]) -> list[ClassificationResult]:
+        return [ClassificationResult(cls.classes[np.argmax(p)], max(p)) for p in pred]
