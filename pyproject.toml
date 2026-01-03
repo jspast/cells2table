@@ -46,6 +46,13 @@ onnx_openvino = [
   "onnxruntime-openvino>=1.23.0",
 ]
 
+[dependency-groups]
+dev = [
+  "cells2table",
+  "pytest>=7.0",
+  "ruff>=0.5.0",
+]
+
 [build-system]
 requires = ["uv_build>=0.9.17,<0.10.0"]
 build-backend = "uv_build"
