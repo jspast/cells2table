@@ -3,7 +3,7 @@ name = "cells2table"
 version = "0.2.2"
 description = "Table image parsing with cell detection models"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<4.0"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [
@@ -15,8 +15,8 @@ classifiers = [
   "Programming Language :: Python :: 3",
 ]
 dependencies = [
-  "numpy>=2.2.0",
-  "opencv-python>=4.11.0.86",
+  "numpy (>=2.2.0,<3.0.0)",
+  "opencv-python (>=4.11.0.86,<5.0.0.0)",
 ]
 
 [project.urls]
@@ -31,26 +31,26 @@ cells2table = "cells2table.docling"
 
 [project.optional-dependencies]
 docling = [
-  "docling>=2.66.0",
+  "docling (>=2.66.0,<3.0.0)",
 ]
 huggingface = [
-  "huggingface-hub>=0.36.0",
+  "huggingface-hub (>=0.36.0,<1.0.0)",
 ]
 onnx_cpu = [
-  "onnxruntime>=1.23.2",
+  "onnxruntime (>=1.23.2,<2.0.0)",
 ]
 onnx_cuda = [
-  "onnxruntime-gpu>=1.23.2",
+  "onnxruntime-gpu (>=1.23.2,<2.0.0)",
 ]
 onnx_openvino = [
-  "onnxruntime-openvino>=1.23.0",
+  "onnxruntime-openvino (>=1.23.0,<2.0.0)",
 ]
 
 [dependency-groups]
 dev = [
   "cells2table",
-  "pytest>=7.0",
-  "ruff>=0.5.0",
+  "pytest (>=7.0,<8.0)",
+  "ruff (>=0.5.0,<1.0.0)",
 ]
 
 [build-system]
@@ -62,4 +62,10 @@ line-length = 100
 
 [tool.uv]
 package = true
-conflicts = [[{ extra = "cpu" }, { extra = "cuda" }, { extra = "openvino" }]]
+conflicts = [
+  [
+    { extra = "onnx_cpu" },
+    { extra = "onnx_cuda" },
+    { extra = "onnx_openvino" }
+  ]
+]
