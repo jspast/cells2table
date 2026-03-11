@@ -68,6 +68,7 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
         artifacts_path: Optional[Path],
         options: CustomDoclingTableStructureOptions,
         accelerator_options: AcceleratorOptions,
+        **kwargs,
     ):
         self.enabled = enabled
 
