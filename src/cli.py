@@ -39,7 +39,7 @@ def main() -> None:
     )
 
     table_pipeline = DefaultPipeline()
-    tables = table_pipeline([image])  # type: ignore
+    tables = table_pipeline([image])
 
     for table in tables:
         visualize_table(image, table)  # type: ignore
