@@ -58,22 +58,24 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel):
         scale_factors: Sequence[tuple[int, int]],
     ) -> list[Iterator[DetectionResult]]:
         last_cell_idx = 0
-        batch_size = len(pred[1])
-        generators = []
         cells = pred[0]
 
-        for i in range(batch_size):
-            c = cells[last_cell_idx : last_cell_idx + pred[1][i]]
+        generators = []
+
+        for i, count in enumerate(pred[1]):
+            c = cells[last_cell_idx : last_cell_idx + count]
             c = c[c[:, 1] > CONFIDENCE_THRESHOLD]
+            last_cell_idx += count
 
-            last_cell_idx += pred[1][i]
+            if not c.size:
+                generators.append(iter([]))
+                continue
 
-            if c.size:
-                sx, sy = scale_factors[i]
-                scores = c[:, 0]
-                boxes = c[:, 2:]
-                boxes[:, [0, 2]] *= sy
-                boxes[:, [1, 3]] *= sx
+            sx, sy = scale_factors[i]
+            scores = c[:, 0]
+            boxes = c[:, 2:]
+            boxes[:, [0, 2]] *= sy
+            boxes[:, [1, 3]] *= sx
 
             generators.append((DetectionResult(box, score) for box, score in zip(boxes, scores)))
 
