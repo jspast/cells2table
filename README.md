@@ -19,15 +19,10 @@ With [uv](https://docs.astral.sh/uv/), add to your project with:
 uv add cells2table
 ```
 
-ONNX models need a [ONNX Runtime](https://onnxruntime.ai/getting-started) installed to run. You can install one on your own or use one of the optionals already configured.
-
 | Optional        | Description             |
 | --------------- | ----------------------- |
 | `docling`       | For docling usage       |
 | `huggingface`   | For downloading models  |
-| `onnx_cuda`     | For NVIDIA GPUs         |
-| `onnx_openvino` | For Intel GPUs and CPUs |
-| `onnx_cpu`      | Default CPU runtime     |
 
 ## Usage
 
@@ -50,7 +45,7 @@ pipeline_options = PdfPipelineOptions(
 converter = DocumentConverter(
     format_options={
         InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options),
-        InputFormat.IMAGE: PdfFormatOption(pipeline_options=pipeline_options),
+        InputFormat.IMAGE: ImageFormatOption(pipeline_options=pipeline_options),
     }
 )
 

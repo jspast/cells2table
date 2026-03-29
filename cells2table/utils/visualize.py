@@ -16,6 +16,22 @@ def visualize_table(
 
     image: np.ndarray (BGR image loaded with cv2)
     """
+    img = create_visualization(image, table, color, thickness)
+    cv2.imshow(window_name, img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+def create_visualization(
+    image: NDArray[np.uint8],
+    table: Table,
+    color=(0, 255, 0),
+    thickness=2,
+) -> NDArray[np.uint8]:
+    """Simple table visualization on top of the image.
+
+    image: np.ndarray (BGR image loaded with cv2)
+    """
 
     img = image.copy()
 
@@ -37,6 +53,4 @@ def visualize_table(
             thickness,
         )
 
-    cv2.imshow(window_name, img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    return img

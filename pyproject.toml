@@ -16,6 +16,7 @@ classifiers = [
 ]
 dependencies = [
   "numpy (>=2.2.0,<3.0.0)",
+  "onnxruntime (>=1.23.2,<2.0.0)",
   "opencv-python (>=4.11.0.86,<5.0.0.0)",
 ]
 
@@ -26,6 +27,7 @@ Issues = "https://github.com/jspast/cells2table/issues"
 [project.scripts]
 cells2table = "cells2table.cli:main"
 cells2table-download = "cells2table.cli:download"
+cells2table-eval = "cells2table.utils.eval:main"
 
 [project.entry-points.docling]
 cells2table = "cells2table.docling"
@@ -33,18 +35,18 @@ cells2table = "cells2table.docling"
 [project.optional-dependencies]
 docling = [
   "docling (>=2.66.0,<3.0.0)",
+  "torch (>=2.11.0,<3.0.0)",
+  "torchvision (>=0.26.0,<1.0.0)",
+]
+eval = [
+  "docling-eval (>=1.0.1,<2.0.0)",
+  "ipykernel (>=7.2.0,<8.0.0)",
+  "pyspark (>=4.1.1,<5.0.0)",
+  "torch (>=2.11.0,<3.0.0)",
+  "torchvision (>=0.26.0,<1.0.0)",
 ]
 huggingface = [
   "huggingface-hub (>=0.36.0,<2.0.0)",
-]
-onnx_cpu = [
-  "onnxruntime (>=1.23.2,<2.0.0)",
-]
-onnx_cuda = [
-  "onnxruntime-gpu (>=1.23.2,<2.0.0)",
-]
-onnx_openvino = [
-  "onnxruntime-openvino (>=1.23.0,<2.0.0)",
 ]
 
 [dependency-groups]
@@ -63,14 +65,17 @@ line-length = 100
 
 [tool.uv]
 package = true
-conflicts = [
-  [
-    { extra = "onnx_cpu" },
-    { extra = "onnx_cuda" },
-    { extra = "onnx_openvino" }
-  ]
-]
+prerelease = "if-necessary-or-explicit"
 
 [tool.uv.build-backend]
 module-name = "cells2table"
 module-root = ""
+
+[tool.uv.sources]
+torch = { index = "torch_cpu" }
+torchvision = { index = "torch_cpu" }
+
+[[tool.uv.index]]
+name = "torch_cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
