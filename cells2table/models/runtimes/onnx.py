@@ -26,7 +26,7 @@ class OnnxModel(BaseModel, ABC):
             "OpenVINOExecutionProvider",
             "CPUExecutionProvider",
         ]
-        available_providers = ort.get_available_providers()  # type: ignore
+        available_providers = ort.get_available_providers()
 
         self.session = ort.InferenceSession(
             self.model_path,
