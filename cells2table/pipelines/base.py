@@ -13,3 +13,8 @@ class BasePipeline(ABC):
     @abstractmethod
     def __call__(self, input: Any):
         pass
+
+    @classmethod
+    @abstractmethod
+    def download(cls, *, local_dir: Path | str | None = None) -> Path:
+        pass

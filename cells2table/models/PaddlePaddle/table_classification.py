@@ -4,7 +4,8 @@ from typing import Iterable, Sequence
 import numpy as np
 from numpy.typing import NDArray
 
-from ..download import DownloadOptions, DownloadPlatform
+from cells2table.utils.download import DownloadOptions, DownloadPlatform
+
 from ..runtimes.onnx import OnnxModel
 from ..tasks import ClassificationModel, ClassificationResult
 
@@ -15,7 +16,14 @@ logger = logging.getLogger(__name__)
 
 class PaddlePaddleTableClassificationModel(ClassificationModel, OnnxModel):
     classes = ["wired", "wireless"]
-    download_options = DownloadOptions(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, "table_cls.onnx")
+
+    @classmethod
+    def get_onnx_path(cls) -> str:
+        return "table_cls.onnx"
+
+    @classmethod
+    def get_download_options(cls) -> DownloadOptions:
+        return DownloadOptions(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, [cls.get_onnx_path()])
 
     def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
         logger.debug("Started preprocessing")

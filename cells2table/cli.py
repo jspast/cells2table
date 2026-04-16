@@ -10,6 +10,20 @@ from cells2table.utils.visualize import visualize_table
 logger = logging.getLogger(__name__)
 
 
+def download(local_dir: Path | str | None = None) -> None:
+    """Download default pipeline models."""
+
+    log_format = "%(asctime)s\t%(levelname)s\t%(name)s: %(message)s"
+    logging.basicConfig(level=logging.DEBUG, format=log_format)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--local-dir", type=Path, default=None, help="Path to download models to")
+
+    args = parser.parse_args()
+
+    DefaultPipeline.download(local_dir=args.local_dir)
+
+
 def main() -> None:
     """Basic CLI program for testing."""
 
@@ -18,6 +32,7 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="Load an image from a given path using OpenCV")
     parser.add_argument("image_path", type=Path, help="Path to the image file")
+    parser.add_argument("--models-path", type=Path, default=None, help="Path to downloaded models")
 
     args = parser.parse_args()
 
@@ -38,7 +53,7 @@ def main() -> None:
         str(image.dtype),
     )
 
-    table_pipeline = DefaultPipeline()
+    table_pipeline = DefaultPipeline(args.models_path)
     tables = table_pipeline([image])
 
     for table in tables:

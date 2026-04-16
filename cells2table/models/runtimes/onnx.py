@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Iterable, Optional
 
@@ -17,6 +17,11 @@ class OnnxModel(BaseModel, ABC):
     mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
     std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
 
+    @classmethod
+    @abstractmethod
+    def get_onnx_path(self) -> str:
+        pass
+
     def __init__(self, model_path: Optional[Path | str] = None) -> None:
         self.model_path = self.download() if model_path is None else Path(model_path)
 
@@ -29,7 +34,7 @@ class OnnxModel(BaseModel, ABC):
         available_providers = ort.get_available_providers()
 
         self.session = ort.InferenceSession(
-            self.model_path,
+            self.model_path / self.get_onnx_path(),
             providers=[p for p in providers_priority if p in available_providers],
         )
 

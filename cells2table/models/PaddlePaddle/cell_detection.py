@@ -4,7 +4,8 @@ from typing import Iterable, Iterator, Sequence
 import numpy as np
 from numpy.typing import NDArray
 
-from ..download import DownloadOptions, DownloadPlatform
+from cells2table.utils.download import DownloadOptions, DownloadPlatform
+
 from ..runtimes.onnx import OnnxModel
 from ..tasks import DetectionModel, DetectionResult
 
@@ -84,13 +85,23 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel):
 
 class PaddlePaddleWiredCellDetectionModel(PaddlePaddleCellDetectionModel):
     classes = ["wired"]
-    download_options = DownloadOptions(
-        DownloadPlatform.HUGGINGFACE, HF_REPO_ID, "wired_table_cell_det.onnx"
-    )
+
+    @classmethod
+    def get_onnx_path(cls) -> str:
+        return "wired_table_cell_det.onnx"
+
+    @classmethod
+    def get_download_options(cls) -> DownloadOptions:
+        return DownloadOptions(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, [cls.get_onnx_path()])
 
 
 class PaddlePaddleWirelessCellDetectionModel(PaddlePaddleCellDetectionModel):
     classes = ["wireless"]
-    download_options = DownloadOptions(
-        DownloadPlatform.HUGGINGFACE, HF_REPO_ID, "wireless_table_cell_det.onnx"
-    )
+
+    @classmethod
+    def get_onnx_path(cls) -> str:
+        return "wireless_table_cell_det.onnx"
+
+    @classmethod
+    def get_download_options(cls) -> DownloadOptions:
+        return DownloadOptions(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, [cls.get_onnx_path()])
