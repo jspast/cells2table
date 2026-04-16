@@ -4,10 +4,9 @@ from typing import Iterable, Sequence
 import numpy as np
 from numpy.typing import NDArray
 
+from cells2table.models.runtimes.onnx import OnnxModel
+from cells2table.models.tasks import ClassificationModel, ClassificationResult
 from cells2table.utils.download import DownloadOptions, DownloadPlatform
-
-from ..runtimes.onnx import OnnxModel
-from ..tasks import ClassificationModel, ClassificationResult
 
 HF_REPO_ID = "jspast/paddlepaddle-table-models-onnx"
 

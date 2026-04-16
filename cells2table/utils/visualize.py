@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from numpy.typing import NDArray
 
-from ..datamodels import Table
+from cells2table.datamodels import Table
 
 
 def visualize_table(

@@ -1,12 +1,12 @@
 from pathlib import Path
 from typing import Optional
 
-from ..models.PaddlePaddle import (
+from cells2table.models.PaddlePaddle import (
     PaddlePaddleTableClassificationModel,
     PaddlePaddleWiredCellDetectionModel,
     PaddlePaddleWirelessCellDetectionModel,
 )
-from .classification_detection import ClassificationDetectionPipeline
+from cells2table.pipelines.classification_detection import ClassificationDetectionPipeline
 
 
 class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):

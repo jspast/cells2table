@@ -21,7 +21,7 @@ try:
 except ImportError:
     raise ImportError("docling is not installed. Unable to initialize plugin.")
 
-from . import DefaultPipeline
+from cells2table.pipelines import DefaultPipeline
 
 
 def get_tokens(page: Page, table_cluster: Cluster, scale: float) -> list[str]:

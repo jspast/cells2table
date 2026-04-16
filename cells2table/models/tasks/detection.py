@@ -3,7 +3,7 @@ from typing import Any, Iterator, NamedTuple
 
 import numpy as np
 
-from .base import BaseModel
+from cells2table.models.tasks.base import BaseModel
 
 
 class DetectionResult(NamedTuple):

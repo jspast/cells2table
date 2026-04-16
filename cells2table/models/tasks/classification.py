@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, NamedTuple
 
-from .base import BaseModel
+from cells2table.models.tasks.base import BaseModel
 
 
 class ClassificationResult(NamedTuple):

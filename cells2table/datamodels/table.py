@@ -3,8 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Iterable, Optional
 
-from ..models.tasks import DetectionResult
-from .bbox import BoundingBox
+from cells2table.datamodels import BoundingBox
+from cells2table.models.tasks import DetectionResult
 
 
 @dataclass

@@ -3,9 +3,9 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, Iterable, Optional
 
-from ..datamodels import Table
-from ..models.tasks import ClassificationModel, DetectionModel
-from .base import BasePipeline
+from cells2table.datamodels import Table
+from cells2table.models.tasks import ClassificationModel, DetectionModel
+from cells2table.pipelines.base import BasePipeline
 
 logger = logging.getLogger(__name__)
 

@@ -7,7 +7,7 @@ import numpy as np
 import onnxruntime as ort
 from numpy.typing import NDArray
 
-from ..tasks.base import BaseModel
+from cells2table.models.tasks.base import BaseModel
 
 
 class OnnxModel(BaseModel, ABC):

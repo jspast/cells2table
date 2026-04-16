@@ -4,10 +4,9 @@ from typing import Iterable, Iterator, Sequence
 import numpy as np
 from numpy.typing import NDArray
 
+from cells2table.models.runtimes.onnx import OnnxModel
+from cells2table.models.tasks import DetectionModel, DetectionResult
 from cells2table.utils.download import DownloadOptions, DownloadPlatform
-
-from ..runtimes.onnx import OnnxModel
-from ..tasks import DetectionModel, DetectionResult
 
 HF_REPO_ID = "jspast/paddlepaddle-table-models-onnx"
 CONFIDENCE_THRESHOLD = 0.5

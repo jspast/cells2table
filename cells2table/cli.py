@@ -4,7 +4,7 @@ from pathlib import Path
 
 import cv2
 
-from cells2table import DefaultPipeline
+from cells2table.pipelines import DefaultPipeline
 from cells2table.utils.visualize import visualize_table
 
 logger = logging.getLogger(__name__)
