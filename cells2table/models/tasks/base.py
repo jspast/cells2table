@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from cells2table.utils.download import DownloadOptions
 
@@ -11,7 +11,7 @@ class BaseModel(ABC):
     model_path: Path
 
     @abstractmethod
-    def __init__(self, model_path: Optional[Path | str] = None) -> None:
+    def __init__(self, model_path: Path | str | None = None) -> None:
         pass
 
     @abstractmethod

@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Optional
 
 from cells2table.models.PaddlePaddle import (
     PaddlePaddleTableClassificationModel,
@@ -12,7 +11,7 @@ from cells2table.pipelines.classification_detection import ClassificationDetecti
 class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
     """A table pipeline combining PaddlePaddle classification and detection models."""
 
-    def __init__(self, models_path: Optional[Path | str] = None) -> None:
+    def __init__(self, models_path: Path | str | None = None) -> None:
         """Initialize models from the provided path or download them."""
 
         models_path = self.download() if models_path is None else Path(models_path)

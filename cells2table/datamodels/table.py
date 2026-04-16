@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Iterable, Optional
+from typing import Iterable
 
 from cells2table.datamodels import BoundingBox
 from cells2table.models.tasks import DetectionResult
@@ -22,9 +22,9 @@ class Table:
     num_rows: int = 0
     num_cols: int = 0
 
-    @staticmethod
-    def from_detections(cells_det: Iterable[DetectionResult], tolerance: float = 10) -> Table:
-        table = Table()
+    @classmethod
+    def from_detections(cls, cells_det: Iterable[DetectionResult], tolerance: float = 10) -> Table:
+        table = cls()
 
         for cell_det in cells_det:
             bbox = BoundingBox.from_array(cell_det.bbox)
@@ -38,20 +38,14 @@ class Table:
         self.compute_rows(tolerance)
         self.compute_cols(tolerance)
 
-    def sort_cells_by_rows(self, cells: Optional[Iterable[Cell]] = None) -> list[Cell]:
-        if cells is None:
-            cells = self.cells
+    def sort_cells_by_rows(self) -> None:
+        self.cells = sorted(self.cells, key=lambda cell: cell.bbox.t)
 
-        return sorted(self.cells, key=lambda cell: cell.bbox.t)
-
-    def sort_cells_by_cols(self, cells: Optional[Iterable[Cell]] = None) -> list[Cell]:
-        if cells is None:
-            cells = self.cells
-
-        return sorted(self.cells, key=lambda cell: cell.bbox.l)
+    def sort_cells_by_cols(self) -> None:
+        self.cells = sorted(self.cells, key=lambda cell: cell.bbox.l)
 
     def compute_rows(self, tolerance: float) -> None:
-        self.cells = self.sort_cells_by_rows()
+        self.sort_cells_by_rows()
 
         row_y = None
         row_num = 0
@@ -87,7 +81,7 @@ class Table:
         self.num_rows = row_num + 1
 
     def compute_cols(self, tolerance: float) -> None:
-        self.cells = self.sort_cells_by_cols()
+        self.sort_cells_by_cols()
 
         col_x = None
         col_num = 0

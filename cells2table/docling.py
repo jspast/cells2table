@@ -1,7 +1,7 @@
 import copy
 from collections.abc import Iterable
 from pathlib import Path
-from typing import ClassVar, Literal, Optional, Sequence, Type
+from typing import ClassVar, Literal, Sequence, Type
 
 import numpy
 
@@ -65,7 +65,7 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
     def __init__(
         self,
         enabled: bool,
-        artifacts_path: Optional[Path],
+        artifacts_path: Path | None,
         options: CustomDoclingTableStructureOptions,
         accelerator_options: AcceleratorOptions,
         **kwargs,

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Iterable, Optional
+from typing import Iterable
 
 import cv2
 import numpy as np
@@ -22,7 +22,7 @@ class OnnxModel(BaseModel, ABC):
     def get_onnx_path(self) -> str:
         pass
 
-    def __init__(self, model_path: Optional[Path | str] = None) -> None:
+    def __init__(self, model_path: Path | str | None = None) -> None:
         self.model_path = self.download() if model_path is None else Path(model_path)
 
         providers_priority = [

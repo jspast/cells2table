@@ -1,7 +1,7 @@
 import logging
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any, Iterable, Optional
+from typing import Any, Iterable
 
 from cells2table.datamodels import Table
 from cells2table.models.tasks import ClassificationModel, DetectionModel
@@ -17,7 +17,7 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
     detection_models: list[DetectionModel]
 
     @abstractmethod
-    def __init__(self, models_path: Optional[Path | str] = None) -> None:
+    def __init__(self, models_path: Path | str | None = None) -> None:
         """Initialize the models."""
 
         pass
