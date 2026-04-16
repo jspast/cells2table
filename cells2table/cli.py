@@ -14,7 +14,7 @@ def download(local_dir: Path | str | None = None) -> None:
     """Download default pipeline models."""
 
     log_format = "%(asctime)s\t%(levelname)s\t%(name)s: %(message)s"
-    logging.basicConfig(level=logging.DEBUG, format=log_format)
+    logging.basicConfig(level=logging.INFO, format=log_format)
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--local-dir", type=Path, default=None, help="Path to download models to")
@@ -28,7 +28,7 @@ def main() -> None:
     """Basic CLI program for testing."""
 
     log_format = "%(asctime)s\t%(levelname)s\t%(name)s: %(message)s"
-    logging.basicConfig(level=logging.DEBUG, format=log_format)
+    logging.basicConfig(level=logging.INFO, format=log_format)
 
     parser = argparse.ArgumentParser(description="Load an image from a given path using OpenCV")
     parser.add_argument("image_path", type=Path, help="Path to the image file")
