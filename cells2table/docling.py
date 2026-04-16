@@ -73,7 +73,14 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
         self.enabled = enabled
 
         if self.enabled:
-            self.pipeline = DefaultPipeline(artifacts_path)
+            if artifacts_path is None:
+                models_path = None
+            elif (artifacts_path / DefaultPipeline._dirname).exists():
+                models_path = artifacts_path / DefaultPipeline._dirname
+            else:
+                models_path = artifacts_path
+
+            self.pipeline = DefaultPipeline(models_path)
 
             # TODO: decide how to deal with accelerator options
             # device = decide_device(accelerator_options.device)

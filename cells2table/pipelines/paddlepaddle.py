@@ -11,6 +11,8 @@ from cells2table.pipelines.classification_detection import ClassificationDetecti
 class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
     """A table pipeline combining PaddlePaddle classification and detection models."""
 
+    _dirname = "jspast--paddlepaddle-table-models-onnx"
+
     def __init__(self, models_path: Path | str | None = None) -> None:
         """Initialize models from the provided path or download them."""
 
@@ -24,7 +26,8 @@ class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
 
     @classmethod
     def download(cls, *, local_dir: Path | str | None = None) -> Path:
-        PaddlePaddleTableClassificationModel.download(local_dir=local_dir)
-        PaddlePaddleWiredCellDetectionModel.download(local_dir=local_dir)
-        path = PaddlePaddleWirelessCellDetectionModel.download(local_dir=local_dir)
+        pipeline_dir = None if local_dir is None else Path(local_dir) / cls._dirname
+        PaddlePaddleTableClassificationModel.download(local_dir=pipeline_dir)
+        PaddlePaddleWiredCellDetectionModel.download(local_dir=pipeline_dir)
+        path = PaddlePaddleWirelessCellDetectionModel.download(local_dir=pipeline_dir)
         return path
