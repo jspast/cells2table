@@ -35,7 +35,7 @@ docling = [
   "docling (>=2.66.0,<3.0.0)",
 ]
 huggingface = [
-  "huggingface-hub (>=0.36.0,<1.0.0)",
+  "huggingface-hub (>=0.36.0,<2.0.0)",
 ]
 onnx_cpu = [
   "onnxruntime (>=1.23.2,<2.0.0)",
@@ -50,12 +50,12 @@ onnx_openvino = [
 [dependency-groups]
 dev = [
   "cells2table",
-  "pytest (>=7.0,<8.0)",
+  "pytest (>=7.0,<10.0)",
   "ruff (>=0.5.0,<1.0.0)",
 ]
 
 [build-system]
-requires = ["uv_build>=0.9.17,<0.10.0"]
+requires = ["uv_build>=0.9.17,<1.0.0"]
 build-backend = "uv_build"
 
 [tool.ruff]
