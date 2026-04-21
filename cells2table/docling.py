@@ -1,4 +1,3 @@
-import copy
 import os
 from collections.abc import Iterable
 from pathlib import Path
@@ -17,46 +16,70 @@ try:
     from docling_core.types.doc.base import BoundingBox
     from docling_core.types.doc.document import TableCell
     from docling_core.types.doc.labels import DocItemLabel
-    from docling_core.types.doc.page import BoundingRectangle, TextCellUnit
     from PIL import ImageDraw
     from pydantic import Field
 except ImportError:
     raise ImportError("docling is not installed. Unable to initialize plugin.")
 
+from cells2table.datamodels import Table as PluginTable
 from cells2table.pipelines import DefaultPipeline
 
 
-def get_tokens(page: Page, table_cluster: Cluster, scale: float) -> list[str]:
-    # Check if word-level cells are available from backend:
-    sp = page._backend.get_segmented_page() if page._backend else None
-    if sp is not None:
-        tcells = sp.get_cells_in_bbox(
-            cell_unit=TextCellUnit.WORD,
-            bbox=table_cluster.bbox,
-        )
-        if len(tcells) == 0:
-            # In case word-level cells yield empty
-            tcells = table_cluster.cells
-    else:
-        # Otherwise - we use normal (line/phrase) cells
-        tcells = table_cluster.cells
-    tokens = []
-    for c in tcells:
-        # Only allow non empty strings (spaces) into the cells of a table
-        if len(c.text.strip()) > 0:
-            new_cell = copy.deepcopy(c)
-            new_cell.rect = BoundingRectangle.from_bounding_box(
-                new_cell.rect.to_bounding_box().scaled(scale=scale)
-            )
-            tokens.append(
-                {
-                    "id": new_cell.index,
-                    "text": new_cell.text,
-                    "bbox": new_cell.rect.to_bounding_box().model_dump(),
-                }
-            )
+def build_docling_table(
+    table: PluginTable,
+    table_cluster: Cluster,
+    page: Page,
+    scale: float,
+) -> Table:
+    docling_cells = []
 
-    return tokens
+    for cell_id, cell in enumerate(table.cells):
+        docling_cell_bbox: dict = {
+            "l": cell.bbox.l / scale + table_cluster.bbox.l,
+            "t": cell.bbox.t / scale + table_cluster.bbox.t,
+            "r": cell.bbox.r / scale + table_cluster.bbox.l,
+            "b": cell.bbox.b / scale + table_cluster.bbox.t,
+            "token": "",
+        }
+
+        docling_cell: dict = {
+            "cell_id": cell_id,
+            "bbox": docling_cell_bbox,
+            "row_span": cell.row_span,
+            "col_span": cell.col_span,
+            "start_row_offset_idx": cell.row,
+            "end_row_offset_idx": cell.row + cell.row_span,
+            "start_col_offset_idx": cell.col,
+            "end_col_offset_idx": cell.col + cell.col_span,
+            "indentation_level": 0,
+            "text_cell_bboxes": [docling_cell_bbox],
+            "column_header": False,
+            "row_header": False,
+            "row_section": False,
+        }
+
+        bbox = BoundingBox.model_validate(docling_cell["bbox"])
+
+        # TODO: implement do_cell_matching
+        # The image backend does not implement .get_text_in_rect()
+        text_piece = page._backend.get_text_in_rect(bbox) if page._backend else ""
+        docling_cell["bbox"]["token"] = text_piece
+
+        tc = TableCell.model_validate(docling_cell)
+        docling_cells.append(tc)
+
+    docling_table = Table(
+        otsl_seq=[],
+        table_cells=docling_cells,
+        num_rows=table.num_rows,
+        num_cols=table.num_cols,
+        id=table_cluster.id,
+        page_no=page.page_no,
+        cluster=table_cluster,
+        label=table_cluster.label,
+    )
+
+    return docling_table
 
 
 class CustomDoclingTableStructureOptions(BaseTableStructureOptions):
@@ -111,6 +134,7 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
         conv_res: ConversionResult,
         pages: Sequence[Page],
     ) -> Sequence[TableStructurePrediction]:
+
         pages = list(pages)
         predictions: list[TableStructurePrediction] = []
 
@@ -130,15 +154,7 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
                 page.predictions.tablestructure = table_prediction
 
                 in_tables = [
-                    (
-                        cluster,
-                        [
-                            round(cluster.bbox.l) * self.scale,
-                            round(cluster.bbox.t) * self.scale,
-                            round(cluster.bbox.r) * self.scale,
-                            round(cluster.bbox.b) * self.scale,
-                        ],
-                    )
+                    cluster
                     for cluster in page.predictions.layout.clusters
                     if cluster.label in [DocItemLabel.TABLE, DocItemLabel.DOCUMENT_INDEX]
                 ]
@@ -146,69 +162,21 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
                     predictions.append(table_prediction)
                     continue
 
-                page_input: dict = {
-                    "width": page.size.width * self.scale,
-                    "height": page.size.height * self.scale,
-                    "image": numpy.asarray(page.get_image(scale=self.scale)),
-                }
+                page_image = numpy.asarray(page.get_image(scale=self.scale))
 
-                for table_cluster, tbl_box in in_tables:
-                    page_input["tokens"] = get_tokens(page, table_cluster, self.scale)
+                for table_cluster in in_tables:
+                    bbox = table_cluster.bbox
 
-                    table_image = page_input["image"][
-                        round(tbl_box[1]) : round(tbl_box[3]),
-                        round(tbl_box[0]) : round(tbl_box[2]),
+                    table_image = page_image[
+                        round(bbox.t * self.scale) : round(bbox.b * self.scale),
+                        round(bbox.l * self.scale) : round(bbox.r * self.scale),
                     ]
 
                     table = self.pipeline([table_image], self.options.confidence_threshold)[0]
 
-                    docling_cells = []
+                    docling_table = build_docling_table(table, table_cluster, page, self.scale)
 
-                    for cell_id, cell in enumerate(table.cells):
-                        docling_cell_bbox: dict = {
-                            "l": (cell.bbox.l + tbl_box[0]) / self.scale,
-                            "t": (cell.bbox.t + tbl_box[1]) / self.scale,
-                            "r": (cell.bbox.r + tbl_box[0]) / self.scale,
-                            "b": (cell.bbox.b + tbl_box[1]) / self.scale,
-                            "token": "",
-                        }
-
-                        docling_cell: dict = {
-                            "cell_id": cell_id,
-                            "bbox": docling_cell_bbox,
-                            "row_span": cell.row_span,
-                            "col_span": cell.col_span,
-                            "start_row_offset_idx": cell.row,
-                            "end_row_offset_idx": cell.row + cell.row_span,
-                            "start_col_offset_idx": cell.col,
-                            "end_col_offset_idx": cell.col + cell.col_span,
-                            "indentation_level": 0,
-                            "text_cell_bboxes": [docling_cell_bbox],
-                            "column_header": False,
-                            "row_header": False,
-                            "row_section": False,
-                        }
-
-                        bbox = BoundingBox.model_validate(docling_cell["bbox"])
-
-                        text_piece = page._backend.get_text_in_rect(bbox) if page._backend else ""
-                        docling_cell["bbox"]["token"] = text_piece
-
-                        tc = TableCell.model_validate(docling_cell)
-                        docling_cells.append(tc)
-
-                    docling_table = Table(
-                        otsl_seq=[],
-                        table_cells=docling_cells,
-                        num_rows=table.num_rows,
-                        num_cols=table.num_cols,
-                        id=table_cluster.id,
-                        page_no=page.page_no,
-                        cluster=table_cluster,
-                        label=table_cluster.label,
-                    )
-
-                    page.predictions.tablestructure.table_map[table_cluster.id] = docling_table
+                    table_prediction.table_map[table_cluster.id] = docling_table
 
                 if settings.debug.visualize_tables:
                     self.draw_table_and_cells(
