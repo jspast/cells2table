@@ -1,7 +1,8 @@
 import copy
+import os
 from collections.abc import Iterable
 from pathlib import Path
-from typing import ClassVar, Literal, Sequence, Type
+from typing import Annotated, ClassVar, Literal, Sequence, Type
 
 import numpy
 
@@ -18,6 +19,7 @@ try:
     from docling_core.types.doc.labels import DocItemLabel
     from docling_core.types.doc.page import BoundingRectangle, TextCellUnit
     from PIL import ImageDraw
+    from pydantic import Field
 except ImportError:
     raise ImportError("docling is not installed. Unable to initialize plugin.")
 
@@ -60,6 +62,17 @@ def get_tokens(page: Page, table_cluster: Cluster, scale: float) -> list[str]:
 class CustomDoclingTableStructureOptions(BaseTableStructureOptions):
     kind: ClassVar[Literal["cells2table"]] = "cells2table"
 
+    confidence_threshold: Annotated[
+        float,
+        Field(
+            ge=0.0,
+            le=1.0,
+            description="Minimum confidence score to keep a cell detection.",
+        ),
+    ] = Field(
+        default_factory=lambda: float(os.environ.get("CELLS2TABLE_CONFIDENCE_THRESHOLD", "0.5"))
+    )
+
 
 class CustomDoclingTableStructureModel(BaseTableStructureModel):
     def __init__(
@@ -81,6 +94,8 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
                 models_path = artifacts_path
 
             self.pipeline = DefaultPipeline(models_path)
+
+            self.options = options
 
             # TODO: decide how to deal with accelerator options
             # device = decide_device(accelerator_options.device)
@@ -145,7 +160,7 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
                         round(tbl_box[0]) : round(tbl_box[2]),
                     ]
 
-                    table = self.pipeline([table_image])[0]
+                    table = self.pipeline([table_image], self.options.confidence_threshold)[0]
 
                     docling_cells = []
 

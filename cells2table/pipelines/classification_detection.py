@@ -23,7 +23,7 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
 
         pass
 
-    def __call__(self, input: Iterable[Any]) -> list[Table]:
+    def __call__(self, input: Iterable[Any], conf_threshold: float = 0.5, **kwargs) -> list[Table]:
         """Run the pipeline."""
 
         cls_images = [[] for c in self.classification_model.classes]
@@ -41,7 +41,7 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
         # Run the detection model for each image
         for i in range(len(self.classification_model.classes)):
             if len(cls_images[i]):
-                cls_detections[i] = self.detection_models[i](cls_images[i])
+                cls_detections[i] = self.detection_models[i](cls_images[i], conf_threshold)
 
         # Combine results
         for i in range(len(cls_result)):
