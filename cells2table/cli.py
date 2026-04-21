@@ -5,12 +5,12 @@ from pathlib import Path
 import cv2
 
 from cells2table.pipelines import DefaultPipeline
-from cells2table.utils.visualize import show_image, visualize_table
+from cells2table.utils.visualize import bgr_to_rgb, rgb_to_bgr, show_image, visualize_table
 
 logger = logging.getLogger(__name__)
 
 
-def download(local_dir: Path | str | None = None) -> None:
+def download() -> None:
     """Download default pipeline models."""
 
     log_format = "%(asctime)s\t%(levelname)s\t%(name)s: %(message)s"
@@ -39,10 +39,11 @@ def main() -> None:
     if not args.image_path.exists():
         raise FileNotFoundError(f"File does not exist: {args.image_path}")
 
-    image = cv2.imread(str(args.image_path))
-
+    image = cv2.imread(args.image_path)
     if image is None:
         raise ValueError(f"Failed to load image: {args.image_path}")
+
+    image = bgr_to_rgb(image)  # ty:ignore[invalid-argument-type]
 
     logger.info("Image loaded successfully from %s", args.image_path)
     logger.debug(
@@ -57,7 +58,7 @@ def main() -> None:
     tables = table_pipeline([image])
 
     for table in tables:
-        show_image(visualize_table(image, table))  # ty:ignore[invalid-argument-type]
+        show_image(visualize_table(rgb_to_bgr(image), table))
 
 
 if __name__ == "__main__":
