@@ -5,6 +5,7 @@ from typing import Any, Iterable
 
 from cells2table.datamodels import Table
 from cells2table.models.tasks import ClassificationModel, DetectionModel
+from cells2table.models.tasks.detection import DetectionResult, filter_detections
 from cells2table.pipelines.base import BasePipeline
 
 logger = logging.getLogger(__name__)
@@ -50,6 +51,18 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
             output.append(Table.from_detections(cells_det))
 
         return output
+
+    def debug(self, image) -> tuple[Table, list[DetectionResult]]:
+        c = self.classification_model([image])[0]
+        logger.info("Image classified as %s with %.4f confidence", c.cls, c.confidence)
+
+        model_idx = self.assigned_model_idx(c.cls, self.detection_models)
+        d = self.detection_models[model_idx]([image], 0.0)[0]
+        d_list = list(d)
+
+        t = Table.from_detections(filter_detections(d, 0.5))
+
+        return t, d_list
 
     @staticmethod
     def assigned_model_idx(pred_cls: str, models: list[DetectionModel]) -> int:

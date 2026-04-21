@@ -2,14 +2,12 @@ import argparse
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-import cv2
 import numpy as np
 from numpy.typing import NDArray
-from PIL import Image
 
 from cells2table.docling import CustomDoclingTableStructureOptions
 from cells2table.pipelines import DefaultPipeline
-from cells2table.utils.visualize import create_visualization
+from cells2table.utils.visualize import bgr_to_rgb, rgb_to_bgr, visualize_detections
 
 try:
     from docling.datamodel.accelerator_options import AcceleratorOptions
@@ -24,6 +22,7 @@ try:
     from docling_eval.prediction_providers.base_prediction_provider import BasePredictionProvider
     from docling_eval.prediction_providers.docling_provider import DoclingPredictionProvider
     from docling_eval.utils.external_predictions_visualizer import PredictionsVisualizer
+    from PIL import Image
 except ImportError:
     raise ImportError("docling-eval is not installed. Unable to initialize evaluation.")
 
@@ -31,17 +30,17 @@ benchmarks_dir = Path(__file__).parent.parent.parent / "benchmarks"
 
 
 def pil_to_cv2(image: Image.Image) -> NDArray[np.uint8]:
-    return cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)  # ty:ignore[invalid-return-type]
+    return rgb_to_bgr(np.array(image))
 
 
 def cv2_to_pil(image: NDArray[np.uint8]) -> Image.Image:
-    return Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+    return Image.fromarray(bgr_to_rgb(image))
 
 
 def analyze_image(image: NDArray[np.uint8]) -> NDArray[np.uint8]:
     table_pipeline = DefaultPipeline()
-    tables = table_pipeline([image])
-    return create_visualization(image, tables[0])
+    table, detections = table_pipeline.debug(image)
+    return visualize_detections(image, detections)  # ty:ignore[invalid-return-type]
 
 
 def cells2table_pdfpipelineoptions(num_threads: int) -> PdfPipelineOptions:
