@@ -1,6 +1,7 @@
 import argparse
 from abc import ABC, abstractmethod
 from pathlib import Path
+from typing import override
 
 import numpy as np
 from numpy.typing import NDArray
@@ -131,6 +132,17 @@ class BaseDataset(ABC):
 
 
 class OmniDocBench(BaseDataset):
+    @override
+    def create_gt(self) -> None:
+        dataset = OmniDocBenchDatasetBuilder(
+            target=self.base_dir / "gt",
+            repo_id="samiuc/OmniDocBench-parquet",
+            revision="main",
+            use_parquet=True,
+        )
+        dataset.retrieve_input_dataset()
+        dataset.save_to_disk()
+
     @property
     def name(self) -> BenchMarkNames:
         return BenchMarkNames.OMNIDOCBENCH
