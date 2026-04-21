@@ -11,7 +11,7 @@ class BasePipeline(ABC):
         pass
 
     @abstractmethod
-    def __call__(self, input: Any):
+    def __call__(self, input: Any, **kwargs):
         pass
 
     @classmethod
