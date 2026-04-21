@@ -5,7 +5,7 @@ from pathlib import Path
 import cv2
 
 from cells2table.pipelines import DefaultPipeline
-from cells2table.utils.visualize import visualize_table
+from cells2table.utils.visualize import show_image, visualize_table
 
 logger = logging.getLogger(__name__)
 
@@ -57,7 +57,7 @@ def main() -> None:
     tables = table_pipeline([image])
 
     for table in tables:
-        visualize_table(image, table)  # type: ignore
+        show_image(visualize_table(image, table))  # ty:ignore[invalid-argument-type]
 
 
 if __name__ == "__main__":

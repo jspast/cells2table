@@ -9,7 +9,6 @@ from cells2table.models.tasks import DetectionModel, DetectionResult
 from cells2table.utils.download import DownloadOptions, DownloadPlatform
 
 HF_REPO_ID = "jspast/paddlepaddle-table-models-onnx"
-CONFIDENCE_THRESHOLD = 0.5
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +20,11 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel):
     def input_shape(self):
         return self.session.get_inputs()[1].shape[2:]  # assuming NCHW
 
-    def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[Iterator[DetectionResult]]:
+    def __call__(
+        self,
+        input: Iterable[NDArray[np.uint8]],
+        conf_threshold: float = 0.5,
+    ) -> list[Iterator[DetectionResult]]:
         logger.debug("Started preprocessing")
 
         original_shapes = []
@@ -45,7 +48,7 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel):
         logger.debug("Done running the model")
         logger.debug("Started postprocessing")
 
-        result = self.postprocess(output, scale_factors)  # type: ignore
+        result = self.postprocess(output, scale_factors, conf_threshold)  # type: ignore
 
         logger.debug("Done postprocessing")
 
@@ -56,6 +59,7 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel):
         cls,
         pred: NDArray,
         scale_factors: Sequence[tuple[int, int]],
+        conf_threshold: float,
     ) -> list[Iterator[DetectionResult]]:
         last_cell_idx = 0
         cells = pred[0]
@@ -64,7 +68,7 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel):
 
         for i, count in enumerate(pred[1]):
             c = cells[last_cell_idx : last_cell_idx + count]
-            c = c[c[:, 1] > CONFIDENCE_THRESHOLD]
+            c = c[c[:, 1] > conf_threshold]
             last_cell_idx += count
 
             if not c.size:
@@ -72,7 +76,7 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel):
                 continue
 
             sx, sy = scale_factors[i]
-            scores = c[:, 0]
+            scores = c[:, 1]
             boxes = c[:, 2:]
             boxes[:, [0, 2]] *= sy
             boxes[:, [1, 3]] *= sx
