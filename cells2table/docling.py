@@ -138,54 +138,67 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
         pages = list(pages)
         predictions: list[TableStructurePrediction] = []
 
-        for page in pages:
-            assert page._backend is not None
-            if not page._backend.is_valid():
-                existing_prediction = page.predictions.tablestructure or TableStructurePrediction()
-                page.predictions.tablestructure = existing_prediction
-                predictions.append(existing_prediction)
+        table_images: list[numpy.ndarray] = []
+        table_clusters: list[Cluster] = []
+        cluster_page: list[int] = []
+
+        for i, page in enumerate(pages):
+            table_prediction = page.predictions.tablestructure or TableStructurePrediction()
+            page.predictions.tablestructure = table_prediction
+            predictions.append(table_prediction)
+
+            if (
+                page._backend is None
+                or not page._backend.is_valid()
+                or page.size is None
+                or page.predictions.layout is None
+            ):
                 continue
 
-            with TimeRecorder(conv_res, "table_structure"):
-                assert page.predictions.layout is not None
-                assert page.size is not None
+            clusters = [
+                cluster
+                for cluster in page.predictions.layout.clusters
+                if cluster.label in [DocItemLabel.TABLE, DocItemLabel.DOCUMENT_INDEX]
+            ]
 
-                table_prediction = TableStructurePrediction()
-                page.predictions.tablestructure = table_prediction
+            if not clusters:
+                continue
 
-                in_tables = [
-                    cluster
-                    for cluster in page.predictions.layout.clusters
-                    if cluster.label in [DocItemLabel.TABLE, DocItemLabel.DOCUMENT_INDEX]
+            cluster_page.extend([i] * len(clusters))
+            table_clusters.extend(clusters)
+
+            page_image = numpy.asarray(page.get_image(scale=self.scale))
+
+            for cluster in clusters:
+                bbox = cluster.bbox
+
+                table_image = page_image[
+                    round(bbox.t * self.scale) : round(bbox.b * self.scale),
+                    round(bbox.l * self.scale) : round(bbox.r * self.scale),
                 ]
-                if not in_tables:
-                    predictions.append(table_prediction)
-                    continue
 
-                page_image = numpy.asarray(page.get_image(scale=self.scale))
+                table_images.append(table_image)
 
-                for table_cluster in in_tables:
-                    bbox = table_cluster.bbox
+        if len(table_images) == 0:
+            return predictions
 
-                    table_image = page_image[
-                        round(bbox.t * self.scale) : round(bbox.b * self.scale),
-                        round(bbox.l * self.scale) : round(bbox.r * self.scale),
-                    ]
+        with TimeRecorder(conv_res, "table_structure"):
+            tables = self.pipeline(table_images, self.options.confidence_threshold)
 
-                    table = self.pipeline([table_image], self.options.confidence_threshold)[0]
+        for table, cluster, page_idx in zip(tables, table_clusters, cluster_page):
+            page = pages[page_idx]
+            assert page.predictions.tablestructure is not None
 
-                    docling_table = build_docling_table(table, table_cluster, page, self.scale)
+            docling_table = build_docling_table(table, cluster, page, self.scale)
 
-                    table_prediction.table_map[table_cluster.id] = docling_table
+            page.predictions.tablestructure.table_map[cluster.id] = docling_table
 
-                if settings.debug.visualize_tables:
-                    self.draw_table_and_cells(
-                        conv_res,
-                        page,
-                        page.predictions.tablestructure.table_map.values(),
-                    )
-
-                predictions.append(table_prediction)
+            if settings.debug.visualize_tables:
+                self.draw_table_and_cells(
+                    conv_res,
+                    page,
+                    page.predictions.tablestructure.table_map.values(),
+                )
 
         return predictions
 
