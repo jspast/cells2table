@@ -38,9 +38,12 @@ def cv2_to_pil(image: NDArray[np.uint8]) -> Image.Image:
     return Image.fromarray(bgr_to_rgb(image))
 
 
-def analyze_image(image: NDArray[np.uint8]) -> NDArray[np.uint8]:
+def analyze_image(
+    image: NDArray[np.uint8],
+    detection_model_idx: int | None = None,
+) -> NDArray[np.uint8]:
     table_pipeline = DefaultPipeline()
-    table, detections = table_pipeline.debug(image)
+    table, detections = table_pipeline.debug(image, detection_model_idx)
     return visualize_detections(image, detections)  # ty:ignore[invalid-return-type]
 
 
