@@ -1,21 +1,13 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Iterable
 
-import cv2
-import numpy as np
 import onnxruntime as ort
-from numpy.typing import NDArray
 
 from cells2table.models.tasks.base import BaseModel
 
 
 class OnnxModel(BaseModel, ABC):
     """Base interface for ONNX models."""
-
-    scale = 1 / 255.0
-    mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
-    std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
 
     @classmethod
     @abstractmethod
@@ -49,14 +41,3 @@ class OnnxModel(BaseModel, ABC):
     @property
     def output_names(self):
         return [v.name for v in self.session.get_outputs()]
-
-    def preprocess(self, input: Iterable[NDArray[np.uint8]]) -> list[NDArray[np.uint8]]:
-        output = []
-
-        for img in input:
-            img = cv2.resize(img, dsize=self.input_shape, interpolation=cv2.INTER_LANCZOS4)
-            img = (img.astype(np.float32) * self.scale - self.mean) / self.std  # Normalize
-            img = img.transpose(2, 0, 1)  # HWC to CHW
-            output.append(img)
-
-        return output
