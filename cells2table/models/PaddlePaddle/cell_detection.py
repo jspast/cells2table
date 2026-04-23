@@ -1,6 +1,7 @@
 import logging
 from typing import Iterable, Iterator, Sequence
 
+import cv2
 import numpy as np
 from numpy.typing import NDArray
 
@@ -53,6 +54,17 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel):
         logger.debug("Done postprocessing")
 
         return result
+
+    def preprocess(self, input: Iterable[NDArray[np.uint8]]) -> list[NDArray[np.float32]]:
+        blob = cv2.dnn.blobFromImages(
+            input,
+            scalefactor=1 / 255.0,
+            size=self.input_shape,
+            swapRB=False,
+            crop=False,
+        )  # ty:ignore[no-matching-overload]
+
+        return list(blob)
 
     @classmethod
     def postprocess(
