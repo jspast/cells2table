@@ -52,11 +52,19 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
 
         return output
 
-    def debug(self, image) -> tuple[Table, list[DetectionResult]]:
-        c = self.classification_model([image])[0]
-        logger.info("Image classified as %s with %.4f confidence", c.cls, c.confidence)
+    def debug(
+        self,
+        image,
+        detection_model_idx: int | None = None,
+    ) -> tuple[Table, list[DetectionResult]]:
+        if detection_model_idx is None:
+            c = self.classification_model([image])[0]
+            logger.info("Image classified as %s with %.4f confidence", c.cls, c.confidence)
 
-        model_idx = self.assigned_model_idx(c.cls, self.detection_models)
+            model_idx = self.assigned_model_idx(c.cls, self.detection_models)
+        else:
+            model_idx = detection_model_idx
+
         d = self.detection_models[model_idx]([image], 0.0)[0]
         d_list = list(d)
 
