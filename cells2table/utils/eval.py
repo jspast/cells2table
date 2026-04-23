@@ -13,7 +13,7 @@ from cells2table.utils.visualize import bgr_to_rgb, rgb_to_bgr, visualize_detect
 try:
     from docling.datamodel.accelerator_options import AcceleratorOptions
     from docling.datamodel.base_models import InputFormat
-    from docling.datamodel.pipeline_options import PdfPipelineOptions, RapidOcrOptions
+    from docling.datamodel.pipeline_options import PdfPipelineOptions
     from docling.document_converter import FormatOption, ImageFormatOption, PdfFormatOption
     from docling_eval.cli import main as eval_main
     from docling_eval.datamodels.types import BenchMarkNames, EvaluationModality
@@ -52,7 +52,7 @@ def cells2table_pdfpipelineoptions(num_threads: int) -> PdfPipelineOptions:
     options.table_structure_options = CustomDoclingTableStructureOptions()
     options.images_scale = 2.0
 
-    options.ocr_options = RapidOcrOptions(backend="torch")
+    options.do_ocr = False
 
     options.accelerator_options = AcceleratorOptions(num_threads=num_threads)
 
