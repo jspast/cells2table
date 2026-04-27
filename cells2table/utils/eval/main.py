@@ -4,10 +4,13 @@ from pathlib import Path
 from typing import override
 
 import numpy as np
+from docling.datamodel.pipeline_options import TableStructureOptions
+from docling_eval.prediction_providers.tableformer_provider import TableFormerPredictionProvider
 from numpy.typing import NDArray
 
 from cells2table.docling import CustomDoclingTableStructureOptions
 from cells2table.pipelines import DefaultPipeline
+from cells2table.utils.eval.cells2table_provider import Cells2tablePredictionProvider
 from cells2table.utils.visualize import bgr_to_rgb, rgb_to_bgr, visualize_detections
 
 try:
@@ -27,7 +30,7 @@ try:
 except ImportError:
     raise ImportError("docling-eval is not installed. Unable to initialize evaluation.")
 
-benchmarks_dir = Path(__file__).parent.parent.parent / "benchmarks"
+benchmarks_dir = Path(__file__).parents[3] / "benchmarks"
 
 
 def pil_to_cv2(image: Image.Image) -> NDArray[np.uint8]:
@@ -85,6 +88,44 @@ def cells2table_provider(num_threads: int) -> DoclingPredictionProvider:
     return provider
 
 
+def tableformer_pdfpipelineoptions(num_threads: int) -> PdfPipelineOptions:
+    options = PdfPipelineOptions()
+
+    options.allow_external_plugins = True
+    options.do_table_structure = True
+    options.table_structure_options = TableStructureOptions(do_cell_matching=False)
+    options.images_scale = 2.0
+
+    options.do_ocr = False
+
+    options.accelerator_options = AcceleratorOptions(num_threads=num_threads)
+
+    options.generate_page_images = True  # Needed for visualizations
+
+    return options
+
+
+def tableformer_formatoptions(num_threads: int) -> dict[InputFormat, FormatOption]:
+    return {
+        InputFormat.PDF: PdfFormatOption(
+            pipeline_options=tableformer_pdfpipelineoptions(num_threads)
+        ),
+        InputFormat.IMAGE: ImageFormatOption(
+            pipeline_options=tableformer_pdfpipelineoptions(num_threads)
+        ),
+    }
+
+
+def tableformer_provider(num_threads: int) -> DoclingPredictionProvider:
+    provider = DoclingPredictionProvider(
+        format_options=tableformer_formatoptions(num_threads),
+        do_visualization=True,
+    )
+    provider.prediction_modalities = [EvaluationModality.TABLE_STRUCTURE]
+
+    return provider
+
+
 class BaseDataset(ABC):
     """Base interface for datasets."""
 
@@ -107,31 +148,31 @@ class BaseDataset(ABC):
         dataset.retrieve_input_dataset()
         dataset.save_to_disk()
 
-    def create_pred(self, provider: BasePredictionProvider) -> None:
+    def create_pred(self, provider: BasePredictionProvider, dirname: str) -> None:
         provider.create_prediction_dataset(
             name=self.name,
             gt_dataset_dir=self.base_dir / "gt",
-            target_dataset_dir=self.base_dir / "pred",
+            target_dataset_dir=self.base_dir / dirname,
         )
 
-    def evaluate(self, modality: EvaluationModality) -> None:
+    def evaluate(self, modality: EvaluationModality, dirname: str) -> None:
         eval_main.evaluate(
             modality=modality,
             benchmark=self.name,
-            idir=self.base_dir / "pred",
-            odir=self.base_dir / "evaluations" / modality.value,
+            idir=self.base_dir / dirname,
+            odir=self.base_dir / dirname / "evaluations",
         )
 
         eval_main.visualize(
             modality=modality,
             benchmark=self.name,
-            idir=self.base_dir / "pred",
-            odir=self.base_dir / "evaluations" / modality.value,
+            idir=self.base_dir / dirname,
+            odir=self.base_dir / dirname / "evaluations",
         )
 
-    def visualize(self) -> None:
-        visualizer = PredictionsVisualizer(self.base_dir / "pred" / "visualizations")
-        visualizer.create_visualizations(dataset_dir=self.base_dir / "pred")
+    def visualize(self, dirname: str) -> None:
+        visualizer = PredictionsVisualizer(self.base_dir / dirname / "visualizations")
+        visualizer.create_visualizations(dataset_dir=self.base_dir / dirname)
 
 
 class OmniDocBench(BaseDataset):
@@ -167,16 +208,32 @@ class DoclingDPBench(BaseDataset):
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--provider", type=str, default="cells2table")
-    parser.add_argument("--benchmark", type=str, default="DoclingDPBench")
-    parser.add_argument("--create-gt", action="store_true", default=False)
-    parser.add_argument("--create-pred", action="store_true", default=False)
-    parser.add_argument("--evaluate", action="store_true", default=False)
-    parser.add_argument("--visualize", action="store_true", default=False)
-    parser.add_argument("--num-threads", type=int, default=4)
+    parser.add_argument("provider", type=str, default="cells2table")
+    parser.add_argument("-b", "--benchmark", type=str, default="DoclingDPBench")
+    parser.add_argument("-g", "--create-gt", action="store_true", default=False)
+    parser.add_argument("-p", "--create-pred", action="store_true", default=False)
+    parser.add_argument("-e", "--evaluate", action="store_true", default=False)
+    parser.add_argument("-v", "--visualize", action="store_true", default=False)
+    parser.add_argument("-t", "--num-threads", type=int, default=4)
     args = parser.parse_args()
 
-    provider = cells2table_provider(args.num_threads)
+    provider = None
+    match args.provider.lower():
+        case "cells2table":
+            # provider = cells2table_provider(args.num_threads)
+            provider = Cells2tablePredictionProvider(
+                num_threads=args.num_threads,
+                do_visualization=True,
+            )
+        case "tableformer":
+            # provider = tableformer_provider(args.num_threads)
+            provider = TableFormerPredictionProvider(
+                num_threads=args.num_threads,
+                do_visualization=True,
+            )
+
+    if provider is None:
+        raise ValueError(f'Unrecognized provider "{args.provider}". Unable to initialize.')
 
     benchmark = None
     for b in [DoclingDPBench(), OmniDocBench()]:
@@ -190,13 +247,13 @@ def main() -> None:
         benchmark.create_gt()
 
     if args.create_pred:
-        benchmark.create_pred(provider)
+        benchmark.create_pred(provider, args.provider)
 
     if args.evaluate:
-        benchmark.evaluate(EvaluationModality.TABLE_STRUCTURE)
+        benchmark.evaluate(EvaluationModality.TABLE_STRUCTURE, args.provider)
 
     if args.visualize:
-        benchmark.visualize()
+        benchmark.visualize(args.provider)
 
 
 if __name__ == "__main__":
