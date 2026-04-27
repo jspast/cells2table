@@ -73,6 +73,7 @@ class Cells2tablePredictionProvider(TableFormerPredictionProvider):
 
         updated = False
         pred_doc = None
+        timings = {}
 
         try:
             if record.mime_type == "application/pdf":
@@ -80,7 +81,7 @@ class Cells2tablePredictionProvider(TableFormerPredictionProvider):
                     raise RuntimeError("Original document must be a DocumentStream for PDF files")
 
                 # Process PDF
-                updated, pred_doc = self.tf_updater.replace_tabledata(
+                updated, pred_doc, timings = self.tf_updater.replace_tabledata(
                     copy.deepcopy(record.original.stream), record.ground_truth_doc
                 )
 
@@ -112,7 +113,7 @@ class Cells2tablePredictionProvider(TableFormerPredictionProvider):
                 deep=True
             )  # Use copy of ground truth as fallback
 
-        pred_record = self.create_dataset_record_with_prediction(record, pred_doc, None)
+        pred_record = self.create_dataset_record_with_prediction(record, pred_doc, timings=timings)
         pred_record.status = status
         return pred_record
 
