@@ -4,11 +4,8 @@ from pathlib import Path
 from typing import override
 
 import numpy as np
-from docling.datamodel.pipeline_options import TableStructureOptions
-from docling_eval.prediction_providers.tableformer_provider import TableFormerPredictionProvider
 from numpy.typing import NDArray
 
-from cells2table.docling import CustomDoclingTableStructureOptions
 from cells2table.pipelines import DefaultPipeline
 from cells2table.utils.eval.cells2table_provider import Cells2tablePredictionProvider
 from cells2table.utils.visualize import bgr_to_rgb, rgb_to_bgr, visualize_detections
@@ -16,7 +13,8 @@ from cells2table.utils.visualize import bgr_to_rgb, rgb_to_bgr, visualize_detect
 try:
     from docling.datamodel.accelerator_options import AcceleratorOptions
     from docling.datamodel.base_models import InputFormat
-    from docling.datamodel.pipeline_options import PdfPipelineOptions
+    from docling.datamodel.pipeline_options import PdfPipelineOptions, TableStructureOptions
+    from docling.datamodel.settings import settings
     from docling.document_converter import FormatOption, ImageFormatOption, PdfFormatOption
     from docling_eval.cli import main as eval_main
     from docling_eval.datamodels.types import BenchMarkNames, EvaluationModality
@@ -25,8 +23,11 @@ try:
     from docling_eval.dataset_builders.omnidocbench_builder import OmniDocBenchDatasetBuilder
     from docling_eval.prediction_providers.base_prediction_provider import BasePredictionProvider
     from docling_eval.prediction_providers.docling_provider import DoclingPredictionProvider
+    from docling_eval.prediction_providers.tableformer_provider import TableFormerPredictionProvider
     from docling_eval.utils.external_predictions_visualizer import PredictionsVisualizer
     from PIL import Image
+
+    from cells2table.docling import CustomDoclingTableStructureOptions
 except ImportError:
     raise ImportError("docling-eval is not installed. Unable to initialize evaluation.")
 
@@ -143,16 +144,24 @@ class BaseDataset(ABC):
     def base_dir(self) -> Path:
         return benchmarks_dir / self.name
 
-    def create_gt(self) -> None:
-        dataset = self.builder(target=self.base_dir / "gt")  # type: ignore
+    def create_gt(self, begin: int = 0, end: int = -1) -> None:
+        dataset = self.builder(target=self.base_dir / "gt", begin_index=begin, end_index=end)  # type: ignore
         dataset.retrieve_input_dataset()
         dataset.save_to_disk()
 
-    def create_pred(self, provider: BasePredictionProvider, dirname: str) -> None:
+    def create_pred(
+        self,
+        provider: BasePredictionProvider,
+        dirname: str,
+        begin: int = 0,
+        end: int = -1,
+    ) -> None:
         provider.create_prediction_dataset(
             name=self.name,
             gt_dataset_dir=self.base_dir / "gt",
             target_dataset_dir=self.base_dir / dirname,
+            begin_index=begin,
+            end_index=end,
         )
 
     def evaluate(self, modality: EvaluationModality, dirname: str) -> None:
@@ -177,12 +186,14 @@ class BaseDataset(ABC):
 
 class OmniDocBench(BaseDataset):
     @override
-    def create_gt(self) -> None:
+    def create_gt(self, begin: int = 0, end: int = -1) -> None:
         dataset = OmniDocBenchDatasetBuilder(
             target=self.base_dir / "gt",
             repo_id="samiuc/OmniDocBench-parquet",
             revision="main",
             use_parquet=True,
+            begin_index=begin,
+            end_index=end,
         )
         dataset.retrieve_input_dataset()
         dataset.save_to_disk()
@@ -215,7 +226,11 @@ def main() -> None:
     parser.add_argument("-e", "--evaluate", action="store_true", default=False)
     parser.add_argument("-v", "--visualize", action="store_true", default=False)
     parser.add_argument("-t", "--num-threads", type=int, default=4)
+    parser.add_argument("--begin", type=int, default=0)
+    parser.add_argument("--end", type=int, default=-1)
     args = parser.parse_args()
+
+    settings.debug.profile_pipeline_timings = True
 
     provider = None
     match args.provider.lower():
@@ -244,10 +259,10 @@ def main() -> None:
         raise ValueError(f'Unrecognized benchmark "{args.benchmark}". Unable to initialize.')
 
     if args.create_gt:
-        benchmark.create_gt()
+        benchmark.create_gt(args.begin, args.end)
 
     if args.create_pred:
-        benchmark.create_pred(provider, args.provider)
+        benchmark.create_pred(provider, args.provider, args.begin, args.end)
 
     if args.evaluate:
         benchmark.evaluate(EvaluationModality.TABLE_STRUCTURE, args.provider)

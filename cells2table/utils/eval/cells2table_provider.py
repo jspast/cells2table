@@ -6,7 +6,6 @@ from typing import override
 
 from docling.datamodel.accelerator_options import AcceleratorDevice, AcceleratorOptions
 from docling.datamodel.base_models import ConversionStatus
-from docling.models.stages.table_structure.table_structure_model import TableStructureModel
 from docling_core.types.doc.labels import DocItemLabel
 from docling_core.types.io import DocumentStream
 from docling_eval.datamodels.dataset_record import DatasetRecord, DatasetRecordWithPrediction
@@ -145,7 +144,6 @@ class Cells2tableUpdater(TableFormerUpdater):
             num_threads: Number of threads for prediction
             artifacts_path: Path to artifacts
         """
-        TableStructureModel
         table_structure_options = CustomDoclingTableStructureOptions()
         accelerator_options = AcceleratorOptions(
             num_threads=num_threads, device=AcceleratorDevice.AUTO
