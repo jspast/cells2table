@@ -77,6 +77,7 @@ module-root = ""
 [tool.uv.sources]
 torch = { index = "torch_cpu" }
 torchvision = { index = "torch_cpu" }
+docling-eval = { git = "https://github.com/jspast/docling-eval", branch = "main" }
 
 [[tool.uv.index]]
 name = "torch_cpu"
