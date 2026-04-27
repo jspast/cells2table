@@ -16,6 +16,22 @@ class Cell:
     col_span: int = 1
 
 
+def sort_cells_index_by_top(cells: list[Cell]) -> list[int]:
+    return sorted(range(len(cells)), key=lambda i: cells[i].bbox.t)
+
+
+def sort_cells_index_by_bottom(cells: list[Cell]) -> list[int]:
+    return sorted(range(len(cells)), key=lambda i: cells[i].bbox.b)
+
+
+def sort_cells_index_by_left(cells: list[Cell]) -> list[int]:
+    return sorted(range(len(cells)), key=lambda i: cells[i].bbox.l)
+
+
+def sort_cells_index_by_right(cells: list[Cell]) -> list[int]:
+    return sorted(range(len(cells)), key=lambda i: cells[i].bbox.r)
+
+
 @dataclass
 class Table:
     cells: list[Cell] = field(default_factory=list)
@@ -31,87 +47,87 @@ class Table:
             cell = Cell(bbox=bbox, row=0, col=0)
             table.cells.append(cell)
 
-        table.compute_rows_and_cols(tolerance)
+        table.compute_structure(tolerance)
         return table
 
-    def compute_rows_and_cols(self, tolerance: float) -> None:
-        self.compute_rows(tolerance)
-        self.compute_cols(tolerance)
+    def compute_structure(self, tolerance: float) -> None:
+        self.compute_cells_row(tolerance)
+        self.compute_cells_col(tolerance)
+        self.compute_cells_row_span(tolerance)
+        self.compute_cells_col_span(tolerance)
 
-    def sort_cells_by_rows(self) -> None:
-        self.cells = sorted(self.cells, key=lambda cell: cell.bbox.t)
+    def compute_cells_row(self, tolerance: float) -> None:
+        indices = sort_cells_index_by_top(self.cells)
 
-    def sort_cells_by_cols(self) -> None:
-        self.cells = sorted(self.cells, key=lambda cell: cell.bbox.l)
+        spos = None  # Spatial position
+        lpos = 0  # Logical position
 
-    def compute_rows(self, tolerance: float) -> None:
-        self.sort_cells_by_rows()
+        for i in indices:
+            cell_spos = self.cells[i].bbox.t
 
-        row_y = None
-        row_num = 0
-        row_start_idx = 0
-        row_end_idx = None
-        check_span_indices: set[int] = set()
+            if spos is None:
+                spos = cell_spos
 
-        for i in range(len(self.cells)):
-            if row_y is None:
-                row_y = self.cells[i].bbox.t
+            elif cell_spos - spos > tolerance:
+                lpos += 1
+                spos = cell_spos
 
-            elif abs(self.cells[i].bbox.t - row_y) > tolerance:
-                row_end_idx = i
-                for j in range(row_start_idx, row_end_idx):
-                    self.cells[j].row = row_num
-                    check_span_indices.add(j)
+            self.cells[i].row = lpos
 
-                row_y = self.cells[i].bbox.t
-                row_start_idx = row_end_idx
-                row_num += 1
+        self.num_rows = lpos + 1
 
-                for j in list(check_span_indices):
-                    if self.cells[j].bbox.b > row_y + tolerance:
-                        self.cells[j].row_span += 1
-                    else:
-                        check_span_indices.remove(j)
+    def compute_cells_col(self, tolerance: float) -> None:
+        indices = sort_cells_index_by_left(self.cells)
 
-        row_end_idx = len(self.cells)
-        for j in range(row_start_idx, row_end_idx):
-            self.cells[j].row = row_num
-            check_span_indices.add(j)
+        spos = None  # Spatial position
+        lpos = 0  # Logical position
 
-        self.num_rows = row_num + 1
+        for i in indices:
+            cell_spos = self.cells[i].bbox.l
 
-    def compute_cols(self, tolerance: float) -> None:
-        self.sort_cells_by_cols()
+            if spos is None:
+                spos = cell_spos
 
-        col_x = None
-        col_num = 0
-        col_start_idx = 0
-        col_end_idx = None
-        check_span_indices: set[int] = set()
+            elif cell_spos - spos > tolerance:
+                lpos += 1
+                spos = cell_spos
 
-        for i in range(len(self.cells)):
-            if col_x is None:
-                col_x = self.cells[i].bbox.l
+            self.cells[i].col = lpos
 
-            elif abs(self.cells[i].bbox.l - col_x) > tolerance:
-                col_end_idx = i
-                for j in range(col_start_idx, col_end_idx):
-                    self.cells[j].col = col_num
-                    check_span_indices.add(j)
+        self.num_cols = lpos + 1
 
-                col_x = self.cells[i].bbox.l
-                col_start_idx = col_end_idx
-                col_num += 1
+    def compute_cells_row_span(self, tolerance: float) -> None:
+        indices = sort_cells_index_by_bottom(self.cells)
 
-                for j in list(check_span_indices):
-                    if self.cells[j].bbox.r > col_x + tolerance:
-                        self.cells[j].col_span += 1
-                    else:
-                        check_span_indices.remove(j)
+        spos = None  # Spatial position
+        lpos = 0  # Logical position
 
-        col_end_idx = len(self.cells)
-        for j in range(col_start_idx, col_end_idx):
-            self.cells[j].col = col_num
-            check_span_indices.add(j)
+        for i in indices:
+            cell_spos = self.cells[i].bbox.b
 
-        self.num_cols = col_num + 1
+            if spos is None:
+                spos = cell_spos
+
+            elif cell_spos - spos > tolerance:
+                lpos += 1
+                spos = cell_spos
+
+            self.cells[i].row_span = 1 + lpos - self.cells[i].row
+
+    def compute_cells_col_span(self, tolerance: float) -> None:
+        indices = sort_cells_index_by_right(self.cells)
+
+        spos = None  # Spatial position
+        lpos = 0  # Logical position
+
+        for i in indices:
+            cell_spos = self.cells[i].bbox.r
+
+            if spos is None:
+                spos = cell_spos
+
+            elif cell_spos - spos > tolerance:
+                lpos += 1
+                spos = cell_spos
+
+            self.cells[i].col_span = 1 + lpos - self.cells[i].col
