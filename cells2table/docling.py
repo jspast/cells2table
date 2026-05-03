@@ -16,8 +16,10 @@ try:
     from docling_core.types.doc.base import BoundingBox
     from docling_core.types.doc.document import TableCell
     from docling_core.types.doc.labels import DocItemLabel
+    from docling_core.types.doc.page import TextCell
     from PIL import ImageDraw
     from pydantic import Field
+    from rtree import index
 except ImportError:
     raise ImportError("docling is not installed. Unable to initialize plugin.")
 
@@ -25,15 +27,56 @@ from cells2table.datamodels import Table as PluginTable
 from cells2table.pipelines import DefaultPipeline
 
 
+def _match_text(bbox: BoundingBox, text_cells: list[TextCell], textcell_overlap: float) -> str:
+    """Return text from text_cells whose bboxes overlap sufficiently with bbox."""
+    return _match_texts([bbox], text_cells, textcell_overlap)[0]
+
+
+def _match_texts(
+    bboxes: list[BoundingBox],
+    text_cells: list[TextCell],
+    textcell_overlap: float,
+) -> list[str]:
+    """Return matched text for each bbox while preserving text-cell order."""
+    if not bboxes:
+        return []
+    if not text_cells:
+        return [""] * len(bboxes)
+
+    p = index.Property()
+    p.dimension = 2
+    spatial_index = index.Index(properties=p)
+    cell_bboxes: list[BoundingBox] = []
+
+    for cell_idx, tc in enumerate(text_cells):
+        tc_bbox = tc.rect.to_bounding_box()
+        cell_bboxes.append(tc_bbox)
+        if tc_bbox.area() > 0:
+            spatial_index.insert(cell_idx, tc_bbox.as_tuple())
+
+    matched_texts: list[str] = []
+    for bbox in bboxes:
+        overlapping = []
+        for cell_idx in sorted(spatial_index.intersection(bbox.as_tuple())):
+            tc_bbox = cell_bboxes[cell_idx]
+            if tc_bbox.get_intersection_bbox(bbox) is not None:
+                if tc_bbox.intersection_over_self(bbox) > textcell_overlap:
+                    overlapping.append(text_cells[cell_idx].text.strip())
+        matched_texts.append(" ".join(overlapping))
+
+    return matched_texts
+
+
 def build_docling_table(
     table: PluginTable,
     table_cluster: Cluster,
     page: Page,
     scale: float,
+    textcell_overlap: float = 0.3,
 ) -> Table:
-    docling_cells = []
+    cells: list[dict] = []
 
-    for cell_id, cell in enumerate(table.cells):
+    for cell in table.cells:
         docling_cell_bbox: dict = {
             "l": cell.bbox.l / scale + table_cluster.bbox.l,
             "t": cell.bbox.t / scale + table_cluster.bbox.t,
@@ -43,7 +86,6 @@ def build_docling_table(
         }
 
         docling_cell: dict = {
-            "cell_id": cell_id,
             "bbox": docling_cell_bbox,
             "row_span": cell.row_span,
             "col_span": cell.col_span,
@@ -51,26 +93,35 @@ def build_docling_table(
             "end_row_offset_idx": cell.row + cell.row_span,
             "start_col_offset_idx": cell.col,
             "end_col_offset_idx": cell.col + cell.col_span,
-            "indentation_level": 0,
-            "text_cell_bboxes": [docling_cell_bbox],
             "column_header": False,
             "row_header": False,
             "row_section": False,
         }
+        cells.append(docling_cell)
 
-        bbox = BoundingBox.model_validate(docling_cell["bbox"])
+    cell_matches = [
+        (element, BoundingBox.model_validate(element["bbox"]))
+        for element in cells
+        if element["bbox"] is not None
+    ]
+    matched_texts = _match_texts(
+        [bbox for _, bbox in cell_matches],
+        table_cluster.cells,
+        textcell_overlap,
+    )
+    for (element, bbox), text in zip(cell_matches, matched_texts):
+        element["text"] = text
+        if not text.strip() and page._backend:
+            element["text"] = page._backend.get_text_in_rect(bbox)
 
-        # TODO: implement do_cell_matching
-        # The image backend does not implement .get_text_in_rect()
-        text_piece = page._backend.get_text_in_rect(bbox) if page._backend else ""
-        docling_cell["bbox"]["token"] = text_piece
-
-        tc = TableCell.model_validate(docling_cell)
-        docling_cells.append(tc)
+    table_cells: list[TableCell] = []
+    for element in cells:
+        tc = TableCell.model_validate(element)
+        table_cells.append(tc)
 
     docling_table = Table(
         otsl_seq=[],
-        table_cells=docling_cells,
+        table_cells=table_cells,
         num_rows=table.num_rows,
         num_cols=table.num_cols,
         id=table_cluster.id,
