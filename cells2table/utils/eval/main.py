@@ -185,19 +185,6 @@ class BaseDataset(ABC):
 
 
 class OmniDocBench(BaseDataset):
-    @override
-    def create_gt(self, begin: int = 0, end: int = -1) -> None:
-        dataset = OmniDocBenchDatasetBuilder(
-            target=self.base_dir / "gt",
-            repo_id="samiuc/OmniDocBench-parquet",
-            revision="main",
-            use_parquet=True,
-            begin_index=begin,
-            end_index=end,
-        )
-        dataset.retrieve_input_dataset()
-        dataset.save_to_disk()
-
     @property
     def name(self) -> BenchMarkNames:
         return BenchMarkNames.OMNIDOCBENCH
