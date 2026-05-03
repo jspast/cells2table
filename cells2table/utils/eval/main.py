@@ -1,7 +1,7 @@
 import argparse
+import logging
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import override
 
 import numpy as np
 from numpy.typing import NDArray
@@ -11,25 +11,25 @@ from cells2table.utils.eval.cells2table_provider import Cells2tablePredictionPro
 from cells2table.utils.visualize import bgr_to_rgb, rgb_to_bgr, visualize_detections
 
 try:
-    from docling.datamodel.accelerator_options import AcceleratorOptions
-    from docling.datamodel.base_models import InputFormat
-    from docling.datamodel.pipeline_options import PdfPipelineOptions, TableStructureOptions
     from docling.datamodel.settings import settings
-    from docling.document_converter import FormatOption, ImageFormatOption, PdfFormatOption
     from docling_eval.cli import main as eval_main
     from docling_eval.datamodels.types import BenchMarkNames, EvaluationModality
     from docling_eval.dataset_builders.dataset_builder import BaseEvaluationDatasetBuilder
     from docling_eval.dataset_builders.doclingdpbench_builder import DoclingDPBenchDatasetBuilder
     from docling_eval.dataset_builders.omnidocbench_builder import OmniDocBenchDatasetBuilder
+    from docling_eval.dataset_builders.otsl_table_dataset_builder import (
+        FintabNetDatasetBuilder,
+        PubTabNetDatasetBuilder,
+    )
     from docling_eval.prediction_providers.base_prediction_provider import BasePredictionProvider
-    from docling_eval.prediction_providers.docling_provider import DoclingPredictionProvider
     from docling_eval.prediction_providers.tableformer_provider import TableFormerPredictionProvider
     from docling_eval.utils.external_predictions_visualizer import PredictionsVisualizer
     from PIL import Image
-
-    from cells2table.docling import CustomDoclingTableStructureOptions
 except ImportError:
     raise ImportError("docling-eval is not installed. Unable to initialize evaluation.")
+
+log_format = "%(asctime)s\t%(levelname)s\t%(name)s: %(message)s"
+logging.basicConfig(level=logging.INFO, format=log_format)
 
 benchmarks_dir = Path(__file__).parents[3] / "benchmarks"
 
@@ -84,24 +84,28 @@ class BaseDataset(ABC):
             name=self.name,
             gt_dataset_dir=self.base_dir / "gt",
             target_dataset_dir=self.base_dir / dirname,
+            split="val" if self.name == BenchMarkNames.PUBTABNET else "test",
             begin_index=begin,
             end_index=end,
         )
 
-    def evaluate(self, modality: EvaluationModality, dirname: str) -> None:
+    def evaluate(self, modalities: list[EvaluationModality], dirname: str) -> None:
         eval_main.evaluate(
-            modality=modality,
+            modality=modalities,
             benchmark=self.name,
+            split="val" if self.name == BenchMarkNames.PUBTABNET else "test",
             idir=self.base_dir / dirname,
             odir=self.base_dir / dirname / "evaluations",
         )
 
-        eval_main.visualize(
-            modality=modality,
-            benchmark=self.name,
-            idir=self.base_dir / dirname,
-            odir=self.base_dir / dirname / "evaluations",
-        )
+        for modality in modalities:
+            eval_main.visualize(
+                modality=modality,
+                benchmark=self.name,
+                split="val" if self.name == BenchMarkNames.PUBTABNET else "test",
+                idir=self.base_dir / dirname,
+                odir=self.base_dir / dirname / "evaluations",
+            )
 
     def visualize(self, dirname: str) -> None:
         visualizer = PredictionsVisualizer(self.base_dir / dirname / "visualizations")
@@ -126,6 +130,26 @@ class DoclingDPBench(BaseDataset):
     @property
     def builder(self) -> type[BaseEvaluationDatasetBuilder]:
         return DoclingDPBenchDatasetBuilder
+
+
+class FinTabNet(BaseDataset):
+    @property
+    def name(self) -> BenchMarkNames:
+        return BenchMarkNames.FINTABNET
+
+    @property
+    def builder(self) -> type[BaseEvaluationDatasetBuilder]:
+        return FintabNetDatasetBuilder
+
+
+class PubTabNet(BaseDataset):
+    @property
+    def name(self) -> BenchMarkNames:
+        return BenchMarkNames.PUBTABNET
+
+    @property
+    def builder(self) -> type[BaseEvaluationDatasetBuilder]:
+        return PubTabNetDatasetBuilder
 
 
 def main() -> None:
@@ -160,7 +184,7 @@ def main() -> None:
         raise ValueError(f'Unrecognized provider "{args.provider}". Unable to initialize.')
 
     benchmark = None
-    for b in [DoclingDPBench(), OmniDocBench()]:
+    for b in [DoclingDPBench(), OmniDocBench(), FinTabNet(), PubTabNet()]:
         if b.name.lower() == args.benchmark.lower():
             benchmark = b
             break
@@ -174,7 +198,7 @@ def main() -> None:
         benchmark.create_pred(provider, args.provider, args.begin, args.end)
 
     if args.evaluate:
-        benchmark.evaluate(EvaluationModality.TABLE_STRUCTURE, args.provider)
+        benchmark.evaluate([EvaluationModality.TABLE_STRUCTURE], args.provider)
 
     if args.visualize:
         benchmark.visualize(args.provider)
