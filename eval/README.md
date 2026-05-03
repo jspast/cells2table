@@ -14,16 +14,6 @@ Docling-eval docs: [DP-Bench](https://github.com/docling-project/docling-eval/bl
 
 55 tables
 
-**Results**:
-
-cells2table
-
-![](DoclingDPBench/cells2table_TEDS_struct-only.png)
-
-Tableformer
-
-![](DoclingDPBench/tableformer_TEDS_struct-only.png)
-
 ### OmniDocBench
 
 Dataset source: [OmniDocBench](https://huggingface.co/datasets/opendatalab/OmniDocBench)
@@ -31,16 +21,6 @@ Dataset source: [OmniDocBench](https://huggingface.co/datasets/opendatalab/OmniD
 Docling-eval docs: [OmniDocBench](https://github.com/docling-project/docling-eval/blob/main/docs/OmniDocBench_benchmarks.md)
 
 1651 pages
-
-**Results**:
-
-cells2table
-
-![](OmniDocBench/cells2table_TEDS_struct-only.png)
-
-Tableformer
-
-![](OmniDocBench/tableformer_TEDS_struct-only.png)
 
 ### FinTabNet
 
