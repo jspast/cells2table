@@ -51,82 +51,6 @@ def analyze_image(
     return visualize_detections(image, detections)  # ty:ignore[invalid-return-type]
 
 
-def cells2table_pdfpipelineoptions(num_threads: int) -> PdfPipelineOptions:
-    options = PdfPipelineOptions()
-
-    options.allow_external_plugins = True
-    options.do_table_structure = True
-    options.table_structure_options = CustomDoclingTableStructureOptions()
-    options.images_scale = 2.0
-
-    options.do_ocr = False
-
-    options.accelerator_options = AcceleratorOptions(num_threads=num_threads)
-
-    options.generate_page_images = True  # Needed for visualizations
-
-    return options
-
-
-def cells2table_formatoptions(num_threads: int) -> dict[InputFormat, FormatOption]:
-    return {
-        InputFormat.PDF: PdfFormatOption(
-            pipeline_options=cells2table_pdfpipelineoptions(num_threads)
-        ),
-        InputFormat.IMAGE: ImageFormatOption(
-            pipeline_options=cells2table_pdfpipelineoptions(num_threads)
-        ),
-    }
-
-
-def cells2table_provider(num_threads: int) -> DoclingPredictionProvider:
-    provider = DoclingPredictionProvider(
-        format_options=cells2table_formatoptions(num_threads),
-        do_visualization=True,
-    )
-    provider.prediction_modalities = [EvaluationModality.TABLE_STRUCTURE]
-
-    return provider
-
-
-def tableformer_pdfpipelineoptions(num_threads: int) -> PdfPipelineOptions:
-    options = PdfPipelineOptions()
-
-    options.allow_external_plugins = True
-    options.do_table_structure = True
-    options.table_structure_options = TableStructureOptions(do_cell_matching=False)
-    options.images_scale = 2.0
-
-    options.do_ocr = False
-
-    options.accelerator_options = AcceleratorOptions(num_threads=num_threads)
-
-    options.generate_page_images = True  # Needed for visualizations
-
-    return options
-
-
-def tableformer_formatoptions(num_threads: int) -> dict[InputFormat, FormatOption]:
-    return {
-        InputFormat.PDF: PdfFormatOption(
-            pipeline_options=tableformer_pdfpipelineoptions(num_threads)
-        ),
-        InputFormat.IMAGE: ImageFormatOption(
-            pipeline_options=tableformer_pdfpipelineoptions(num_threads)
-        ),
-    }
-
-
-def tableformer_provider(num_threads: int) -> DoclingPredictionProvider:
-    provider = DoclingPredictionProvider(
-        format_options=tableformer_formatoptions(num_threads),
-        do_visualization=True,
-    )
-    provider.prediction_modalities = [EvaluationModality.TABLE_STRUCTURE]
-
-    return provider
-
-
 class BaseDataset(ABC):
     """Base interface for datasets."""
 
@@ -222,13 +146,11 @@ def main() -> None:
     provider = None
     match args.provider.lower():
         case "cells2table":
-            # provider = cells2table_provider(args.num_threads)
             provider = Cells2tablePredictionProvider(
                 num_threads=args.num_threads,
                 do_visualization=True,
             )
         case "tableformer":
-            # provider = tableformer_provider(args.num_threads)
             provider = TableFormerPredictionProvider(
                 num_threads=args.num_threads,
                 do_visualization=True,
