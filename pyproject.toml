@@ -40,11 +40,16 @@ docling = [
 ]
 eval = [
   "docling-eval (>=1.0.1,<2.0.0)",
+  "docling-metrics-table>=0.12.0",
   "ipykernel (>=7.2.0,<8.0.0)",
   "ipympl>=0.10.0",
+  "lxml>=5.4.0",
   "matplotlib (>=3.10.8,<4.0.0)",
+  "paddleocr[doc-parser]>=3.5.0",
   "pillow (>=12.2.0,<13.0.0)",
   "pyspark (>=4.1.1,<5.0.0)",
+  "python-levenshtein>=0.27.3",
+  "scipy>=1.17.1",
   "torch (>=2.11.0,<3.0.0)",
   "torchvision (>=0.26.0,<1.0.0)",
 ]
