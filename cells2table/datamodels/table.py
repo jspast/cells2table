@@ -53,26 +53,40 @@ class Table:
     def compute_structure(self, tolerance: float) -> None:
         self.compute_cells_row(tolerance)
         self.compute_cells_col(tolerance)
-        self.compute_cells_row_span(tolerance)
-        self.compute_cells_col_span(tolerance)
 
     def compute_cells_row(self, tolerance: float) -> None:
         indices = sort_cells_index_by_top(self.cells)
 
         spos = None  # Spatial position
         lpos = 0  # Logical position
+        spanning: set[int] = set()
 
         for i in indices:
             cell_spos = self.cells[i].bbox.t
 
+            # First cell
             if spos is None:
                 spos = cell_spos
 
+            # New row
             elif cell_spos - spos > tolerance:
                 lpos += 1
                 spos = cell_spos
 
+                # Check for the end of spanning cells
+                for j in list(spanning):
+                    if self.cells[j].bbox.b - spos < tolerance:
+                        self.cells[j].row_span = lpos - self.cells[j].row
+                        spanning.remove(j)
+
             self.cells[i].row = lpos
+            spanning.add(i)
+
+        # End all cells
+        if spos is not None:
+            for j in list(spanning):
+                self.cells[j].row_span = 1 + lpos - self.cells[j].row
+                spanning.remove(j)
 
         self.num_rows = lpos + 1
 
@@ -81,53 +95,33 @@ class Table:
 
         spos = None  # Spatial position
         lpos = 0  # Logical position
+        spanning: set[int] = set()
 
         for i in indices:
             cell_spos = self.cells[i].bbox.l
 
+            # First cell
             if spos is None:
                 spos = cell_spos
 
+            # New col
             elif cell_spos - spos > tolerance:
                 lpos += 1
                 spos = cell_spos
+
+                # Check for the end of spanning cells
+                for j in list(spanning):
+                    if self.cells[j].bbox.r - spos < tolerance:
+                        self.cells[j].col_span = lpos - self.cells[j].col
+                        spanning.remove(j)
 
             self.cells[i].col = lpos
+            spanning.add(i)
+
+        # End all cells
+        if spos is not None:
+            for j in list(spanning):
+                self.cells[j].col_span = 1 + lpos - self.cells[j].col
+                spanning.remove(j)
 
         self.num_cols = lpos + 1
-
-    def compute_cells_row_span(self, tolerance: float) -> None:
-        indices = sort_cells_index_by_bottom(self.cells)
-
-        spos = None  # Spatial position
-        lpos = 0  # Logical position
-
-        for i in indices:
-            cell_spos = self.cells[i].bbox.b
-
-            if spos is None:
-                spos = cell_spos
-
-            elif cell_spos - spos > tolerance:
-                lpos += 1
-                spos = cell_spos
-
-            self.cells[i].row_span = 1 + lpos - self.cells[i].row
-
-    def compute_cells_col_span(self, tolerance: float) -> None:
-        indices = sort_cells_index_by_right(self.cells)
-
-        spos = None  # Spatial position
-        lpos = 0  # Logical position
-
-        for i in indices:
-            cell_spos = self.cells[i].bbox.r
-
-            if spos is None:
-                spos = cell_spos
-
-            elif cell_spos - spos > tolerance:
-                lpos += 1
-                spos = cell_spos
-
-            self.cells[i].col_span = 1 + lpos - self.cells[i].col
