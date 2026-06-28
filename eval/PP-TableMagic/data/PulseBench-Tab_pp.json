@@ -1,0 +1,3733 @@
+{
+  "benchmark_name": "PulseBench-Tab",
+  "provider_name": "pp",
+  "TEDS": {
+    "mean": 0.8707,
+    "median": 0.9444,
+    "std": 0.1729,
+    "p10": 0.6623,
+    "p25": 0.8333,
+    "p75": 0.9737,
+    "p90": 1.0,
+    "perfect_count": 63
+  },
+  "TLAG": {
+    "mean": 0.3929,
+    "median": 0.3545,
+    "std": 0.3053,
+    "p10": 0.0086,
+    "p25": 0.1177,
+    "p75": 0.6414,
+    "p90": 0.8355,
+    "perfect_count": 27
+  },
+  "rd": {
+    "mean": 0.6619,
+    "median": 0.6429,
+    "std": 0.1849,
+    "p10": 0.4444,
+    "p25": 0.5362,
+    "p75": 0.7835,
+    "p90": 0.953,
+    "perfect_count": 35
+  },
+  "num_evaluations": 528,
+  "evaluations": [
+    {
+      "filename": "chinese_0003",
+      "TEDS": 0.941176,
+      "TLAG": 0.074075,
+      "rd": 0.648148,
+      "timing": 17.575144
+    },
+    {
+      "filename": "chinese_0004",
+      "TEDS": 0.962264,
+      "TLAG": 0.011308,
+      "rd": 0.603553,
+      "timing": 14.086417
+    },
+    {
+      "filename": "chinese_0005",
+      "TEDS": 0.956522,
+      "TLAG": 0.47321,
+      "rd": 0.545455,
+      "timing": 13.311127
+    },
+    {
+      "filename": "chinese_0007",
+      "TEDS": 0.864662,
+      "TLAG": 0.153109,
+      "rd": 0.774359,
+      "timing": 16.329128
+    },
+    {
+      "filename": "chinese_0009",
+      "TEDS": 0.162667,
+      "TLAG": 0.296312,
+      "rd": 0.67304,
+      "timing": 17.978558
+    },
+    {
+      "filename": "chinese_0010",
+      "TEDS": 0.972973,
+      "TLAG": 0.118456,
+      "rd": 0.740741,
+      "timing": 13.198817
+    },
+    {
+      "filename": "chinese_0012",
+      "TEDS": 0.985075,
+      "TLAG": 0.285819,
+      "rd": 0.540816,
+      "timing": 15.11344
+    },
+    {
+      "filename": "chinese_0015",
+      "TEDS": 0.92126,
+      "TLAG": 0.39136,
+      "rd": 0.685128,
+      "timing": 16.070332
+    },
+    {
+      "filename": "chinese_0018",
+      "TEDS": 0.904762,
+      "TLAG": 0.000026,
+      "rd": 0.611111,
+      "timing": 13.52358
+    },
+    {
+      "filename": "chinese_0019",
+      "TEDS": 0.986111,
+      "TLAG": 0.000013,
+      "rd": 0.990909,
+      "timing": 14.545258
+    },
+    {
+      "filename": "chinese_0022",
+      "TEDS": 0.860927,
+      "TLAG": 0.491878,
+      "rd": 0.506993,
+      "timing": 16.89076
+    },
+    {
+      "filename": "chinese_0023",
+      "TEDS": 0.97561,
+      "TLAG": 0.102517,
+      "rd": 0.522222,
+      "timing": 14.383313
+    },
+    {
+      "filename": "chinese_0025",
+      "TEDS": 0.862069,
+      "TLAG": 0.425673,
+      "rd": 0.477273,
+      "timing": 23.856566
+    },
+    {
+      "filename": "chinese_0026",
+      "TEDS": 0.944444,
+      "TLAG": 0.969996,
+      "rd": 0.646753,
+      "timing": 12.396826
+    },
+    {
+      "filename": "chinese_0027",
+      "TEDS": 0.617647,
+      "TLAG": 0.222705,
+      "rd": 0.25,
+      "timing": 16.163095
+    },
+    {
+      "filename": "chinese_0028",
+      "TEDS": 0.969697,
+      "TLAG": 0.952003,
+      "rd": 0.81948,
+      "timing": 13.010431
+    },
+    {
+      "filename": "chinese_0029",
+      "TEDS": 0.980769,
+      "TLAG": 1.0,
+      "rd": 1.0,
+      "timing": 13.711867
+    },
+    {
+      "filename": "chinese_0030",
+      "TEDS": 1.0,
+      "TLAG": 0.137388,
+      "rd": 0.590909,
+      "timing": 13.25187
+    },
+    {
+      "filename": "chinese_0031",
+      "TEDS": 0.774194,
+      "TLAG": 0.572368,
+      "rd": 0.885417,
+      "timing": 12.953307
+    },
+    {
+      "filename": "chinese_0032",
+      "TEDS": 0.150754,
+      "TLAG": 0.725424,
+      "rd": 0.1825,
+      "timing": 20.048559
+    },
+    {
+      "filename": "chinese_0033",
+      "TEDS": 0.888889,
+      "TLAG": 0.101149,
+      "rd": 0.533143,
+      "timing": 15.649791
+    },
+    {
+      "filename": "chinese_0034",
+      "TEDS": 0.962963,
+      "TLAG": 0.166673,
+      "rd": 0.685926,
+      "timing": 12.449918
+    },
+    {
+      "filename": "chinese_0036",
+      "TEDS": 0.823834,
+      "TLAG": 0.126885,
+      "rd": 0.508876,
+      "timing": 17.988611
+    },
+    {
+      "filename": "chinese_0037",
+      "TEDS": 1.0,
+      "TLAG": 0.979585,
+      "rd": 1.0,
+      "timing": 12.433349
+    },
+    {
+      "filename": "chinese_0039",
+      "TEDS": 0.891089,
+      "TLAG": 0.000123,
+      "rd": 0.444444,
+      "timing": 18.199683
+    },
+    {
+      "filename": "chinese_0042",
+      "TEDS": 0.733746,
+      "TLAG": 0.471595,
+      "rd": 0.432367,
+      "timing": 26.561849
+    },
+    {
+      "filename": "chinese_0045",
+      "TEDS": 0.973684,
+      "TLAG": 1.0,
+      "rd": 1.0,
+      "timing": 12.940924
+    },
+    {
+      "filename": "chinese_0046",
+      "TEDS": 0.95,
+      "TLAG": 0.486836,
+      "rd": 0.629167,
+      "timing": 13.723716
+    },
+    {
+      "filename": "chinese_0047",
+      "TEDS": 0.5,
+      "TLAG": 0.14349,
+      "rd": 0.535714,
+      "timing": 12.479904
+    },
+    {
+      "filename": "chinese_0050",
+      "TEDS": 1.0,
+      "TLAG": 0.074075,
+      "rd": 1.0,
+      "timing": 13.635742
+    },
+    {
+      "filename": "chinese_0051",
+      "TEDS": 0.994624,
+      "TLAG": 0.136572,
+      "rd": 0.626225,
+      "timing": 19.034246
+    },
+    {
+      "filename": "chinese_0052",
+      "TEDS": 0.504132,
+      "TLAG": 0.049018,
+      "rd": 0.625,
+      "timing": 15.744385
+    },
+    {
+      "filename": "chinese_0053",
+      "TEDS": 0.852941,
+      "TLAG": 0.009331,
+      "rd": 0.623967,
+      "timing": 13.301016
+    },
+    {
+      "filename": "chinese_0055",
+      "TEDS": 1.0,
+      "TLAG": 0.118456,
+      "rd": 1.0,
+      "timing": 12.59502
+    },
+    {
+      "filename": "chinese_0056",
+      "TEDS": 0.971429,
+      "TLAG": 0.000013,
+      "rd": 0.644048,
+      "timing": 13.992518
+    },
+    {
+      "filename": "chinese_0058",
+      "TEDS": 0.956522,
+      "TLAG": 0.422903,
+      "rd": 0.545455,
+      "timing": 13.529906
+    },
+    {
+      "filename": "chinese_0060",
+      "TEDS": 0.926606,
+      "TLAG": 0.461103,
+      "rd": 0.681852,
+      "timing": 15.688992
+    },
+    {
+      "filename": "chinese_0061",
+      "TEDS": 0.969697,
+      "TLAG": 0.03232,
+      "rd": 0.541667,
+      "timing": 14.69908
+    },
+    {
+      "filename": "chinese_0063",
+      "TEDS": 0.666667,
+      "TLAG": 0.000026,
+      "rd": 0.65,
+      "timing": 13.556472
+    },
+    {
+      "filename": "chinese_0072",
+      "TEDS": 0.972414,
+      "TLAG": 0.491878,
+      "rd": 0.467949,
+      "timing": 18.599592
+    },
+    {
+      "filename": "chinese_0076",
+      "TEDS": 0.97561,
+      "TLAG": 0.432553,
+      "rd": 0.522222,
+      "timing": 13.734569
+    },
+    {
+      "filename": "chinese_0078",
+      "TEDS": 0.862069,
+      "TLAG": 0.331163,
+      "rd": 0.477273,
+      "timing": 24.07873
+    },
+    {
+      "filename": "chinese_0079",
+      "TEDS": 0.961538,
+      "TLAG": 0.222705,
+      "rd": 0.525,
+      "timing": 17.642392
+    },
+    {
+      "filename": "chinese_0080",
+      "TEDS": 0.617647,
+      "TLAG": 0.4,
+      "rd": 0.25,
+      "timing": 15.99716
+    },
+    {
+      "filename": "chinese_0081",
+      "TEDS": 0.969697,
+      "TLAG": 1.0,
+      "rd": 0.81948,
+      "timing": 12.580576
+    },
+    {
+      "filename": "chinese_0082",
+      "TEDS": 1.0,
+      "TLAG": 0.723199,
+      "rd": 1.0,
+      "timing": 13.404844
+    },
+    {
+      "filename": "chinese_0084",
+      "TEDS": 0.978723,
+      "TLAG": 0.969996,
+      "rd": 0.657407,
+      "timing": 13.462074
+    },
+    {
+      "filename": "chinese_0085",
+      "TEDS": 0.150754,
+      "TLAG": 0.233848,
+      "rd": 0.17875,
+      "timing": 20.440755
+    },
+    {
+      "filename": "chinese_0086",
+      "TEDS": 0.961538,
+      "TLAG": 0.14149,
+      "rd": 0.688889,
+      "timing": 13.147575
+    },
+    {
+      "filename": "chinese_0087",
+      "TEDS": 0.962963,
+      "TLAG": 0.917715,
+      "rd": 0.685926,
+      "timing": 13.269352
+    },
+    {
+      "filename": "chinese_0090",
+      "TEDS": 1.0,
+      "TLAG": 0.471595,
+      "rd": 1.0,
+      "timing": 12.681552
+    },
+    {
+      "filename": "chinese_0094",
+      "TEDS": 1.0,
+      "TLAG": 1.0,
+      "rd": 0.935714,
+      "timing": 12.847746
+    },
+    {
+      "filename": "chinese_0097",
+      "TEDS": 0.811728,
+      "TLAG": 0.009337,
+      "rd": 0.355135,
+      "timing": 19.151
+    },
+    {
+      "filename": "chinese_0099",
+      "TEDS": 0.904762,
+      "TLAG": 0.303346,
+      "rd": 0.607018,
+      "timing": 14.396914
+    },
+    {
+      "filename": "chinese_0101",
+      "TEDS": 0.983871,
+      "TLAG": 0.087881,
+      "rd": 0.570227,
+      "timing": 16.033364
+    },
+    {
+      "filename": "chinese_0102",
+      "TEDS": 0.985915,
+      "TLAG": 0.296312,
+      "rd": 0.495457,
+      "timing": 14.223008
+    },
+    {
+      "filename": "chinese_0103",
+      "TEDS": 1.0,
+      "TLAG": 0.054574,
+      "rd": 0.991667,
+      "timing": 12.339636
+    },
+    {
+      "filename": "chinese_0106",
+      "TEDS": 0.852941,
+      "TLAG": 0.122543,
+      "rd": 0.623967,
+      "timing": 12.939246
+    },
+    {
+      "filename": "chinese_0108",
+      "TEDS": 1.0,
+      "TLAG": 0.05112,
+      "rd": 1.0,
+      "timing": 12.157859
+    },
+    {
+      "filename": "chinese_0110",
+      "TEDS": 0.962264,
+      "TLAG": 0.153109,
+      "rd": 0.603553,
+      "timing": 13.933548
+    },
+    {
+      "filename": "chinese_0111",
+      "TEDS": 0.902439,
+      "TLAG": 0.052632,
+      "rd": 0.43,
+      "timing": 15.988268
+    },
+    {
+      "filename": "chinese_0112",
+      "TEDS": 0.926606,
+      "TLAG": 0.28576,
+      "rd": 0.681852,
+      "timing": 16.203006
+    },
+    {
+      "filename": "chinese_0113",
+      "TEDS": 0.796296,
+      "TLAG": 0.0,
+      "rd": 0.367133,
+      "timing": 14.368372
+    },
+    {
+      "filename": "chinese_0114",
+      "TEDS": 0.666667,
+      "TLAG": 0.4,
+      "rd": 0.590909,
+      "timing": 13.140629
+    },
+    {
+      "filename": "chinese_0116",
+      "TEDS": 0.966667,
+      "TLAG": 0.81784,
+      "rd": 0.522727,
+      "timing": 14.454351
+    },
+    {
+      "filename": "chinese_0117",
+      "TEDS": 0.92126,
+      "TLAG": 0.181818,
+      "rd": 0.685128,
+      "timing": 15.663208
+    },
+    {
+      "filename": "chinese_0119",
+      "TEDS": 0.904762,
+      "TLAG": 0.693913,
+      "rd": 0.611111,
+      "timing": 12.946135
+    },
+    {
+      "filename": "chinese_0123",
+      "TEDS": 1.0,
+      "TLAG": 0.500053,
+      "rd": 0.646753,
+      "timing": 12.639025
+    },
+    {
+      "filename": "chinese_0124",
+      "TEDS": 0.428571,
+      "TLAG": 0.172161,
+      "rd": 0.3,
+      "timing": 12.86758
+    },
+    {
+      "filename": "chinese_0125",
+      "TEDS": 1.0,
+      "TLAG": 0.634146,
+      "rd": 0.8625,
+      "timing": 12.882539
+    },
+    {
+      "filename": "chinese_0127",
+      "TEDS": 0.961538,
+      "TLAG": 0.422903,
+      "rd": 0.688889,
+      "timing": 12.333368
+    },
+    {
+      "filename": "chinese_0128",
+      "TEDS": 0.966667,
+      "TLAG": 0.917715,
+      "rd": 0.520833,
+      "timing": 15.06783
+    },
+    {
+      "filename": "chinese_0132",
+      "TEDS": 0.962963,
+      "TLAG": 0.0276,
+      "rd": 0.458333,
+      "timing": 12.566272
+    },
+    {
+      "filename": "chinese_0133",
+      "TEDS": 1.0,
+      "TLAG": 0.174219,
+      "rd": 0.935714,
+      "timing": 12.103441
+    },
+    {
+      "filename": "chinese_0135",
+      "TEDS": 0.95,
+      "TLAG": 0.011356,
+      "rd": 0.833333,
+      "timing": 11.936849
+    },
+    {
+      "filename": "chinese_0137",
+      "TEDS": 0.970588,
+      "TLAG": 0.47321,
+      "rd": 0.793651,
+      "timing": 12.511664
+    },
+    {
+      "filename": "chinese_0138",
+      "TEDS": 0.981818,
+      "TLAG": 0.467657,
+      "rd": 0.574074,
+      "timing": 17.939028
+    },
+    {
+      "filename": "chinese_0139",
+      "TEDS": 0.965174,
+      "TLAG": 0.020409,
+      "rd": 0.397884,
+      "timing": 15.857403
+    },
+    {
+      "filename": "chinese_0141",
+      "TEDS": 1.0,
+      "TLAG": 0.688038,
+      "rd": 0.991667,
+      "timing": 11.804084
+    },
+    {
+      "filename": "chinese_0145",
+      "TEDS": 0.941176,
+      "TLAG": 0.102986,
+      "rd": 0.648148,
+      "timing": 15.639718
+    },
+    {
+      "filename": "chinese_0148",
+      "TEDS": 0.977273,
+      "TLAG": 0.928575,
+      "rd": 0.78168,
+      "timing": 13.273401
+    },
+    {
+      "filename": "chinese_0149",
+      "TEDS": 0.871795,
+      "TLAG": 0.747942,
+      "rd": 0.569444,
+      "timing": 16.847583
+    },
+    {
+      "filename": "chinese_0150",
+      "TEDS": 0.972973,
+      "TLAG": 0.464232,
+      "rd": 0.740741,
+      "timing": 11.902321
+    },
+    {
+      "filename": "chinese_0151",
+      "TEDS": 0.977778,
+      "TLAG": 0.39136,
+      "rd": 0.710606,
+      "timing": 12.606683
+    },
+    {
+      "filename": "chinese_0152",
+      "TEDS": 0.985075,
+      "TLAG": 0.646945,
+      "rd": 0.540816,
+      "timing": 13.824356
+    },
+    {
+      "filename": "chinese_0153",
+      "TEDS": 0.956522,
+      "TLAG": 0.172161,
+      "rd": 0.55,
+      "timing": 12.078348
+    },
+    {
+      "filename": "chinese_0154",
+      "TEDS": 0.978261,
+      "TLAG": 0.652574,
+      "rd": 0.888889,
+      "timing": 12.418446
+    },
+    {
+      "filename": "chinese_0155",
+      "TEDS": 0.944444,
+      "TLAG": 0.542997,
+      "rd": 0.995536,
+      "timing": 11.503343
+    },
+    {
+      "filename": "chinese_0156",
+      "TEDS": 0.986111,
+      "TLAG": 0.725424,
+      "rd": 0.990909,
+      "timing": 13.432006
+    },
+    {
+      "filename": "chinese_0160",
+      "TEDS": 0.642857,
+      "TLAG": 0.615804,
+      "rd": 0.833333,
+      "timing": 11.604719
+    },
+    {
+      "filename": "chinese_0161",
+      "TEDS": 1.0,
+      "TLAG": 0.419389,
+      "rd": 0.825521,
+      "timing": 11.815005
+    },
+    {
+      "filename": "chinese_0163",
+      "TEDS": 0.981481,
+      "TLAG": 0.081091,
+      "rd": 0.783333,
+      "timing": 13.105373
+    },
+    {
+      "filename": "chinese_0164",
+      "TEDS": 0.966667,
+      "TLAG": 0.37096,
+      "rd": 0.520833,
+      "timing": 14.808839
+    },
+    {
+      "filename": "chinese_0167",
+      "TEDS": 0.984375,
+      "TLAG": 0.952003,
+      "rd": 0.625,
+      "timing": 13.388909
+    },
+    {
+      "filename": "chinese_0171",
+      "TEDS": 0.795987,
+      "TLAG": 0.594078,
+      "rd": 0.628009,
+      "timing": 19.582508
+    },
+    {
+      "filename": "chinese_0172",
+      "TEDS": 0.973684,
+      "TLAG": 0.871795,
+      "rd": 1.0,
+      "timing": 12.025315
+    },
+    {
+      "filename": "chinese_0174",
+      "TEDS": 1.0,
+      "TLAG": 0.14349,
+      "rd": 0.692308,
+      "timing": 12.662106
+    },
+    {
+      "filename": "chinese_0175",
+      "TEDS": 0.962963,
+      "TLAG": 0.126059,
+      "rd": 0.355556,
+      "timing": 12.02992
+    },
+    {
+      "filename": "chinese_0176",
+      "TEDS": 0.871429,
+      "TLAG": 0.459526,
+      "rd": 0.495457,
+      "timing": 13.512897
+    },
+    {
+      "filename": "chinese_0177",
+      "TEDS": 0.731707,
+      "TLAG": 0.486836,
+      "rd": 0.714286,
+      "timing": 12.613957
+    },
+    {
+      "filename": "chinese_0178",
+      "TEDS": 0.951613,
+      "TLAG": 0.134695,
+      "rd": 0.751972,
+      "timing": 15.675368
+    },
+    {
+      "filename": "chinese_0179",
+      "TEDS": 0.971429,
+      "TLAG": 0.542997,
+      "rd": 0.644048,
+      "timing": 13.032381
+    },
+    {
+      "filename": "chinese_0181",
+      "TEDS": 0.761905,
+      "TLAG": 0.677292,
+      "rd": 1.0,
+      "timing": 11.870284
+    },
+    {
+      "filename": "chinese_0182",
+      "TEDS": 0.954545,
+      "TLAG": 0.579629,
+      "rd": 0.563889,
+      "timing": 16.5228
+    },
+    {
+      "filename": "chinese_0183",
+      "TEDS": 0.964706,
+      "TLAG": 0.223877,
+      "rd": 0.408508,
+      "timing": 15.227732
+    },
+    {
+      "filename": "chinese_0184",
+      "TEDS": 0.916667,
+      "TLAG": 0.153119,
+      "rd": 0.888889,
+      "timing": 11.552637
+    },
+    {
+      "filename": "chinese_0188",
+      "TEDS": 0.830769,
+      "TLAG": 0.397186,
+      "rd": 0.555,
+      "timing": 16.394456
+    },
+    {
+      "filename": "chinese_0190",
+      "TEDS": 0.835443,
+      "TLAG": 0.067424,
+      "rd": 0.503699,
+      "timing": 14.71596
+    },
+    {
+      "filename": "chinese_0192",
+      "TEDS": 0.981481,
+      "TLAG": 0.016311,
+      "rd": 0.783333,
+      "timing": 13.781006
+    },
+    {
+      "filename": "chinese_0193",
+      "TEDS": 0.91129,
+      "TLAG": 0.611708,
+      "rd": 0.946429,
+      "timing": 15.9617
+    },
+    {
+      "filename": "chinese_0194",
+      "TEDS": 0.961538,
+      "TLAG": 0.117687,
+      "rd": 0.625,
+      "timing": 13.140303
+    },
+    {
+      "filename": "chinese_0195",
+      "TEDS": 0.838863,
+      "TLAG": 0.297568,
+      "rd": 0.484034,
+      "timing": 19.417191
+    },
+    {
+      "filename": "chinese_0196",
+      "TEDS": 0.919355,
+      "TLAG": 0.504009,
+      "rd": 0.484375,
+      "timing": 15.990961
+    },
+    {
+      "filename": "chinese_0197",
+      "TEDS": 0.996124,
+      "TLAG": 0.459526,
+      "rd": 0.503646,
+      "timing": 17.484825
+    },
+    {
+      "filename": "chinese_0199",
+      "TEDS": 0.920635,
+      "TLAG": 0.297625,
+      "rd": 0.36666,
+      "timing": 14.600023
+    },
+    {
+      "filename": "chinese_0200",
+      "TEDS": 0.823529,
+      "TLAG": 0.842578,
+      "rd": 0.625,
+      "timing": 18.243551
+    },
+    {
+      "filename": "chinese_0201",
+      "TEDS": 0.800781,
+      "TLAG": 0.928575,
+      "rd": 0.338824,
+      "timing": 19.116628
+    },
+    {
+      "filename": "chinese_0203",
+      "TEDS": 0.944444,
+      "TLAG": 0.772747,
+      "rd": 0.71875,
+      "timing": 13.675986
+    },
+    {
+      "filename": "chinese_0205",
+      "TEDS": 0.964968,
+      "TLAG": 0.851851,
+      "rd": 0.956989,
+      "timing": 22.460071
+    },
+    {
+      "filename": "chinese_0206",
+      "TEDS": 0.994382,
+      "TLAG": 0.499302,
+      "rd": 0.434524,
+      "timing": 15.735427
+    },
+    {
+      "filename": "chinese_0208",
+      "TEDS": 1.0,
+      "TLAG": 0.14149,
+      "rd": 0.888889,
+      "timing": 11.810603
+    },
+    {
+      "filename": "chinese_0209",
+      "TEDS": 0.972973,
+      "TLAG": 0.425089,
+      "rd": 0.757937,
+      "timing": 12.596227
+    },
+    {
+      "filename": "chinese_0211",
+      "TEDS": 1.0,
+      "TLAG": 0.423312,
+      "rd": 0.97619,
+      "timing": 14.352322
+    },
+    {
+      "filename": "chinese_0212",
+      "TEDS": 0.944444,
+      "TLAG": 0.425673,
+      "rd": 0.995536,
+      "timing": 12.027111
+    },
+    {
+      "filename": "chinese_0214",
+      "TEDS": 0.96875,
+      "TLAG": 0.587701,
+      "rd": 0.996296,
+      "timing": 12.452324
+    },
+    {
+      "filename": "chinese_0215",
+      "TEDS": 0.954955,
+      "TLAG": 0.594078,
+      "rd": 0.725516,
+      "timing": 20.08744
+    },
+    {
+      "filename": "chinese_0216",
+      "TEDS": 1.0,
+      "TLAG": 0.0,
+      "rd": 0.605382,
+      "timing": 14.782861
+    },
+    {
+      "filename": "chinese_0218",
+      "TEDS": 0.983871,
+      "TLAG": 0.851851,
+      "rd": 0.570227,
+      "timing": 15.144039
+    },
+    {
+      "filename": "chinese_0219",
+      "TEDS": 0.91129,
+      "TLAG": 0.653462,
+      "rd": 0.946429,
+      "timing": 15.349082
+    },
+    {
+      "filename": "chinese_0221",
+      "TEDS": 0.928375,
+      "TLAG": 0.09688,
+      "rd": 0.554321,
+      "timing": 24.397289
+    },
+    {
+      "filename": "chinese_0222",
+      "TEDS": 0.774194,
+      "TLAG": 0.542841,
+      "rd": 0.885417,
+      "timing": 11.95422
+    },
+    {
+      "filename": "chinese_0223",
+      "TEDS": 0.731707,
+      "TLAG": 0.067424,
+      "rd": 0.714286,
+      "timing": 12.771432
+    },
+    {
+      "filename": "chinese_0225",
+      "TEDS": 0.864662,
+      "TLAG": 0.572368,
+      "rd": 0.774359,
+      "timing": 15.465539
+    },
+    {
+      "filename": "chinese_0226",
+      "TEDS": 0.5,
+      "TLAG": 0.331163,
+      "rd": 0.785714,
+      "timing": 11.779229
+    },
+    {
+      "filename": "chinese_0230",
+      "TEDS": 0.857143,
+      "TLAG": 0.181818,
+      "rd": 0.443372,
+      "timing": 21.389348
+    },
+    {
+      "filename": "chinese_0231",
+      "TEDS": 0.800781,
+      "TLAG": 0.652574,
+      "rd": 0.338824,
+      "timing": 18.49029
+    },
+    {
+      "filename": "chinese_0234",
+      "TEDS": 0.973684,
+      "TLAG": 0.136572,
+      "rd": 0.397436,
+      "timing": 13.099932
+    },
+    {
+      "filename": "chinese_0236",
+      "TEDS": 0.919355,
+      "TLAG": 0.09688,
+      "rd": 0.484375,
+      "timing": 16.37566
+    },
+    {
+      "filename": "chinese_0237",
+      "TEDS": 0.795987,
+      "TLAG": 0.035623,
+      "rd": 0.628009,
+      "timing": 19.945285
+    },
+    {
+      "filename": "chinese_0238",
+      "TEDS": 0.978723,
+      "TLAG": 0.067896,
+      "rd": 0.657407,
+      "timing": 12.976925
+    },
+    {
+      "filename": "chinese_0239",
+      "TEDS": 0.642857,
+      "TLAG": 0.134695,
+      "rd": 0.833333,
+      "timing": 11.921095
+    },
+    {
+      "filename": "chinese_0241",
+      "TEDS": 0.962963,
+      "TLAG": 0.37096,
+      "rd": 0.458333,
+      "timing": 12.505743
+    },
+    {
+      "filename": "chinese_0244",
+      "TEDS": 0.969697,
+      "TLAG": 0.894604,
+      "rd": 0.541667,
+      "timing": 14.175887
+    },
+    {
+      "filename": "chinese_0245",
+      "TEDS": 0.981132,
+      "TLAG": 0.761037,
+      "rd": 0.418845,
+      "timing": 23.491488
+    },
+    {
+      "filename": "chinese_0246",
+      "TEDS": 0.973684,
+      "TLAG": 0.0,
+      "rd": 0.397436,
+      "timing": 12.882223
+    },
+    {
+      "filename": "chinese_0247",
+      "TEDS": 0.727273,
+      "TLAG": 0.420999,
+      "rd": 0.273491,
+      "timing": 17.724902
+    },
+    {
+      "filename": "chinese_0251",
+      "TEDS": 0.857143,
+      "TLAG": 0.753623,
+      "rd": 0.464286,
+      "timing": 14.741281
+    },
+    {
+      "filename": "chinese_0252",
+      "TEDS": 0.954545,
+      "TLAG": 0.082384,
+      "rd": 0.563889,
+      "timing": 16.685
+    },
+    {
+      "filename": "chinese_0253",
+      "TEDS": 1.0,
+      "TLAG": 0.0,
+      "rd": 0.692308,
+      "timing": 13.324934
+    },
+    {
+      "filename": "chinese_0254",
+      "TEDS": 0.962644,
+      "TLAG": 0.326257,
+      "rd": 0.568498,
+      "timing": 23.793311
+    },
+    {
+      "filename": "chinese_0259",
+      "TEDS": 0.944444,
+      "TLAG": 0.27907,
+      "rd": 0.979167,
+      "timing": 11.718776
+    },
+    {
+      "filename": "chinese_0260",
+      "TEDS": 0.7,
+      "TLAG": 0.529808,
+      "rd": 0.47619,
+      "timing": 11.098168
+    },
+    {
+      "filename": "chinese_0261",
+      "TEDS": 0.9375,
+      "TLAG": 0.10808,
+      "rd": 0.558453,
+      "timing": 16.701491
+    },
+    {
+      "filename": "chinese_0262",
+      "TEDS": 0.651376,
+      "TLAG": 0.5744,
+      "rd": 0.705128,
+      "timing": 11.652549
+    },
+    {
+      "filename": "chinese_0263",
+      "TEDS": 0.991935,
+      "TLAG": 0.289474,
+      "rd": 0.637755,
+      "timing": 14.945514
+    },
+    {
+      "filename": "chinese_0266",
+      "TEDS": 0.785714,
+      "TLAG": 0.631924,
+      "rd": 0.5,
+      "timing": 12.465485
+    },
+    {
+      "filename": "chinese_0267",
+      "TEDS": 0.978723,
+      "TLAG": 0.061606,
+      "rd": 0.714286,
+      "timing": 13.276788
+    },
+    {
+      "filename": "chinese_0268",
+      "TEDS": 0.953846,
+      "TLAG": 0.25,
+      "rd": 0.897006,
+      "timing": 15.205043
+    },
+    {
+      "filename": "chinese_0269",
+      "TEDS": 1.0,
+      "TLAG": 0.645567,
+      "rd": 0.751634,
+      "timing": 11.828567
+    },
+    {
+      "filename": "chinese_0270",
+      "TEDS": 0.979592,
+      "TLAG": 0.370041,
+      "rd": 0.5,
+      "timing": 14.026613
+    },
+    {
+      "filename": "english_sec_0002",
+      "TEDS": 0.965517,
+      "TLAG": 0.0,
+      "rd": 0.855712,
+      "timing": 12.356868
+    },
+    {
+      "filename": "english_sec_0004",
+      "TEDS": 0.96875,
+      "TLAG": 0.764491,
+      "rd": 0.595062,
+      "timing": 12.742723
+    },
+    {
+      "filename": "english_sec_0005",
+      "TEDS": 0.96875,
+      "TLAG": 0.426489,
+      "rd": 0.777778,
+      "timing": 12.640577
+    },
+    {
+      "filename": "english_sec_0007",
+      "TEDS": 0.724138,
+      "TLAG": 0.704252,
+      "rd": 0.363636,
+      "timing": 12.50229
+    },
+    {
+      "filename": "english_sec_0009",
+      "TEDS": 0.333333,
+      "TLAG": 0.347021,
+      "rd": 0.86724,
+      "timing": 14.945271
+    },
+    {
+      "filename": "english_sec_0011",
+      "TEDS": 0.990741,
+      "TLAG": 0.671889,
+      "rd": 0.558618,
+      "timing": 14.297709
+    },
+    {
+      "filename": "english_sec_0012",
+      "TEDS": 0.833333,
+      "TLAG": 0.056501,
+      "rd": 0.550642,
+      "timing": 11.975943
+    },
+    {
+      "filename": "english_sec_0013",
+      "TEDS": 0.625,
+      "TLAG": 0.436771,
+      "rd": 0.407407,
+      "timing": 12.051676
+    },
+    {
+      "filename": "english_sec_0016",
+      "TEDS": 0.310345,
+      "TLAG": 0.010535,
+      "rd": 0.733787,
+      "timing": 17.549352
+    },
+    {
+      "filename": "english_sec_0017",
+      "TEDS": 0.896552,
+      "TLAG": 0.0,
+      "rd": 0.642857,
+      "timing": 11.793162
+    },
+    {
+      "filename": "english_sec_0019",
+      "TEDS": 0.984848,
+      "TLAG": 0.426436,
+      "rd": 0.85264,
+      "timing": 14.06648
+    },
+    {
+      "filename": "english_sec_0025",
+      "TEDS": 0.75,
+      "TLAG": 0.170363,
+      "rd": 0.56627,
+      "timing": 12.79322
+    },
+    {
+      "filename": "english_sec_0027",
+      "TEDS": 0.910112,
+      "TLAG": 0.502643,
+      "rd": 0.477348,
+      "timing": 17.956072
+    },
+    {
+      "filename": "english_sec_0029",
+      "TEDS": 0.963504,
+      "TLAG": 0.288951,
+      "rd": 0.488731,
+      "timing": 16.214281
+    },
+    {
+      "filename": "english_sec_0030",
+      "TEDS": 0.83871,
+      "TLAG": 0.119099,
+      "rd": 0.650112,
+      "timing": 12.464422
+    },
+    {
+      "filename": "english_sec_0031",
+      "TEDS": 0.611111,
+      "TLAG": 0.259245,
+      "rd": 0.478686,
+      "timing": 13.447688
+    },
+    {
+      "filename": "english_sec_0032",
+      "TEDS": 0.652174,
+      "TLAG": 0.326257,
+      "rd": 0.333333,
+      "timing": 11.965975
+    },
+    {
+      "filename": "english_sec_0033",
+      "TEDS": 0.896552,
+      "TLAG": 0.350416,
+      "rd": 0.642857,
+      "timing": 11.911597
+    },
+    {
+      "filename": "english_sec_0034",
+      "TEDS": 0.954545,
+      "TLAG": 1.0,
+      "rd": 0.688028,
+      "timing": 13.016385
+    },
+    {
+      "filename": "english_sec_0038",
+      "TEDS": 0.321508,
+      "TLAG": 0.029557,
+      "rd": 0.582297,
+      "timing": 18.005887
+    },
+    {
+      "filename": "english_sec_0041",
+      "TEDS": 0.987952,
+      "TLAG": 0.117647,
+      "rd": 0.445711,
+      "timing": 13.682493
+    },
+    {
+      "filename": "english_sec_0042",
+      "TEDS": 0.928571,
+      "TLAG": 0.247109,
+      "rd": 0.714286,
+      "timing": 12.32059
+    },
+    {
+      "filename": "english_sec_0043",
+      "TEDS": 0.27321,
+      "TLAG": 0.678884,
+      "rd": 0.643339,
+      "timing": 17.609254
+    },
+    {
+      "filename": "english_sec_0044",
+      "TEDS": 0.755556,
+      "TLAG": 0.538857,
+      "rd": 0.597222,
+      "timing": 15.879549
+    },
+    {
+      "filename": "english_sec_0045",
+      "TEDS": 1.0,
+      "TLAG": 0.946398,
+      "rd": 0.594136,
+      "timing": 12.227079
+    },
+    {
+      "filename": "english_sec_0046",
+      "TEDS": 1.0,
+      "TLAG": 0.700019,
+      "rd": 1.0,
+      "timing": 11.362406
+    },
+    {
+      "filename": "english_sec_0048",
+      "TEDS": 0.847953,
+      "TLAG": 1.0,
+      "rd": 0.467938,
+      "timing": 16.537954
+    },
+    {
+      "filename": "english_sec_0049",
+      "TEDS": 0.6875,
+      "TLAG": 1.0,
+      "rd": 0.714286,
+      "timing": 11.538275
+    },
+    {
+      "filename": "english_sec_0050",
+      "TEDS": 0.872727,
+      "TLAG": 0.682539,
+      "rd": 0.72,
+      "timing": 13.035084
+    },
+    {
+      "filename": "english_sec_0051",
+      "TEDS": 0.888889,
+      "TLAG": 0.34246,
+      "rd": 0.633333,
+      "timing": 13.709705
+    },
+    {
+      "filename": "english_sec_0055",
+      "TEDS": 1.0,
+      "TLAG": 0.125432,
+      "rd": 0.755165,
+      "timing": 11.699675
+    },
+    {
+      "filename": "english_sec_0056",
+      "TEDS": 1.0,
+      "TLAG": 1.0,
+      "rd": 1.0,
+      "timing": 12.595523
+    },
+    {
+      "filename": "english_sec_0059",
+      "TEDS": 0.74269,
+      "TLAG": 0.26087,
+      "rd": 0.637027,
+      "timing": 18.689718
+    },
+    {
+      "filename": "english_sec_0060",
+      "TEDS": 0.928571,
+      "TLAG": 0.738327,
+      "rd": 1.0,
+      "timing": 11.471487
+    },
+    {
+      "filename": "english_sec_0061",
+      "TEDS": 1.0,
+      "TLAG": 1.0,
+      "rd": 1.0,
+      "timing": 11.745933
+    },
+    {
+      "filename": "english_sec_0064",
+      "TEDS": 1.0,
+      "TLAG": 0.611808,
+      "rd": 0.832143,
+      "timing": 12.414877
+    },
+    {
+      "filename": "english_sec_0066",
+      "TEDS": 0.956522,
+      "TLAG": 0.236545,
+      "rd": 0.659524,
+      "timing": 12.414845
+    },
+    {
+      "filename": "english_sec_0067",
+      "TEDS": 0.952381,
+      "TLAG": 0.340953,
+      "rd": 0.72437,
+      "timing": 15.783095
+    },
+    {
+      "filename": "english_sec_0069",
+      "TEDS": 0.961538,
+      "TLAG": 0.462733,
+      "rd": 1.0,
+      "timing": 11.855793
+    },
+    {
+      "filename": "english_sec_0070",
+      "TEDS": 0.816667,
+      "TLAG": 0.571592,
+      "rd": 0.879704,
+      "timing": 13.851808
+    },
+    {
+      "filename": "english_sec_0072",
+      "TEDS": 0.98,
+      "TLAG": 0.353219,
+      "rd": 0.771943,
+      "timing": 13.106001
+    },
+    {
+      "filename": "english_sec_0073",
+      "TEDS": 0.961538,
+      "TLAG": 0.69028,
+      "rd": 1.0,
+      "timing": 11.691654
+    },
+    {
+      "filename": "english_sec_0074",
+      "TEDS": 0.916667,
+      "TLAG": 0.594112,
+      "rd": 0.581445,
+      "timing": 18.300775
+    },
+    {
+      "filename": "english_sec_0075",
+      "TEDS": 0.666667,
+      "TLAG": 0.296988,
+      "rd": 0.553282,
+      "timing": 11.542157
+    },
+    {
+      "filename": "english_sec_0078",
+      "TEDS": 0.787879,
+      "TLAG": 0.184113,
+      "rd": 0.601007,
+      "timing": 13.29642
+    },
+    {
+      "filename": "english_sec_0079",
+      "TEDS": 0.98,
+      "TLAG": 0.75541,
+      "rd": 0.5125,
+      "timing": 13.380129
+    },
+    {
+      "filename": "english_sec_0080",
+      "TEDS": 0.972973,
+      "TLAG": 0.700019,
+      "rd": 0.690909,
+      "timing": 12.29365
+    },
+    {
+      "filename": "english_sec_0082",
+      "TEDS": 0.855172,
+      "TLAG": 0.00676,
+      "rd": 0.463203,
+      "timing": 14.99288
+    },
+    {
+      "filename": "english_sec_0084",
+      "TEDS": 0.892308,
+      "TLAG": 0.051058,
+      "rd": 0.897123,
+      "timing": 15.722763
+    },
+    {
+      "filename": "english_sec_0085",
+      "TEDS": 0.972477,
+      "TLAG": 0.580757,
+      "rd": 0.718618,
+      "timing": 15.017448
+    },
+    {
+      "filename": "english_sec_0087",
+      "TEDS": 0.833333,
+      "TLAG": 1.0,
+      "rd": 0.557778,
+      "timing": 12.494691
+    },
+    {
+      "filename": "english_sec_0088",
+      "TEDS": 0.888889,
+      "TLAG": 0.102127,
+      "rd": 0.633333,
+      "timing": 14.742992
+    },
+    {
+      "filename": "english_sec_0089",
+      "TEDS": 0.934211,
+      "TLAG": 0.704252,
+      "rd": 0.389594,
+      "timing": 17.805669
+    },
+    {
+      "filename": "english_sec_0090",
+      "TEDS": 0.393939,
+      "TLAG": 0.0,
+      "rd": 0.314236,
+      "timing": 13.913081
+    },
+    {
+      "filename": "english_sec_0093",
+      "TEDS": 0.984848,
+      "TLAG": 0.289481,
+      "rd": 0.85264,
+      "timing": 14.143236
+    },
+    {
+      "filename": "english_sec_0094",
+      "TEDS": 0.944444,
+      "TLAG": 0.364884,
+      "rd": 0.566667,
+      "timing": 11.583759
+    },
+    {
+      "filename": "english_sec_0096",
+      "TEDS": 0.861538,
+      "TLAG": 0.000131,
+      "rd": 0.78,
+      "timing": 12.173172
+    },
+    {
+      "filename": "english_sec_0099",
+      "TEDS": 1.0,
+      "TLAG": 0.918919,
+      "rd": 1.0,
+      "timing": 11.258198
+    },
+    {
+      "filename": "english_sec_0101",
+      "TEDS": 0.96875,
+      "TLAG": 0.2,
+      "rd": 0.671875,
+      "timing": 13.846142
+    },
+    {
+      "filename": "english_sec_0102",
+      "TEDS": 0.975207,
+      "TLAG": 0.829222,
+      "rd": 0.613853,
+      "timing": 15.867949
+    },
+    {
+      "filename": "english_sec_0103",
+      "TEDS": 0.916667,
+      "TLAG": 0.235549,
+      "rd": 0.555556,
+      "timing": 12.062073
+    },
+    {
+      "filename": "english_sec_0104",
+      "TEDS": 0.96875,
+      "TLAG": 0.971906,
+      "rd": 0.583714,
+      "timing": 11.972028
+    },
+    {
+      "filename": "english_sec_0105",
+      "TEDS": 0.755102,
+      "TLAG": 0.319446,
+      "rd": 0.625,
+      "timing": 19.275615
+    },
+    {
+      "filename": "english_sec_0106",
+      "TEDS": 0.868421,
+      "TLAG": 0.712633,
+      "rd": 0.458599,
+      "timing": 16.719139
+    },
+    {
+      "filename": "english_sec_0109",
+      "TEDS": 0.869565,
+      "TLAG": 0.090913,
+      "rd": 0.979592,
+      "timing": 11.596058
+    },
+    {
+      "filename": "english_sec_0110",
+      "TEDS": 0.928571,
+      "TLAG": 0.001641,
+      "rd": 0.78993,
+      "timing": 24.542422
+    },
+    {
+      "filename": "english_sec_0115",
+      "TEDS": 0.883333,
+      "TLAG": 0.400092,
+      "rd": 0.914286,
+      "timing": 12.985071
+    },
+    {
+      "filename": "english_sec_0117",
+      "TEDS": 0.914286,
+      "TLAG": 0.404388,
+      "rd": 0.57672,
+      "timing": 12.388861
+    },
+    {
+      "filename": "english_sec_0121",
+      "TEDS": 0.95,
+      "TLAG": 0.002588,
+      "rd": 0.998016,
+      "timing": 11.369276
+    },
+    {
+      "filename": "english_sec_0124",
+      "TEDS": 0.941176,
+      "TLAG": 0.692316,
+      "rd": 0.962963,
+      "timing": 11.22896
+    },
+    {
+      "filename": "english_sec_0125",
+      "TEDS": 0.961538,
+      "TLAG": 0.130899,
+      "rd": 0.757436,
+      "timing": 19.980541
+    },
+    {
+      "filename": "english_sec_0126",
+      "TEDS": 0.947917,
+      "TLAG": 0.229342,
+      "rd": 0.74179,
+      "timing": 14.025568
+    },
+    {
+      "filename": "english_sec_0127",
+      "TEDS": 0.5,
+      "TLAG": 0.023857,
+      "rd": 0.560465,
+      "timing": 12.104971
+    },
+    {
+      "filename": "english_sec_0129",
+      "TEDS": 0.964286,
+      "TLAG": 0.300585,
+      "rd": 0.642857,
+      "timing": 12.288287
+    },
+    {
+      "filename": "english_sec_0131",
+      "TEDS": 0.911765,
+      "TLAG": 0.231209,
+      "rd": 0.649351,
+      "timing": 15.193926
+    },
+    {
+      "filename": "english_sec_0132",
+      "TEDS": 0.721311,
+      "TLAG": 0.151406,
+      "rd": 0.452381,
+      "timing": 13.826837
+    },
+    {
+      "filename": "english_sec_0134",
+      "TEDS": 0.976744,
+      "TLAG": 1.0,
+      "rd": 0.826531,
+      "timing": 12.144751
+    },
+    {
+      "filename": "english_sec_0135",
+      "TEDS": 0.965517,
+      "TLAG": 0.001013,
+      "rd": 0.718107,
+      "timing": 12.977586
+    },
+    {
+      "filename": "english_sec_0136",
+      "TEDS": 0.972477,
+      "TLAG": 0.392301,
+      "rd": 0.588539,
+      "timing": 14.805942
+    },
+    {
+      "filename": "english_sec_0137",
+      "TEDS": 0.682927,
+      "TLAG": 0.603141,
+      "rd": 0.5625,
+      "timing": 12.751578
+    },
+    {
+      "filename": "english_sec_0139",
+      "TEDS": 0.745583,
+      "TLAG": 0.067923,
+      "rd": 0.440341,
+      "timing": 18.16926
+    },
+    {
+      "filename": "english_sec_0143",
+      "TEDS": 0.888889,
+      "TLAG": 0.734548,
+      "rd": 0.528191,
+      "timing": 14.169064
+    },
+    {
+      "filename": "english_sec_0144",
+      "TEDS": 0.961538,
+      "TLAG": 1.0,
+      "rd": 1.0,
+      "timing": 11.744748
+    },
+    {
+      "filename": "english_sec_0148",
+      "TEDS": 0.75,
+      "TLAG": 0.764278,
+      "rd": 0.462963,
+      "timing": 13.196205
+    },
+    {
+      "filename": "english_sec_0157",
+      "TEDS": 0.871287,
+      "TLAG": 0.058863,
+      "rd": 0.558795,
+      "timing": 15.859298
+    },
+    {
+      "filename": "english_sec_0158",
+      "TEDS": 0.934959,
+      "TLAG": 0.951601,
+      "rd": 0.877974,
+      "timing": 15.609007
+    },
+    {
+      "filename": "english_sec_0159",
+      "TEDS": 0.990741,
+      "TLAG": 0.030542,
+      "rd": 0.536396,
+      "timing": 15.011787
+    },
+    {
+      "filename": "english_sec_0160",
+      "TEDS": 1.0,
+      "TLAG": 0.878337,
+      "rd": 0.785862,
+      "timing": 15.355953
+    },
+    {
+      "filename": "english_sec_0161",
+      "TEDS": 0.815789,
+      "TLAG": 0.796684,
+      "rd": 0.598249,
+      "timing": 17.224632
+    },
+    {
+      "filename": "english_sec_0162",
+      "TEDS": 1.0,
+      "TLAG": 0.746002,
+      "rd": 1.0,
+      "timing": 12.205398
+    },
+    {
+      "filename": "english_sec_0163",
+      "TEDS": 0.97619,
+      "TLAG": 0.768069,
+      "rd": 0.888889,
+      "timing": 12.809998
+    },
+    {
+      "filename": "english_sec_0164",
+      "TEDS": 0.9375,
+      "TLAG": 0.774243,
+      "rd": 0.5,
+      "timing": 11.746204
+    },
+    {
+      "filename": "english_sec_0166",
+      "TEDS": 1.0,
+      "TLAG": 0.444447,
+      "rd": 0.999313,
+      "timing": 12.774396
+    },
+    {
+      "filename": "english_sec_0167",
+      "TEDS": 0.948718,
+      "TLAG": 0.000871,
+      "rd": 0.665805,
+      "timing": 15.222875
+    },
+    {
+      "filename": "english_sec_0170",
+      "TEDS": 0.984848,
+      "TLAG": 0.355768,
+      "rd": 0.935004,
+      "timing": 13.493656
+    },
+    {
+      "filename": "english_sec_0171",
+      "TEDS": 0.888889,
+      "TLAG": 0.289474,
+      "rd": 0.731481,
+      "timing": 11.480214
+    },
+    {
+      "filename": "english_sec_0173",
+      "TEDS": 0.972477,
+      "TLAG": 0.200047,
+      "rd": 0.718618,
+      "timing": 14.427202
+    },
+    {
+      "filename": "english_sec_0174",
+      "TEDS": 0.901099,
+      "TLAG": 1.0,
+      "rd": 0.447854,
+      "timing": 14.368452
+    },
+    {
+      "filename": "english_sec_0175",
+      "TEDS": 0.861111,
+      "TLAG": 0.021287,
+      "rd": 0.809524,
+      "timing": 12.764951
+    },
+    {
+      "filename": "english_sec_0177",
+      "TEDS": 0.705882,
+      "TLAG": 0.333807,
+      "rd": 0.833333,
+      "timing": 11.590259
+    },
+    {
+      "filename": "english_sec_0179",
+      "TEDS": 0.740741,
+      "TLAG": 0.875,
+      "rd": 0.660714,
+      "timing": 14.824679
+    },
+    {
+      "filename": "english_sec_0181",
+      "TEDS": 0.96875,
+      "TLAG": 0.243735,
+      "rd": 0.595062,
+      "timing": 12.691896
+    },
+    {
+      "filename": "english_sec_0184",
+      "TEDS": 0.961538,
+      "TLAG": 0.426489,
+      "rd": 1.0,
+      "timing": 11.909866
+    },
+    {
+      "filename": "english_sec_0185",
+      "TEDS": 1.0,
+      "TLAG": 0.000014,
+      "rd": 0.714286,
+      "timing": 12.071179
+    },
+    {
+      "filename": "english_sec_0187",
+      "TEDS": 0.822222,
+      "TLAG": 0.0,
+      "rd": 0.511364,
+      "timing": 14.607357
+    },
+    {
+      "filename": "english_sec_0188",
+      "TEDS": 1.0,
+      "TLAG": 0.502151,
+      "rd": 0.783911,
+      "timing": 12.812563
+    },
+    {
+      "filename": "english_sec_0191",
+      "TEDS": 0.978723,
+      "TLAG": 0.220768,
+      "rd": 0.514516,
+      "timing": 13.105811
+    },
+    {
+      "filename": "english_sec_0194",
+      "TEDS": 0.95,
+      "TLAG": 0.75527,
+      "rd": 0.952381,
+      "timing": 11.653883
+    },
+    {
+      "filename": "english_sec_0195",
+      "TEDS": 0.928571,
+      "TLAG": 0.030542,
+      "rd": 0.642857,
+      "timing": 12.090626
+    },
+    {
+      "filename": "english_sec_0196",
+      "TEDS": 0.861111,
+      "TLAG": 0.64136,
+      "rd": 0.550901,
+      "timing": 14.341689
+    },
+    {
+      "filename": "english_sec_0197",
+      "TEDS": 0.583333,
+      "TLAG": 0.797513,
+      "rd": 0.227273,
+      "timing": 12.489201
+    },
+    {
+      "filename": "english_sec_0198",
+      "TEDS": 0.625,
+      "TLAG": 0.711123,
+      "rd": 0.407407,
+      "timing": 12.198184
+    },
+    {
+      "filename": "english_sec_0202",
+      "TEDS": 0.727273,
+      "TLAG": 0.508835,
+      "rd": 0.637901,
+      "timing": 13.229978
+    },
+    {
+      "filename": "english_sec_0203",
+      "TEDS": 0.716667,
+      "TLAG": 0.824547,
+      "rd": 0.577778,
+      "timing": 13.355753
+    },
+    {
+      "filename": "english_sec_0204",
+      "TEDS": 0.948718,
+      "TLAG": 0.248512,
+      "rd": 0.665805,
+      "timing": 15.381603
+    },
+    {
+      "filename": "english_sec_0205",
+      "TEDS": 0.961538,
+      "TLAG": 0.065104,
+      "rd": 0.782937,
+      "timing": 11.940241
+    },
+    {
+      "filename": "english_sec_0207",
+      "TEDS": 0.738095,
+      "TLAG": 0.657014,
+      "rd": 0.745767,
+      "timing": 15.888058
+    },
+    {
+      "filename": "english_sec_0209",
+      "TEDS": 0.943396,
+      "TLAG": 0.166829,
+      "rd": 0.867366,
+      "timing": 12.642346
+    },
+    {
+      "filename": "english_sec_0210",
+      "TEDS": 0.9375,
+      "TLAG": 0.267429,
+      "rd": 0.966558,
+      "timing": 11.325794
+    },
+    {
+      "filename": "english_sec_0212",
+      "TEDS": 0.325301,
+      "TLAG": 0.521938,
+      "rd": 0.624102,
+      "timing": 16.205106
+    },
+    {
+      "filename": "english_sec_0213",
+      "TEDS": 0.818182,
+      "TLAG": 0.666976,
+      "rd": 0.890286,
+      "timing": 11.806181
+    },
+    {
+      "filename": "english_sec_0214",
+      "TEDS": 1.0,
+      "TLAG": 0.289474,
+      "rd": 0.714286,
+      "timing": 16.834061
+    },
+    {
+      "filename": "english_sec_0215",
+      "TEDS": 1.0,
+      "TLAG": 0.994891,
+      "rd": 0.999379,
+      "timing": 15.481118
+    },
+    {
+      "filename": "english_sec_0220",
+      "TEDS": 0.847826,
+      "TLAG": 0.152372,
+      "rd": 0.625,
+      "timing": 12.624669
+    },
+    {
+      "filename": "english_sec_0221",
+      "TEDS": 0.885714,
+      "TLAG": 0.0,
+      "rd": 0.597222,
+      "timing": 14.460659
+    },
+    {
+      "filename": "english_sec_0222",
+      "TEDS": 0.833333,
+      "TLAG": 0.065147,
+      "rd": 0.698833,
+      "timing": 16.070036
+    },
+    {
+      "filename": "english_sec_0223",
+      "TEDS": 1.0,
+      "TLAG": 0.101067,
+      "rd": 0.785714,
+      "timing": 11.782315
+    },
+    {
+      "filename": "english_sec_0225",
+      "TEDS": 0.842105,
+      "TLAG": 0.643159,
+      "rd": 0.630952,
+      "timing": 13.084311
+    },
+    {
+      "filename": "english_sec_0226",
+      "TEDS": 0.96875,
+      "TLAG": 0.531679,
+      "rd": 0.595062,
+      "timing": 12.172125
+    },
+    {
+      "filename": "english_sec_0231",
+      "TEDS": 0.90625,
+      "TLAG": 0.27784,
+      "rd": 0.59375,
+      "timing": 13.526114
+    },
+    {
+      "filename": "english_sec_0232",
+      "TEDS": 0.769231,
+      "TLAG": 0.0,
+      "rd": 0.444444,
+      "timing": 12.54592
+    },
+    {
+      "filename": "english_sec_0233",
+      "TEDS": 0.943396,
+      "TLAG": 0.59355,
+      "rd": 0.715967,
+      "timing": 12.593666
+    },
+    {
+      "filename": "english_sec_0234",
+      "TEDS": 1.0,
+      "TLAG": 0.417752,
+      "rd": 0.714286,
+      "timing": 16.25588
+    },
+    {
+      "filename": "english_sec_0235",
+      "TEDS": 0.95,
+      "TLAG": 0.001028,
+      "rd": 0.652727,
+      "timing": 12.272344
+    },
+    {
+      "filename": "english_sec_0237",
+      "TEDS": 0.971429,
+      "TLAG": 0.64518,
+      "rd": 0.907415,
+      "timing": 13.522449
+    },
+    {
+      "filename": "english_sec_0239",
+      "TEDS": 0.466667,
+      "TLAG": 0.310932,
+      "rd": 0.222222,
+      "timing": 12.367224
+    },
+    {
+      "filename": "english_sec_0240",
+      "TEDS": 0.940299,
+      "TLAG": 0.0,
+      "rd": 0.498588,
+      "timing": 16.620369
+    },
+    {
+      "filename": "english_sec_0243",
+      "TEDS": 1.0,
+      "TLAG": 1.0,
+      "rd": 0.633333,
+      "timing": 12.164118
+    },
+    {
+      "filename": "english_sec_0244",
+      "TEDS": 0.928571,
+      "TLAG": 0.250401,
+      "rd": 0.883755,
+      "timing": 19.437081
+    },
+    {
+      "filename": "english_sec_0245",
+      "TEDS": 0.934426,
+      "TLAG": 0.474,
+      "rd": 0.679238,
+      "timing": 13.753149
+    },
+    {
+      "filename": "english_sec_0247",
+      "TEDS": 1.0,
+      "TLAG": 0.423636,
+      "rd": 0.761905,
+      "timing": 12.237213
+    },
+    {
+      "filename": "english_sec_0249",
+      "TEDS": 0.984375,
+      "TLAG": 3e-6,
+      "rd": 0.715242,
+      "timing": 13.380396
+    },
+    {
+      "filename": "english_sec_0254",
+      "TEDS": 0.72,
+      "TLAG": 0.0,
+      "rd": 0.375,
+      "timing": 12.758095
+    },
+    {
+      "filename": "english_sec_0258",
+      "TEDS": 0.96875,
+      "TLAG": 0.192546,
+      "rd": 0.592593,
+      "timing": 12.612612
+    },
+    {
+      "filename": "english_sec_0261",
+      "TEDS": 0.9375,
+      "TLAG": 1.0,
+      "rd": 1.0,
+      "timing": 11.817527
+    },
+    {
+      "filename": "english_sec_0263",
+      "TEDS": 0.973684,
+      "TLAG": 0.000565,
+      "rd": 0.307775,
+      "timing": 16.982831
+    },
+    {
+      "filename": "english_sec_0265",
+      "TEDS": 1.0,
+      "TLAG": 0.001058,
+      "rd": 0.912245,
+      "timing": 13.544747
+    },
+    {
+      "filename": "english_sec_0266",
+      "TEDS": 1.0,
+      "TLAG": 0.875,
+      "rd": 0.672222,
+      "timing": 12.043919
+    },
+    {
+      "filename": "english_sec_0267",
+      "TEDS": 0.384615,
+      "TLAG": 0.289587,
+      "rd": 0.208333,
+      "timing": 11.550585
+    },
+    {
+      "filename": "english_sec_0269",
+      "TEDS": 0.631579,
+      "TLAG": 0.946398,
+      "rd": 0.333333,
+      "timing": 12.415448
+    },
+    {
+      "filename": "english_sec_0270",
+      "TEDS": 0.928571,
+      "TLAG": 1.0,
+      "rd": 1.0,
+      "timing": 11.614722
+    },
+    {
+      "filename": "english_sec_0275",
+      "TEDS": 0.952381,
+      "TLAG": 0.629743,
+      "rd": 0.418582,
+      "timing": 12.136291
+    },
+    {
+      "filename": "english_sec_0276",
+      "TEDS": 0.73913,
+      "TLAG": 0.00001,
+      "rd": 0.734365,
+      "timing": 15.496762
+    },
+    {
+      "filename": "english_sec_0277",
+      "TEDS": 0.875,
+      "TLAG": 0.473872,
+      "rd": 0.533333,
+      "timing": 11.927453
+    },
+    {
+      "filename": "english_sec_0278",
+      "TEDS": 1.0,
+      "TLAG": 0.454941,
+      "rd": 1.0,
+      "timing": 12.688787
+    },
+    {
+      "filename": "english_sec_0285",
+      "TEDS": 0.96875,
+      "TLAG": 0.629143,
+      "rd": 0.594296,
+      "timing": 12.274937
+    },
+    {
+      "filename": "english_sec_0287",
+      "TEDS": 1.0,
+      "TLAG": 0.018665,
+      "rd": 0.714286,
+      "timing": 20.040506
+    },
+    {
+      "filename": "english_sec_0289",
+      "TEDS": 1.0,
+      "TLAG": 0.625478,
+      "rd": 1.0,
+      "timing": 12.359821
+    },
+    {
+      "filename": "english_sec_0290",
+      "TEDS": 0.961538,
+      "TLAG": 1.0,
+      "rd": 0.791667,
+      "timing": 11.8961
+    },
+    {
+      "filename": "english_sec_0291",
+      "TEDS": 0.933333,
+      "TLAG": 0.463682,
+      "rd": 0.604167,
+      "timing": 13.674447
+    },
+    {
+      "filename": "english_sec_0292",
+      "TEDS": 0.96875,
+      "TLAG": 0.571592,
+      "rd": 0.592593,
+      "timing": 12.36415
+    },
+    {
+      "filename": "english_sec_0296",
+      "TEDS": 0.0375,
+      "TLAG": 0.289474,
+      "rd": 0.321429,
+      "timing": 14.776867
+    },
+    {
+      "filename": "english_sec_0297",
+      "TEDS": 0.96875,
+      "TLAG": 0.217505,
+      "rd": 0.796875,
+      "timing": 12.248762
+    },
+    {
+      "filename": "english_sec_0299",
+      "TEDS": 0.96875,
+      "TLAG": 0.096519,
+      "rd": 0.790579,
+      "timing": 12.842352
+    },
+    {
+      "filename": "english_sec_0300",
+      "TEDS": 0.307692,
+      "TLAG": 0.00044,
+      "rd": 0.593008,
+      "timing": 12.633945
+    },
+    {
+      "filename": "english_sec_0301",
+      "TEDS": 0.961538,
+      "TLAG": 0.808992,
+      "rd": 1.0,
+      "timing": 12.01834
+    },
+    {
+      "filename": "english_sec_0302",
+      "TEDS": 0.972973,
+      "TLAG": 0.209995,
+      "rd": 0.690909,
+      "timing": 12.366749
+    },
+    {
+      "filename": "english_sec_0305",
+      "TEDS": 0.888112,
+      "TLAG": 0.064027,
+      "rd": 0.870912,
+      "timing": 15.917055
+    },
+    {
+      "filename": "english_sec_0306",
+      "TEDS": 0.96875,
+      "TLAG": 1.0,
+      "rd": 0.595062,
+      "timing": 12.43381
+    },
+    {
+      "filename": "english_sec_0307",
+      "TEDS": 0.666667,
+      "TLAG": 0.89621,
+      "rd": 0.522418,
+      "timing": 13.601743
+    },
+    {
+      "filename": "english_sec_0308",
+      "TEDS": 0.625,
+      "TLAG": 0.159414,
+      "rd": 0.407407,
+      "timing": 12.099864
+    },
+    {
+      "filename": "english_sec_0309",
+      "TEDS": 1.0,
+      "TLAG": 0.003259,
+      "rd": 0.582778,
+      "timing": 11.969869
+    },
+    {
+      "filename": "english_sec_0311",
+      "TEDS": 0.9375,
+      "TLAG": 0.368773,
+      "rd": 0.454545,
+      "timing": 11.896584
+    },
+    {
+      "filename": "english_sec_0313",
+      "TEDS": 1.0,
+      "TLAG": 0.6252,
+      "rd": 1.0,
+      "timing": 11.644499
+    },
+    {
+      "filename": "english_sec_0315",
+      "TEDS": 0.990385,
+      "TLAG": 0.721966,
+      "rd": 0.500553,
+      "timing": 16.253536
+    },
+    {
+      "filename": "english_sec_0319",
+      "TEDS": 0.939394,
+      "TLAG": 0.069833,
+      "rd": 0.672354,
+      "timing": 12.94368
+    },
+    {
+      "filename": "english_sec_0320",
+      "TEDS": 0.966667,
+      "TLAG": 0.033427,
+      "rd": 0.954545,
+      "timing": 11.857037
+    },
+    {
+      "filename": "english_sec_0324",
+      "TEDS": 0.871345,
+      "TLAG": 0.0,
+      "rd": 0.405999,
+      "timing": 16.165984
+    },
+    {
+      "filename": "english_sec_0327",
+      "TEDS": 1.0,
+      "TLAG": 0.338732,
+      "rd": 0.647619,
+      "timing": 13.274392
+    },
+    {
+      "filename": "english_sec_0328",
+      "TEDS": 0.957895,
+      "TLAG": 0.239929,
+      "rd": 0.690909,
+      "timing": 14.8888
+    },
+    {
+      "filename": "english_sec_0329",
+      "TEDS": 0.986486,
+      "TLAG": 0.419118,
+      "rd": 0.618636,
+      "timing": 14.213999
+    },
+    {
+      "filename": "english_sec_0331",
+      "TEDS": 0.985075,
+      "TLAG": 0.382826,
+      "rd": 0.811966,
+      "timing": 13.693778
+    },
+    {
+      "filename": "english_sec_0332",
+      "TEDS": 0.764706,
+      "TLAG": 0.073007,
+      "rd": 0.46875,
+      "timing": 11.914998
+    },
+    {
+      "filename": "english_sec_0333",
+      "TEDS": 0.222222,
+      "TLAG": 0.231895,
+      "rd": 0.576982,
+      "timing": 12.803484
+    },
+    {
+      "filename": "english_sec_0335",
+      "TEDS": 1.0,
+      "TLAG": 0.265683,
+      "rd": 0.625,
+      "timing": 12.194247
+    },
+    {
+      "filename": "english_sec_0336",
+      "TEDS": 0.854167,
+      "TLAG": 0.180291,
+      "rd": 0.677521,
+      "timing": 12.591805
+    },
+    {
+      "filename": "english_sec_0338",
+      "TEDS": 0.982759,
+      "TLAG": 0.115109,
+      "rd": 0.540348,
+      "timing": 13.524658
+    },
+    {
+      "filename": "english_sec_0339",
+      "TEDS": 0.810811,
+      "TLAG": 0.473872,
+      "rd": 0.501914,
+      "timing": 14.136549
+    },
+    {
+      "filename": "english_sec_0342",
+      "TEDS": 0.876404,
+      "TLAG": 0.40034,
+      "rd": 0.466683,
+      "timing": 17.639122
+    },
+    {
+      "filename": "english_sec_0343",
+      "TEDS": 0.828571,
+      "TLAG": 0.308158,
+      "rd": 0.571961,
+      "timing": 14.41281
+    },
+    {
+      "filename": "english_sec_0345",
+      "TEDS": 0.52381,
+      "TLAG": 0.731343,
+      "rd": 0.528282,
+      "timing": 11.588348
+    },
+    {
+      "filename": "english_sec_0346",
+      "TEDS": 1.0,
+      "TLAG": 0.02876,
+      "rd": 0.718481,
+      "timing": 16.156254
+    },
+    {
+      "filename": "english_sec_0347",
+      "TEDS": 0.941176,
+      "TLAG": 0.829676,
+      "rd": 0.592593,
+      "timing": 11.684787
+    },
+    {
+      "filename": "english_sec_0349",
+      "TEDS": 0.79661,
+      "TLAG": 0.655767,
+      "rd": 0.684346,
+      "timing": 13.211868
+    },
+    {
+      "filename": "english_sec_0350",
+      "TEDS": 1.0,
+      "TLAG": 0.657898,
+      "rd": 0.592593,
+      "timing": 12.591333
+    },
+    {
+      "filename": "english_sec_0351",
+      "TEDS": 1.0,
+      "TLAG": 0.430471,
+      "rd": 0.737076,
+      "timing": 11.670976
+    },
+    {
+      "filename": "english_sec_0352",
+      "TEDS": 0.98,
+      "TLAG": 0.100981,
+      "rd": 0.8125,
+      "timing": 12.944219
+    },
+    {
+      "filename": "english_sec_0353",
+      "TEDS": 0.985714,
+      "TLAG": 0.064032,
+      "rd": 0.909819,
+      "timing": 13.720618
+    },
+    {
+      "filename": "english_sec_0354",
+      "TEDS": 0.991667,
+      "TLAG": 0.075468,
+      "rd": 0.555857,
+      "timing": 16.362604
+    },
+    {
+      "filename": "english_sec_0355",
+      "TEDS": 1.0,
+      "TLAG": 0.768069,
+      "rd": 0.935004,
+      "timing": 13.470698
+    },
+    {
+      "filename": "english_sec_0357",
+      "TEDS": 0.914286,
+      "TLAG": 0.687515,
+      "rd": 0.876325,
+      "timing": 12.051185
+    },
+    {
+      "filename": "english_sec_0359",
+      "TEDS": 0.984848,
+      "TLAG": 0.473872,
+      "rd": 0.833154,
+      "timing": 13.555299
+    },
+    {
+      "filename": "english_sec_0360",
+      "TEDS": 0.96875,
+      "TLAG": 0.39656,
+      "rd": 0.671875,
+      "timing": 13.904973
+    },
+    {
+      "filename": "english_sec_0362",
+      "TEDS": 1.0,
+      "TLAG": 0.041667,
+      "rd": 0.732747,
+      "timing": 15.103095
+    },
+    {
+      "filename": "english_sec_0363",
+      "TEDS": 0.764706,
+      "TLAG": 0.736842,
+      "rd": 0.625,
+      "timing": 12.040968
+    },
+    {
+      "filename": "english_sec_0365",
+      "TEDS": 0.977273,
+      "TLAG": 0.097578,
+      "rd": 0.5,
+      "timing": 13.182459
+    },
+    {
+      "filename": "english_sec_0366",
+      "TEDS": 0.96875,
+      "TLAG": 0.0,
+      "rd": 0.592593,
+      "timing": 12.305908
+    },
+    {
+      "filename": "english_sec_0369",
+      "TEDS": 1.0,
+      "TLAG": 0.0,
+      "rd": 0.79881,
+      "timing": 11.714184
+    },
+    {
+      "filename": "english_sec_0370",
+      "TEDS": 0.846154,
+      "TLAG": 0.333998,
+      "rd": 0.765306,
+      "timing": 19.762898
+    },
+    {
+      "filename": "english_sec_0372",
+      "TEDS": 0.491228,
+      "TLAG": 0.062433,
+      "rd": 0.523968,
+      "timing": 12.480523
+    },
+    {
+      "filename": "english_sec_0373",
+      "TEDS": 0.954545,
+      "TLAG": 0.821971,
+      "rd": 0.555556,
+      "timing": 12.166687
+    },
+    {
+      "filename": "english_sec_0374",
+      "TEDS": 0.764706,
+      "TLAG": 0.0,
+      "rd": 0.606061,
+      "timing": 11.300097
+    },
+    {
+      "filename": "english_sec_0375",
+      "TEDS": 0.956522,
+      "TLAG": 0.051723,
+      "rd": 0.714286,
+      "timing": 12.336871
+    },
+    {
+      "filename": "english_sec_0379",
+      "TEDS": 0.736842,
+      "TLAG": 0.117691,
+      "rd": 0.638889,
+      "timing": 12.334507
+    },
+    {
+      "filename": "english_sec_0381",
+      "TEDS": 0.944444,
+      "TLAG": 0.433594,
+      "rd": 0.625,
+      "timing": 12.142176
+    },
+    {
+      "filename": "english_sec_0383",
+      "TEDS": 0.855895,
+      "TLAG": 0.433594,
+      "rd": 0.316487,
+      "timing": 16.023465
+    },
+    {
+      "filename": "english_sec_0386",
+      "TEDS": 0.609756,
+      "TLAG": 0.316605,
+      "rd": 0.516384,
+      "timing": 13.692541
+    },
+    {
+      "filename": "english_sec_0388",
+      "TEDS": 0.625,
+      "TLAG": 0.755443,
+      "rd": 0.407407,
+      "timing": 12.392299
+    },
+    {
+      "filename": "english_sec_0390",
+      "TEDS": 0.833333,
+      "TLAG": 0.224425,
+      "rd": 0.645527,
+      "timing": 17.476361
+    },
+    {
+      "filename": "english_sec_0392",
+      "TEDS": 1.0,
+      "TLAG": 0.666976,
+      "rd": 0.71875,
+      "timing": 17.443837
+    },
+    {
+      "filename": "english_sec_0394",
+      "TEDS": 0.972477,
+      "TLAG": 0.734694,
+      "rd": 0.589195,
+      "timing": 14.615841
+    },
+    {
+      "filename": "english_sec_0396",
+      "TEDS": 0.964286,
+      "TLAG": 0.83242,
+      "rd": 0.695153,
+      "timing": 12.152323
+    },
+    {
+      "filename": "english_sec_0397",
+      "TEDS": 0.964286,
+      "TLAG": 0.764278,
+      "rd": 0.642857,
+      "timing": 12.214137
+    },
+    {
+      "filename": "english_sec_0398",
+      "TEDS": 0.929648,
+      "TLAG": 0.244482,
+      "rd": 0.359259,
+      "timing": 17.743945
+    },
+    {
+      "filename": "english_sec_0405",
+      "TEDS": 0.89011,
+      "TLAG": 0.452786,
+      "rd": 0.45488,
+      "timing": 14.475721
+    },
+    {
+      "filename": "english_sec_0406",
+      "TEDS": 0.326087,
+      "TLAG": 0.250162,
+      "rd": 0.62533,
+      "timing": 18.498907
+    },
+    {
+      "filename": "english_sec_0407",
+      "TEDS": 0.961538,
+      "TLAG": 0.117565,
+      "rd": 0.785714,
+      "timing": 11.982528
+    },
+    {
+      "filename": "english_sec_0409",
+      "TEDS": 0.972973,
+      "TLAG": 0.685204,
+      "rd": 0.872727,
+      "timing": 12.361552
+    },
+    {
+      "filename": "english_sec_0412",
+      "TEDS": 0.983051,
+      "TLAG": 1.0,
+      "rd": 0.91809,
+      "timing": 14.083436
+    },
+    {
+      "filename": "english_sec_0413",
+      "TEDS": 0.97619,
+      "TLAG": 0.292949,
+      "rd": 0.888889,
+      "timing": 12.811907
+    },
+    {
+      "filename": "english_sec_0415",
+      "TEDS": 0.571429,
+      "TLAG": 0.263627,
+      "rd": 0.507422,
+      "timing": 11.949178
+    },
+    {
+      "filename": "english_sec_0417",
+      "TEDS": 0.9625,
+      "TLAG": 0.317127,
+      "rd": 0.653333,
+      "timing": 14.168209
+    },
+    {
+      "filename": "english_sec_0422",
+      "TEDS": 0.833333,
+      "TLAG": 0.888889,
+      "rd": 0.53906,
+      "timing": 12.578093
+    },
+    {
+      "filename": "english_sec_0424",
+      "TEDS": 0.961538,
+      "TLAG": 0.451881,
+      "rd": 0.719823,
+      "timing": 14.268315
+    },
+    {
+      "filename": "english_sec_0425",
+      "TEDS": 0.96875,
+      "TLAG": 0.356551,
+      "rd": 0.798501,
+      "timing": 12.307395
+    },
+    {
+      "filename": "english_sec_0426",
+      "TEDS": 0.98,
+      "TLAG": 0.584752,
+      "rd": 1.0,
+      "timing": 13.025151
+    },
+    {
+      "filename": "english_sec_0427",
+      "TEDS": 0.982759,
+      "TLAG": 1.0,
+      "rd": 0.459022,
+      "timing": 13.803793
+    },
+    {
+      "filename": "english_sec_0429",
+      "TEDS": 0.965517,
+      "TLAG": 0.393968,
+      "rd": 0.703704,
+      "timing": 12.866905
+    },
+    {
+      "filename": "english_sec_0430",
+      "TEDS": 0.98,
+      "TLAG": 0.0,
+      "rd": 0.683929,
+      "timing": 13.00576
+    },
+    {
+      "filename": "english_sec_0433",
+      "TEDS": 0.866667,
+      "TLAG": 0.315196,
+      "rd": 0.75,
+      "timing": 11.399593
+    },
+    {
+      "filename": "english_sec_0434",
+      "TEDS": 0.961538,
+      "TLAG": 0.42141,
+      "rd": 0.625,
+      "timing": 12.116228
+    },
+    {
+      "filename": "english_sec_0435",
+      "TEDS": 0.89011,
+      "TLAG": 0.151874,
+      "rd": 0.599476,
+      "timing": 14.571783
+    },
+    {
+      "filename": "english_sec_0437",
+      "TEDS": 0.959184,
+      "TLAG": 0.288212,
+      "rd": 0.732143,
+      "timing": 17.126207
+    },
+    {
+      "filename": "english_sec_0438",
+      "TEDS": 0.961538,
+      "TLAG": 0.064032,
+      "rd": 1.0,
+      "timing": 12.122761
+    },
+    {
+      "filename": "english_sec_0439",
+      "TEDS": 0.916667,
+      "TLAG": 5e-6,
+      "rd": 0.692857,
+      "timing": 12.291344
+    },
+    {
+      "filename": "english_sec_0443",
+      "TEDS": 0.677419,
+      "TLAG": 0.180291,
+      "rd": 0.714286,
+      "timing": 12.96284
+    },
+    {
+      "filename": "english_sec_0444",
+      "TEDS": 0.723404,
+      "TLAG": 0.161794,
+      "rd": 0.745855,
+      "timing": 13.455568
+    },
+    {
+      "filename": "english_sec_0445",
+      "TEDS": 0.991379,
+      "TLAG": 0.629743,
+      "rd": 0.495815,
+      "timing": 16.700914
+    },
+    {
+      "filename": "english_sec_0446",
+      "TEDS": 0.972477,
+      "TLAG": 0.592676,
+      "rd": 0.71973,
+      "timing": 15.356575
+    },
+    {
+      "filename": "english_sec_0447",
+      "TEDS": 0.84375,
+      "TLAG": 0.142512,
+      "rd": 0.626374,
+      "timing": 14.474099
+    },
+    {
+      "filename": "english_sec_0448",
+      "TEDS": 1.0,
+      "TLAG": 0.635331,
+      "rd": 0.732747,
+      "timing": 16.133862
+    },
+    {
+      "filename": "english_sec_0449",
+      "TEDS": 1.0,
+      "TLAG": 0.761302,
+      "rd": 0.744921,
+      "timing": 14.808579
+    },
+    {
+      "filename": "english_sec_0451",
+      "TEDS": 0.941176,
+      "TLAG": 0.0,
+      "rd": 0.592593,
+      "timing": 12.3438
+    },
+    {
+      "filename": "english_sec_0453",
+      "TEDS": 0.777778,
+      "TLAG": 0.075382,
+      "rd": 0.633333,
+      "timing": 13.132023
+    },
+    {
+      "filename": "english_sec_0454",
+      "TEDS": 0.961538,
+      "TLAG": 0.368477,
+      "rd": 0.791667,
+      "timing": 12.614327
+    },
+    {
+      "filename": "english_sec_0455",
+      "TEDS": 0.107399,
+      "TLAG": 0.502116,
+      "rd": 0.072751,
+      "timing": 13.927095
+    },
+    {
+      "filename": "english_sec_0457",
+      "TEDS": 0.6,
+      "TLAG": 1.0,
+      "rd": 0.918321,
+      "timing": 13.272148
+    },
+    {
+      "filename": "english_sec_0458",
+      "TEDS": 0.914286,
+      "TLAG": 0.435707,
+      "rd": 0.833997,
+      "timing": 12.631217
+    },
+    {
+      "filename": "english_sec_0459",
+      "TEDS": 0.988372,
+      "TLAG": 0.531596,
+      "rd": 0.819841,
+      "timing": 14.839177
+    },
+    {
+      "filename": "english_sec_0461",
+      "TEDS": 0.9,
+      "TLAG": 0.001028,
+      "rd": 0.6875,
+      "timing": 11.864697
+    },
+    {
+      "filename": "english_sec_0462",
+      "TEDS": 0.987179,
+      "TLAG": 0.641546,
+      "rd": 0.735179,
+      "timing": 14.754894
+    },
+    {
+      "filename": "english_sec_0465",
+      "TEDS": 0.947368,
+      "TLAG": 0.772673,
+      "rd": 0.731187,
+      "timing": 16.827189
+    },
+    {
+      "filename": "english_sec_0467",
+      "TEDS": 0.727273,
+      "TLAG": 0.092907,
+      "rd": 0.637135,
+      "timing": 12.957715
+    },
+    {
+      "filename": "english_sec_0469",
+      "TEDS": 1.0,
+      "TLAG": 0.118118,
+      "rd": 1.0,
+      "timing": 11.974335
+    },
+    {
+      "filename": "english_sec_0471",
+      "TEDS": 0.985294,
+      "TLAG": 0.062124,
+      "rd": 0.754545,
+      "timing": 14.24536
+    },
+    {
+      "filename": "english_sec_0472",
+      "TEDS": 0.783784,
+      "TLAG": 1.0,
+      "rd": 0.566667,
+      "timing": 14.387478
+    },
+    {
+      "filename": "english_sec_0473",
+      "TEDS": 1.0,
+      "TLAG": 0.6596,
+      "rd": 0.761905,
+      "timing": 11.808397
+    },
+    {
+      "filename": "english_sec_0474",
+      "TEDS": 0.903226,
+      "TLAG": 0.078321,
+      "rd": 0.601976,
+      "timing": 14.034286
+    },
+    {
+      "filename": "english_sec_0477",
+      "TEDS": 0.863636,
+      "TLAG": 0.362284,
+      "rd": 0.533636,
+      "timing": 13.179393
+    },
+    {
+      "filename": "english_sec_0478",
+      "TEDS": 0.232558,
+      "TLAG": 0.393535,
+      "rd": 0.663008,
+      "timing": 14.205276
+    },
+    {
+      "filename": "english_sec_0479",
+      "TEDS": 0.864407,
+      "TLAG": 0.252246,
+      "rd": 0.49749,
+      "timing": 13.998847
+    },
+    {
+      "filename": "english_sec_0481",
+      "TEDS": 0.941176,
+      "TLAG": 0.10916,
+      "rd": 1.0,
+      "timing": 11.600174
+    },
+    {
+      "filename": "english_sec_0482",
+      "TEDS": 0.933333,
+      "TLAG": 0.273374,
+      "rd": 0.654887,
+      "timing": 14.782761
+    },
+    {
+      "filename": "english_sec_0484",
+      "TEDS": 0.953704,
+      "TLAG": 0.516065,
+      "rd": 0.902081,
+      "timing": 15.161869
+    },
+    {
+      "filename": "english_sec_0485",
+      "TEDS": 0.963504,
+      "TLAG": 0.36115,
+      "rd": 0.488731,
+      "timing": 15.764085
+    },
+    {
+      "filename": "english_sec_0489",
+      "TEDS": 0.6875,
+      "TLAG": 0.00044,
+      "rd": 0.387755,
+      "timing": 13.505301
+    },
+    {
+      "filename": "english_sec_0493",
+      "TEDS": 0.896552,
+      "TLAG": 1.0,
+      "rd": 0.642857,
+      "timing": 12.061992
+    },
+    {
+      "filename": "english_sec_0494",
+      "TEDS": 0.847826,
+      "TLAG": 0.222486,
+      "rd": 0.544898,
+      "timing": 12.460176
+    },
+    {
+      "filename": "english_sec_0496",
+      "TEDS": 0.777778,
+      "TLAG": 0.462733,
+      "rd": 0.466667,
+      "timing": 12.728454
+    },
+    {
+      "filename": "english_sec_0497",
+      "TEDS": 0.666667,
+      "TLAG": 0.298996,
+      "rd": 0.611162,
+      "timing": 12.655895
+    },
+    {
+      "filename": "english_sec_0498",
+      "TEDS": 0.98,
+      "TLAG": 0.67514,
+      "rd": 0.5125,
+      "timing": 13.597398
+    },
+    {
+      "filename": "english_sec_0501",
+      "TEDS": 0.625,
+      "TLAG": 0.035162,
+      "rd": 0.407407,
+      "timing": 12.261203
+    },
+    {
+      "filename": "english_sec_0502",
+      "TEDS": 0.986486,
+      "TLAG": 1.0,
+      "rd": 0.569312,
+      "timing": 13.120761
+    },
+    {
+      "filename": "english_sec_0504",
+      "TEDS": 1.0,
+      "TLAG": 0.183878,
+      "rd": 1.0,
+      "timing": 11.464703
+    },
+    {
+      "filename": "english_sec_0505",
+      "TEDS": 0.95,
+      "TLAG": 0.800014,
+      "rd": 0.775452,
+      "timing": 14.238775
+    },
+    {
+      "filename": "english_sec_0506",
+      "TEDS": 0.377358,
+      "TLAG": 0.17904,
+      "rd": 0.214844,
+      "timing": 16.060968
+    },
+    {
+      "filename": "english_sec_0507",
+      "TEDS": 0.944444,
+      "TLAG": 0.003427,
+      "rd": 0.770247,
+      "timing": 13.429059
+    },
+    {
+      "filename": "english_sec_0509",
+      "TEDS": 0.973684,
+      "TLAG": 0.560904,
+      "rd": 0.786458,
+      "timing": 12.238509
+    },
+    {
+      "filename": "english_sec_0512",
+      "TEDS": 0.928571,
+      "TLAG": 0.000076,
+      "rd": 1.0,
+      "timing": 11.299903
+    },
+    {
+      "filename": "english_sec_0513",
+      "TEDS": 0.95,
+      "TLAG": 0.724029,
+      "rd": 0.5,
+      "timing": 11.704167
+    },
+    {
+      "filename": "english_sec_0514",
+      "TEDS": 0.818182,
+      "TLAG": 0.261488,
+      "rd": 0.827551,
+      "timing": 11.560832
+    },
+    {
+      "filename": "english_sec_0516",
+      "TEDS": 0.941176,
+      "TLAG": 0.368937,
+      "rd": 0.592593,
+      "timing": 11.59418
+    },
+    {
+      "filename": "english_sec_0517",
+      "TEDS": 0.823529,
+      "TLAG": 0.713557,
+      "rd": 0.61229,
+      "timing": 11.534702
+    },
+    {
+      "filename": "english_sec_0518",
+      "TEDS": 0.857143,
+      "TLAG": 0.642442,
+      "rd": 0.920721,
+      "timing": 14.341413
+    },
+    {
+      "filename": "english_sec_0519",
+      "TEDS": 0.938144,
+      "TLAG": 0.248506,
+      "rd": 0.796091,
+      "timing": 15.092965
+    },
+    {
+      "filename": "english_sec_0520",
+      "TEDS": 0.928571,
+      "TLAG": 0.616844,
+      "rd": 0.625,
+      "timing": 12.191016
+    },
+    {
+      "filename": "english_sec_0523",
+      "TEDS": 0.977273,
+      "TLAG": 0.803116,
+      "rd": 0.516934,
+      "timing": 12.937997
+    },
+    {
+      "filename": "english_sec_0524",
+      "TEDS": 0.933333,
+      "TLAG": 0.0,
+      "rd": 0.616162,
+      "timing": 13.687029
+    },
+    {
+      "filename": "english_sec_0525",
+      "TEDS": 0.820896,
+      "TLAG": 0.25925,
+      "rd": 0.538499,
+      "timing": 13.441067
+    },
+    {
+      "filename": "english_sec_0526",
+      "TEDS": 1.0,
+      "TLAG": 0.041294,
+      "rd": 0.672222,
+      "timing": 14.135533
+    },
+    {
+      "filename": "english_sec_0528",
+      "TEDS": 0.863636,
+      "TLAG": 0.500017,
+      "rd": 0.884008,
+      "timing": 14.081488
+    },
+    {
+      "filename": "english_sec_0530",
+      "TEDS": 0.986486,
+      "TLAG": 0.870331,
+      "rd": 0.865582,
+      "timing": 13.756355
+    },
+    {
+      "filename": "english_sec_0531",
+      "TEDS": 0.92126,
+      "TLAG": 0.784987,
+      "rd": 0.459625,
+      "timing": 14.538387
+    },
+    {
+      "filename": "english_sec_0532",
+      "TEDS": 0.875,
+      "TLAG": 0.388863,
+      "rd": 0.519131,
+      "timing": 14.299427
+    },
+    {
+      "filename": "english_sec_0534",
+      "TEDS": 0.409091,
+      "TLAG": 0.0,
+      "rd": 0.630303,
+      "timing": 11.765073
+    },
+    {
+      "filename": "english_sec_0535",
+      "TEDS": 0.970588,
+      "TLAG": 0.426807,
+      "rd": 0.688392,
+      "timing": 12.813201
+    },
+    {
+      "filename": "english_sec_0537",
+      "TEDS": 0.95,
+      "TLAG": 0.131108,
+      "rd": 0.715385,
+      "timing": 12.07101
+    },
+    {
+      "filename": "english_sec_0538",
+      "TEDS": 0.683333,
+      "TLAG": 0.001653,
+      "rd": 0.451516,
+      "timing": 13.923096
+    },
+    {
+      "filename": "english_sec_0539",
+      "TEDS": 0.827586,
+      "TLAG": 0.587407,
+      "rd": 0.803571,
+      "timing": 12.986424
+    },
+    {
+      "filename": "english_sec_0540",
+      "TEDS": 0.913043,
+      "TLAG": 0.000027,
+      "rd": 0.860732,
+      "timing": 13.19349
+    },
+    {
+      "filename": "english_sec_0541",
+      "TEDS": 0.727612,
+      "TLAG": 0.426807,
+      "rd": 0.410175,
+      "timing": 17.974744
+    },
+    {
+      "filename": "english_sec_0542",
+      "TEDS": 0.846154,
+      "TLAG": 0.603601,
+      "rd": 0.714286,
+      "timing": 12.24628
+    },
+    {
+      "filename": "english_sec_0545",
+      "TEDS": 0.9375,
+      "TLAG": 0.01629,
+      "rd": 0.718656,
+      "timing": 13.503101
+    },
+    {
+      "filename": "english_sec_0546",
+      "TEDS": 0.916667,
+      "TLAG": 0.056429,
+      "rd": 0.499268,
+      "timing": 18.401346
+    },
+    {
+      "filename": "english_sec_0547",
+      "TEDS": 0.388889,
+      "TLAG": 0.08,
+      "rd": 0.4,
+      "timing": 13.202308
+    },
+    {
+      "filename": "english_sec_0548",
+      "TEDS": 0.9375,
+      "TLAG": 0.004944,
+      "rd": 0.718656,
+      "timing": 13.53605
+    },
+    {
+      "filename": "english_sec_0549",
+      "TEDS": 0.342105,
+      "TLAG": 0.125009,
+      "rd": 0.53,
+      "timing": 13.112544
+    },
+    {
+      "filename": "english_sec_0550",
+      "TEDS": 0.926829,
+      "TLAG": 0.111141,
+      "rd": 0.545994,
+      "timing": 13.463229
+    },
+    {
+      "filename": "english_sec_0551",
+      "TEDS": 0.606061,
+      "TLAG": 0.0,
+      "rd": 0.418975,
+      "timing": 12.620287
+    },
+    {
+      "filename": "english_sec_0552",
+      "TEDS": 0.928571,
+      "TLAG": 0.622005,
+      "rd": 0.5,
+      "timing": 12.178302
+    },
+    {
+      "filename": "english_sec_0553",
+      "TEDS": 0.214286,
+      "TLAG": 0.075472,
+      "rd": 0.660326,
+      "timing": 13.396139
+    },
+    {
+      "filename": "english_sec_0554",
+      "TEDS": 0.652174,
+      "TLAG": 0.341442,
+      "rd": 0.734694,
+      "timing": 12.321682
+    },
+    {
+      "filename": "english_sec_0555",
+      "TEDS": 0.95,
+      "TLAG": 0.153855,
+      "rd": 0.771019,
+      "timing": 13.989055
+    },
+    {
+      "filename": "english_sec_0557",
+      "TEDS": 0.836066,
+      "TLAG": 0.075992,
+      "rd": 0.819228,
+      "timing": 13.481681
+    },
+    {
+      "filename": "english_sec_0559",
+      "TEDS": 0.769231,
+      "TLAG": 0.144634,
+      "rd": 0.565972,
+      "timing": 12.785369
+    },
+    {
+      "filename": "english_sec_0560",
+      "TEDS": 0.692308,
+      "TLAG": 0.791036,
+      "rd": 0.714286,
+      "timing": 12.027422
+    },
+    {
+      "filename": "english_sec_0561",
+      "TEDS": 1.0,
+      "TLAG": 0.189836,
+      "rd": 0.782509,
+      "timing": 12.421672
+    },
+    {
+      "filename": "english_sec_0562",
+      "TEDS": 0.990741,
+      "TLAG": 1.0,
+      "rd": 0.556972,
+      "timing": 15.077688
+    },
+    {
+      "filename": "english_sec_0563",
+      "TEDS": 0.283688,
+      "TLAG": 0.805522,
+      "rd": 0.468857,
+      "timing": 14.622527
+    },
+    {
+      "filename": "english_sec_0564",
+      "TEDS": 0.941176,
+      "TLAG": 0.0,
+      "rd": 0.78548,
+      "timing": 15.230831
+    },
+    {
+      "filename": "english_sec_0565",
+      "TEDS": 0.916667,
+      "TLAG": 0.074967,
+      "rd": 0.555556,
+      "timing": 11.393156
+    },
+    {
+      "filename": "english_sec_0567",
+      "TEDS": 0.955882,
+      "TLAG": 0.350029,
+      "rd": 0.853044,
+      "timing": 14.095958
+    },
+    {
+      "filename": "english_sec_0570",
+      "TEDS": 0.7,
+      "TLAG": 0.455186,
+      "rd": 0.434137,
+      "timing": 12.241234
+    },
+    {
+      "filename": "english_sec_0571",
+      "TEDS": 0.645833,
+      "TLAG": 0.137931,
+      "rd": 0.640598,
+      "timing": 12.46735
+    },
+    {
+      "filename": "english_sec_0573",
+      "TEDS": 0.928571,
+      "TLAG": 0.669862,
+      "rd": 1.0,
+      "timing": 11.451797
+    },
+    {
+      "filename": "english_sec_0574",
+      "TEDS": 0.9875,
+      "TLAG": 0.0,
+      "rd": 0.549871,
+      "timing": 15.171331
+    },
+    {
+      "filename": "english_sec_0575",
+      "TEDS": 0.692308,
+      "TLAG": 0.420386,
+      "rd": 0.714286,
+      "timing": 11.47217
+    },
+    {
+      "filename": "english_sec_0578",
+      "TEDS": 0.729167,
+      "TLAG": 0.642444,
+      "rd": 0.606061,
+      "timing": 12.139277
+    },
+    {
+      "filename": "english_sec_0580",
+      "TEDS": 0.722222,
+      "TLAG": 0.763876,
+      "rd": 0.75,
+      "timing": 19.620452
+    },
+    {
+      "filename": "english_sec_0582",
+      "TEDS": 0.854839,
+      "TLAG": 0.000136,
+      "rd": 0.519937,
+      "timing": 15.59222
+    },
+    {
+      "filename": "english_sec_0583",
+      "TEDS": 0.955882,
+      "TLAG": 0.571595,
+      "rd": 0.533477,
+      "timing": 13.129543
+    },
+    {
+      "filename": "english_sec_0585",
+      "TEDS": 0.961538,
+      "TLAG": 0.480969,
+      "rd": 0.625,
+      "timing": 12.783123
+    },
+    {
+      "filename": "english_sec_0586",
+      "TEDS": 0.813953,
+      "TLAG": 0.052184,
+      "rd": 0.712121,
+      "timing": 12.280136
+    },
+    {
+      "filename": "english_sec_0588",
+      "TEDS": 0.961538,
+      "TLAG": 0.285997,
+      "rd": 0.8125,
+      "timing": 11.915993
+    },
+    {
+      "filename": "english_sec_0590",
+      "TEDS": 0.972973,
+      "TLAG": 1.0,
+      "rd": 0.690909,
+      "timing": 12.378541
+    },
+    {
+      "filename": "english_sec_0591",
+      "TEDS": 0.915254,
+      "TLAG": 0.560008,
+      "rd": 0.572917,
+      "timing": 13.344146
+    },
+    {
+      "filename": "english_sec_0592",
+      "TEDS": 0.466667,
+      "TLAG": 0.18853,
+      "rd": 0.389092,
+      "timing": 12.134048
+    },
+    {
+      "filename": "english_sec_0593",
+      "TEDS": 0.978417,
+      "TLAG": 0.420386,
+      "rd": 0.662783,
+      "timing": 18.528634
+    },
+    {
+      "filename": "english_sec_0594",
+      "TEDS": 1.0,
+      "TLAG": 0.67746,
+      "rd": 0.725,
+      "timing": 12.303589
+    },
+    {
+      "filename": "english_sec_0597",
+      "TEDS": 0.852941,
+      "TLAG": 0.050592,
+      "rd": 0.635372,
+      "timing": 12.38658
+    },
+    {
+      "filename": "english_sec_0598",
+      "TEDS": 0.962025,
+      "TLAG": 0.248076,
+      "rd": 0.552934,
+      "timing": 14.907566
+    },
+    {
+      "filename": "english_sec_0599",
+      "TEDS": 0.961538,
+      "TLAG": 0.144777,
+      "rd": 1.0,
+      "timing": 11.936457
+    },
+    {
+      "filename": "english_sec_0601",
+      "TEDS": 0.961538,
+      "TLAG": 0.232559,
+      "rd": 0.8125,
+      "timing": 11.675105
+    },
+    {
+      "filename": "english_sec_0603",
+      "TEDS": 0.848485,
+      "TLAG": 0.385855,
+      "rd": 0.418975,
+      "timing": 11.940338
+    },
+    {
+      "filename": "english_sec_0604",
+      "TEDS": 1.0,
+      "TLAG": 0.065051,
+      "rd": 0.909091,
+      "timing": 13.092883
+    },
+    {
+      "filename": "english_sec_0605",
+      "TEDS": 0.990196,
+      "TLAG": 1.0,
+      "rd": 0.839126,
+      "timing": 14.990308
+    },
+    {
+      "filename": "english_sec_0607",
+      "TEDS": 0.107463,
+      "TLAG": 0.052717,
+      "rd": 0.454986,
+      "timing": 17.101357
+    },
+    {
+      "filename": "english_sec_0608",
+      "TEDS": 0.955307,
+      "TLAG": 0.000019,
+      "rd": 0.452448,
+      "timing": 17.623948
+    },
+    {
+      "filename": "english_sec_0610",
+      "TEDS": 0.756757,
+      "TLAG": 0.589645,
+      "rd": 0.490278,
+      "timing": 12.453479
+    },
+    {
+      "filename": "english_sec_0611",
+      "TEDS": 0.971429,
+      "TLAG": 0.748679,
+      "rd": 0.571429,
+      "timing": 12.495435
+    },
+    {
+      "filename": "english_sec_0612",
+      "TEDS": 0.990741,
+      "TLAG": 0.318152,
+      "rd": 0.558618,
+      "timing": 14.232515
+    },
+    {
+      "filename": "english_sec_0613",
+      "TEDS": 0.966667,
+      "TLAG": 0.551845,
+      "rd": 0.706904,
+      "timing": 12.318273
+    },
+    {
+      "filename": "english_sec_0614",
+      "TEDS": 0.95,
+      "TLAG": 0.006891,
+      "rd": 1.0,
+      "timing": 11.632253
+    },
+    {
+      "filename": "english_sec_0617",
+      "TEDS": 0.545455,
+      "TLAG": 0.293259,
+      "rd": 0.454545,
+      "timing": 13.798452
+    },
+    {
+      "filename": "english_sec_0618",
+      "TEDS": 0.861111,
+      "TLAG": 0.763558,
+      "rd": 0.690909,
+      "timing": 12.324094
+    },
+    {
+      "filename": "english_sec_0621",
+      "TEDS": 0.982759,
+      "TLAG": 0.436966,
+      "rd": 0.472167,
+      "timing": 13.136598
+    },
+    {
+      "filename": "english_sec_0624",
+      "TEDS": 0.973684,
+      "TLAG": 0.350135,
+      "rd": 0.998299,
+      "timing": 12.498725
+    },
+    {
+      "filename": "english_sec_0625",
+      "TEDS": 0.723464,
+      "TLAG": 0.405084,
+      "rd": 0.372266,
+      "timing": 17.954804
+    }
+  ]
+}
