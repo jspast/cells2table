@@ -315,7 +315,7 @@ huggingface = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "cells2table" },
+    { name = "cells2table", extra = ["docling"] },
     { name = "pytest" },
     { name = "ruff" },
 ]
@@ -347,7 +347,7 @@ provides-extras = ["docling", "eval", "huggingface"]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "cells2table" },
+    { name = "cells2table", extras = ["docling"] },
     { name = "pytest", specifier = ">=7.0,<10.0" },
     { name = "ruff", specifier = ">=0.5.0,<1.0.0" },
 ]
