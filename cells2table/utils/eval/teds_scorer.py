@@ -24,14 +24,7 @@ def clean_table_in_html(html: str) -> str:
     return table_html
 
 
-def main():
-    parser = argparse.ArgumentParser(description="T-LAG scorer for PulseBench-Tab")
-    parser.add_argument("--gt", required=True, help="Directory with ground truth HTML files")
-    parser.add_argument("--pred", required=True, help="Directory with predicted HTML files")
-    parser.add_argument("--output", default=None, help="Output JSON file (default: stdout)")
-    parser.add_argument("--workers", type=int, default=8, help="Number of parallel workers")
-    args = parser.parse_args()
-
+def run(args: argparse.Namespace) -> None:
     gt_files = {f.replace(".html", "") for f in os.listdir(args.gt) if f.endswith(".html")}
     pred_files = {f.replace(".html", "") for f in os.listdir(args.pred) if f.endswith(".html")}
 
@@ -113,6 +106,20 @@ def main():
         print(f"\nSaved to {args.output}", file=sys.stderr)
     else:
         print(json_str)
+
+
+def parse_args(argv=None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="T-LAG scorer for PulseBench-Tab")
+    parser.add_argument("--gt", required=True, help="Directory with ground truth HTML files")
+    parser.add_argument("--pred", required=True, help="Directory with predicted HTML files")
+    parser.add_argument("--output", default=None, help="Output JSON file (default: stdout)")
+    parser.add_argument("--workers", type=int, default=8, help="Number of parallel workers")
+    return parser.parse_args(argv)
+
+
+def main(argv=None) -> None:
+    args = parse_args(argv)
+    run(args)
 
 
 if __name__ == "__main__":

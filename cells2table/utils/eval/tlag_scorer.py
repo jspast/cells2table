@@ -16,25 +16,39 @@ import json
 import os
 import re
 import sys
-from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import dataclass
 
 import numpy as np
-from lxml import etree  # ty:ignore[unresolved-import]
 from Levenshtein import distance as levenshtein_distance
+from lxml import etree  # ty:ignore[unresolved-import]
 from scipy.optimize import linear_sum_assignment
+
+from cells2table.utils.eval.teds_scorer import clean_table_in_html
 
 # -- Configuration --
 
 EXPONENT = 7
-_NULL_MARKERS = frozenset([
-    "", "-", "\u2013", "\u2014", "...", "\u2026",
-    "n/a", "na", "none", "nil", "--", "---",
-])
+_NULL_MARKERS = frozenset(
+    [
+        "",
+        "-",
+        "\u2013",
+        "\u2014",
+        "...",
+        "\u2026",
+        "n/a",
+        "na",
+        "none",
+        "nil",
+        "--",
+        "---",
+    ]
+)
 
 
 # -- Data structures --
+
 
 @dataclass
 class Edge:
@@ -47,6 +61,7 @@ class Edge:
 
 # -- Text normalization and similarity --
 
+
 def normalize_text(text):
     """Normalize cell text for comparison."""
     if text is None:
@@ -54,9 +69,9 @@ def normalize_text(text):
     t = text.strip()
     if t.lower() in _NULL_MARKERS or t.replace(" ", "").replace("\u00a0", "") == "":
         return "[NULL]"
-    t = re.sub(r'[\u2012\u2013\u2014\u2015\u2212]', '-', t)
+    t = re.sub(r"[\u2012\u2013\u2014\u2015\u2212]", "-", t)
     t = t.replace("\u00a0", " ")
-    t = re.sub(r'\s+', ' ', t).strip()
+    t = re.sub(r"\s+", " ", t).strip()
     return t
 
 
@@ -81,6 +96,7 @@ def psi(text_gt, text_pred):
 
 
 # -- HTML parsing --
+
 
 def parse_html_to_matrix(html_string):
     """
@@ -115,13 +131,13 @@ def parse_html_to_matrix(html_string):
                     del span_info[col_idx]
                 col_idx += 1
             try:
-                rs = int(cell_elem.get("rowspan", "1").strip().rstrip('>'))
+                rs = int(cell_elem.get("rowspan", "1").strip().rstrip(">"))
             except ValueError:
                 rs = 1
             if rs == 0:
                 rs = max(1, total_rows - row_idx)
             try:
-                cs = int(cell_elem.get("colspan", "1").strip().rstrip('>'))
+                cs = int(cell_elem.get("colspan", "1").strip().rstrip(">"))
             except ValueError:
                 cs = 1
             if cs == 0:
@@ -154,6 +170,7 @@ def parse_html_to_matrix(html_string):
 
 # -- Edge extraction --
 
+
 def extract_edges(cells, matrix, num_rows, num_cols):
     """
     Extract directed edges from a cell-position grid matrix.
@@ -176,20 +193,23 @@ def extract_edges(cells, matrix, num_rows, num_cols):
                     key = (uid, vid, "RIGHT")
                     if key not in seen:
                         seen.add(key)
-                        edges.append(Edge(uid, vid, "RIGHT",
-                                          cells[uid]["text"], cells[vid]["text"]))
+                        edges.append(
+                            Edge(uid, vid, "RIGHT", cells[uid]["text"], cells[vid]["text"])
+                        )
             if r + 1 < num_rows and (r + 1, c) in matrix:
                 vid = matrix[(r + 1, c)]
                 if uid != vid:
                     key = (uid, vid, "BELOW")
                     if key not in seen:
                         seen.add(key)
-                        edges.append(Edge(uid, vid, "BELOW",
-                                          cells[uid]["text"], cells[vid]["text"]))
+                        edges.append(
+                            Edge(uid, vid, "BELOW", cells[uid]["text"], cells[vid]["text"])
+                        )
     return edges
 
 
 # -- Scoring --
+
 
 def compute_tlag(gt_edges, pr_edges):
     """
@@ -268,24 +288,16 @@ def _score_file(args):
             pred_html = f.read()
         if not pred_html.strip():
             return sample_id, None
-        result = score_single(gt_html, pred_html)
+        result = score_single(clean_table_in_html(gt_html), clean_table_in_html(pred_html))
         return sample_id, result
-    except Exception as e:
+    except Exception:
         return sample_id, None
 
 
 # -- CLI --
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="T-LAG scorer for PulseBench-Tab"
-    )
-    parser.add_argument("--gt", required=True, help="Directory with ground truth HTML files")
-    parser.add_argument("--pred", required=True, help="Directory with predicted HTML files")
-    parser.add_argument("--output", default=None, help="Output JSON file (default: stdout)")
-    parser.add_argument("--workers", type=int, default=8, help="Number of parallel workers")
-    args = parser.parse_args()
 
+def run(args: argparse.Namespace) -> None:
     gt_files = {f.replace(".html", "") for f in os.listdir(args.gt) if f.endswith(".html")}
     pred_files = {f.replace(".html", "") for f in os.listdir(args.pred) if f.endswith(".html")}
 
@@ -307,7 +319,7 @@ def main():
         futures = {executor.submit(_score_file, t): t[0] for t in tasks}
         done = 0
         for future in as_completed(futures):
-            sid = futures[future]
+            sid = futures[future]  # noqa: F841
             sample_id, result = future.result()
             if result is not None:
                 scores[sample_id] = result
@@ -340,7 +352,7 @@ def main():
     }
 
     # Print summary to stderr
-    print(f"\nResults:", file=sys.stderr)
+    print("\nResults:", file=sys.stderr)
     print(f"  T-LAG Score (mean): {summary['mean']}", file=sys.stderr)
     print(f"  Median:             {summary['median']}", file=sys.stderr)
     print(f"  Coverage:           {summary['coverage_pct']}%", file=sys.stderr)
@@ -354,6 +366,20 @@ def main():
         print(f"\nSaved to {args.output}", file=sys.stderr)
     else:
         print(json_str)
+
+
+def parse_args(argv=None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="T-LAG scorer for PulseBench-Tab")
+    parser.add_argument("--gt", required=True, help="Directory with ground truth HTML files")
+    parser.add_argument("--pred", required=True, help="Directory with predicted HTML files")
+    parser.add_argument("--output", default=None, help="Output JSON file (default: stdout)")
+    parser.add_argument("--workers", type=int, default=8, help="Number of parallel workers")
+    return parser.parse_args(argv)
+
+
+def main(argv=None) -> None:
+    args = parse_args(argv)
+    run(args)
 
 
 if __name__ == "__main__":
