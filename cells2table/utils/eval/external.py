@@ -1,4 +1,5 @@
 import gc
+import time
 from io import BytesIO
 from pathlib import Path
 
@@ -17,7 +18,7 @@ from docling.document_converter import (
 from docling.experimental.datamodel.table_crops_layout_options import TableCropsLayoutOptions
 from docling_core.types.io import DocumentStream
 from paddleocr import TableRecognitionPipelineV2
-from rapidocr import OCRVersion
+from rapidocr import ModelType, OCRVersion
 
 from cells2table.docling import CustomDoclingTableStructureOptions
 
@@ -39,6 +40,8 @@ def cells2table_pdfpipelineoptions(num_threads: int) -> PdfPipelineOptions:
         rapidocr_params={
             "Det.ocr_version": OCRVersion.PPOCRV5,
             "Rec.ocr_version": OCRVersion.PPOCRV5,
+            "Det.model_type": ModelType.MOBILE,
+            "Rec.model_type": ModelType.MOBILE,
         },
     )
 
@@ -75,8 +78,15 @@ def create_pred_cells2table(ds: Dataset, benchmark_dir: Path):
 
     converter = DocumentConverter(format_options=cells2table_formatoptions(12))
 
-    for sample in ds:
-        with open(pred_dir / f"{sample['sample_id']}.html", "w") as f:
+    timing_file = benchmark_dir / "cells2table_timings.csv"
+    write_header = not timing_file.exists()
+
+    with open(timing_file, "a") as tf:
+        if write_header:
+            tf.write("sample_id,time_seconds\n")
+            tf.flush()
+
+        for sample in ds:
             pil_image = sample["image"]
             buf = BytesIO()
             pil_image.save(buf, format="PNG")
@@ -84,8 +94,16 @@ def create_pred_cells2table(ds: Dataset, benchmark_dir: Path):
 
             stream = DocumentStream(name="image.png", stream=buf)
 
+            start = time.perf_counter()
             result = converter.convert(stream)
-            f.write(result.document.tables[0].export_to_html(result.document))
+            convert_time = time.perf_counter() - start
+
+            html = result.document.tables[0].export_to_html(result.document)
+            with open(pred_dir / f"{sample['sample_id']}.html", "w") as f:
+                f.write(html)
+
+            tf.write(f"{sample['sample_id']},{convert_time:.6f}\n")
+            tf.flush()
 
             if result.input and result.input._backend:
                 result.input._backend.unload()
@@ -108,15 +126,26 @@ def create_pred_pp(ds: Dataset, benchmark_dir: Path):
         engine="transformers",
     )
 
-    for sample in ds:
-        with open(pred_dir / f"{sample['sample_id']}.html", "w") as f:
+    timing_file = benchmark_dir / "pp_timings.csv"
+    write_header = not timing_file.exists()
+
+    with open(timing_file, "a") as tf:
+        if write_header:
+            tf.write("sample_id,time_seconds\n")
+
+        for sample in ds:
             pil_image = sample["image"]
             image = np.asarray(pil_image)
 
+            start = time.perf_counter()
             output = pipeline.predict(image)
+            convert_time = time.perf_counter() - start
 
-            print(output[0].html)
-            f.write(output[0].html["table_1"])
+            with open(pred_dir / f"{sample['sample_id']}.html", "w") as f:
+                f.write(output[0].html["table_1"])
+
+            tf.write(f"{sample['sample_id']},{convert_time:.6f}\n")
+            tf.flush()
 
             pil_image.close()
             gc.collect()
