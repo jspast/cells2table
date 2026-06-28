@@ -152,19 +152,7 @@ class PubTabNet(BaseDataset):
         return PubTabNetDatasetBuilder
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("provider", type=str, default="cells2table")
-    parser.add_argument("-b", "--benchmark", type=str, default="DoclingDPBench")
-    parser.add_argument("-g", "--create-gt", action="store_true", default=False)
-    parser.add_argument("-p", "--create-pred", action="store_true", default=False)
-    parser.add_argument("-e", "--evaluate", action="store_true", default=False)
-    parser.add_argument("-v", "--visualize", action="store_true", default=False)
-    parser.add_argument("-t", "--num-threads", type=int, default=4)
-    parser.add_argument("--begin", type=int, default=0)
-    parser.add_argument("--end", type=int, default=-1)
-    args = parser.parse_args()
-
+def run(args: argparse.Namespace) -> None:
     settings.debug.profile_pipeline_timings = True
 
     provider = None
@@ -202,6 +190,25 @@ def main() -> None:
 
     if args.visualize:
         benchmark.visualize(args.provider)
+
+
+def parse_args(argv=None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("provider", type=str, default="cells2table")
+    parser.add_argument("-b", "--benchmark", type=str, default="DoclingDPBench")
+    parser.add_argument("-g", "--create-gt", action="store_true", default=False)
+    parser.add_argument("-p", "--create-pred", action="store_true", default=False)
+    parser.add_argument("-e", "--evaluate", action="store_true", default=False)
+    parser.add_argument("-v", "--visualize", action="store_true", default=False)
+    parser.add_argument("-t", "--num-threads", type=int, default=4)
+    parser.add_argument("--begin", type=int, default=0)
+    parser.add_argument("--end", type=int, default=-1)
+    return parser.parse_args(argv)
+
+
+def main(argv=None) -> None:
+    args = parse_args(argv)
+    run(args)
 
 
 if __name__ == "__main__":
