@@ -79,7 +79,6 @@ def visualize_detections(
         thickness: The thickness of the overlay lines.
     """
 
-    import matplotlib.cm as cm
     import matplotlib.colors as mcolors
     import matplotlib.patches as patches
     import matplotlib.pyplot as plt
@@ -89,7 +88,7 @@ def visualize_detections(
 
     # Normalize + colormap
     norm = mcolors.Normalize(vmin=0, vmax=1)
-    cmap = cm.get_cmap("winter")
+    cmap = plt.get_cmap("winter")
 
     # Create figure
     fig, ax = plt.subplots()
