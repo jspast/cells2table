@@ -328,7 +328,7 @@ def run(args: argparse.Namespace) -> None:
                 print(f"  Scored {done}/{len(tasks)}...", file=sys.stderr)
 
     # Compute aggregate stats
-    valid_scores = [s["score"] for s in scores.values()]
+    valid_scores = [scores[sid]["score"] for sid in sorted(scores)]
     arr = np.array(valid_scores)
 
     summary = {
@@ -348,7 +348,7 @@ def run(args: argparse.Namespace) -> None:
 
     output = {
         "summary": summary,
-        "per_sample": {sid: round(s["score"], 6) for sid, s in scores.items()},
+        "per_sample": {sid: round(scores[sid]["score"], 6) for sid in sorted(scores)},
     }
 
     # Print summary to stderr
