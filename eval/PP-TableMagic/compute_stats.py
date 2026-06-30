@@ -34,6 +34,7 @@ class Metric(BaseModel):
 class BenchmarkStats(BaseModel):
     benchmark_name: str
     provider_name: str
+    total_time: float
     TEDS: Metric
     TLAG: Metric
     rd: Metric
@@ -87,6 +88,8 @@ def main() -> None:
             with open(rd_file) as file:
                 rd_data = json.load(file)
 
+            total_time = 0
+
             with open(timings_file) as file:
                 timings_csv = csv.reader(file)
                 next(timings_csv)  # skip header
@@ -109,6 +112,8 @@ def main() -> None:
                         )
                     )
 
+                    total_time += float(timing[1])
+
             def build_metric(data: dict) -> Metric:
                 return Metric(
                     mean=data["summary"]["mean"],
@@ -124,6 +129,7 @@ def main() -> None:
             stats = BenchmarkStats(
                 benchmark_name=b,
                 provider_name=p,
+                total_time=total_time,
                 TEDS=build_metric(teds_data),
                 TLAG=build_metric(tlag_data),
                 rd=build_metric(rd_data),

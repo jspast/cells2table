@@ -1,6 +1,7 @@
 {
   "benchmark_name": "PulseBench-Tab",
   "provider_name": "cells2table",
+  "total_time": 1360.5866049999988,
   "TEDS": {
     "mean": 0.7738,
     "median": 0.8333,
@@ -43,98 +44,98 @@
     {
       "filename": "chinese_0004",
       "TEDS": 0.981132,
-      "TLAG": 0.3658,
+      "TLAG": 0.892001,
       "rd": 1.0,
       "timing": 2.536059
     },
     {
       "filename": "chinese_0005",
       "TEDS": 0.956522,
-      "TLAG": 0.761725,
+      "TLAG": 0.3658,
       "rd": 0.939394,
       "timing": 1.567815
     },
     {
       "filename": "chinese_0007",
       "TEDS": 0.991453,
-      "TLAG": 0.388425,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 3.312418
     },
     {
       "filename": "chinese_0009",
       "TEDS": 0.491667,
-      "TLAG": 0.892001,
+      "TLAG": 0.180625,
       "rd": 0.552849,
       "timing": 4.224679
     },
     {
       "filename": "chinese_0010",
       "TEDS": 0.972973,
-      "TLAG": 0.296453,
+      "TLAG": 0.761725,
       "rd": 0.936508,
       "timing": 1.613135
     },
     {
       "filename": "chinese_0012",
       "TEDS": 0.985075,
-      "TLAG": 0.590634,
+      "TLAG": 0.762495,
       "rd": 0.922741,
       "timing": 2.170523
     },
     {
       "filename": "chinese_0015",
       "TEDS": 0.866667,
-      "TLAG": 0.520905,
+      "TLAG": 0.824743,
       "rd": 0.901652,
       "timing": 2.966037
     },
     {
       "filename": "chinese_0018",
       "TEDS": 0.952381,
-      "TLAG": 0.762495,
+      "TLAG": 0.388425,
       "rd": 0.911747,
       "timing": 1.840118
     },
     {
       "filename": "chinese_0019",
       "TEDS": 0.986111,
-      "TLAG": 0.240715,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.877457
     },
     {
       "filename": "chinese_0022",
       "TEDS": 0.992701,
-      "TLAG": 1.0,
+      "TLAG": 0.980657,
       "rd": 0.98986,
       "timing": 3.877403
     },
     {
       "filename": "chinese_0023",
       "TEDS": 0.97561,
-      "TLAG": 0.972395,
+      "TLAG": 0.520905,
       "rd": 0.897917,
       "timing": 1.965116
     },
     {
       "filename": "chinese_0025",
       "TEDS": 0.769231,
-      "TLAG": 0.514411,
+      "TLAG": 0.296453,
       "rd": 0.945091,
       "timing": 9.553739
     },
     {
       "filename": "chinese_0026",
       "TEDS": 0.944444,
-      "TLAG": 0.079889,
+      "TLAG": 0.590634,
       "rd": 0.950866,
       "timing": 1.931408
     },
     {
       "filename": "chinese_0027",
       "TEDS": 0.911765,
-      "TLAG": 0.839587,
+      "TLAG": 0.240715,
       "rd": 0.789233,
       "timing": 3.509069
     },
@@ -148,672 +149,672 @@
     {
       "filename": "chinese_0029",
       "TEDS": 0.980769,
-      "TLAG": 1.0,
+      "TLAG": 0.972395,
       "rd": 0.996825,
       "timing": 1.800294
     },
     {
       "filename": "chinese_0030",
       "TEDS": 1.0,
-      "TLAG": 0.228434,
+      "TLAG": 0.514411,
       "rd": 0.998737,
       "timing": 1.895819
     },
     {
       "filename": "chinese_0031",
       "TEDS": 0.615385,
-      "TLAG": 0.180625,
+      "TLAG": 0.079889,
       "rd": 0.65,
       "timing": 1.335997
     },
     {
       "filename": "chinese_0032",
       "TEDS": 0.956522,
-      "TLAG": 0.69472,
+      "TLAG": 0.228434,
       "rd": 0.948569,
       "timing": 6.112179
     },
     {
       "filename": "chinese_0033",
       "TEDS": 0.985075,
-      "TLAG": 0.683045,
+      "TLAG": 0.69472,
       "rd": 0.994389,
       "timing": 3.066236
     },
     {
       "filename": "chinese_0034",
       "TEDS": 0.962963,
-      "TLAG": 0.702344,
+      "TLAG": 0.839587,
       "rd": 1.0,
       "timing": 1.521745
     },
     {
       "filename": "chinese_0036",
       "TEDS": 0.994286,
-      "TLAG": 0.725424,
+      "TLAG": 0.943542,
       "rd": 0.987179,
       "timing": 3.706114
     },
     {
       "filename": "chinese_0037",
       "TEDS": 1.0,
-      "TLAG": 0.824743,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.432348
     },
     {
       "filename": "chinese_0039",
       "TEDS": 0.994709,
-      "TLAG": 1.0,
+      "TLAG": 0.964701,
       "rd": 0.993055,
       "timing": 3.724865
     },
     {
       "filename": "chinese_0042",
       "TEDS": 0.681004,
-      "TLAG": 0.767588,
+      "TLAG": 0.254936,
       "rd": 0.169192,
       "timing": 4.074374
     },
     {
       "filename": "chinese_0045",
       "TEDS": 0.973684,
-      "TLAG": 1.0,
+      "TLAG": 0.725424,
       "rd": 1.0,
       "timing": 1.978879
     },
     {
       "filename": "chinese_0046",
       "TEDS": 0.95,
-      "TLAG": 0.977704,
+      "TLAG": 0.683045,
       "rd": 0.994992,
       "timing": 2.52886
     },
     {
       "filename": "chinese_0047",
       "TEDS": 0.5,
-      "TLAG": 0.3658,
+      "TLAG": 0.702344,
       "rd": 0.868548,
       "timing": 2.078491
     },
     {
       "filename": "chinese_0050",
       "TEDS": 0.984848,
-      "TLAG": 0.399031,
+      "TLAG": 0.977704,
       "rd": 0.996528,
       "timing": 2.083637
     },
     {
       "filename": "chinese_0051",
       "TEDS": 0.994624,
-      "TLAG": 0.691233,
+      "TLAG": 0.986892,
       "rd": 1.0,
       "timing": 3.773795
     },
     {
       "filename": "chinese_0052",
       "TEDS": 0.678571,
-      "TLAG": 0.000281,
+      "TLAG": 0.0,
       "rd": 0.583333,
       "timing": 2.879222
     },
     {
       "filename": "chinese_0053",
       "TEDS": 0.757576,
-      "TLAG": 0.0,
+      "TLAG": 0.767588,
       "rd": 0.833333,
       "timing": 1.80497
     },
     {
       "filename": "chinese_0055",
       "TEDS": 1.0,
-      "TLAG": 0.516347,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.899518
     },
     {
       "filename": "chinese_0056",
       "TEDS": 0.971429,
-      "TLAG": 0.29578,
+      "TLAG": 0.399031,
       "rd": 1.0,
       "timing": 1.524023
     },
     {
       "filename": "chinese_0058",
       "TEDS": 0.956522,
-      "TLAG": 0.873827,
+      "TLAG": 0.3658,
       "rd": 0.939394,
       "timing": 1.491694
     },
     {
       "filename": "chinese_0060",
       "TEDS": 0.990291,
-      "TLAG": 0.162439,
+      "TLAG": 0.873827,
       "rd": 0.995635,
       "timing": 3.303262
     },
     {
       "filename": "chinese_0061",
       "TEDS": 0.969697,
-      "TLAG": 0.232417,
+      "TLAG": 0.691233,
       "rd": 0.985682,
       "timing": 3.561431
     },
     {
       "filename": "chinese_0063",
       "TEDS": 0.615385,
-      "TLAG": 1.0,
+      "TLAG": 0.000281,
       "rd": 0.5625,
       "timing": 3.566143
     },
     {
       "filename": "chinese_0072",
       "TEDS": 0.972414,
-      "TLAG": 0.545273,
+      "TLAG": 0.701773,
       "rd": 0.983173,
       "timing": 4.203444
     },
     {
       "filename": "chinese_0076",
       "TEDS": 0.97561,
-      "TLAG": 0.972395,
+      "TLAG": 0.516347,
       "rd": 0.895833,
       "timing": 2.013193
     },
     {
       "filename": "chinese_0078",
       "TEDS": 0.769231,
-      "TLAG": 0.866667,
+      "TLAG": 0.29578,
       "rd": 0.944985,
       "timing": 9.653928
     },
     {
       "filename": "chinese_0079",
       "TEDS": 0.961538,
-      "TLAG": 0.839587,
+      "TLAG": 0.162439,
       "rd": 0.96058,
       "timing": 5.548139
     },
     {
       "filename": "chinese_0080",
       "TEDS": 0.911765,
-      "TLAG": 1.0,
+      "TLAG": 0.232417,
       "rd": 0.785192,
       "timing": 3.667354
     },
     {
       "filename": "chinese_0081",
       "TEDS": 0.969697,
-      "TLAG": 0.957414,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.4093
     },
     {
       "filename": "chinese_0082",
       "TEDS": 1.0,
-      "TLAG": 0.258704,
+      "TLAG": 0.972395,
       "rd": 0.996825,
       "timing": 1.903094
     },
     {
       "filename": "chinese_0084",
       "TEDS": 0.54,
-      "TLAG": 0.980657,
+      "TLAG": 0.545273,
       "rd": 0.695286,
       "timing": 2.134484
     },
     {
       "filename": "chinese_0085",
       "TEDS": 0.985507,
-      "TLAG": 0.747732,
+      "TLAG": 0.258704,
       "rd": 0.976331,
       "timing": 6.304509
     },
     {
       "filename": "chinese_0086",
       "TEDS": 0.961538,
-      "TLAG": 0.701773,
+      "TLAG": 0.866667,
       "rd": 0.955556,
       "timing": 1.934003
     },
     {
       "filename": "chinese_0087",
       "TEDS": 0.962963,
-      "TLAG": 0.917715,
+      "TLAG": 0.839587,
       "rd": 1.0,
       "timing": 1.623889
     },
     {
       "filename": "chinese_0090",
       "TEDS": 1.0,
-      "TLAG": 0.767588,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.493949
     },
     {
       "filename": "chinese_0094",
       "TEDS": 1.0,
-      "TLAG": 1.0,
+      "TLAG": 0.957414,
       "rd": 0.992857,
       "timing": 1.501376
     },
     {
       "filename": "chinese_0097",
       "TEDS": 0.996479,
-      "TLAG": 0.753797,
+      "TLAG": 0.961863,
       "rd": 0.992747,
       "timing": 4.361527
     },
     {
       "filename": "chinese_0099",
       "TEDS": 0.984127,
-      "TLAG": 0.892001,
+      "TLAG": 0.747732,
       "rd": 0.996308,
       "timing": 2.633618
     },
     {
       "filename": "chinese_0101",
       "TEDS": 0.761905,
-      "TLAG": 0.142551,
+      "TLAG": 0.683714,
       "rd": 0.7725,
       "timing": 3.366518
     },
     {
       "filename": "chinese_0102",
       "TEDS": 0.985915,
-      "TLAG": 0.683714,
+      "TLAG": 0.753797,
       "rd": 0.978008,
       "timing": 2.279685
     },
     {
       "filename": "chinese_0103",
       "TEDS": 0.954545,
-      "TLAG": 0.000281,
+      "TLAG": 0.917715,
       "rd": 0.991667,
       "timing": 1.835076
     },
     {
       "filename": "chinese_0106",
       "TEDS": 0.757576,
-      "TLAG": 0.328305,
+      "TLAG": 0.767588,
       "rd": 0.833333,
       "timing": 1.871471
     },
     {
       "filename": "chinese_0108",
       "TEDS": 1.0,
-      "TLAG": 0.468462,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.692344
     },
     {
       "filename": "chinese_0110",
       "TEDS": 0.981132,
-      "TLAG": 0.388425,
+      "TLAG": 0.892001,
       "rd": 1.0,
       "timing": 2.516468
     },
     {
       "filename": "chinese_0111",
       "TEDS": 0.975,
-      "TLAG": 0.675582,
+      "TLAG": 0.142551,
       "rd": 0.864974,
       "timing": 3.560844
     },
     {
       "filename": "chinese_0112",
       "TEDS": 0.990291,
-      "TLAG": 0.04354,
+      "TLAG": 0.873827,
       "rd": 0.995635,
       "timing": 3.282876
     },
     {
       "filename": "chinese_0113",
       "TEDS": 1.0,
-      "TLAG": 0.581282,
+      "TLAG": 0.328305,
       "rd": 0.896057,
       "timing": 2.843986
     },
     {
       "filename": "chinese_0114",
       "TEDS": 0.615385,
-      "TLAG": 0.866667,
+      "TLAG": 0.000281,
       "rd": 0.5625,
       "timing": 3.371499
     },
     {
       "filename": "chinese_0116",
       "TEDS": 0.966667,
-      "TLAG": 0.873827,
+      "TLAG": 0.468462,
       "rd": 0.986026,
       "timing": 2.989873
     },
     {
       "filename": "chinese_0117",
       "TEDS": 0.866667,
-      "TLAG": 0.394294,
+      "TLAG": 0.818476,
       "rd": 0.900513,
       "timing": 2.937883
     },
     {
       "filename": "chinese_0119",
       "TEDS": 0.952381,
-      "TLAG": 0.942941,
+      "TLAG": 0.388425,
       "rd": 0.911747,
       "timing": 1.700409
     },
     {
       "filename": "chinese_0123",
       "TEDS": 1.0,
-      "TLAG": 1.0,
+      "TLAG": 0.675582,
       "rd": 0.950866,
       "timing": 1.759833
     },
     {
       "filename": "chinese_0124",
       "TEDS": 0.75,
-      "TLAG": 0.843528,
+      "TLAG": 0.04354,
       "rd": 0.7,
       "timing": 1.435421
     },
     {
       "filename": "chinese_0125",
       "TEDS": 0.603774,
-      "TLAG": 1.0,
+      "TLAG": 0.581282,
       "rd": 0.769722,
       "timing": 1.959527
     },
     {
       "filename": "chinese_0127",
       "TEDS": 0.961538,
-      "TLAG": 0.818476,
+      "TLAG": 0.866667,
       "rd": 0.955556,
       "timing": 1.740511
     },
     {
       "filename": "chinese_0128",
       "TEDS": 0.966667,
-      "TLAG": 0.917715,
+      "TLAG": 0.394294,
       "rd": 0.997388,
       "timing": 3.242335
     },
     {
       "filename": "chinese_0132",
       "TEDS": 0.962963,
-      "TLAG": 0.24362,
+      "TLAG": 0.942941,
       "rd": 0.990385,
       "timing": 2.108477
     },
     {
       "filename": "chinese_0133",
       "TEDS": 1.0,
-      "TLAG": 0.45904,
+      "TLAG": 0.843528,
       "rd": 0.992857,
       "timing": 1.356122
     },
     {
       "filename": "chinese_0135",
       "TEDS": 0.95,
-      "TLAG": 0.949116,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 2.80303
     },
     {
       "filename": "chinese_0137",
       "TEDS": 0.970588,
-      "TLAG": 0.761725,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.823497
     },
     {
       "filename": "chinese_0138",
       "TEDS": 0.981818,
-      "TLAG": 0.415003,
+      "TLAG": 0.45904,
       "rd": 0.849165,
       "timing": 5.086836
     },
     {
       "filename": "chinese_0139",
       "TEDS": 0.994975,
-      "TLAG": 0.254936,
+      "TLAG": 0.961105,
       "rd": 0.994074,
       "timing": 2.789462
     },
     {
       "filename": "chinese_0141",
       "TEDS": 0.954545,
-      "TLAG": 0.873387,
+      "TLAG": 0.917715,
       "rd": 0.991667,
       "timing": 1.758925
     },
     {
       "filename": "chinese_0145",
       "TEDS": 0.941176,
-      "TLAG": 0.317185,
+      "TLAG": 0.24362,
       "rd": 0.993639,
       "timing": 3.724979
     },
     {
       "filename": "chinese_0148",
       "TEDS": 0.977273,
-      "TLAG": 1.0,
+      "TLAG": 0.949116,
       "rd": 1.0,
       "timing": 2.29681
     },
     {
       "filename": "chinese_0149",
       "TEDS": 1.0,
-      "TLAG": 0.881322,
+      "TLAG": 0.415003,
       "rd": 0.958201,
       "timing": 4.59426
     },
     {
       "filename": "chinese_0150",
       "TEDS": 0.972973,
-      "TLAG": 0.943542,
+      "TLAG": 0.761725,
       "rd": 0.936508,
       "timing": 1.594583
     },
     {
       "filename": "chinese_0151",
       "TEDS": 0.977778,
-      "TLAG": 0.698456,
+      "TLAG": 0.873387,
       "rd": 0.990909,
       "timing": 1.990716
     },
     {
       "filename": "chinese_0152",
       "TEDS": 0.985075,
-      "TLAG": 0.420834,
+      "TLAG": 0.762495,
       "rd": 0.922741,
       "timing": 2.296377
     },
     {
       "filename": "chinese_0153",
       "TEDS": 0.826087,
-      "TLAG": 1.0,
+      "TLAG": 0.317185,
       "rd": 0.854167,
       "timing": 1.42714
     },
     {
       "filename": "chinese_0154",
       "TEDS": 0.978261,
-      "TLAG": 0.402085,
+      "TLAG": 0.881322,
       "rd": 0.972222,
       "timing": 1.702114
     },
     {
       "filename": "chinese_0155",
       "TEDS": 0.944444,
-      "TLAG": 0.853728,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.365235
     },
     {
       "filename": "chinese_0156",
       "TEDS": 0.986111,
-      "TLAG": 0.725424,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.974969
     },
     {
       "filename": "chinese_0160",
       "TEDS": 0.75,
-      "TLAG": 0.762495,
+      "TLAG": 0.698456,
       "rd": 0.9,
       "timing": 2.220118
     },
     {
       "filename": "chinese_0161",
       "TEDS": 0.741935,
-      "TLAG": 0.91788,
+      "TLAG": 0.420834,
       "rd": 0.729167,
       "timing": 1.377358
     },
     {
       "filename": "chinese_0163",
       "TEDS": 0.981481,
-      "TLAG": 0.983005,
+      "TLAG": 0.853728,
       "rd": 0.958148,
       "timing": 1.832828
     },
     {
       "filename": "chinese_0164",
       "TEDS": 0.966667,
-      "TLAG": 0.609709,
+      "TLAG": 0.402085,
       "rd": 1.0,
       "timing": 3.063755
     },
     {
       "filename": "chinese_0167",
       "TEDS": 0.984375,
-      "TLAG": 0.917742,
+      "TLAG": 0.983005,
       "rd": 0.996667,
       "timing": 2.099136
     },
     {
       "filename": "chinese_0171",
       "TEDS": 0.995851,
-      "TLAG": 0.964701,
+      "TLAG": 0.899639,
       "rd": 0.976018,
       "timing": 4.883531
     },
     {
       "filename": "chinese_0172",
       "TEDS": 0.973684,
-      "TLAG": 1.0,
+      "TLAG": 0.725424,
       "rd": 1.0,
       "timing": 2.120382
     },
     {
       "filename": "chinese_0174",
       "TEDS": 1.0,
-      "TLAG": 0.399031,
+      "TLAG": 0.91788,
       "rd": 1.0,
       "timing": 1.829657
     },
     {
       "filename": "chinese_0175",
       "TEDS": 0.962963,
-      "TLAG": 0.701057,
+      "TLAG": 0.609709,
       "rd": 0.911111,
       "timing": 1.791665
     },
     {
       "filename": "chinese_0176",
       "TEDS": 0.871429,
-      "TLAG": 0.672785,
+      "TLAG": 0.701057,
       "rd": 0.901085,
       "timing": 2.173324
     },
     {
       "filename": "chinese_0177",
       "TEDS": 0.96875,
-      "TLAG": 0.500931,
+      "TLAG": 0.917742,
       "rd": 0.975813,
       "timing": 2.505821
     },
     {
       "filename": "chinese_0178",
       "TEDS": 0.991736,
-      "TLAG": 0.880072,
+      "TLAG": 0.893713,
       "rd": 0.994564,
       "timing": 3.571625
     },
     {
       "filename": "chinese_0179",
       "TEDS": 0.971429,
-      "TLAG": 0.961105,
+      "TLAG": 0.399031,
       "rd": 1.0,
       "timing": 1.806983
     },
     {
       "filename": "chinese_0181",
       "TEDS": 0.944444,
-      "TLAG": 0.853728,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.890078
     },
     {
       "filename": "chinese_0182",
       "TEDS": 0.977273,
-      "TLAG": 0.547491,
+      "TLAG": 0.500931,
       "rd": 0.994444,
       "timing": 4.879594
     },
     {
       "filename": "chinese_0183",
       "TEDS": 0.988235,
-      "TLAG": 0.553705,
+      "TLAG": 0.880072,
       "rd": 0.982129,
       "timing": 2.620003
     },
     {
       "filename": "chinese_0184",
       "TEDS": 0.916667,
-      "TLAG": 0.986892,
+      "TLAG": 0.672785,
       "rd": 0.972222,
       "timing": 1.51989
     },
     {
       "filename": "chinese_0188",
       "TEDS": 0.966942,
-      "TLAG": 0.961863,
+      "TLAG": 0.854056,
       "rd": 0.973545,
       "timing": 3.343376
     },
     {
       "filename": "chinese_0190",
       "TEDS": 0.987342,
-      "TLAG": 0.854056,
+      "TLAG": 0.553705,
       "rd": 0.893048,
       "timing": 2.695329
     },
     {
       "filename": "chinese_0192",
       "TEDS": 0.981481,
-      "TLAG": 0.893713,
+      "TLAG": 0.853728,
       "rd": 0.958148,
       "timing": 1.872476
     },
     {
       "filename": "chinese_0193",
       "TEDS": 0.991935,
-      "TLAG": 0.673156,
+      "TLAG": 0.964952,
       "rd": 0.989011,
       "timing": 2.926649
     },
     {
       "filename": "chinese_0194",
       "TEDS": 0.961538,
-      "TLAG": 0.434012,
+      "TLAG": 0.547491,
       "rd": 1.0,
       "timing": 1.82588
     },
     {
       "filename": "chinese_0195",
       "TEDS": 0.995261,
-      "TLAG": 0.642904,
+      "TLAG": 0.859732,
       "rd": 0.995738,
       "timing": 4.592587
     },
@@ -827,42 +828,42 @@
     {
       "filename": "chinese_0197",
       "TEDS": 0.996124,
-      "TLAG": 0.688409,
+      "TLAG": 0.730475,
       "rd": 0.92112,
       "timing": 4.029986
     },
     {
       "filename": "chinese_0199",
       "TEDS": 0.865672,
-      "TLAG": 0.964952,
+      "TLAG": 0.642904,
       "rd": 0.833362,
       "timing": 2.908616
     },
     {
       "filename": "chinese_0200",
       "TEDS": 0.882353,
-      "TLAG": 0.056639,
+      "TLAG": 0.673156,
       "rd": 0.999341,
       "timing": 5.952709
     },
     {
       "filename": "chinese_0201",
       "TEDS": 0.995556,
-      "TLAG": 1.0,
+      "TLAG": 0.915457,
       "rd": 0.993277,
       "timing": 3.850215
     },
     {
       "filename": "chinese_0203",
       "TEDS": 0.944444,
-      "TLAG": 0.655922,
+      "TLAG": 0.434012,
       "rd": 0.993734,
       "timing": 2.204123
     },
     {
       "filename": "chinese_0205",
       "TEDS": 0.996815,
-      "TLAG": 0.871966,
+      "TLAG": 0.936419,
       "rd": 0.977678,
       "timing": 5.758033
     },
@@ -876,896 +877,896 @@
     {
       "filename": "chinese_0208",
       "TEDS": 1.0,
-      "TLAG": 0.829838,
+      "TLAG": 0.688409,
       "rd": 0.981482,
       "timing": 1.469366
     },
     {
       "filename": "chinese_0209",
       "TEDS": 0.38,
-      "TLAG": 0.683714,
+      "TLAG": 0.056639,
       "rd": 0.634921,
       "timing": 1.565884
     },
     {
       "filename": "chinese_0211",
       "TEDS": 1.0,
-      "TLAG": 0.859732,
+      "TLAG": 0.871966,
       "rd": 1.0,
       "timing": 2.355923
     },
     {
       "filename": "chinese_0212",
       "TEDS": 0.944444,
-      "TLAG": 0.079889,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.375592
     },
     {
       "filename": "chinese_0214",
       "TEDS": 0.96875,
-      "TLAG": 0.917742,
+      "TLAG": 0.655922,
       "rd": 0.925926,
       "timing": 1.843392
     },
     {
       "filename": "chinese_0215",
       "TEDS": 0.958904,
-      "TLAG": 0.964952,
+      "TLAG": 0.846739,
       "rd": 0.930794,
       "timing": 4.64717
     },
     {
       "filename": "chinese_0216",
       "TEDS": 0.969388,
-      "TLAG": 0.167315,
+      "TLAG": 0.829838,
       "rd": 0.969697,
       "timing": 2.802023
     },
     {
       "filename": "chinese_0218",
       "TEDS": 0.761905,
-      "TLAG": 1.0,
+      "TLAG": 0.683714,
       "rd": 0.7725,
       "timing": 3.244699
     },
     {
       "filename": "chinese_0219",
       "TEDS": 0.991935,
-      "TLAG": 0.730475,
+      "TLAG": 0.964952,
       "rd": 0.989011,
       "timing": 2.976575
     },
     {
       "filename": "chinese_0221",
       "TEDS": 0.994318,
-      "TLAG": 0.64483,
+      "TLAG": 0.855279,
       "rd": 0.888889,
       "timing": 7.147912
     },
     {
       "filename": "chinese_0222",
       "TEDS": 0.615385,
-      "TLAG": 0.899639,
+      "TLAG": 0.079889,
       "rd": 0.65,
       "timing": 1.335864
     },
     {
       "filename": "chinese_0223",
       "TEDS": 0.96875,
-      "TLAG": 0.915457,
+      "TLAG": 0.917742,
       "rd": 0.975813,
       "timing": 2.239264
     },
     {
       "filename": "chinese_0225",
       "TEDS": 0.991453,
-      "TLAG": 0.233086,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 3.472817
     },
     {
       "filename": "chinese_0226",
       "TEDS": 0.380952,
-      "TLAG": 0.545273,
+      "TLAG": 0.167315,
       "rd": 0.612245,
       "timing": 1.793048
     },
     {
       "filename": "chinese_0230",
       "TEDS": 0.996933,
-      "TLAG": 0.942941,
+      "TLAG": 0.873368,
       "rd": 0.977872,
       "timing": 5.574571
     },
     {
       "filename": "chinese_0231",
       "TEDS": 0.995556,
-      "TLAG": 0.698456,
+      "TLAG": 0.910191,
       "rd": 0.987395,
       "timing": 3.786068
     },
     {
       "filename": "chinese_0234",
       "TEDS": 0.973684,
-      "TLAG": 0.696061,
+      "TLAG": 0.64483,
       "rd": 0.931247,
       "timing": 1.748583
     },
     {
       "filename": "chinese_0236",
       "TEDS": 0.983333,
-      "TLAG": 0.65374,
+      "TLAG": 0.233086,
       "rd": 0.798625,
       "timing": 3.442795
     },
     {
       "filename": "chinese_0237",
       "TEDS": 0.995851,
-      "TLAG": 0.846739,
+      "TLAG": 0.899176,
       "rd": 0.976018,
       "timing": 4.764249
     },
     {
       "filename": "chinese_0238",
       "TEDS": 0.54,
-      "TLAG": 0.547315,
+      "TLAG": 0.545273,
       "rd": 0.695286,
       "timing": 2.124581
     },
     {
       "filename": "chinese_0239",
       "TEDS": 0.75,
-      "TLAG": 0.910191,
+      "TLAG": 0.698456,
       "rd": 0.9,
       "timing": 2.09421
     },
     {
       "filename": "chinese_0241",
       "TEDS": 0.962963,
-      "TLAG": 0.936419,
+      "TLAG": 0.942941,
       "rd": 0.990385,
       "timing": 2.263897
     },
     {
       "filename": "chinese_0244",
       "TEDS": 0.969697,
-      "TLAG": 0.91788,
+      "TLAG": 0.696061,
       "rd": 0.986111,
       "timing": 3.651413
     },
     {
       "filename": "chinese_0245",
       "TEDS": 0.97065,
-      "TLAG": 0.678495,
+      "TLAG": 0.797314,
       "rd": 0.80752,
       "timing": 6.439869
     },
     {
       "filename": "chinese_0246",
       "TEDS": 0.973684,
-      "TLAG": 0.0,
+      "TLAG": 0.65374,
       "rd": 0.960551,
       "timing": 1.746041
     },
     {
       "filename": "chinese_0247",
       "TEDS": 0.989583,
-      "TLAG": 0.503272,
+      "TLAG": 0.547315,
       "rd": 0.983713,
       "timing": 4.488993
     },
     {
       "filename": "chinese_0251",
       "TEDS": 0.764706,
-      "TLAG": 0.499474,
+      "TLAG": 0.503272,
       "rd": 0.805869,
       "timing": 2.552451
     },
     {
       "filename": "chinese_0252",
       "TEDS": 0.977273,
-      "TLAG": 0.315916,
+      "TLAG": 0.499474,
       "rd": 0.994101,
       "timing": 4.508598
     },
     {
       "filename": "chinese_0253",
       "TEDS": 1.0,
-      "TLAG": 0.166668,
+      "TLAG": 0.91788,
       "rd": 1.0,
       "timing": 1.931168
     },
     {
       "filename": "chinese_0254",
       "TEDS": 0.991379,
-      "TLAG": 0.919786,
+      "TLAG": 0.880015,
       "rd": 0.900794,
       "timing": 6.365275
     },
     {
       "filename": "chinese_0259",
       "TEDS": 0.944444,
-      "TLAG": 0.302326,
+      "TLAG": 0.678495,
       "rd": 0.979167,
       "timing": 1.681643
     },
     {
       "filename": "chinese_0260",
       "TEDS": 0.571429,
-      "TLAG": 0.7,
+      "TLAG": 0.0,
       "rd": 0.357143,
       "timing": 2.063539
     },
     {
       "filename": "chinese_0261",
       "TEDS": 0.791667,
-      "TLAG": 0.530265,
+      "TLAG": 0.315916,
       "rd": 0.897517,
       "timing": 4.593844
     },
     {
       "filename": "chinese_0262",
       "TEDS": 0.858268,
-      "TLAG": 0.852951,
+      "TLAG": 0.919786,
       "rd": 0.857143,
       "timing": 1.377522
     },
     {
       "filename": "chinese_0263",
       "TEDS": 0.991935,
-      "TLAG": 0.894811,
+      "TLAG": 0.904819,
       "rd": 0.990659,
       "timing": 2.755379
     },
     {
       "filename": "chinese_0266",
       "TEDS": 0.714286,
-      "TLAG": 0.946083,
+      "TLAG": 0.166668,
       "rd": 0.559009,
       "timing": 2.002388
     },
     {
       "filename": "chinese_0267",
       "TEDS": 0.978723,
-      "TLAG": 0.928571,
+      "TLAG": 0.302326,
       "rd": 0.714286,
       "timing": 2.295402
     },
     {
       "filename": "chinese_0268",
       "TEDS": 1.0,
-      "TLAG": 0.210528,
+      "TLAG": 0.6995,
       "rd": 0.960088,
       "timing": 2.903584
     },
     {
       "filename": "chinese_0269",
       "TEDS": 1.0,
-      "TLAG": 0.6995,
+      "TLAG": 0.7,
       "rd": 0.777778,
       "timing": 1.873563
     },
     {
       "filename": "chinese_0270",
       "TEDS": 0.979592,
-      "TLAG": 0.793126,
+      "TLAG": 0.530265,
       "rd": 0.991281,
       "timing": 2.661506
     },
     {
       "filename": "english_sec_0002",
       "TEDS": 0.896552,
-      "TLAG": 1.0,
+      "TLAG": 0.852951,
       "rd": 0.960114,
       "timing": 3.302847
     },
     {
       "filename": "english_sec_0004",
       "TEDS": 0.96875,
-      "TLAG": 0.014414,
+      "TLAG": 0.894811,
       "rd": 0.996296,
       "timing": 2.119924
     },
     {
       "filename": "english_sec_0005",
       "TEDS": 0.96875,
-      "TLAG": 0.417115,
+      "TLAG": 0.946083,
       "rd": 1.0,
       "timing": 2.157007
     },
     {
       "filename": "english_sec_0007",
       "TEDS": 0.826087,
-      "TLAG": 0.852087,
+      "TLAG": 0.928571,
       "rd": 0.666667,
       "timing": 2.285532
     },
     {
       "filename": "english_sec_0009",
       "TEDS": 0.333333,
-      "TLAG": 0.653311,
+      "TLAG": 0.210528,
       "rd": 0.872288,
       "timing": 3.011242
     },
     {
       "filename": "english_sec_0011",
       "TEDS": 0.833333,
-      "TLAG": 0.593588,
+      "TLAG": 0.852087,
       "rd": 0.769113,
       "timing": 2.594208
     },
     {
       "filename": "english_sec_0012",
       "TEDS": 0.393939,
-      "TLAG": 0.899176,
+      "TLAG": 0.793126,
       "rd": 0.648623,
       "timing": 1.669959
     },
     {
       "filename": "english_sec_0013",
       "TEDS": 0.916667,
-      "TLAG": 0.904819,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 2.226198
     },
     {
       "filename": "english_sec_0016",
       "TEDS": 0.201681,
-      "TLAG": 0.765707,
+      "TLAG": 0.014414,
       "rd": 0.746746,
       "timing": 5.159856
     },
     {
       "filename": "english_sec_0017",
       "TEDS": 0.459459,
-      "TLAG": 0.473934,
+      "TLAG": 0.417115,
       "rd": 0.693833,
       "timing": 1.876304
     },
     {
       "filename": "english_sec_0019",
       "TEDS": 0.376812,
-      "TLAG": 0.226804,
+      "TLAG": 0.593588,
       "rd": 0.701876,
       "timing": 3.048535
     },
     {
       "filename": "english_sec_0025",
       "TEDS": 0.825,
-      "TLAG": 0.919577,
+      "TLAG": 0.653311,
       "rd": 0.783761,
       "timing": 2.431994
     },
     {
       "filename": "english_sec_0027",
       "TEDS": 0.631579,
-      "TLAG": 0.612808,
+      "TLAG": 0.884876,
       "rd": 0.661559,
       "timing": 4.526436
     },
     {
       "filename": "english_sec_0029",
       "TEDS": 0.450704,
-      "TLAG": 0.935015,
+      "TLAG": 0.341751,
       "rd": 0.38656,
       "timing": 3.328965
     },
     {
       "filename": "english_sec_0030",
       "TEDS": 0.37931,
-      "TLAG": 0.77786,
+      "TLAG": 0.765707,
       "rd": 0.851213,
       "timing": 1.667077
     },
     {
       "filename": "english_sec_0031",
       "TEDS": 0.611111,
-      "TLAG": 0.696314,
+      "TLAG": 0.473934,
       "rd": 0.82387,
       "timing": 2.296817
     },
     {
       "filename": "english_sec_0032",
       "TEDS": 0.215686,
-      "TLAG": 0.433909,
+      "TLAG": 0.226804,
       "rd": 0.263889,
       "timing": 2.056874
     },
     {
       "filename": "english_sec_0033",
       "TEDS": 0.5,
-      "TLAG": 0.933355,
+      "TLAG": 0.612808,
       "rd": 0.723162,
       "timing": 1.745947
     },
     {
       "filename": "english_sec_0034",
       "TEDS": 0.954545,
-      "TLAG": 0.000407,
+      "TLAG": 0.919577,
       "rd": 0.994269,
       "timing": 2.412187
     },
     {
       "filename": "english_sec_0038",
       "TEDS": 0.774194,
-      "TLAG": 0.63624,
+      "TLAG": 0.696314,
       "rd": 0.655293,
       "timing": 4.105733
     },
     {
       "filename": "english_sec_0041",
       "TEDS": 0.539326,
-      "TLAG": 1.0,
+      "TLAG": 0.935015,
       "rd": 0.761163,
       "timing": 2.369676
     },
     {
       "filename": "english_sec_0042",
       "TEDS": 0.928571,
-      "TLAG": 0.341751,
+      "TLAG": 0.77786,
       "rd": 0.990725,
       "timing": 2.088267
     },
     {
       "filename": "english_sec_0043",
       "TEDS": 0.735537,
-      "TLAG": 0.908082,
+      "TLAG": 0.433909,
       "rd": 0.622297,
       "timing": 4.502843
     },
     {
       "filename": "english_sec_0044",
       "TEDS": 0.571429,
-      "TLAG": 0.647739,
+      "TLAG": 0.63624,
       "rd": 0.773331,
       "timing": 2.569013
     },
     {
       "filename": "english_sec_0045",
       "TEDS": 1.0,
-      "TLAG": 0.491996,
+      "TLAG": 0.933355,
       "rd": 0.994037,
       "timing": 2.262595
     },
     {
       "filename": "english_sec_0046",
       "TEDS": 0.533333,
-      "TLAG": 0.856713,
+      "TLAG": 0.000407,
       "rd": 0.547844,
       "timing": 1.462029
     },
     {
       "filename": "english_sec_0048",
       "TEDS": 0.74375,
-      "TLAG": 1.0,
+      "TLAG": 0.875036,
       "rd": 0.536081,
       "timing": 3.288138
     },
     {
       "filename": "english_sec_0049",
       "TEDS": 1.0,
-      "TLAG": 0.896254,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.440368
     },
     {
       "filename": "english_sec_0050",
       "TEDS": 0.44,
-      "TLAG": 0.855279,
+      "TLAG": 0.908082,
       "rd": 0.648593,
       "timing": 1.794579
     },
     {
       "filename": "english_sec_0051",
       "TEDS": 0.72973,
-      "TLAG": 0.823529,
+      "TLAG": 0.856713,
       "rd": 0.75098,
       "timing": 2.163078
     },
     {
       "filename": "english_sec_0055",
       "TEDS": 0.526316,
-      "TLAG": 0.679246,
+      "TLAG": 0.647739,
       "rd": 1.0,
       "timing": 1.444533
     },
     {
       "filename": "english_sec_0056",
       "TEDS": 0.508197,
-      "TLAG": 0.780388,
+      "TLAG": 0.491996,
       "rd": 0.996012,
       "timing": 2.288892
     },
     {
       "filename": "english_sec_0059",
       "TEDS": 0.121324,
-      "TLAG": 0.195351,
+      "TLAG": 0.008611,
       "rd": 0.555,
       "timing": 6.259355
     },
     {
       "filename": "english_sec_0060",
       "TEDS": 0.928571,
-      "TLAG": 0.793785,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.923436
     },
     {
       "filename": "english_sec_0061",
       "TEDS": 1.0,
-      "TLAG": 0.72807,
+      "TLAG": 0.896254,
       "rd": 0.997537,
       "timing": 2.570487
     },
     {
       "filename": "english_sec_0064",
       "TEDS": 0.423077,
-      "TLAG": 0.72973,
+      "TLAG": 0.823529,
       "rd": 0.982143,
       "timing": 1.643638
     },
     {
       "filename": "english_sec_0066",
       "TEDS": 0.708333,
-      "TLAG": 0.770239,
+      "TLAG": 0.679246,
       "rd": 0.926243,
       "timing": 1.686139
     },
     {
       "filename": "english_sec_0067",
       "TEDS": 0.428571,
-      "TLAG": 0.908648,
+      "TLAG": 0.195351,
       "rd": 0.708553,
       "timing": 4.133279
     },
     {
       "filename": "english_sec_0069",
       "TEDS": 0.653846,
-      "TLAG": 0.884876,
+      "TLAG": 0.780388,
       "rd": 0.8125,
       "timing": 2.162207
     },
     {
       "filename": "english_sec_0070",
       "TEDS": 0.688525,
-      "TLAG": 0.947569,
+      "TLAG": 0.793785,
       "rd": 0.934656,
       "timing": 2.391698
     },
     {
       "filename": "english_sec_0072",
       "TEDS": 0.40625,
-      "TLAG": 0.935258,
+      "TLAG": 0.72973,
       "rd": 0.768224,
       "timing": 1.846152
     },
     {
       "filename": "english_sec_0073",
       "TEDS": 0.65625,
-      "TLAG": 0.709163,
+      "TLAG": 0.72807,
       "rd": 0.911237,
       "timing": 1.792525
     },
     {
       "filename": "english_sec_0074",
       "TEDS": 0.805,
-      "TLAG": 0.640027,
+      "TLAG": 0.865031,
       "rd": 0.607759,
       "timing": 4.13682
     },
     {
       "filename": "english_sec_0075",
       "TEDS": 0.9375,
-      "TLAG": 1.0,
+      "TLAG": 0.770239,
       "rd": 1.0,
       "timing": 2.031221
     },
     {
       "filename": "english_sec_0078",
       "TEDS": 0.96875,
-      "TLAG": 0.873368,
+      "TLAG": 0.908648,
       "rd": 0.88642,
       "timing": 1.871591
     },
     {
       "filename": "english_sec_0079",
       "TEDS": 0.66,
-      "TLAG": 0.856713,
+      "TLAG": 0.935258,
       "rd": 0.879167,
       "timing": 2.027484
     },
     {
       "filename": "english_sec_0080",
       "TEDS": 0.972973,
-      "TLAG": 0.87994,
+      "TLAG": 0.947569,
       "rd": 0.997403,
       "timing": 1.880998
     },
     {
       "filename": "english_sec_0082",
       "TEDS": 0.5,
-      "TLAG": 0.153105,
+      "TLAG": 0.709163,
       "rd": 0.495675,
       "timing": 2.416698
     },
     {
       "filename": "english_sec_0084",
       "TEDS": 0.539474,
-      "TLAG": 0.650144,
+      "TLAG": 0.640027,
       "rd": 0.783963,
       "timing": 3.41739
     },
     {
       "filename": "english_sec_0085",
       "TEDS": 0.522936,
-      "TLAG": 0.875036,
+      "TLAG": 0.87994,
       "rd": 0.841213,
       "timing": 2.323664
     },
     {
       "filename": "english_sec_0087",
       "TEDS": 0.954545,
-      "TLAG": 0.8,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.79034
     },
     {
       "filename": "english_sec_0088",
       "TEDS": 0.72973,
-      "TLAG": 0.593588,
+      "TLAG": 0.856713,
       "rd": 0.75098,
       "timing": 1.97174
     },
     {
       "filename": "english_sec_0089",
       "TEDS": 0.859729,
-      "TLAG": 0.69853,
+      "TLAG": 0.926233,
       "rd": 0.869255,
       "timing": 4.131074
     },
     {
       "filename": "english_sec_0090",
       "TEDS": 0.892857,
-      "TLAG": 0.765824,
+      "TLAG": 0.153105,
       "rd": 0.597406,
       "timing": 1.553066
     },
     {
       "filename": "english_sec_0093",
       "TEDS": 0.376812,
-      "TLAG": 1.0,
+      "TLAG": 0.593588,
       "rd": 0.701876,
       "timing": 2.817838
     },
     {
       "filename": "english_sec_0094",
       "TEDS": 0.888889,
-      "TLAG": 0.869715,
+      "TLAG": 0.650144,
       "rd": 0.933333,
       "timing": 2.019834
     },
     {
       "filename": "english_sec_0096",
       "TEDS": 0.983051,
-      "TLAG": 0.865031,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.519222
     },
     {
       "filename": "english_sec_0099",
       "TEDS": 0.588235,
-      "TLAG": 0.854397,
+      "TLAG": 0.8,
       "rd": 0.971429,
       "timing": 1.489594
     },
     {
       "filename": "english_sec_0101",
       "TEDS": 0.606061,
-      "TLAG": 0.575334,
+      "TLAG": 0.69853,
       "rd": 0.899858,
       "timing": 2.826011
     },
     {
       "filename": "english_sec_0102",
       "TEDS": 0.622222,
-      "TLAG": 0.181883,
+      "TLAG": 0.628149,
       "rd": 0.60278,
       "timing": 3.034869
     },
     {
       "filename": "english_sec_0103",
       "TEDS": 0.916667,
-      "TLAG": 0.854619,
+      "TLAG": 0.765824,
       "rd": 0.998628,
       "timing": 2.149337
     },
     {
       "filename": "english_sec_0104",
       "TEDS": 0.5625,
-      "TLAG": 0.424167,
+      "TLAG": 0.869715,
       "rd": 0.722697,
       "timing": 1.67695
     },
     {
       "filename": "english_sec_0105",
       "TEDS": 0.583333,
-      "TLAG": 1.0,
+      "TLAG": 0.575334,
       "rd": 0.961062,
       "timing": 6.647847
     },
     {
       "filename": "english_sec_0106",
       "TEDS": 0.543307,
-      "TLAG": 0.766667,
+      "TLAG": 0.677,
       "rd": 0.710208,
       "timing": 4.460105
     },
     {
       "filename": "english_sec_0109",
       "TEDS": 0.565217,
-      "TLAG": 0.813597,
+      "TLAG": 0.854397,
       "rd": 0.997524,
       "timing": 1.453055
     },
     {
       "filename": "english_sec_0110",
       "TEDS": 0.243243,
-      "TLAG": 0.000645,
+      "TLAG": 0.181883,
       "rd": 0.785714,
       "timing": 8.223922
     },
     {
       "filename": "english_sec_0115",
       "TEDS": 0.539683,
-      "TLAG": 0.615466,
+      "TLAG": 0.766667,
       "rd": 0.981169,
       "timing": 2.530681
     },
     {
       "filename": "english_sec_0117",
       "TEDS": 0.914286,
-      "TLAG": 0.86296,
+      "TLAG": 0.854619,
       "rd": 0.9967,
       "timing": 1.650861
     },
     {
       "filename": "english_sec_0121",
       "TEDS": 0.551724,
-      "TLAG": 0.628149,
+      "TLAG": 0.424167,
       "rd": 0.838095,
       "timing": 1.951735
     },
     {
       "filename": "english_sec_0124",
       "TEDS": 0.941176,
-      "TLAG": 0.860714,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.495007
     },
     {
       "filename": "english_sec_0125",
       "TEDS": 0.961538,
-      "TLAG": 0.802352,
+      "TLAG": 0.813597,
       "rd": 0.994275,
       "timing": 6.24505
     },
     {
       "filename": "english_sec_0126",
       "TEDS": 0.5,
-      "TLAG": 0.93271,
+      "TLAG": 0.787412,
       "rd": 0.85849,
       "timing": 2.668503
     },
     {
       "filename": "english_sec_0127",
       "TEDS": 0.5,
-      "TLAG": 0.656818,
+      "TLAG": 0.000645,
       "rd": 0.25,
       "timing": 1.500193
     },
     {
       "filename": "english_sec_0129",
       "TEDS": 0.5,
-      "TLAG": 0.787412,
+      "TLAG": 0.615466,
       "rd": 0.856084,
       "timing": 1.475769
     },
     {
       "filename": "english_sec_0131",
       "TEDS": 1.0,
-      "TLAG": 0.807828,
+      "TLAG": 0.86296,
       "rd": 0.963006,
       "timing": 4.070266
     },
     {
       "filename": "english_sec_0132",
       "TEDS": 0.944444,
-      "TLAG": 0.630137,
+      "TLAG": 0.93271,
       "rd": 0.950476,
       "timing": 2.237057
     },
     {
       "filename": "english_sec_0134",
       "TEDS": 0.976744,
-      "TLAG": 0.872603,
+      "TLAG": 0.860714,
       "rd": 0.986978,
       "timing": 1.919073
     },
     {
       "filename": "english_sec_0135",
       "TEDS": 0.6875,
-      "TLAG": 0.974186,
+      "TLAG": 0.802352,
       "rd": 0.943253,
       "timing": 2.349096
     },
     {
       "filename": "english_sec_0136",
       "TEDS": 0.7,
-      "TLAG": 0.677,
+      "TLAG": 0.872603,
       "rd": 0.727669,
       "timing": 2.458347
     },
     {
       "filename": "english_sec_0137",
       "TEDS": 0.333333,
-      "TLAG": 0.229518,
+      "TLAG": 0.656818,
       "rd": 0.694898,
       "timing": 1.491743
     },
     {
       "filename": "english_sec_0139",
       "TEDS": 0.647887,
-      "TLAG": 0.878775,
+      "TLAG": 0.740602,
       "rd": 0.465482,
       "timing": 3.851109
     },
     {
       "filename": "english_sec_0143",
       "TEDS": 0.961538,
-      "TLAG": 0.880015,
+      "TLAG": 0.807828,
       "rd": 0.949367,
       "timing": 3.135487
     },
     {
       "filename": "english_sec_0144",
       "TEDS": 0.5,
-      "TLAG": 0.575,
+      "TLAG": 0.630137,
       "rd": 0.834912,
       "timing": 1.825857
     },
     {
       "filename": "english_sec_0148",
       "TEDS": 0.777778,
-      "TLAG": 0.769351,
+      "TLAG": 0.974186,
       "rd": 0.910331,
       "timing": 2.077156
     },
     {
       "filename": "english_sec_0157",
       "TEDS": 0.705357,
-      "TLAG": 0.254793,
+      "TLAG": 0.229518,
       "rd": 0.578152,
       "timing": 4.272977
     },
     {
       "filename": "english_sec_0158",
       "TEDS": 0.735294,
-      "TLAG": 0.437428,
+      "TLAG": 0.710795,
       "rd": 0.829049,
       "timing": 3.737319
     },
     {
       "filename": "english_sec_0159",
       "TEDS": 0.770642,
-      "TLAG": 0.90868,
+      "TLAG": 0.955399,
       "rd": 0.689626,
       "timing": 2.317451
     },
     {
       "filename": "english_sec_0160",
       "TEDS": 0.894737,
-      "TLAG": 0.955399,
+      "TLAG": 0.878775,
       "rd": 0.975474,
       "timing": 3.148746
     },
@@ -1779,294 +1780,294 @@
     {
       "filename": "english_sec_0162",
       "TEDS": 0.414634,
-      "TLAG": 0.866589,
+      "TLAG": 0.575,
       "rd": 0.942857,
       "timing": 1.656038
     },
     {
       "filename": "english_sec_0163",
       "TEDS": 0.97619,
-      "TLAG": 0.965116,
+      "TLAG": 0.769351,
       "rd": 0.894444,
       "timing": 1.803326
     },
     {
       "filename": "english_sec_0164",
       "TEDS": 0.6875,
-      "TLAG": 0.533799,
+      "TLAG": 0.254793,
       "rd": 0.651111,
       "timing": 1.511101
     },
     {
       "filename": "english_sec_0166",
       "TEDS": 0.474359,
-      "TLAG": 0.888889,
+      "TLAG": 0.437428,
       "rd": 0.998914,
       "timing": 2.263867
     },
     {
       "filename": "english_sec_0167",
       "TEDS": 0.684211,
-      "TLAG": 0.404378,
+      "TLAG": 0.90868,
       "rd": 0.987264,
       "timing": 4.2012
     },
     {
       "filename": "english_sec_0170",
       "TEDS": 0.984848,
-      "TLAG": 0.710795,
+      "TLAG": 0.965116,
       "rd": 0.982906,
       "timing": 2.290205
     },
     {
       "filename": "english_sec_0171",
       "TEDS": 0.888889,
-      "TLAG": 0.889305,
+      "TLAG": 0.866589,
       "rd": 0.75,
       "timing": 2.273109
     },
     {
       "filename": "english_sec_0173",
       "TEDS": 0.555556,
-      "TLAG": 0.765646,
+      "TLAG": 0.818626,
       "rd": 0.743386,
       "timing": 2.365821
     },
     {
       "filename": "english_sec_0174",
       "TEDS": 0.725275,
-      "TLAG": 0.72807,
+      "TLAG": 0.484991,
       "rd": 0.592449,
       "timing": 2.584709
     },
     {
       "filename": "english_sec_0175",
       "TEDS": 0.475,
-      "TLAG": 0.740602,
+      "TLAG": 0.533799,
       "rd": 0.948052,
       "timing": 2.250219
     },
     {
       "filename": "english_sec_0177",
       "TEDS": 0.705882,
-      "TLAG": 0.893428,
+      "TLAG": 0.888889,
       "rd": 0.866667,
       "timing": 1.500314
     },
     {
       "filename": "english_sec_0179",
       "TEDS": 0.703704,
-      "TLAG": 0.47033,
+      "TLAG": 0.404378,
       "rd": 0.728549,
       "timing": 2.731945
     },
     {
       "filename": "english_sec_0181",
       "TEDS": 0.96875,
-      "TLAG": 0.887024,
+      "TLAG": 0.889305,
       "rd": 0.995174,
       "timing": 2.003963
     },
     {
       "filename": "english_sec_0184",
       "TEDS": 0.65625,
-      "TLAG": 0.652423,
+      "TLAG": 0.72807,
       "rd": 0.911237,
       "timing": 1.791058
     },
     {
       "filename": "english_sec_0185",
       "TEDS": 1.0,
-      "TLAG": 0.690364,
+      "TLAG": 0.765646,
       "rd": 0.95,
       "timing": 1.967919
     },
     {
       "filename": "english_sec_0187",
       "TEDS": 0.394737,
-      "TLAG": 1.0,
+      "TLAG": 0.893428,
       "rd": 0.874848,
       "timing": 2.398377
     },
     {
       "filename": "english_sec_0188",
       "TEDS": 1.0,
-      "TLAG": 0.963835,
+      "TLAG": 0.887024,
       "rd": 0.990433,
       "timing": 1.462671
     },
     {
       "filename": "english_sec_0191",
       "TEDS": 0.978723,
-      "TLAG": 0.254314,
+      "TLAG": 0.963835,
       "rd": 0.747368,
       "timing": 1.960634
     },
     {
       "filename": "english_sec_0194",
       "TEDS": 0.5,
-      "TLAG": 0.907823,
+      "TLAG": 0.47033,
       "rd": 0.755102,
       "timing": 1.620309
     },
     {
       "filename": "english_sec_0195",
       "TEDS": 0.428571,
-      "TLAG": 0.90868,
+      "TLAG": 0.652423,
       "rd": 0.732537,
       "timing": 1.691578
     },
     {
       "filename": "english_sec_0196",
       "TEDS": 0.743363,
-      "TLAG": 0.87134,
+      "TLAG": 0.835271,
       "rd": 0.644021,
       "timing": 2.526981
     },
     {
       "filename": "english_sec_0197",
       "TEDS": 0.9375,
-      "TLAG": 0.785177,
+      "TLAG": 0.690364,
       "rd": 0.818182,
       "timing": 2.069983
     },
     {
       "filename": "english_sec_0198",
       "TEDS": 0.916667,
-      "TLAG": 0.902181,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.957986
     },
     {
       "filename": "english_sec_0202",
       "TEDS": 0.724138,
-      "TLAG": 0.926233,
+      "TLAG": 0.254314,
       "rd": 0.583333,
       "timing": 1.84994
     },
     {
       "filename": "english_sec_0203",
       "TEDS": 0.5,
-      "TLAG": 0.894069,
+      "TLAG": 0.907823,
       "rd": 0.683766,
       "timing": 1.666873
     },
     {
       "filename": "english_sec_0204",
       "TEDS": 0.684211,
-      "TLAG": 0.621889,
+      "TLAG": 0.90868,
       "rd": 0.987264,
       "timing": 5.94954
     },
     {
       "filename": "english_sec_0205",
       "TEDS": 0.5,
-      "TLAG": 0.887786,
+      "TLAG": 0.87134,
       "rd": 0.902315,
       "timing": 1.951717
     },
     {
       "filename": "english_sec_0207",
       "TEDS": 0.641791,
-      "TLAG": 0.484991,
+      "TLAG": 0.894069,
       "rd": 0.999577,
       "timing": 5.340216
     },
     {
       "filename": "english_sec_0209",
       "TEDS": 0.607143,
-      "TLAG": 0.818626,
+      "TLAG": 0.785177,
       "rd": 0.82271,
       "timing": 2.160915
     },
     {
       "filename": "english_sec_0210",
       "TEDS": 0.9375,
-      "TLAG": 0.976426,
+      "TLAG": 0.902181,
       "rd": 0.990909,
       "timing": 1.455345
     },
     {
       "filename": "english_sec_0212",
       "TEDS": 0.863636,
-      "TLAG": 0.87134,
+      "TLAG": 0.273697,
       "rd": 0.753812,
       "timing": 4.155364
     },
     {
       "filename": "english_sec_0213",
       "TEDS": 0.548387,
-      "TLAG": 0.619563,
+      "TLAG": 0.621889,
       "rd": 0.943816,
       "timing": 1.449462
     },
     {
       "filename": "english_sec_0214",
       "TEDS": 1.0,
-      "TLAG": 0.666675,
+      "TLAG": 0.887786,
       "rd": 0.990035,
       "timing": 4.548474
     },
     {
       "filename": "english_sec_0215",
       "TEDS": 1.0,
-      "TLAG": 0.273697,
+      "TLAG": 0.964891,
       "rd": 0.991342,
       "timing": 3.437426
     },
     {
       "filename": "english_sec_0220",
       "TEDS": 0.97619,
-      "TLAG": 0.924543,
+      "TLAG": 0.976426,
       "rd": 1.0,
       "timing": 1.683994
     },
     {
       "filename": "english_sec_0221",
       "TEDS": 0.475,
-      "TLAG": 0.99233,
+      "TLAG": 0.666675,
       "rd": 0.800397,
       "timing": 2.904042
     },
     {
       "filename": "english_sec_0222",
       "TEDS": 0.583333,
-      "TLAG": 0.989761,
+      "TLAG": 0.619563,
       "rd": 0.951424,
       "timing": 4.184919
     },
     {
       "filename": "english_sec_0223",
       "TEDS": 0.72,
-      "TLAG": 0.833206,
+      "TLAG": 0.87134,
       "rd": 0.910714,
       "timing": 1.285084
     },
     {
       "filename": "english_sec_0225",
       "TEDS": 0.98,
-      "TLAG": 0.944924,
+      "TLAG": 0.989761,
       "rd": 1.0,
       "timing": 2.316501
     },
     {
       "filename": "english_sec_0226",
       "TEDS": 0.96875,
-      "TLAG": 0.704428,
+      "TLAG": 0.924543,
       "rd": 0.996296,
       "timing": 1.987886
     },
     {
       "filename": "english_sec_0231",
       "TEDS": 0.628571,
-      "TLAG": 0.529103,
+      "TLAG": 0.704428,
       "rd": 0.840209,
       "timing": 2.592802
     },
     {
       "filename": "english_sec_0232",
       "TEDS": 0.954545,
-      "TLAG": 0.988532,
+      "TLAG": 0.99233,
       "rd": 0.999563,
       "timing": 1.960835
     },
@@ -2080,126 +2081,126 @@
     {
       "filename": "english_sec_0234",
       "TEDS": 1.0,
-      "TLAG": 0.603458,
+      "TLAG": 0.988532,
       "rd": 0.999727,
       "timing": 4.487643
     },
     {
       "filename": "english_sec_0235",
       "TEDS": 0.95,
-      "TLAG": 0.842899,
+      "TLAG": 0.833206,
       "rd": 0.996154,
       "timing": 1.329741
     },
     {
       "filename": "english_sec_0237",
       "TEDS": 0.971429,
-      "TLAG": 0.964891,
+      "TLAG": 0.944924,
       "rd": 1.0,
       "timing": 2.177001
     },
     {
       "filename": "english_sec_0239",
       "TEDS": 1.0,
-      "TLAG": 0.909091,
+      "TLAG": 0.529103,
       "rd": 0.971347,
       "timing": 1.435116
     },
     {
       "filename": "english_sec_0240",
       "TEDS": 0.539007,
-      "TLAG": 0.842241,
+      "TLAG": 0.833357,
       "rd": 0.555672,
       "timing": 3.712422
     },
     {
       "filename": "english_sec_0243",
       "TEDS": 0.743243,
-      "TLAG": 0.52264,
+      "TLAG": 0.603458,
       "rd": 0.767235,
       "timing": 1.671779
     },
     {
       "filename": "english_sec_0244",
       "TEDS": 0.095092,
-      "TLAG": 0.792546,
+      "TLAG": 0.021027,
       "rd": 0.368056,
       "timing": 6.606491
     },
     {
       "filename": "english_sec_0245",
       "TEDS": 0.574713,
-      "TLAG": 0.008611,
+      "TLAG": 0.299782,
       "rd": 0.730303,
       "timing": 1.943365
     },
     {
       "filename": "english_sec_0247",
       "TEDS": 1.0,
-      "TLAG": 0.299782,
+      "TLAG": 0.842899,
       "rd": 0.993627,
       "timing": 1.789818
     },
     {
       "filename": "english_sec_0249",
       "TEDS": 0.625,
-      "TLAG": 0.465319,
+      "TLAG": 0.842241,
       "rd": 0.709974,
       "timing": 2.175489
     },
     {
       "filename": "english_sec_0254",
       "TEDS": 0.95,
-      "TLAG": 0.179827,
+      "TLAG": 0.909091,
       "rd": 0.933333,
       "timing": 2.040303
     },
     {
       "filename": "english_sec_0258",
       "TEDS": 0.628571,
-      "TLAG": 0.893545,
+      "TLAG": 0.792546,
       "rd": 0.792068,
       "timing": 1.801208
     },
     {
       "filename": "english_sec_0261",
       "TEDS": 0.444444,
-      "TLAG": 1.0,
+      "TLAG": 0.52264,
       "rd": 0.858926,
       "timing": 1.460662
     },
     {
       "filename": "english_sec_0263",
       "TEDS": 0.77193,
-      "TLAG": 0.118773,
+      "TLAG": 0.161146,
       "rd": 0.341766,
       "timing": 4.373124
     },
     {
       "filename": "english_sec_0265",
       "TEDS": 0.454545,
-      "TLAG": 0.835271,
+      "TLAG": 0.891639,
       "rd": 0.989796,
       "timing": 2.507412
     },
     {
       "filename": "english_sec_0266",
       "TEDS": 0.869565,
-      "TLAG": 0.594751,
+      "TLAG": 0.893545,
       "rd": 1.0,
       "timing": 1.589949
     },
     {
       "filename": "english_sec_0267",
       "TEDS": 1.0,
-      "TLAG": 0.720274,
+      "TLAG": 0.465319,
       "rd": 1.0,
       "timing": 1.877837
     },
     {
       "filename": "english_sec_0269",
       "TEDS": 0.44,
-      "TLAG": 0.891639,
+      "TLAG": 0.179827,
       "rd": 0.538043,
       "timing": 1.539964
     },
@@ -2213,280 +2214,280 @@
     {
       "filename": "english_sec_0275",
       "TEDS": 0.857143,
-      "TLAG": 0.094404,
+      "TLAG": 0.118773,
       "rd": 0.587251,
       "timing": 1.437428
     },
     {
       "filename": "english_sec_0276",
       "TEDS": 0.525316,
-      "TLAG": 0.97973,
+      "TLAG": 0.381725,
       "rd": 0.499145,
       "timing": 2.882403
     },
     {
       "filename": "english_sec_0277",
       "TEDS": 0.764706,
-      "TLAG": 0.491996,
+      "TLAG": 0.594751,
       "rd": 0.933333,
       "timing": 1.912199
     },
     {
       "filename": "english_sec_0278",
       "TEDS": 0.508197,
-      "TLAG": 0.766576,
+      "TLAG": 0.491996,
       "rd": 0.996012,
       "timing": 2.390331
     },
     {
       "filename": "english_sec_0285",
       "TEDS": 0.65625,
-      "TLAG": 0.713857,
+      "TLAG": 0.720274,
       "rd": 0.722426,
       "timing": 1.611688
     },
     {
       "filename": "english_sec_0287",
       "TEDS": 1.0,
-      "TLAG": 0.948946,
+      "TLAG": 0.97973,
       "rd": 0.999017,
       "timing": 5.93993
     },
     {
       "filename": "english_sec_0289",
       "TEDS": 1.0,
-      "TLAG": 0.589326,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.615642
     },
     {
       "filename": "english_sec_0290",
       "TEDS": 0.576923,
-      "TLAG": 0.903116,
+      "TLAG": 0.094404,
       "rd": 0.703819,
       "timing": 1.666387
     },
     {
       "filename": "english_sec_0291",
       "TEDS": 0.983333,
-      "TLAG": 0.161146,
+      "TLAG": 0.964747,
       "rd": 0.997807,
       "timing": 2.018254
     },
     {
       "filename": "english_sec_0292",
       "TEDS": 0.638889,
-      "TLAG": 0.947569,
+      "TLAG": 0.766576,
       "rd": 0.790815,
       "timing": 1.917773
     },
     {
       "filename": "english_sec_0296",
       "TEDS": 0.2375,
-      "TLAG": 0.938694,
+      "TLAG": 0.293935,
       "rd": 0.267242,
       "timing": 2.836514
     },
     {
       "filename": "english_sec_0297",
       "TEDS": 0.527778,
-      "TLAG": 0.964747,
+      "TLAG": 0.713857,
       "rd": 0.833768,
       "timing": 1.454391
     },
     {
       "filename": "english_sec_0299",
       "TEDS": 0.96875,
-      "TLAG": 0.863951,
+      "TLAG": 0.948946,
       "rd": 0.996167,
       "timing": 2.376282
     },
     {
       "filename": "english_sec_0300",
       "TEDS": 0.512195,
-      "TLAG": 0.775499,
+      "TLAG": 0.589326,
       "rd": 0.652315,
       "timing": 1.944944
     },
     {
       "filename": "english_sec_0301",
       "TEDS": 0.653846,
-      "TLAG": 0.570796,
+      "TLAG": 0.903116,
       "rd": 0.997253,
       "timing": 1.824273
     },
     {
       "filename": "english_sec_0302",
       "TEDS": 0.972973,
-      "TLAG": 0.96999,
+      "TLAG": 0.947569,
       "rd": 0.997403,
       "timing": 1.865379
     },
     {
       "filename": "english_sec_0305",
       "TEDS": 0.718391,
-      "TLAG": 0.492781,
+      "TLAG": 0.327911,
       "rd": 0.672751,
       "timing": 3.954903
     },
     {
       "filename": "english_sec_0306",
       "TEDS": 0.96875,
-      "TLAG": 0.586223,
+      "TLAG": 0.938694,
       "rd": 1.0,
       "timing": 2.062871
     },
     {
       "filename": "english_sec_0307",
       "TEDS": 0.744681,
-      "TLAG": 0.974359,
+      "TLAG": 0.570796,
       "rd": 0.772727,
       "timing": 2.725611
     },
     {
       "filename": "english_sec_0308",
       "TEDS": 0.916667,
-      "TLAG": 0.293935,
+      "TLAG": 0.863951,
       "rd": 1.0,
       "timing": 2.257977
     },
     {
       "filename": "english_sec_0309",
       "TEDS": 0.791667,
-      "TLAG": 0.801442,
+      "TLAG": 0.775499,
       "rd": 0.9,
       "timing": 1.662025
     },
     {
       "filename": "english_sec_0311",
       "TEDS": 0.9375,
-      "TLAG": 0.381725,
+      "TLAG": 0.96999,
       "rd": 0.995455,
       "timing": 2.305967
     },
     {
       "filename": "english_sec_0313",
       "TEDS": 0.571429,
-      "TLAG": 0.833357,
+      "TLAG": 0.492781,
       "rd": 0.92517,
       "timing": 1.248444
     },
     {
       "filename": "english_sec_0315",
       "TEDS": 0.752294,
-      "TLAG": 0.327911,
+      "TLAG": 0.649337,
       "rd": 0.569358,
       "timing": 3.347065
     },
     {
       "filename": "english_sec_0319",
       "TEDS": 0.470588,
-      "TLAG": 0.842285,
+      "TLAG": 0.586223,
       "rd": 0.739575,
       "timing": 2.108265
     },
     {
       "filename": "english_sec_0320",
       "TEDS": 0.8,
-      "TLAG": 0.447811,
+      "TLAG": 0.974359,
       "rd": 0.931818,
       "timing": 1.793287
     },
     {
       "filename": "english_sec_0324",
       "TEDS": 0.824242,
-      "TLAG": 0.740743,
+      "TLAG": 0.813243,
       "rd": 0.493996,
       "timing": 2.976261
     },
     {
       "filename": "english_sec_0327",
       "TEDS": 1.0,
-      "TLAG": 0.805306,
+      "TLAG": 0.801442,
       "rd": 0.993277,
       "timing": 2.101805
     },
     {
       "filename": "english_sec_0328",
       "TEDS": 0.614583,
-      "TLAG": 0.650315,
+      "TLAG": 0.969072,
       "rd": 0.828155,
       "timing": 2.496973
     },
     {
       "filename": "english_sec_0329",
       "TEDS": 0.905405,
-      "TLAG": 0.725343,
+      "TLAG": 0.650315,
       "rd": 0.84828,
       "timing": 2.359017
     },
     {
       "filename": "english_sec_0331",
       "TEDS": 0.656716,
-      "TLAG": 0.898672,
+      "TLAG": 0.761313,
       "rd": 0.812916,
       "timing": 2.326375
     },
     {
       "filename": "english_sec_0332",
       "TEDS": 1.0,
-      "TLAG": 0.761313,
+      "TLAG": 0.842285,
       "rd": 1.0,
       "timing": 2.146665
     },
     {
       "filename": "english_sec_0333",
       "TEDS": 0.615385,
-      "TLAG": 0.649337,
+      "TLAG": 0.447811,
       "rd": 0.621413,
       "timing": 1.947604
     },
     {
       "filename": "english_sec_0335",
       "TEDS": 1.0,
-      "TLAG": 0.850769,
+      "TLAG": 0.740743,
       "rd": 0.985415,
       "timing": 1.943157
     },
     {
       "filename": "english_sec_0336",
       "TEDS": 0.788462,
-      "TLAG": 0.835096,
+      "TLAG": 0.805306,
       "rd": 0.821549,
       "timing": 1.686561
     },
     {
       "filename": "english_sec_0338",
       "TEDS": 0.844828,
-      "TLAG": 0.969072,
+      "TLAG": 0.898672,
       "rd": 0.840909,
       "timing": 2.126925
     },
     {
       "filename": "english_sec_0339",
       "TEDS": 0.918919,
-      "TLAG": 0.000012,
+      "TLAG": 0.725343,
       "rd": 0.896589,
       "timing": 3.376839
     },
     {
       "filename": "english_sec_0342",
       "TEDS": 0.631229,
-      "TLAG": 0.801507,
+      "TLAG": 0.805651,
       "rd": 0.65791,
       "timing": 4.593134
     },
     {
       "filename": "english_sec_0343",
       "TEDS": 0.846154,
-      "TLAG": 0.819566,
+      "TLAG": 0.229937,
       "rd": 0.63149,
       "timing": 3.208904
     },
     {
       "filename": "english_sec_0345",
       "TEDS": 0.75,
-      "TLAG": 0.229937,
+      "TLAG": 0.850769,
       "rd": 0.941111,
       "timing": 2.068696
     },
@@ -2500,343 +2501,343 @@
     {
       "filename": "english_sec_0347",
       "TEDS": 0.941176,
-      "TLAG": 0.8004,
+      "TLAG": 0.835096,
       "rd": 1.0,
       "timing": 1.682713
     },
     {
       "filename": "english_sec_0349",
       "TEDS": 0.084746,
-      "TLAG": 0.702254,
+      "TLAG": 0.000012,
       "rd": 0.458333,
       "timing": 2.511372
     },
     {
       "filename": "english_sec_0350",
       "TEDS": 0.571429,
-      "TLAG": 0.813243,
+      "TLAG": 0.819566,
       "rd": 0.71844,
       "timing": 1.989861
     },
     {
       "filename": "english_sec_0351",
       "TEDS": 0.692308,
-      "TLAG": 0.704064,
+      "TLAG": 0.801507,
       "rd": 0.992168,
       "timing": 1.556613
     },
     {
       "filename": "english_sec_0352",
       "TEDS": 0.36,
-      "TLAG": 0.641293,
+      "TLAG": 0.8004,
       "rd": 0.703786,
       "timing": 1.735659
     },
     {
       "filename": "english_sec_0353",
       "TEDS": 0.361446,
-      "TLAG": 0.965116,
+      "TLAG": 0.641293,
       "rd": 0.681825,
       "timing": 2.979104
     },
     {
       "filename": "english_sec_0354",
       "TEDS": 0.766129,
-      "TLAG": 0.985507,
+      "TLAG": 0.937649,
       "rd": 0.832503,
       "timing": 3.226715
     },
     {
       "filename": "english_sec_0355",
       "TEDS": 1.0,
-      "TLAG": 0.793194,
+      "TLAG": 0.965116,
       "rd": 0.982906,
       "timing": 2.285046
     },
     {
       "filename": "english_sec_0357",
       "TEDS": 0.564103,
-      "TLAG": 0.526316,
+      "TLAG": 0.702254,
       "rd": 0.853378,
       "timing": 1.954659
     },
     {
       "filename": "english_sec_0359",
       "TEDS": 0.36,
-      "TLAG": 0.773889,
+      "TLAG": 0.56055,
       "rd": 0.735588,
       "timing": 2.092641
     },
     {
       "filename": "english_sec_0360",
       "TEDS": 0.606061,
-      "TLAG": 0.56138,
+      "TLAG": 0.704064,
       "rd": 0.899858,
       "timing": 2.889495
     },
     {
       "filename": "english_sec_0362",
       "TEDS": 0.675676,
-      "TLAG": 0.980637,
+      "TLAG": 0.985507,
       "rd": 1.0,
       "timing": 4.291587
     },
     {
       "filename": "english_sec_0363",
       "TEDS": 0.882353,
-      "TLAG": 0.56055,
+      "TLAG": 0.793194,
       "rd": 0.934375,
       "timing": 1.897299
     },
     {
       "filename": "english_sec_0365",
       "TEDS": 0.977273,
-      "TLAG": 0.72748,
+      "TLAG": 0.980637,
       "rd": 1.0,
       "timing": 1.765955
     },
     {
       "filename": "english_sec_0366",
       "TEDS": 0.638889,
-      "TLAG": 0.428572,
+      "TLAG": 0.773889,
       "rd": 0.790815,
       "timing": 1.820966
     },
     {
       "filename": "english_sec_0369",
       "TEDS": 0.458333,
-      "TLAG": 0.784429,
+      "TLAG": 0.526316,
       "rd": 0.678571,
       "timing": 1.841533
     },
     {
       "filename": "english_sec_0370",
       "TEDS": 0.961538,
-      "TLAG": 0.49493,
+      "TLAG": 0.784429,
       "rd": 0.985337,
       "timing": 6.100489
     },
     {
       "filename": "english_sec_0372",
       "TEDS": 0.604167,
-      "TLAG": 0.775828,
+      "TLAG": 0.56138,
       "rd": 0.723443,
       "timing": 2.282123
     },
     {
       "filename": "english_sec_0373",
       "TEDS": 0.681818,
-      "TLAG": 0.0,
+      "TLAG": 0.72748,
       "rd": 0.704545,
       "timing": 2.139349
     },
     {
       "filename": "english_sec_0374",
       "TEDS": 0.466667,
-      "TLAG": 1.0,
+      "TLAG": 0.428572,
       "rd": 0.707792,
       "timing": 1.368649
     },
     {
       "filename": "english_sec_0375",
       "TEDS": 0.608696,
-      "TLAG": 0.742263,
+      "TLAG": 0.49493,
       "rd": 0.976452,
       "timing": 1.534331
     },
     {
       "filename": "english_sec_0379",
       "TEDS": 0.6875,
-      "TLAG": 0.862989,
+      "TLAG": 0.742263,
       "rd": 0.833929,
       "timing": 1.899539
     },
     {
       "filename": "english_sec_0381",
       "TEDS": 0.944444,
-      "TLAG": 0.579038,
+      "TLAG": 0.775828,
       "rd": 0.981132,
       "timing": 2.006914
     },
     {
       "filename": "english_sec_0383",
       "TEDS": 0.52381,
-      "TLAG": 0.599473,
+      "TLAG": 0.380933,
       "rd": 0.270143,
       "timing": 3.667302
     },
     {
       "filename": "english_sec_0386",
       "TEDS": 0.073171,
-      "TLAG": 0.937649,
+      "TLAG": 0.0,
       "rd": 0.0625,
       "timing": 2.399965
     },
     {
       "filename": "english_sec_0388",
       "TEDS": 0.916667,
-      "TLAG": 0.462474,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.92565
     },
     {
       "filename": "english_sec_0390",
       "TEDS": 0.775,
-      "TLAG": 0.926138,
+      "TLAG": 0.81451,
       "rd": 0.593947,
       "timing": 3.619591
     },
     {
       "filename": "english_sec_0392",
       "TEDS": 0.736842,
-      "TLAG": 0.685589,
+      "TLAG": 0.862989,
       "rd": 0.9375,
       "timing": 5.27025
     },
     {
       "filename": "english_sec_0394",
       "TEDS": 0.733945,
-      "TLAG": 0.734694,
+      "TLAG": 0.926138,
       "rd": 0.764281,
       "timing": 2.317972
     },
     {
       "filename": "english_sec_0396",
       "TEDS": 0.431818,
-      "TLAG": 0.992669,
+      "TLAG": 0.579038,
       "rd": 0.725,
       "timing": 1.501731
     },
     {
       "filename": "english_sec_0397",
       "TEDS": 0.411765,
-      "TLAG": 0.769351,
+      "TLAG": 0.599473,
       "rd": 0.710559,
       "timing": 1.802658
     },
     {
       "filename": "english_sec_0398",
       "TEDS": 0.876777,
-      "TLAG": 0.511876,
+      "TLAG": 0.191429,
       "rd": 0.437037,
       "timing": 2.87977
     },
     {
       "filename": "english_sec_0405",
       "TEDS": 0.747253,
-      "TLAG": 0.709364,
+      "TLAG": 0.462474,
       "rd": 0.593706,
       "timing": 2.588386
     },
     {
       "filename": "english_sec_0406",
       "TEDS": 0.452555,
-      "TLAG": 0.90174,
+      "TLAG": 0.670708,
       "rd": 0.783674,
       "timing": 5.124725
     },
     {
       "filename": "english_sec_0407",
       "TEDS": 0.653846,
-      "TLAG": 0.889188,
+      "TLAG": 0.685589,
       "rd": 0.888095,
       "timing": 1.317624
     },
     {
       "filename": "english_sec_0409",
       "TEDS": 0.972973,
-      "TLAG": 1.0,
+      "TLAG": 0.734694,
       "rd": 0.854545,
       "timing": 2.169397
     },
     {
       "filename": "english_sec_0412",
       "TEDS": 0.983051,
-      "TLAG": 0.989247,
+      "TLAG": 0.992669,
       "rd": 0.999633,
       "timing": 3.013873
     },
     {
       "filename": "english_sec_0413",
       "TEDS": 0.97619,
-      "TLAG": 0.670708,
+      "TLAG": 0.769351,
       "rd": 0.894444,
       "timing": 1.777541
     },
     {
       "filename": "english_sec_0415",
       "TEDS": 0.928571,
-      "TLAG": 0.805195,
+      "TLAG": 0.511876,
       "rd": 0.873457,
       "timing": 2.157553
     },
     {
       "filename": "english_sec_0417",
       "TEDS": 0.712766,
-      "TLAG": 0.878534,
+      "TLAG": 0.709364,
       "rd": 0.74375,
       "timing": 2.328964
     },
     {
       "filename": "english_sec_0422",
       "TEDS": 0.96875,
-      "TLAG": 0.803183,
+      "TLAG": 0.90174,
       "rd": 0.849647,
       "timing": 1.697596
     },
     {
       "filename": "english_sec_0424",
       "TEDS": 0.814815,
-      "TLAG": 0.977689,
+      "TLAG": 0.889188,
       "rd": 0.854329,
       "timing": 3.088113
     },
     {
       "filename": "english_sec_0425",
       "TEDS": 0.96875,
-      "TLAG": 0.895105,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.513576
     },
     {
       "filename": "english_sec_0426",
       "TEDS": 0.66,
-      "TLAG": 0.982678,
+      "TLAG": 0.989247,
       "rd": 1.0,
       "timing": 2.685947
     },
     {
       "filename": "english_sec_0427",
       "TEDS": 0.982759,
-      "TLAG": 0.847458,
+      "TLAG": 0.878534,
       "rd": 0.954545,
       "timing": 2.186985
     },
     {
       "filename": "english_sec_0429",
       "TEDS": 0.666667,
-      "TLAG": 0.923077,
+      "TLAG": 0.805195,
       "rd": 0.944444,
       "timing": 2.214172
     },
     {
       "filename": "english_sec_0430",
       "TEDS": 0.673077,
-      "TLAG": 0.528352,
+      "TLAG": 0.895105,
       "rd": 0.827,
       "timing": 1.737595
     },
     {
       "filename": "english_sec_0433",
       "TEDS": 0.692308,
-      "TLAG": 0.586365,
+      "TLAG": 0.803183,
       "rd": 0.964286,
       "timing": 2.237209
     },
     {
       "filename": "english_sec_0434",
       "TEDS": 0.961538,
-      "TLAG": 0.805651,
+      "TLAG": 0.977689,
       "rd": 0.996875,
       "timing": 1.927854
     },
@@ -2850,315 +2851,315 @@
     {
       "filename": "english_sec_0437",
       "TEDS": 1.0,
-      "TLAG": 1.0,
+      "TLAG": 0.982678,
       "rd": 0.999551,
       "timing": 4.710899
     },
     {
       "filename": "english_sec_0438",
       "TEDS": 0.740741,
-      "TLAG": 0.81451,
+      "TLAG": 0.847458,
       "rd": 0.914247,
       "timing": 1.970569
     },
     {
       "filename": "english_sec_0439",
       "TEDS": 0.826087,
-      "TLAG": 0.586734,
+      "TLAG": 0.923077,
       "rd": 0.962354,
       "timing": 1.541476
     },
     {
       "filename": "english_sec_0443",
       "TEDS": 0.534884,
-      "TLAG": 0.628328,
+      "TLAG": 0.528352,
       "rd": 0.941071,
       "timing": 1.848011
     },
     {
       "filename": "english_sec_0444",
       "TEDS": 0.488372,
-      "TLAG": 0.985507,
+      "TLAG": 0.586365,
       "rd": 0.966952,
       "timing": 2.19886
     },
     {
       "filename": "english_sec_0445",
       "TEDS": 0.603053,
-      "TLAG": 0.094404,
+      "TLAG": 0.855892,
       "rd": 0.572727,
       "timing": 3.342389
     },
     {
       "filename": "english_sec_0446",
       "TEDS": 0.798165,
-      "TLAG": 0.824364,
+      "TLAG": 0.88435,
       "rd": 0.897959,
       "timing": 2.447244
     },
     {
       "filename": "english_sec_0447",
       "TEDS": 0.982143,
-      "TLAG": 0.01036,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 2.248158
     },
     {
       "filename": "english_sec_0448",
       "TEDS": 0.675676,
-      "TLAG": 0.35216,
+      "TLAG": 0.985507,
       "rd": 1.0,
       "timing": 4.176121
     },
     {
       "filename": "english_sec_0449",
       "TEDS": 1.0,
-      "TLAG": 0.461554,
+      "TLAG": 0.586734,
       "rd": 0.969308,
       "timing": 3.054785
     },
     {
       "filename": "english_sec_0451",
       "TEDS": 0.611111,
-      "TLAG": 0.000489,
+      "TLAG": 0.628328,
       "rd": 0.862037,
       "timing": 2.167689
     },
     {
       "filename": "english_sec_0453",
       "TEDS": 0.833333,
-      "TLAG": 0.88435,
+      "TLAG": 0.824364,
       "rd": 0.895247,
       "timing": 2.534784
     },
     {
       "filename": "english_sec_0454",
       "TEDS": 0.576923,
-      "TLAG": 0.797314,
+      "TLAG": 0.094404,
       "rd": 0.703819,
       "timing": 1.684836
     },
     {
       "filename": "english_sec_0455",
       "TEDS": 0.212766,
-      "TLAG": 0.855892,
+      "TLAG": 0.01036,
       "rd": 0.624691,
       "timing": 2.279564
     },
     {
       "filename": "english_sec_0457",
       "TEDS": 0.48,
-      "TLAG": 1.0,
+      "TLAG": 0.35216,
       "rd": 0.963188,
       "timing": 2.045515
     },
     {
       "filename": "english_sec_0458",
       "TEDS": 0.576923,
-      "TLAG": 0.565593,
+      "TLAG": 0.461554,
       "rd": 0.728836,
       "timing": 2.106448
     },
     {
       "filename": "english_sec_0459",
       "TEDS": 0.988372,
-      "TLAG": 0.386243,
+      "TLAG": 0.926833,
       "rd": 0.997399,
       "timing": 2.454851
     },
     {
       "filename": "english_sec_0461",
       "TEDS": 0.9,
-      "TLAG": 0.775062,
+      "TLAG": 0.000489,
       "rd": 0.625,
       "timing": 1.137199
     },
     {
       "filename": "english_sec_0462",
       "TEDS": 0.680412,
-      "TLAG": 0.828684,
+      "TLAG": 0.565593,
       "rd": 0.797896,
       "timing": 2.733819
     },
     {
       "filename": "english_sec_0465",
       "TEDS": 0.657534,
-      "TLAG": 0.852952,
+      "TLAG": 0.862841,
       "rd": 0.702225,
       "timing": 3.187371
     },
     {
       "filename": "english_sec_0467",
       "TEDS": 0.733333,
-      "TLAG": 0.927111,
+      "TLAG": 0.386243,
       "rd": 0.666667,
       "timing": 1.756408
     },
     {
       "filename": "english_sec_0469",
       "TEDS": 1.0,
-      "TLAG": 0.919015,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.485529
     },
     {
       "filename": "english_sec_0471",
       "TEDS": 0.647059,
-      "TLAG": 0.384615,
+      "TLAG": 0.927111,
       "rd": 0.794805,
       "timing": 2.069511
     },
     {
       "filename": "english_sec_0472",
       "TEDS": 0.756757,
-      "TLAG": 0.992296,
+      "TLAG": 0.828684,
       "rd": 0.832692,
       "timing": 2.675751
     },
     {
       "filename": "english_sec_0473",
       "TEDS": 1.0,
-      "TLAG": 0.926833,
+      "TLAG": 0.775062,
       "rd": 0.99073,
       "timing": 1.648737
     },
     {
       "filename": "english_sec_0474",
       "TEDS": 0.741935,
-      "TLAG": 0.243253,
+      "TLAG": 0.852952,
       "rd": 0.97551,
       "timing": 2.742387
     },
     {
       "filename": "english_sec_0477",
       "TEDS": 0.859649,
-      "TLAG": 0.980209,
+      "TLAG": 0.919015,
       "rd": 0.727273,
       "timing": 1.998421
     },
     {
       "filename": "english_sec_0478",
       "TEDS": 0.534884,
-      "TLAG": 0.191429,
+      "TLAG": 0.243253,
       "rd": 0.691105,
       "timing": 2.48689
     },
     {
       "filename": "english_sec_0479",
       "TEDS": 0.982759,
-      "TLAG": 0.687118,
+      "TLAG": 0.980209,
       "rd": 0.885027,
       "timing": 2.215657
     },
     {
       "filename": "english_sec_0481",
       "TEDS": 0.941176,
-      "TLAG": 0.92118,
+      "TLAG": 0.384615,
       "rd": 0.771429,
       "timing": 2.161616
     },
     {
       "filename": "english_sec_0482",
       "TEDS": 1.0,
-      "TLAG": 0.755277,
+      "TLAG": 0.992296,
       "rd": 0.999651,
       "timing": 3.50932
     },
     {
       "filename": "english_sec_0484",
       "TEDS": 0.953704,
-      "TLAG": 0.914114,
+      "TLAG": 0.972849,
       "rd": 0.977315,
       "timing": 2.993654
     },
     {
       "filename": "english_sec_0485",
       "TEDS": 0.450704,
-      "TLAG": 0.863951,
+      "TLAG": 0.328417,
       "rd": 0.38656,
       "timing": 3.313643
     },
     {
       "filename": "english_sec_0489",
       "TEDS": 0.981481,
-      "TLAG": 0.935258,
+      "TLAG": 0.991756,
       "rd": 1.0,
       "timing": 2.096868
     },
     {
       "filename": "english_sec_0493",
       "TEDS": 0.586207,
-      "TLAG": 0.664186,
+      "TLAG": 0.687118,
       "rd": 0.902466,
       "timing": 1.567255
     },
     {
       "filename": "english_sec_0494",
       "TEDS": 0.878049,
-      "TLAG": 0.702861,
+      "TLAG": 0.914114,
       "rd": 0.931136,
       "timing": 1.7161
     },
     {
       "filename": "english_sec_0496",
       "TEDS": 0.962963,
-      "TLAG": 0.862841,
+      "TLAG": 0.92118,
       "rd": 0.907216,
       "timing": 2.191369
     },
     {
       "filename": "english_sec_0497",
       "TEDS": 0.825,
-      "TLAG": 0.991756,
+      "TLAG": 0.755277,
       "rd": 0.836557,
       "timing": 2.228239
     },
     {
       "filename": "english_sec_0498",
       "TEDS": 0.66,
-      "TLAG": 0.824332,
+      "TLAG": 0.935258,
       "rd": 0.879167,
       "timing": 2.001483
     },
     {
       "filename": "english_sec_0501",
       "TEDS": 0.916667,
-      "TLAG": 0.590416,
+      "TLAG": 0.863951,
       "rd": 1.0,
       "timing": 2.314114
     },
     {
       "filename": "english_sec_0502",
       "TEDS": 0.706667,
-      "TLAG": 0.911483,
+      "TLAG": 0.437615,
       "rd": 0.583333,
       "timing": 2.118677
     },
     {
       "filename": "english_sec_0504",
       "TEDS": 0.666667,
-      "TLAG": 0.302583,
+      "TLAG": 0.664186,
       "rd": 0.940741,
       "timing": 1.423205
     },
     {
       "filename": "english_sec_0505",
       "TEDS": 0.65,
-      "TLAG": 0.949534,
+      "TLAG": 0.702861,
       "rd": 0.939694,
       "timing": 2.909951
     },
     {
       "filename": "english_sec_0506",
       "TEDS": 0.45283,
-      "TLAG": 0.701381,
+      "TLAG": 0.056548,
       "rd": 0.527981,
       "timing": 1.858379
     },
     {
       "filename": "english_sec_0507",
       "TEDS": 0.944444,
-      "TLAG": 0.056548,
+      "TLAG": 0.824332,
       "rd": 0.992221,
       "timing": 2.398568
     },
@@ -3172,105 +3173,105 @@
     {
       "filename": "english_sec_0512",
       "TEDS": 0.666667,
-      "TLAG": 0.86846,
+      "TLAG": 0.590416,
       "rd": 0.920635,
       "timing": 1.638353
     },
     {
       "filename": "english_sec_0513",
       "TEDS": 0.95,
-      "TLAG": 0.437615,
+      "TLAG": 0.911483,
       "rd": 0.993939,
       "timing": 2.144538
     },
     {
       "filename": "english_sec_0514",
       "TEDS": 0.35,
-      "TLAG": 0.677373,
+      "TLAG": 0.302583,
       "rd": 0.682016,
       "timing": 2.02516
     },
     {
       "filename": "english_sec_0516",
       "TEDS": 0.941176,
-      "TLAG": 0.972849,
+      "TLAG": 0.949534,
       "rd": 0.99537,
       "timing": 2.071395
     },
     {
       "filename": "english_sec_0517",
       "TEDS": 0.529412,
-      "TLAG": 0.979763,
+      "TLAG": 0.701381,
       "rd": 0.866667,
       "timing": 2.144279
     },
     {
       "filename": "english_sec_0518",
       "TEDS": 0.557692,
-      "TLAG": 0.488346,
+      "TLAG": 0.677373,
       "rd": 0.894452,
       "timing": 3.319787
     },
     {
       "filename": "english_sec_0519",
       "TEDS": 0.719626,
-      "TLAG": 0.908022,
+      "TLAG": 0.794027,
       "rd": 0.738777,
       "timing": 2.709877
     },
     {
       "filename": "english_sec_0520",
       "TEDS": 0.928571,
-      "TLAG": 0.794027,
+      "TLAG": 0.86846,
       "rd": 1.0,
       "timing": 2.193717
     },
     {
       "filename": "english_sec_0523",
       "TEDS": 0.977273,
-      "TLAG": 0.776494,
+      "TLAG": 0.979763,
       "rd": 0.997669,
       "timing": 1.765843
     },
     {
       "filename": "english_sec_0524",
       "TEDS": 0.793103,
-      "TLAG": 0.347825,
+      "TLAG": 0.908022,
       "rd": 0.784473,
       "timing": 2.241027
     },
     {
       "filename": "english_sec_0525",
       "TEDS": 0.555556,
-      "TLAG": 0.021169,
+      "TLAG": 0.488346,
       "rd": 0.528665,
       "timing": 2.208097
     },
     {
       "filename": "english_sec_0526",
       "TEDS": 0.425926,
-      "TLAG": 0.73042,
+      "TLAG": 0.776494,
       "rd": 0.78385,
       "timing": 3.071106
     },
     {
       "filename": "english_sec_0528",
       "TEDS": 0.69697,
-      "TLAG": 0.7658,
+      "TLAG": 0.789132,
       "rd": 0.878429,
       "timing": 2.566802
     },
     {
       "filename": "english_sec_0530",
       "TEDS": 0.571429,
-      "TLAG": 0.380933,
+      "TLAG": 0.7658,
       "rd": 0.774019,
       "timing": 2.782898
     },
     {
       "filename": "english_sec_0531",
       "TEDS": 0.573643,
-      "TLAG": 0.60435,
+      "TLAG": 0.640394,
       "rd": 0.530292,
       "timing": 3.011552
     },
@@ -3284,441 +3285,441 @@
     {
       "filename": "english_sec_0534",
       "TEDS": 0.608696,
-      "TLAG": 0.789132,
+      "TLAG": 0.347825,
       "rd": 0.784643,
       "timing": 1.683381
     },
     {
       "filename": "english_sec_0535",
       "TEDS": 0.264706,
-      "TLAG": 0.695652,
+      "TLAG": 0.021169,
       "rd": 0.778879,
       "timing": 1.863977
     },
     {
       "filename": "english_sec_0537",
       "TEDS": 0.6,
-      "TLAG": 0.122013,
+      "TLAG": 0.73042,
       "rd": 0.725,
       "timing": 1.901046
     },
     {
       "filename": "english_sec_0538",
       "TEDS": 0.516667,
-      "TLAG": 0.021338,
+      "TLAG": 0.122013,
       "rd": 0.531751,
       "timing": 2.612068
     },
     {
       "filename": "english_sec_0539",
       "TEDS": 0.645161,
-      "TLAG": 0.955475,
+      "TLAG": 0.60435,
       "rd": 0.870356,
       "timing": 1.871616
     },
     {
       "filename": "english_sec_0540",
       "TEDS": 0.567164,
-      "TLAG": 0.955475,
+      "TLAG": 0.564015,
       "rd": 0.788889,
       "timing": 2.11751
     },
     {
       "filename": "english_sec_0541",
       "TEDS": 0.374732,
-      "TLAG": 0.111388,
+      "TLAG": 0.483481,
       "rd": 0.356618,
       "timing": 4.002089
     },
     {
       "filename": "english_sec_0542",
       "TEDS": 0.733333,
-      "TLAG": 0.516549,
+      "TLAG": 0.695652,
       "rd": 1.0,
       "timing": 1.388275
     },
     {
       "filename": "english_sec_0545",
       "TEDS": 0.78125,
-      "TLAG": 0.564015,
+      "TLAG": 0.955475,
       "rd": 0.888889,
       "timing": 2.573085
     },
     {
       "filename": "english_sec_0546",
       "TEDS": 0.875706,
-      "TLAG": 0.222827,
+      "TLAG": 0.912988,
       "rd": 0.688386,
       "timing": 3.693734
     },
     {
       "filename": "english_sec_0547",
       "TEDS": 0.9375,
-      "TLAG": 0.837209,
+      "TLAG": 0.021338,
       "rd": 0.692989,
       "timing": 1.259776
     },
     {
       "filename": "english_sec_0548",
       "TEDS": 0.78125,
-      "TLAG": 0.013731,
+      "TLAG": 0.955475,
       "rd": 0.888889,
       "timing": 2.626432
     },
     {
       "filename": "english_sec_0549",
       "TEDS": 0.631579,
-      "TLAG": 0.919536,
+      "TLAG": 0.111388,
       "rd": 0.587765,
       "timing": 1.76539
     },
     {
       "filename": "english_sec_0550",
       "TEDS": 0.926829,
-      "TLAG": 0.833836,
+      "TLAG": 0.857454,
       "rd": 0.96987,
       "timing": 1.842246
     },
     {
       "filename": "english_sec_0551",
       "TEDS": 0.617647,
-      "TLAG": 1.0,
+      "TLAG": 0.516549,
       "rd": 0.955408,
       "timing": 2.41918
     },
     {
       "filename": "english_sec_0552",
       "TEDS": 0.928571,
-      "TLAG": 0.857454,
+      "TLAG": 0.222827,
       "rd": 0.814915,
       "timing": 1.619382
     },
     {
       "filename": "english_sec_0553",
       "TEDS": 0.214286,
-      "TLAG": 0.664916,
+      "TLAG": 0.013731,
       "rd": 0.779287,
       "timing": 2.205907
     },
     {
       "filename": "english_sec_0554",
       "TEDS": 0.478261,
-      "TLAG": 0.096674,
+      "TLAG": 0.837209,
       "rd": 0.979592,
       "timing": 1.528274
     },
     {
       "filename": "english_sec_0555",
       "TEDS": 0.95,
-      "TLAG": 0.846214,
+      "TLAG": 0.919536,
       "rd": 0.999448,
       "timing": 2.581784
     },
     {
       "filename": "english_sec_0557",
       "TEDS": 0.754386,
-      "TLAG": 0.115274,
+      "TLAG": 0.799549,
       "rd": 0.823864,
       "timing": 2.136258
     },
     {
       "filename": "english_sec_0559",
       "TEDS": 0.884615,
-      "TLAG": 0.799549,
+      "TLAG": 0.833836,
       "rd": 0.863616,
       "timing": 2.043047
     },
     {
       "filename": "english_sec_0560",
       "TEDS": 1.0,
-      "TLAG": 0.302928,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.71333
     },
     {
       "filename": "english_sec_0561",
       "TEDS": 0.78125,
-      "TLAG": 0.94382,
+      "TLAG": 0.664916,
       "rd": 0.875,
       "timing": 1.500498
     },
     {
       "filename": "english_sec_0562",
       "TEDS": 0.743119,
-      "TLAG": 0.869565,
+      "TLAG": 0.851213,
       "rd": 0.726531,
       "timing": 2.264465
     },
     {
       "filename": "english_sec_0563",
       "TEDS": 0.141844,
-      "TLAG": 0.819414,
+      "TLAG": 0.096674,
       "rd": 0.731159,
       "timing": 2.779335
     },
     {
       "filename": "english_sec_0564",
       "TEDS": 0.941176,
-      "TLAG": 1.0,
+      "TLAG": 0.846214,
       "rd": 0.961905,
       "timing": 3.18582
     },
     {
       "filename": "english_sec_0565",
       "TEDS": 0.833333,
-      "TLAG": 0.984366,
+      "TLAG": 0.115274,
       "rd": 0.731996,
       "timing": 1.638211
     },
     {
       "filename": "english_sec_0567",
       "TEDS": 0.913043,
-      "TLAG": 0.328417,
+      "TLAG": 0.94382,
       "rd": 0.912698,
       "timing": 2.580156
     },
     {
       "filename": "english_sec_0570",
       "TEDS": 0.75,
-      "TLAG": 0.905406,
+      "TLAG": 0.302928,
       "rd": 0.609447,
       "timing": 1.992418
     },
     {
       "filename": "english_sec_0571",
       "TEDS": 0.641026,
-      "TLAG": 0.718349,
+      "TLAG": 0.819414,
       "rd": 0.870916,
       "timing": 2.3334
     },
     {
       "filename": "english_sec_0573",
       "TEDS": 0.5,
-      "TLAG": 0.888462,
+      "TLAG": 0.869565,
       "rd": 1.0,
       "timing": 1.509055
     },
     {
       "filename": "english_sec_0574",
       "TEDS": 0.9875,
-      "TLAG": 0.616873,
+      "TLAG": 0.905406,
       "rd": 0.997979,
       "timing": 3.587754
     },
     {
       "filename": "english_sec_0575",
       "TEDS": 1.0,
-      "TLAG": 0.942343,
+      "TLAG": 1.0,
       "rd": 1.0,
       "timing": 1.645995
     },
     {
       "filename": "english_sec_0578",
       "TEDS": 0.972973,
-      "TLAG": 0.841492,
+      "TLAG": 0.984366,
       "rd": 0.998485,
       "timing": 2.0914
     },
     {
       "filename": "english_sec_0580",
       "TEDS": 0.409091,
-      "TLAG": 0.958186,
+      "TLAG": 0.718349,
       "rd": 0.90625,
       "timing": 6.685315
     },
     {
       "filename": "english_sec_0582",
       "TEDS": 0.570513,
-      "TLAG": 0.000109,
+      "TLAG": 0.618838,
       "rd": 0.534874,
       "timing": 2.911073
     },
     {
       "filename": "english_sec_0583",
       "TEDS": 0.676471,
-      "TLAG": 0.640394,
+      "TLAG": 0.616873,
       "rd": 0.672727,
       "timing": 2.091822
     },
     {
       "filename": "english_sec_0585",
       "TEDS": 0.730769,
-      "TLAG": 0.869775,
+      "TLAG": 0.888462,
       "rd": 0.891071,
       "timing": 1.619991
     },
     {
       "filename": "english_sec_0586",
       "TEDS": 0.972973,
-      "TLAG": 0.012135,
+      "TLAG": 0.942343,
       "rd": 0.996277,
       "timing": 2.254048
     },
     {
       "filename": "english_sec_0588",
       "TEDS": 0.961538,
-      "TLAG": 0.854318,
+      "TLAG": 0.841492,
       "rd": 0.991351,
       "timing": 1.736396
     },
     {
       "filename": "english_sec_0590",
       "TEDS": 0.972973,
-      "TLAG": 0.741935,
+      "TLAG": 0.958186,
       "rd": 1.0,
       "timing": 2.00362
     },
     {
       "filename": "english_sec_0591",
       "TEDS": 0.862069,
-      "TLAG": 0.841492,
+      "TLAG": 0.869775,
       "rd": 0.75875,
       "timing": 1.886073
     },
     {
       "filename": "english_sec_0592",
       "TEDS": 0.416667,
-      "TLAG": 0.851213,
+      "TLAG": 0.000109,
       "rd": 0.406569,
       "timing": 1.465398
     },
     {
       "filename": "english_sec_0593",
       "TEDS": 0.927536,
-      "TLAG": 0.021027,
+      "TLAG": 0.053804,
       "rd": 0.719769,
       "timing": 5.001387
     },
     {
       "filename": "english_sec_0594",
       "TEDS": 1.0,
-      "TLAG": 0.664894,
+      "TLAG": 0.854318,
       "rd": 0.997058,
       "timing": 2.05219
     },
     {
       "filename": "english_sec_0597",
       "TEDS": 0.264706,
-      "TLAG": 0.784117,
+      "TLAG": 0.012135,
       "rd": 0.777778,
       "timing": 1.912614
     },
     {
       "filename": "english_sec_0598",
       "TEDS": 0.835443,
-      "TLAG": 0.036364,
+      "TLAG": 0.788624,
       "rd": 0.905616,
       "timing": 2.748284
     },
     {
       "filename": "english_sec_0599",
       "TEDS": 0.758621,
-      "TLAG": 0.112829,
+      "TLAG": 0.741935,
       "rd": 0.886243,
       "timing": 1.912902
     },
     {
       "filename": "english_sec_0601",
       "TEDS": 0.961538,
-      "TLAG": 0.788624,
+      "TLAG": 0.841492,
       "rd": 0.991351,
       "timing": 1.718134
     },
     {
       "filename": "english_sec_0603",
       "TEDS": 0.852941,
-      "TLAG": 0.912988,
+      "TLAG": 0.664894,
       "rd": 0.955408,
       "timing": 2.388353
     },
     {
       "filename": "english_sec_0604",
       "TEDS": 0.542857,
-      "TLAG": 0.061085,
+      "TLAG": 0.784117,
       "rd": 0.982189,
       "timing": 2.094659
     },
     {
       "filename": "english_sec_0605",
       "TEDS": 0.470588,
-      "TLAG": 0.724854,
+      "TLAG": 0.66334,
       "rd": 0.691827,
       "timing": 2.558045
     },
     {
       "filename": "english_sec_0607",
       "TEDS": 0.063636,
-      "TLAG": 0.055117,
+      "TLAG": 0.036364,
       "rd": 0.861806,
       "timing": 4.923681
     },
     {
       "filename": "english_sec_0608",
       "TEDS": 0.730159,
-      "TLAG": 0.51656,
+      "TLAG": 0.811621,
       "rd": 0.508712,
       "timing": 5.622893
     },
     {
       "filename": "english_sec_0610",
       "TEDS": 0.459459,
-      "TLAG": 0.915096,
+      "TLAG": 0.112829,
       "rd": 0.189394,
       "timing": 1.542694
     },
     {
       "filename": "english_sec_0611",
       "TEDS": 0.576923,
-      "TLAG": 0.814383,
+      "TLAG": 0.51656,
       "rd": 0.761595,
       "timing": 1.654358
     },
     {
       "filename": "english_sec_0612",
       "TEDS": 0.754545,
-      "TLAG": 0.66334,
+      "TLAG": 0.907969,
       "rd": 0.68407,
       "timing": 2.30757
     },
     {
       "filename": "english_sec_0613",
       "TEDS": 0.3,
-      "TLAG": 0.742695,
+      "TLAG": 0.061085,
       "rd": 0.783088,
       "timing": 1.653309
     },
     {
       "filename": "english_sec_0614",
       "TEDS": 0.55,
-      "TLAG": 0.907969,
+      "TLAG": 0.724854,
       "rd": 0.914286,
       "timing": 1.402343
     },
     {
       "filename": "english_sec_0617",
       "TEDS": 0.454545,
-      "TLAG": 0.618838,
+      "TLAG": 0.055117,
       "rd": 0.62583,
       "timing": 1.557738
     },
     {
       "filename": "english_sec_0618",
       "TEDS": 0.861111,
-      "TLAG": 0.053804,
+      "TLAG": 0.915096,
       "rd": 1.0,
       "timing": 1.966577
     },
     {
       "filename": "english_sec_0621",
       "TEDS": 0.982759,
-      "TLAG": 0.811621,
+      "TLAG": 0.742695,
       "rd": 0.713462,
       "timing": 2.082135
     },
     {
       "filename": "english_sec_0624",
       "TEDS": 0.421053,
-      "TLAG": 0.483481,
+      "TLAG": 0.814383,
       "rd": 1.0,
       "timing": 2.027006
     },
