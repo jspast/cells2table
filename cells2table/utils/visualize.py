@@ -52,14 +52,14 @@ def visualize_table(
             color,
             thickness,
         )
+
         cv2.putText(
             img,
             f"{cell.row},{cell.col} : {cell.row_span},{cell.col_span}",
             (round(cell.bbox.l), round(cell.bbox.t) + 10),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.5,
             (128, 192, 0),
-            thickness,
+            cv2.FontFace("uni"),
+            14,
         )
 
     return img

@@ -17,7 +17,7 @@ classifiers = [
 dependencies = [
   "numpy (>=2.2.0,<3.0.0)",
   "onnxruntime (>=1.23.2,<2.0.0)",
-  "opencv-python (>=4.11.0.86,<5.0.0.0)",
+  "opencv-python (>=5.0.0.0,<6.0.0.0)",
 ]
 
 [project.urls]
