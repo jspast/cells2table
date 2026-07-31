@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, NamedTuple
+from typing import Any, ClassVar, NamedTuple
 
 from cells2table.models.tasks.base import BaseModel
 
@@ -14,7 +14,7 @@ class ClassificationResult(NamedTuple):
 class ClassificationModel(BaseModel, ABC):
     """Base interface for table classification models."""
 
-    classes: list[str]
+    classes: ClassVar[list[str]]
 
     @abstractmethod
     def __call__(self, input: Any) -> list[ClassificationResult]:

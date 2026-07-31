@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import Any, Iterable, Iterator, NamedTuple
+from collections.abc import Iterable, Iterator
+from typing import Any, ClassVar, NamedTuple
 
 import numpy as np
 
@@ -23,7 +24,7 @@ def filter_detections(
 class DetectionModel(BaseModel, ABC):
     """Base interface for detection models."""
 
-    classes: list[str] = []
+    classes: ClassVar[list[str]] = []
 
     @abstractmethod
     def __call__(

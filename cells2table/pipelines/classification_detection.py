@@ -1,7 +1,8 @@
 import logging
 from abc import ABC, abstractmethod
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 from cells2table.datamodels import Table
 from cells2table.models.tasks import ClassificationModel, DetectionModel
@@ -20,8 +21,6 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
     @abstractmethod
     def __init__(self, models_path: Path | str | None = None) -> None:
         """Initialize the models."""
-
-        pass
 
     def __call__(self, input: Iterable[Any], conf_threshold: float = 0.5, **kwargs) -> list[Table]:
         """Run the pipeline."""

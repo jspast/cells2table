@@ -1,7 +1,7 @@
 import os
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from pathlib import Path
-from typing import Annotated, ClassVar, Literal, Sequence, Type
+from typing import Annotated, ClassVar, Literal
 
 import numpy
 
@@ -59,9 +59,11 @@ def _match_texts(
         overlapping = []
         for cell_idx in sorted(spatial_index.intersection(bbox.as_tuple())):
             tc_bbox = cell_bboxes[cell_idx]
-            if tc_bbox.get_intersection_bbox(bbox) is not None:
-                if tc_bbox.intersection_over_self(bbox) > textcell_overlap:
-                    overlapping.append(text_cells[cell_idx].text.strip())
+            if (
+                tc_bbox.get_intersection_bbox(bbox) is not None
+                and tc_bbox.intersection_over_self(bbox) > textcell_overlap
+            ):
+                overlapping.append(text_cells[cell_idx].text.strip())
         matched_texts.append(" ".join(overlapping))
 
     return matched_texts
@@ -177,7 +179,7 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
             self.scale = 2.0  # Scale up table input images to 144 dpi
 
     @classmethod
-    def get_options_type(cls) -> Type[BaseTableStructureOptions]:
+    def get_options_type(cls) -> type[BaseTableStructureOptions]:
         return CustomDoclingTableStructureOptions
 
     def predict_tables(

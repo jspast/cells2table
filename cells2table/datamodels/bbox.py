@@ -8,7 +8,7 @@ from numpy.typing import NDArray
 
 @dataclass
 class BoundingBox:
-    l: float  # noqa: E741
+    l: float
     t: float
     r: float
     b: float
