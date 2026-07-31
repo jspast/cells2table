@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass, field
-from typing import Iterable
 
 from cells2table.datamodels import BoundingBox
 from cells2table.models.tasks import DetectionResult

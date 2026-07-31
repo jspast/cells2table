@@ -6,8 +6,8 @@ from .cell_detection import (
 from .table_classification import PaddlePaddleTableClassificationModel
 
 __all__ = [
-    PaddlePaddleCellDetectionModel,
-    PaddlePaddleWiredCellDetectionModel,
-    PaddlePaddleWirelessCellDetectionModel,
-    PaddlePaddleTableClassificationModel,
+    "PaddlePaddleCellDetectionModel",
+    "PaddlePaddleTableClassificationModel",
+    "PaddlePaddleWiredCellDetectionModel",
+    "PaddlePaddleWirelessCellDetectionModel",
 ]
