@@ -5,7 +5,7 @@ from pathlib import Path
 import cv2
 
 from cells2table.pipelines import DefaultPipeline
-from cells2table.utils.visualize import bgr_to_rgb, rgb_to_bgr, show_image, visualize_table
+from cells2table.utils.visualize import show_image, visualize_table
 
 logger = logging.getLogger(__name__)
 
@@ -43,8 +43,6 @@ def main() -> None:
     if image is None:
         raise ValueError(f"Failed to load image: {args.image_path}")
 
-    image = bgr_to_rgb(image)  # ty:ignore[invalid-argument-type]
-
     logger.info("Image loaded successfully from %s", args.image_path)
     logger.debug(
         "Image proprieties: width=%d, height=%d, channels=%d, datatype=%s",
@@ -58,7 +56,7 @@ def main() -> None:
     tables = table_pipeline([image])
 
     for table in tables:
-        show_image(visualize_table(rgb_to_bgr(image), table))
+        show_image(visualize_table(image, table))  # ty:ignore[invalid-argument-type]
 
 
 if __name__ == "__main__":
