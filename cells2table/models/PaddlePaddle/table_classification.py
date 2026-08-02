@@ -1,40 +1,122 @@
 import logging
-from typing import Iterable, Sequence
+from collections.abc import Iterable, Sequence
+from pathlib import Path
+from typing import ClassVar
 
 import cv2
 import numpy as np
 from numpy.typing import NDArray
 
 from cells2table.models.runtimes.onnx import OnnxModel
+from cells2table.models.runtimes.opencv import OpencvModel
 from cells2table.models.tasks import ClassificationModel, ClassificationResult
-from cells2table.utils.download import DownloadOptions, DownloadPlatform
+from cells2table.utils.download import DownloadOption, DownloadPlatform
+from cells2table.utils.inference import InferenceRuntime
 
 HF_REPO_ID = "jspast/paddlepaddle-table-models-onnx"
 
 logger = logging.getLogger(__name__)
 
 
-class PaddlePaddleTableClassificationModel(ClassificationModel, OnnxModel):
-    classes = ["wired", "wireless"]
+class PaddlePaddleTableClassificationModel(ClassificationModel, OnnxModel, OpencvModel):
+    classes: ClassVar[list[str]] = ["wired", "wireless"]
 
-    @classmethod
-    def get_onnx_path(cls) -> str:
-        return "table_cls.onnx"
+    _input_shape = (224, 224)
 
-    @classmethod
-    def get_download_options(cls) -> DownloadOptions:
-        return DownloadOptions(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, [cls.get_onnx_path()])
+    _onnx_path: ClassVar[str] = "table_cls.onnx"
+    _onnx_download_options: ClassVar[list[DownloadOption]] = [
+        DownloadOption(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, (_onnx_path,)),
+    ]
+    _onnx_input_names = ("x",)
+    _onnx_output_names = ("fetch_name_0",)
+
+    _default_runtime = InferenceRuntime.OPENCV
+
+    def __init__(
+        self,
+        runtime: InferenceRuntime = _default_runtime,
+        model_path: Path | str | None = None,
+    ) -> None:
+        match runtime:
+            case InferenceRuntime.ONNX:
+                self._onnx_init(model_path)
+                self._run_fn = self._onnx_run
+            case InferenceRuntime.OPENCV:
+                self._opencv_init(model_path)
+                self._run_fn = self._opencv_run
 
     def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
+        return self._run_fn(input)
+
+    def preprocess(self, input: Iterable[NDArray[np.uint8]]) -> NDArray:
+        """PP-LCNet image preprocessing pipeline.
+
+        Args:
+            input: iterable of HxWxC uint8 images (C=3, assumed BGR).
+
+        Output:
+            list of CxHxW float32 tensors (BGR order), normalized with PP-LCNet mean/std.
+        """
+        resize_short = 256  # shorter edge after resize
+        crop_size = 224  # center crop size
+
+        cropped_imgs: list[NDArray] = []
+
+        scalefactor = (
+            1.0 / (255.0 * 0.229),  # B
+            1.0 / (255.0 * 0.224),  # G
+            1.0 / (255.0 * 0.225),  # R
+        )
+        mean = (
+            0.485 * 255.0,  # B
+            0.456 * 255.0,  # G
+            0.406 * 255.0,  # R
+        )
+
+        params = cv2.dnn.Image2BlobParams(
+            scalefactor=scalefactor,
+            mean=mean,
+            swapRB=False,
+            ddepth=cv2.CV_32F,
+            datalayout=cv2.DNN_LAYOUT_NCHW,
+        )
+
+        for img in input:
+            # Validate and coerce to expected dtype/layout (HWC, uint8, 3 channels)
+            if img.ndim != 3 or img.shape[2] != 3:
+                raise ValueError(f"Expected HxWx3 image, got shape={img.shape}")
+            if img.dtype != np.uint8:
+                raise ValueError(f"Expected uint8 image, got dtype={img.dtype}")
+
+            # Resize while preserving aspect ratio using the shorter edge as reference
+            h, w = img.shape[:2]
+            scale = resize_short / min(h, w)
+            new_size = (round(w * scale), round(h * scale))
+            resized = cv2.resize(img, new_size, interpolation=cv2.INTER_LINEAR)
+
+            # Center-crop
+            top = (new_size[1] - crop_size) // 2
+            left = (new_size[0] - crop_size) // 2
+            cropped = resized[top : top + crop_size, left : left + crop_size, :]
+
+            cropped_imgs.append(cropped)
+
+        return cv2.dnn.blobFromImagesWithParams(cropped_imgs, params)
+
+    @classmethod
+    def postprocess(cls, pred: Sequence[Sequence[float]]) -> list[ClassificationResult]:
+        return [ClassificationResult(cls.classes[np.argmax(p)], max(p)) for p in pred]
+
+    def _onnx_run(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
         logger.debug("Started preprocessing")
         images = self.preprocess(input)
 
-        input_dict = dict(zip(self.input_names, [images]))
+        input_dict = dict(zip(self._onnx_input_names, [images]))
 
         logger.debug("Done preprocessing")
         logger.debug("Started running the model")
 
-        output = self.session.run(self.output_names, input_dict)[0]
+        output = self._onnx_session.run(self._onnx_output_names, input_dict)[0]
 
         logger.debug("Done running the model")
         logger.debug("Started postprocessing")
@@ -45,65 +127,22 @@ class PaddlePaddleTableClassificationModel(ClassificationModel, OnnxModel):
 
         return result
 
-    def preprocess(self, input: Iterable[NDArray[np.uint8]]) -> list[NDArray[np.float32]]:
-        """PP-LCNet image preprocessing pipeline.
+    def _opencv_run(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
+        logger.debug("Started preprocessing")
 
-        Args:
-            input: iterable of HxWxC uint8 images (C=3, assumed RGB).
+        images = self.preprocess(input)
+        self._opencv_net.setInput(images)
 
-        Output:
-            list of CxHxW float32 tensors (BGR order), normalized with PP-LCNet mean/std.
-        """
-        resize_short = 256  # shorter edge after resize
-        crop_size = 224  # center crop size
-        mean = np.asarray([0.406, 0.456, 0.485], dtype=np.float32)  # RGB mean
-        std = np.asarray([0.225, 0.224, 0.229], dtype=np.float32)  # RGB std
-        rescale_factor = 1.0 / 255.0  # uint8 -> [0,1]
+        logger.debug("Done preprocessing")
+        logger.debug("Started running the model")
 
-        out: list[NDArray[np.float32]] = []
+        output = self._opencv_net.forward()
 
-        for img in input:
-            # Validate and coerce to expected dtype/layout (HWC, uint8, 3 channels)
-            if img.ndim != 3 or img.shape[2] != 3:
-                raise ValueError(f"Expected HxWx3 image, got shape={img.shape}")
-            if img.dtype != np.uint8:
-                raise ValueError(f"Expected uint8 image, got dtype={img.dtype}")
+        logger.debug("Done running the model")
+        logger.debug("Started postprocessing")
 
-            h, w = img.shape[:2]
+        result = self.postprocess(output)  # type: ignore
 
-            # Resize while preserving aspect ratio using the shorter edge as reference
-            scale = resize_short / float(min(h, w))
-            new_h = int(round(h * scale))
-            new_w = int(round(w * scale))
+        logger.debug("Done postprocessing")
 
-            # Perform the resize (OpenCV expects size as (width, height))
-            resized = cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_LINEAR)
-
-            # Center-crop to crop_size x crop_size (assumes resized dims are >= crop_size)
-            if new_h < crop_size or new_w < crop_size:
-                raise ValueError(
-                    f"Resized image too small for center crop: resized={new_h}x{new_w}, crop={crop_size}"
-                )
-            top = (new_h - crop_size) // 2
-            left = (new_w - crop_size) // 2
-            cropped = resized[top : top + crop_size, left : left + crop_size, :]
-
-            # Convert to float32 and rescale to [0,1]
-            x = cropped.astype(np.float32) * rescale_factor
-
-            # Normalize per channel in RGB space: (x - mean) / std
-            x = (x - mean) / std
-
-            # Convert RGB -> BGR
-            x = x[..., ::-1]
-
-            # Convert HWC -> CHW
-            x = np.transpose(x, (2, 0, 1)).astype(np.float32, copy=False)
-
-            out.append(x)
-
-        return out
-
-    @classmethod
-    def postprocess(cls, pred: Sequence[Sequence[float]]) -> list[ClassificationResult]:
-        return [ClassificationResult(cls.classes[np.argmax(p)], max(p)) for p in pred]
+        return result

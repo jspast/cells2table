@@ -11,6 +11,10 @@ Parsing tables in document images with cell detection models
 
 Uses ONNX weights downloaded automatically from [Hugging Face](https://huggingface.co/jspast/paddlepaddle-table-models-onnx) on first use.
 
+## Inference Runtimes
+
+Currently both OpenCV and ONNX Runtime are supported. OpenCV is the default.
+
 ## Instalation
 
 With [uv](https://docs.astral.sh/uv/), add to your project with:
@@ -21,8 +25,8 @@ uv add cells2table
 
 | Optional        | Description             |
 | --------------- | ----------------------- |
-| `docling`       | For docling usage       |
 | `huggingface`   | For downloading models  |
+| `onnxruntime`   | For using ONNX Runtime  |
 
 ## Usage
 

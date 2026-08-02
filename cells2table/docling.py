@@ -25,6 +25,8 @@ except ImportError:
 
 from cells2table.datamodels import Table as PluginTable
 from cells2table.pipelines import DefaultPipeline
+from cells2table.utils.inference import InferenceRuntime
+from cells2table.utils.visualize import rgb_to_bgr
 
 
 def _match_text(bbox: BoundingBox, text_cells: list[TextCell], textcell_overlap: float) -> str:
@@ -149,6 +151,10 @@ class CustomDoclingTableStructureOptions(BaseTableStructureOptions):
         default_factory=lambda: float(os.environ.get("CELLS2TABLE_CONFIDENCE_THRESHOLD", "0.5"))
     )
 
+    runtime: Annotated[
+        InferenceRuntime, Field(description="Inference runtime to use. Defaults to OpenCV.")
+    ] = InferenceRuntime.OPENCV
+
 
 class CustomDoclingTableStructureModel(BaseTableStructureModel):
     def __init__(
@@ -169,7 +175,7 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
             else:
                 models_path = artifacts_path
 
-            self.pipeline = DefaultPipeline(models_path)
+            self.pipeline = DefaultPipeline(models_path, options.runtime)
 
             self.options = options
 
@@ -225,10 +231,12 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
             for cluster in clusters:
                 bbox = cluster.bbox
 
-                table_image = page_image[
-                    round(bbox.t * self.scale) : round(bbox.b * self.scale),
-                    round(bbox.l * self.scale) : round(bbox.r * self.scale),
-                ]
+                table_image = rgb_to_bgr(
+                    page_image[
+                        round(bbox.t * self.scale) : round(bbox.b * self.scale),
+                        round(bbox.l * self.scale) : round(bbox.r * self.scale),
+                    ]
+                )
 
                 table_images.append(table_image)
 
