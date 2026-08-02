@@ -47,7 +47,7 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel, OpencvModel):
         input: Sequence[NDArray[np.uint8]],
         conf_threshold: float = 0.5,
     ) -> list[Iterator[DetectionResult]]:
-        return self._run_fn(input)
+        return self._run_fn(input, conf_threshold)
 
     def _onnx_run(
         self,
