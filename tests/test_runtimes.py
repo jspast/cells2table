@@ -1,4 +1,3 @@
-import json
 from pathlib import Path
 
 import cv2
@@ -8,6 +7,7 @@ from numpy.typing import NDArray
 from cells2table.pipelines import DefaultPipeline
 from cells2table.pipelines.classification_detection import ClassificationDetectionPipeline
 from cells2table.utils.inference import InferenceRuntime
+from tests.gt_utils import verify_classification, verify_detection
 
 
 @pytest.fixture
@@ -35,70 +35,59 @@ def gt_file_path() -> Path:
     return Path(__file__).parent / "data" / "gt" / "wired.json"
 
 
-@pytest.fixture
-def gt_dict(gt_file_path: Path) -> dict:
-    return json.loads(gt_file_path.read_text())
-
-
 def test_opencv_classification(
     opencv_pipeline: ClassificationDetectionPipeline,
     test_image: NDArray,
-    gt_dict: dict,
+    gt_file_path: Path,
 ) -> None:
     result = opencv_pipeline.classification_model([test_image])
-
-    assert gt_dict["classification"] == eval(json.dumps(str(result)))
+    verify_classification(gt_file_path, result[0])
 
 
 def test_opencv_detection_wired(
     opencv_pipeline: ClassificationDetectionPipeline,
     test_image: NDArray,
-    gt_dict: dict,
+    gt_file_path: Path,
 ) -> None:
     model = opencv_pipeline.detection_models[0]
     result = model([test_image])
-
-    assert gt_dict["detection_wired"] == eval(json.dumps(str(list(result[0]))))
+    verify_detection(gt_file_path, result[0], key="detection_wired")
 
 
 def test_opencv_detection_wireless(
     opencv_pipeline: ClassificationDetectionPipeline,
     test_image: NDArray,
-    gt_dict: dict,
+    gt_file_path: Path,
 ) -> None:
     model = opencv_pipeline.detection_models[1]
     result = model([test_image])
-
-    assert gt_dict["detection_wireless"] == eval(json.dumps(str(list(result[0]))))
+    verify_detection(gt_file_path, result[0], key="detection_wireless")
 
 
 def test_onnx_classification(
     onnx_pipeline: ClassificationDetectionPipeline,
     test_image: NDArray,
-    gt_dict: dict,
+    gt_file_path: Path,
 ) -> None:
     result = onnx_pipeline.classification_model([test_image])
-
-    assert gt_dict["classification"] == eval(json.dumps(str(result)))
+    verify_classification(gt_file_path, result[0], False)
 
 
 def test_onnx_detection_wired(
     onnx_pipeline: ClassificationDetectionPipeline,
     test_image: NDArray,
-    gt_dict: dict,
+    gt_file_path: Path,
 ) -> None:
     model = onnx_pipeline.detection_models[0]
     result = model([test_image])
-
-    assert gt_dict["detection_wired"] == eval(json.dumps(str(list(result[0]))))
+    verify_detection(gt_file_path, result[0], False, key="detection_wired")
 
 
 def test_onnx_detection_wireless(
     onnx_pipeline: ClassificationDetectionPipeline,
     test_image: NDArray,
-    gt_dict: dict,
+    gt_file_path: Path,
 ) -> None:
     model = onnx_pipeline.detection_models[1]
     result = model([test_image])
-
-    assert gt_dict["detection_wireless"] == eval(json.dumps(str(list(result[0]))))
+    verify_detection(gt_file_path, result[0], False, key="detection_wireless")

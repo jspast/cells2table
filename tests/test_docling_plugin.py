@@ -19,6 +19,8 @@ from cells2table.docling import (
     table_structure_engines,
 )
 
+from .gt_utils import verify_text
+
 
 def test_plugin_is_discoverable() -> None:
     """Test that the plugin is registered via entry points."""
@@ -89,7 +91,6 @@ def gt_file_path() -> Path:
 def test_conversion(converter: DocumentConverter, test_file_path: Path, gt_file_path: Path) -> None:
     result = converter.convert(test_file_path)
     md = result.document.export_to_markdown()
-    md_gt = gt_file_path.read_text()
-    assert md == md_gt, (
-        f"This error can be caused by an OCR change.\nGround-truth:\n{md_gt}\n\nResult:\n{md}"
-    )
+
+    # An error here can be caused by an OCR change
+    verify_text(gt_file_path, md)
