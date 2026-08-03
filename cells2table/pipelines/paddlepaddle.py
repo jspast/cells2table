@@ -34,10 +34,10 @@ class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
             self.download(download_options_attr) if models_path is None else Path(models_path)
         )
 
-        self.classification_model = PaddlePaddleTableClassificationModel(model_path=models_path)
+        self.classification_model = PaddlePaddleTableClassificationModel(runtime, models_path)
         self.detection_models = [
-            PaddlePaddleWiredCellDetectionModel(model_path=models_path),
-            PaddlePaddleWirelessCellDetectionModel(model_path=models_path),
+            PaddlePaddleWiredCellDetectionModel(runtime, models_path),
+            PaddlePaddleWirelessCellDetectionModel(runtime, models_path),
         ]
 
     @classmethod
