@@ -1,14 +1,15 @@
 import logging
 from collections.abc import Iterable, Sequence
 from pathlib import Path
-from typing import ClassVar
+from typing import ClassVar, override
 
 import cv2
 import numpy as np
 from numpy.typing import NDArray
 
-from cells2table.models.runtimes.onnx import OnnxModel
+from cells2table.models.runtimes.onnxruntime import ONNXRuntimeModel
 from cells2table.models.runtimes.opencv import OpencvModel
+from cells2table.models.runtimes.transformers import TransformersModel
 from cells2table.models.tasks import ClassificationModel, ClassificationResult
 from cells2table.utils.download import DownloadOption, DownloadPlatform
 from cells2table.utils.inference import InferenceRuntime
@@ -18,7 +19,9 @@ HF_REPO_ID = "jspast/paddlepaddle-table-models-onnx"
 logger = logging.getLogger(__name__)
 
 
-class PaddlePaddleTableClassificationModel(ClassificationModel, OnnxModel, OpencvModel):
+class PaddlePaddleTableClassificationModel(
+    ClassificationModel, ONNXRuntimeModel, OpencvModel, TransformersModel
+):
     classes: ClassVar[list[str]] = ["wired", "wireless"]
 
     _input_shape = (224, 224)
@@ -30,6 +33,11 @@ class PaddlePaddleTableClassificationModel(ClassificationModel, OnnxModel, Openc
     _onnx_input_names = ("x",)
     _onnx_output_names = ("fetch_name_0",)
 
+    _transformers_path: ClassVar[str] = "PaddlePaddle/PP-LCNet_x1_0_table_cls_safetensors"
+    _transformers_download_options: ClassVar[list[DownloadOption]] = [
+        DownloadOption(DownloadPlatform.HUGGINGFACE, _transformers_path),
+    ]
+
     _default_runtime = InferenceRuntime.OPENCV
 
     def __init__(
@@ -39,16 +47,32 @@ class PaddlePaddleTableClassificationModel(ClassificationModel, OnnxModel, Openc
     ) -> None:
         match runtime:
             case InferenceRuntime.ONNX:
-                self._onnx_init(model_path)
-                self._run_fn = self._onnx_run
+                self._onnxruntime_init(model_path)
+                self._run_fn = self._onnxruntime_run
             case InferenceRuntime.OPENCV:
                 self._opencv_init(model_path)
                 self._run_fn = self._opencv_run
+            case InferenceRuntime.TRANSFORMERS:
+                self._transformers_init(model_path)
+                self._run_fn = self._transformers_run
+
+    @override
+    def _transformers_init(self, model_path: Path | str | None = None) -> None:
+        super()._transformers_init(model_path=model_path)
+
+        from transformers import PPLCNetForImageClassification, PPLCNetImageProcessor
+
+        self._transformers_model = PPLCNetForImageClassification.from_pretrained(
+            self._transformers_path
+        )
+        self._transformers_processor = PPLCNetImageProcessor.from_pretrained(
+            self._transformers_path
+        )
 
     def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
         return self._run_fn(input)
 
-    def preprocess(self, input: Iterable[NDArray[np.uint8]]) -> NDArray:
+    def _onnx_preprocess(self, input: Iterable[NDArray[np.uint8]]) -> NDArray:
         """PP-LCNet image preprocessing pipeline.
 
         Args:
@@ -104,24 +128,24 @@ class PaddlePaddleTableClassificationModel(ClassificationModel, OnnxModel, Openc
         return cv2.dnn.blobFromImagesWithParams(cropped_imgs, params)
 
     @classmethod
-    def postprocess(cls, pred: Sequence[Sequence[float]]) -> list[ClassificationResult]:
+    def _onnx_postprocess(cls, pred: Sequence[Sequence[np.float32]]) -> list[ClassificationResult]:
         return [ClassificationResult(cls.classes[np.argmax(p)], max(p)) for p in pred]
 
-    def _onnx_run(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
+    def _onnxruntime_run(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
         logger.debug("Started preprocessing")
-        images = self.preprocess(input)
+        images = self._onnx_preprocess(input)
 
         input_dict = dict(zip(self._onnx_input_names, [images]))
 
         logger.debug("Done preprocessing")
         logger.debug("Started running the model")
 
-        output = self._onnx_session.run(self._onnx_output_names, input_dict)[0]
+        output = self._onnxruntime_session.run(self._onnx_output_names, input_dict)[0]
 
         logger.debug("Done running the model")
         logger.debug("Started postprocessing")
 
-        result = self.postprocess(output)  # type: ignore
+        result = self._onnx_postprocess(output)  # type: ignore
 
         logger.debug("Done postprocessing")
 
@@ -130,7 +154,7 @@ class PaddlePaddleTableClassificationModel(ClassificationModel, OnnxModel, Openc
     def _opencv_run(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
         logger.debug("Started preprocessing")
 
-        images = self.preprocess(input)
+        images = self._onnx_preprocess(input)
         self._opencv_net.setInput(images)
 
         logger.debug("Done preprocessing")
@@ -141,7 +165,34 @@ class PaddlePaddleTableClassificationModel(ClassificationModel, OnnxModel, Openc
         logger.debug("Done running the model")
         logger.debug("Started postprocessing")
 
-        result = self.postprocess(output)  # type: ignore
+        result = self._onnx_postprocess(output)  # type: ignore
+
+        logger.debug("Done postprocessing")
+
+        return result
+
+    def _transformers_run(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
+        logger.debug("Started preprocessing")
+
+        import torch.nn.functional as F
+
+        inputs = self._transformers_processor(images=input, return_tensors="pt").to(  # ty:ignore[invalid-argument-type]
+            self._transformers_model.device  # ty:ignore[unresolved-attribute]
+        )
+
+        logger.debug("Done preprocessing")
+        logger.debug("Started running the model")
+
+        output = self._transformers_model(**inputs)  # ty:ignore[call-non-callable]
+
+        logger.debug("Done running the model")
+        logger.debug("Started postprocessing")
+
+        logits = output.last_hidden_state
+
+        probs = F.softmax(logits, dim=-1).detach()
+
+        result = [ClassificationResult(self.classes[np.argmax(p.numpy())], max(p)) for p in probs]
 
         logger.debug("Done postprocessing")
 

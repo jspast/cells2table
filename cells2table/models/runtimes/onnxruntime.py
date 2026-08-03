@@ -11,15 +11,15 @@ from cells2table.models.tasks.base import BaseModel
 from cells2table.utils.download import DownloadOption, select_download_option
 
 
-class OnnxModel(BaseModel, ABC):
-    """Base interface for ONNX models."""
+class ONNXRuntimeModel(BaseModel, ABC):
+    """Base interface for ONNX Runtime models."""
 
     _onnx_path: ClassVar[str]
     _onnx_download_options: ClassVar[list[DownloadOption]]
 
-    _onnx_session: ort.InferenceSession
+    _onnxruntime_session: ort.InferenceSession
 
-    def _onnx_init(self, model_path: Path | str | None = None) -> None:
+    def _onnxruntime_init(self, model_path: Path | str | None = None) -> None:
         self.model_path = self._onnx_download() if model_path is None else Path(model_path)
 
         providers_priority = [
@@ -30,7 +30,7 @@ class OnnxModel(BaseModel, ABC):
         ]
         available_providers = ort.get_available_providers()
 
-        self._onnx_session = ort.InferenceSession(
+        self._onnxruntime_session = ort.InferenceSession(
             self.model_path / self._onnx_path,
             providers=[p for p in providers_priority if p in available_providers],
         )
@@ -40,7 +40,7 @@ class OnnxModel(BaseModel, ABC):
         return select_download_option(cls._onnx_download_options).download(local_dir=local_dir)
 
     @abstractmethod
-    def _onnx_run(self, input: Any):
+    def _onnxruntime_run(self, input: Any):
         pass
 
     # Useful implementation functions:

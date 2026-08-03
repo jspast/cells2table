@@ -6,13 +6,16 @@ from cells2table.models.PaddlePaddle import (
     PaddlePaddleWirelessCellDetectionModel,
 )
 from cells2table.pipelines.classification_detection import ClassificationDetectionPipeline
+from cells2table.utils.download import combine_download_options, select_download_option
 from cells2table.utils.inference import InferenceRuntime
 
 
 class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
     """A table pipeline combining PaddlePaddle classification and detection models."""
 
-    _dirname = "jspast--paddlepaddle-table-models-onnx"
+    _default_runtime = PaddlePaddleTableClassificationModel._default_runtime
+
+    _onnx_dirname = "jspast--paddlepaddle-table-models-onnx"
 
     def __init__(
         self,
@@ -21,18 +24,9 @@ class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
     ) -> None:
         """Initialize models from the provided path or download them."""
 
-        runtime = (
-            PaddlePaddleTableClassificationModel._default_runtime if runtime is None else runtime
-        )
+        runtime = self._default_runtime if runtime is None else runtime
 
-        download_options_attr: str
-        match runtime:
-            case InferenceRuntime.ONNX | InferenceRuntime.OPENCV:
-                download_options_attr = "_onnx_download_options"
-
-        models_path = (
-            self.download(download_options_attr) if models_path is None else Path(models_path)
-        )
+        models_path = self.download(runtime) if models_path is None else Path(models_path)
 
         self.classification_model = PaddlePaddleTableClassificationModel(runtime, models_path)
         self.detection_models = [
@@ -43,18 +37,35 @@ class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
     @classmethod
     def download(
         cls,
-        download_options_attr: str = "_onnx_download_options",
+        runtime: InferenceRuntime,
         local_dir: Path | str | None = None,
     ) -> Path:
-        pipeline_dir = None if local_dir is None else Path(local_dir) / cls._dirname
+        match runtime:
+            case InferenceRuntime.ONNX | InferenceRuntime.OPENCV:
+                pipeline_dir = None if local_dir is None else Path(local_dir) / cls._onnx_dirname
+                path = combine_download_options(
+                    [
+                        select_download_option(
+                            PaddlePaddleTableClassificationModel._onnx_download_options
+                        ),
+                        select_download_option(
+                            PaddlePaddleWiredCellDetectionModel._onnx_download_options
+                        ),
+                        select_download_option(
+                            PaddlePaddleWirelessCellDetectionModel._onnx_download_options
+                        ),
+                    ]
+                ).download(local_dir=pipeline_dir)
 
-        getattr(PaddlePaddleTableClassificationModel, download_options_attr)[0].download(
-            local_dir=pipeline_dir
-        )
-        getattr(PaddlePaddleWiredCellDetectionModel, download_options_attr)[0].download(
-            local_dir=pipeline_dir
-        )
-        path = getattr(PaddlePaddleWirelessCellDetectionModel, download_options_attr)[0].download(
-            local_dir=pipeline_dir
-        )
+            case InferenceRuntime.TRANSFORMERS:
+                path = select_download_option(
+                    PaddlePaddleTableClassificationModel._transformers_download_options
+                ).download(local_dir=local_dir)
+                select_download_option(
+                    PaddlePaddleWiredCellDetectionModel._transformers_download_options
+                ).download(local_dir=local_dir)
+                select_download_option(
+                    PaddlePaddleWirelessCellDetectionModel._transformers_download_options
+                ).download(local_dir=local_dir)
+
         return path
