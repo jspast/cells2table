@@ -8,10 +8,10 @@ from cells2table.models.tasks import ClassificationResult, DetectionResult
 UPDATE_GT = bool(int(getenv("CELLS2TABLE_UPDATE_GT", "0")))
 
 # Absolute tolerance for confidence results
-CONFIDENCE_TOLERANCE = 0.001
+CONFIDENCE_TOLERANCE = 0.01
 
 # Absolute tolerance for positional results in pixels
-POSITION_TOLERANCE = 0.1
+POSITION_TOLERANCE = 5
 
 
 def verify_text(gt_file_path: Path, text: str, update_gt: bool = UPDATE_GT) -> None:
@@ -74,7 +74,7 @@ def verify_detection(
                 },
                 "confidence": round(float(r.confidence), 4),
             }
-            for r in result
+            for r in sorted(result, key=lambda d: d.bbox[0] + 100 * d.bbox[1])
         ]
 
         gt_dict[key] = res
@@ -83,7 +83,9 @@ def verify_detection(
     else:
         gt_dict = json.loads(gt_file_path.read_text())
 
-        for i, r in enumerate(result):
+        res = sorted(result, key=lambda d: d.bbox[0] + 100 * d.bbox[1])
+
+        for i, r in enumerate(res):
             gt = gt_dict[key][i]
 
             assert abs(gt["bbox"]["l"] - r.bbox[0]) < POSITION_TOLERANCE

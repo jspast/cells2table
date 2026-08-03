@@ -21,7 +21,7 @@ def download() -> None:
 
     args = parser.parse_args()
 
-    DefaultPipeline.download(local_dir=args.local_dir)
+    DefaultPipeline.download(runtime=DefaultPipeline._default_runtime, local_dir=args.local_dir)
 
 
 def main() -> None:
@@ -33,6 +33,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Load an image from a given path using OpenCV")
     parser.add_argument("image_path", type=Path, help="Path to the image file")
     parser.add_argument("--models-path", type=Path, default=None, help="Path to downloaded models")
+    parser.add_argument("--runtime", type=str, default=None, help="Inference runtime to use")
 
     args = parser.parse_args()
 
@@ -52,7 +53,7 @@ def main() -> None:
         str(image.dtype),
     )
 
-    table_pipeline = DefaultPipeline(args.models_path)
+    table_pipeline = DefaultPipeline(args.models_path, args.runtime)
     tables = table_pipeline([image])
 
     for table in tables:

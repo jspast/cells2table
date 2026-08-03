@@ -1,14 +1,15 @@
 import logging
 from collections.abc import Iterator, Sequence
 from pathlib import Path
-from typing import ClassVar
+from typing import ClassVar, override
 
 import cv2
 import numpy as np
 from numpy.typing import NDArray
 
-from cells2table.models.runtimes.onnx import OnnxModel
+from cells2table.models.runtimes.onnxruntime import ONNXRuntimeModel
 from cells2table.models.runtimes.opencv import OpencvModel
+from cells2table.models.runtimes.transformers import TransformersModel
 from cells2table.models.tasks import DetectionModel, DetectionResult
 from cells2table.utils.download import DownloadOption, DownloadPlatform
 from cells2table.utils.inference import InferenceRuntime
@@ -18,7 +19,9 @@ HF_REPO_ID = "jspast/paddlepaddle-table-models-onnx"
 logger = logging.getLogger(__name__)
 
 
-class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel, OpencvModel):
+class PaddlePaddleCellDetectionModel(
+    DetectionModel, ONNXRuntimeModel, OpencvModel, TransformersModel
+):
     """Table cell detection model from PaddlePaddle."""
 
     _max_detections = 300
@@ -36,11 +39,23 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel, OpencvModel):
     ) -> None:
         match runtime:
             case InferenceRuntime.ONNX:
-                self._onnx_init(model_path)
-                self._run_fn = self._onnx_run
+                self._onnxruntime_init(model_path)
+                self._run_fn = self._onnxruntime_run
             case InferenceRuntime.OPENCV:
                 self._opencv_init(model_path)
                 self._run_fn = self._opencv_run
+            case InferenceRuntime.TRANSFORMERS:
+                self._transformers_init(model_path)
+                self._run_fn = self._transformers_run
+
+    @override
+    def _transformers_init(self, model_path: Path | str | None = None) -> None:
+        super()._transformers_init(model_path=model_path)
+
+        from transformers import RTDetrForObjectDetection, RTDetrImageProcessor
+
+        self._transformers_model = RTDetrForObjectDetection.from_pretrained(self._transformers_path)
+        self._transformers_processor = RTDetrImageProcessor.from_pretrained(self._transformers_path)
 
     def __call__(
         self,
@@ -49,7 +64,7 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel, OpencvModel):
     ) -> list[Iterator[DetectionResult]]:
         return self._run_fn(input, conf_threshold)
 
-    def _onnx_run(
+    def _onnxruntime_run(
         self,
         input: Sequence[NDArray[np.uint8]],
         conf_threshold: float = 0.5,
@@ -63,19 +78,19 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel, OpencvModel):
             original_shapes.append(original_shape)
             scale_factors.append(tuple(original_shape[i] / self._input_shape[i] for i in range(2)))
 
-        imgs = self.preprocess(input)
+        imgs = self._onnx_preprocess(input)
 
         input_dict = dict(zip(self._onnx_input_names, [original_shapes, imgs, scale_factors]))
 
         logger.debug("Done preprocessing")
         logger.debug("Started running the model")
 
-        output = self._onnx_session.run(self._onnx_output_names, input_dict)
+        output = self._onnxruntime_session.run(self._onnx_output_names, input_dict)
 
         logger.debug("Done running the model")
         logger.debug("Started postprocessing")
 
-        result = self.postprocess(output, scale_factors, conf_threshold)
+        result = self._onnx_postprocess(output, scale_factors, conf_threshold)
 
         logger.debug("Done postprocessing")
 
@@ -98,7 +113,7 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel, OpencvModel):
             )
             scale_factors.append(scale_factor)
 
-        imgs = self.preprocess(input)
+        imgs = self._onnx_preprocess(input)
         self._opencv_net.setInput(np.array(original_shapes, dtype=np.float32), name="im_shape")
         self._opencv_net.setInput(imgs, name="image")
         self._opencv_net.setInput(np.array(scale_factors), name="scale_factor")
@@ -111,7 +126,7 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel, OpencvModel):
         logger.debug("Done running the model")
         logger.debug("Started postprocessing")
 
-        result = self.postprocess(
+        result = self._onnx_postprocess(
             [output, np.repeat(self._max_detections, len(input))],
             scale_factors,
             conf_threshold,
@@ -121,7 +136,41 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel, OpencvModel):
 
         return result
 
-    def preprocess(self, input: Sequence[NDArray[np.uint8]]) -> NDArray:
+    def _transformers_run(
+        self,
+        input: Sequence[NDArray[np.uint8]],
+        conf_threshold: float = 0.5,
+    ) -> list[Iterator[DetectionResult]]:
+        logger.debug("Started preprocessing")
+
+        inputs = self._transformers_processor(images=input, return_tensors="pt").to(  # ty:ignore[invalid-argument-type]
+            self._transformers_model.device  # ty:ignore[unresolved-attribute]
+        )
+
+        logger.debug("Done preprocessing")
+        logger.debug("Started running the model")
+
+        output = self._transformers_model(**inputs)  # ty:ignore[call-non-callable]
+
+        logger.debug("Done running the model")
+        logger.debug("Started postprocessing")
+
+        result = self._transformers_processor.post_process_object_detection(
+            output, target_sizes=[img.shape[:2] for img in input]
+        )
+
+        generators = []
+        for res in result:
+            generators.append(
+                DetectionResult(box.detach().numpy(), score.item())
+                for box, score in zip(res["boxes"], res["scores"])
+            )
+
+        logger.debug("Done postprocessing")
+
+        return generators
+
+    def _onnx_preprocess(self, input: Sequence[NDArray[np.uint8]]) -> NDArray:
         params = cv2.dnn.Image2BlobParams(
             scalefactor=1.0 / 255.0,
             size=(640, 640),
@@ -134,7 +183,7 @@ class PaddlePaddleCellDetectionModel(DetectionModel, OnnxModel, OpencvModel):
         return cv2.dnn.blobFromImagesWithParams(input, params)
 
     @classmethod
-    def postprocess(
+    def _onnx_postprocess(
         cls,
         pred: Sequence,
         scale_factors: Sequence[tuple[int, int] | NDArray],
@@ -173,6 +222,11 @@ class PaddlePaddleWiredCellDetectionModel(PaddlePaddleCellDetectionModel):
         DownloadOption(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, (_onnx_path,)),
     ]
 
+    _transformers_path: ClassVar[str] = "PaddlePaddle/RT-DETR-L_wired_table_cell_det_safetensors"
+    _transformers_download_options: ClassVar[list[DownloadOption]] = [
+        DownloadOption(DownloadPlatform.HUGGINGFACE, _transformers_path),
+    ]
+
 
 class PaddlePaddleWirelessCellDetectionModel(PaddlePaddleCellDetectionModel):
     classes: ClassVar[list[str]] = ["wireless"]
@@ -180,4 +234,9 @@ class PaddlePaddleWirelessCellDetectionModel(PaddlePaddleCellDetectionModel):
     _onnx_path: ClassVar[str] = "wireless_table_cell_det.onnx"
     _onnx_download_options: ClassVar[list[DownloadOption]] = [
         DownloadOption(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, (_onnx_path,)),
+    ]
+
+    _transformers_path: ClassVar[str] = "PaddlePaddle/RT-DETR-L_wireless_table_cell_det_safetensors"
+    _transformers_download_options: ClassVar[list[DownloadOption]] = [
+        DownloadOption(DownloadPlatform.HUGGINGFACE, _transformers_path),
     ]

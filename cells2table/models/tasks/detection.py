@@ -11,7 +11,7 @@ class DetectionResult(NamedTuple):
     """Result type for a detection with no class."""
 
     bbox: np.ndarray
-    confidence: float
+    confidence: np.float32
 
 
 def filter_detections(

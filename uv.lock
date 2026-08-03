@@ -106,9 +106,14 @@ huggingface = [
 onnxruntime = [
     { name = "onnxruntime" },
 ]
+transformers = [
+    { name = "transformers", version = "5.8.1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'darwin'" },
+    { name = "transformers", version = "5.14.1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'darwin'" },
+]
 
 [package.dev-dependencies]
 dev = [
+    { name = "cells2table", extra = ["onnxruntime", "transformers"] },
     { name = "docling" },
     { name = "pytest" },
     { name = "ruff" },
@@ -125,11 +130,13 @@ requires-dist = [
     { name = "numpy", specifier = ">=2.2.0,<3.0.0" },
     { name = "onnxruntime", marker = "extra == 'onnxruntime'", specifier = ">=1.23.2,<2.0.0" },
     { name = "opencv-python", specifier = ">=5.0.0.0,<6.0.0.0" },
+    { name = "transformers", marker = "extra == 'transformers'", specifier = ">=5.8.1,<6.0.0" },
 ]
-provides-extras = ["huggingface", "onnxruntime"]
+provides-extras = ["huggingface", "onnxruntime", "transformers"]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "cells2table", extras = ["onnxruntime", "transformers"] },
     { name = "docling", specifier = ">=2.66.0,<3.0.0" },
     { name = "pytest", specifier = ">=7.0,<10.0" },
     { name = "ruff", specifier = ">=0.5.0,<1.0.0" },

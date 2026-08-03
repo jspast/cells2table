@@ -8,10 +8,10 @@ from numpy.typing import NDArray
 
 @dataclass
 class BoundingBox:
-    l: float
-    t: float
-    r: float
-    b: float
+    l: np.float32
+    t: np.float32
+    r: np.float32
+    b: np.float32
 
     @staticmethod
     def from_array(bbox: NDArray[np.float32]) -> BoundingBox:

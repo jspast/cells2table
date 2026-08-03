@@ -9,30 +9,37 @@ Parsing tables in document images with cell detection models
 - Classification model (wired / wireless)
 - Cell detection model with different weights for each class
 
-Uses ONNX weights downloaded automatically from [Hugging Face](https://huggingface.co/jspast/paddlepaddle-table-models-onnx) on first use.
+## Inference runtimes
 
-## Inference Runtimes
-
-Currently both OpenCV and ONNX Runtime are supported. OpenCV is the default.
+Currently OpenCV, ONNX Runtime and Transformers are supported. OpenCV is the default.
 
 ## Instalation
 
-With [uv](https://docs.astral.sh/uv/), add to your project with:
+With [uv](https://docs.astral.sh/uv/), add to your project using:
 
 ```sh
 uv add cells2table
 ```
 
-| Optional        | Description             |
-| --------------- | ----------------------- |
-| `huggingface`   | For downloading models  |
-| `onnxruntime`   | For using ONNX Runtime  |
+### Extras
+
+| Optional       | Description                       |
+|----------------|-----------------------------------|
+| `huggingface`  | For downloading models from HF    |
+| `onnxruntime`  | For using ONNX Runtime as runtime |
+| `transformers` | For using transformers as runtime |
 
 ## Usage
 
-cells2table only extract structural information from the tables. Another library is needed to extract content from the cells.
+cells2table only extracts structural information from the tables. Another library is needed to extract content from the cells.
 
-### Docling
+### Quick visual demo
+
+```sh
+cells2table path/to/image.png
+```
+
+### Docling (recommended)
 
 A [docling plugin](https://docling-project.github.io/docling/concepts/plugins/) is provided to allow integrating cells2table in a complete pipeline.
 

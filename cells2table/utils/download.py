@@ -1,12 +1,12 @@
 import logging
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
 
-class DownloadPlatform(Enum):
+class DownloadPlatform(StrEnum):
     HUGGINGFACE = "huggingface"
 
 
@@ -29,6 +29,18 @@ class DownloadOption:
                 )
 
         return path
+
+
+def combine_download_options(options: list[DownloadOption]) -> DownloadOption:
+    platform = options[0].platform
+    repo_id = options[0].repo_id
+    files = set(() if options[0].files is None else options[0].files)
+
+    for o in options[1:]:
+        if o.platform == platform and o.repo_id == repo_id and o.files is not None:
+            files.update(o.files)
+
+    return DownloadOption(platform, repo_id, tuple(files))
 
 
 def select_download_option(supported: list[DownloadOption]) -> DownloadOption:
@@ -56,9 +68,7 @@ def hf_download(
 
     disable_progress_bars()
 
-    download_path = try_to_load_from_cache(
-        repo_id=repo_id, filename=files[0] if files is not None else ""
-    )
+    download_path = try_to_load_from_cache(repo_id=repo_id, filename=files[0] if files else "")
 
     if isinstance(download_path, str):
         logger.info("Repo %s cached, no need to redownload", repo_id)
