@@ -10,7 +10,7 @@ from numpy.typing import NDArray
 from cells2table.models.runtimes.onnxruntime import ONNXRuntimeModel
 from cells2table.models.runtimes.opencv import OpencvModel
 from cells2table.models.runtimes.transformers import TransformersModel
-from cells2table.models.tasks import DetectionModel, DetectionResult
+from cells2table.models.tasks import Detection, DetectionModel
 from cells2table.utils.download import DownloadOption, DownloadPlatform
 from cells2table.utils.inference import InferenceRuntime
 
@@ -61,14 +61,14 @@ class PaddlePaddleCellDetectionModel(
         self,
         input: Sequence[NDArray[np.uint8]],
         conf_threshold: float = 0.5,
-    ) -> list[Iterator[DetectionResult]]:
+    ) -> list[Iterator[Detection]]:
         return self._run_fn(input, conf_threshold)
 
     def _onnxruntime_run(
         self,
         input: Sequence[NDArray[np.uint8]],
         conf_threshold: float = 0.5,
-    ) -> list[Iterator[DetectionResult]]:
+    ) -> list[Iterator[Detection]]:
         logger.debug("Started preprocessing")
 
         original_shapes = []
@@ -100,7 +100,7 @@ class PaddlePaddleCellDetectionModel(
         self,
         input: Sequence[NDArray[np.uint8]],
         conf_threshold: float = 0.5,
-    ) -> list[Iterator[DetectionResult]]:
+    ) -> list[Iterator[Detection]]:
         logger.debug("Started preprocessing")
 
         original_shapes = []
@@ -140,7 +140,7 @@ class PaddlePaddleCellDetectionModel(
         self,
         input: Sequence[NDArray[np.uint8]],
         conf_threshold: float = 0.5,
-    ) -> list[Iterator[DetectionResult]]:
+    ) -> list[Iterator[Detection]]:
         logger.debug("Started preprocessing")
 
         inputs = self._transformers_processor(images=input, return_tensors="pt").to(  # ty:ignore[invalid-argument-type]
@@ -162,8 +162,8 @@ class PaddlePaddleCellDetectionModel(
         generators = []
         for res in result:
             generators.append(
-                DetectionResult(box.detach().numpy(), score.item())
-                for box, score in zip(res["boxes"], res["scores"])
+                Detection(score.item(), box.detach().numpy())
+                for score, box in zip(res["scores"], res["boxes"])
             )
 
         logger.debug("Done postprocessing")
@@ -188,7 +188,7 @@ class PaddlePaddleCellDetectionModel(
         pred: Sequence,
         scale_factors: Sequence[tuple[int, int] | NDArray],
         conf_threshold: float,
-    ) -> list[Iterator[DetectionResult]]:
+    ) -> list[Iterator[Detection]]:
         last_cell_idx = 0
         cells = pred[0]
 
@@ -209,7 +209,7 @@ class PaddlePaddleCellDetectionModel(
             boxes[:, [0, 2]] *= sy
             boxes[:, [1, 3]] *= sx
 
-            generators.append((DetectionResult(box, score) for box, score in zip(boxes, scores)))
+            generators.append((Detection(score, box) for score, box in zip(scores, boxes)))
 
         return generators
 

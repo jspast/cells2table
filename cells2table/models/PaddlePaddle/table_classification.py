@@ -10,7 +10,7 @@ from numpy.typing import NDArray
 from cells2table.models.runtimes.onnxruntime import ONNXRuntimeModel
 from cells2table.models.runtimes.opencv import OpencvModel
 from cells2table.models.runtimes.transformers import TransformersModel
-from cells2table.models.tasks import ClassificationModel, ClassificationResult
+from cells2table.models.tasks import Classification, ClassificationModel
 from cells2table.utils.download import DownloadOption, DownloadPlatform
 from cells2table.utils.inference import InferenceRuntime
 
@@ -69,7 +69,7 @@ class PaddlePaddleTableClassificationModel(
             self._transformers_path
         )
 
-    def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
+    def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[Classification]:
         return self._run_fn(input)
 
     def _onnx_preprocess(self, input: Iterable[NDArray[np.uint8]]) -> NDArray:
@@ -128,10 +128,10 @@ class PaddlePaddleTableClassificationModel(
         return cv2.dnn.blobFromImagesWithParams(cropped_imgs, params)
 
     @classmethod
-    def _onnx_postprocess(cls, pred: Sequence[Sequence[np.float32]]) -> list[ClassificationResult]:
-        return [ClassificationResult(cls.classes[np.argmax(p)], max(p)) for p in pred]
+    def _onnx_postprocess(cls, pred: Sequence[Sequence[np.float32]]) -> list[Classification]:
+        return [Classification(max(p), cls.classes[np.argmax(p)]) for p in pred]
 
-    def _onnxruntime_run(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
+    def _onnxruntime_run(self, input: Iterable[NDArray[np.uint8]]) -> list[Classification]:
         logger.debug("Started preprocessing")
         images = self._onnx_preprocess(input)
 
@@ -151,7 +151,7 @@ class PaddlePaddleTableClassificationModel(
 
         return result
 
-    def _opencv_run(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
+    def _opencv_run(self, input: Iterable[NDArray[np.uint8]]) -> list[Classification]:
         logger.debug("Started preprocessing")
 
         images = self._onnx_preprocess(input)
@@ -171,7 +171,7 @@ class PaddlePaddleTableClassificationModel(
 
         return result
 
-    def _transformers_run(self, input: Iterable[NDArray[np.uint8]]) -> list[ClassificationResult]:
+    def _transformers_run(self, input: Iterable[NDArray[np.uint8]]) -> list[Classification]:
         logger.debug("Started preprocessing")
 
         import torch.nn.functional as F
@@ -192,7 +192,7 @@ class PaddlePaddleTableClassificationModel(
 
         probs = F.softmax(logits, dim=-1).detach()
 
-        result = [ClassificationResult(self.classes[np.argmax(p.numpy())], max(p)) for p in probs]
+        result = [Classification(max(p), self.classes[np.argmax(p.numpy())]) for p in probs]
 
         logger.debug("Done postprocessing")
 

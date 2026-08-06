@@ -1,16 +1,15 @@
 from abc import ABC, abstractmethod
-from typing import Any, ClassVar, NamedTuple
+from dataclasses import dataclass
+from typing import Any, ClassVar
 
-import numpy as np
-
-from cells2table.models.tasks.base import BaseModel
+from cells2table.models.tasks.base import BaseModel, Prediction
 
 
-class ClassificationResult(NamedTuple):
+@dataclass(frozen=True, slots=True)
+class Classification(Prediction):
     """Result type for classification models."""
 
     cls: str
-    confidence: np.float32
 
 
 class ClassificationModel(BaseModel, ABC):
@@ -19,5 +18,5 @@ class ClassificationModel(BaseModel, ABC):
     classes: ClassVar[list[str]]
 
     @abstractmethod
-    def __call__(self, input: Any) -> list[ClassificationResult]:
+    def __call__(self, input: Any) -> list[Classification]:
         pass

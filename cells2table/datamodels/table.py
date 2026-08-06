@@ -4,10 +4,10 @@ from collections.abc import Iterable
 from dataclasses import dataclass, field
 
 from cells2table.datamodels import BoundingBox
-from cells2table.models.tasks import DetectionResult
+from cells2table.models.tasks import Detection
 
 
-@dataclass
+@dataclass(slots=True)
 class Cell:
     bbox: BoundingBox
     row: int
@@ -32,14 +32,14 @@ def sort_cells_index_by_right(cells: list[Cell]) -> list[int]:
     return sorted(range(len(cells)), key=lambda i: cells[i].bbox.r)
 
 
-@dataclass
+@dataclass(slots=True)
 class Table:
     cells: list[Cell] = field(default_factory=list)
     num_rows: int = 0
     num_cols: int = 0
 
     @classmethod
-    def from_detections(cls, cells_det: Iterable[DetectionResult], tolerance: float = 10) -> Table:
+    def from_detections(cls, cells_det: Iterable[Detection], tolerance: float = 10) -> Table:
         table = cls()
 
         for cell_det in cells_det:
