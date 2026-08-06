@@ -1,23 +1,24 @@
 from abc import ABC, abstractmethod
 from collections.abc import Iterable, Iterator
-from typing import Any, ClassVar, NamedTuple
+from dataclasses import dataclass
+from typing import Any, ClassVar
 
 import numpy as np
 
-from cells2table.models.tasks.base import BaseModel
+from cells2table.models.tasks.base import BaseModel, Prediction
 
 
-class DetectionResult(NamedTuple):
+@dataclass(frozen=True, slots=True)
+class Detection(Prediction):
     """Result type for a detection with no class."""
 
     bbox: np.ndarray
-    confidence: np.float32
 
 
 def filter_detections(
-    detections: Iterable[DetectionResult],
+    detections: Iterable[Detection],
     conf_threshold: float,
-) -> list[DetectionResult]:
+) -> list[Detection]:
     return [d for d in detections if d.confidence > conf_threshold]
 
 
@@ -31,5 +32,5 @@ class DetectionModel(BaseModel, ABC):
         self,
         input: Any,
         conf_threshold: float = 0.5,
-    ) -> list[Iterator[DetectionResult]]:
+    ) -> list[Iterator[Detection]]:
         pass

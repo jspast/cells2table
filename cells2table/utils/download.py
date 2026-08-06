@@ -13,7 +13,7 @@ class DownloadPlatform(StrEnum):
 enabled_download_platforms: list[DownloadPlatform] = [DownloadPlatform.HUGGINGFACE]
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class DownloadOption:
     platform: DownloadPlatform
     repo_id: str

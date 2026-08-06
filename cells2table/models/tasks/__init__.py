@@ -1,11 +1,11 @@
 from .base import BaseModel
-from .classification import ClassificationModel, ClassificationResult
-from .detection import DetectionModel, DetectionResult
+from .classification import Classification, ClassificationModel
+from .detection import Detection, DetectionModel
 
 __all__ = [
     "BaseModel",
+    "Classification",
     "ClassificationModel",
-    "ClassificationResult",
+    "Detection",
     "DetectionModel",
-    "DetectionResult",
 ]

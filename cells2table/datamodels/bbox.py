@@ -6,7 +6,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 
-@dataclass
+@dataclass(slots=True)
 class BoundingBox:
     l: np.float32
     t: np.float32

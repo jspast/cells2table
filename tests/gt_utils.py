@@ -3,7 +3,7 @@ from collections.abc import Iterator
 from os import getenv
 from pathlib import Path
 
-from cells2table.models.tasks import ClassificationResult, DetectionResult
+from cells2table.models.tasks import Classification, Detection
 
 UPDATE_GT = bool(int(getenv("CELLS2TABLE_UPDATE_GT", "0")))
 
@@ -26,7 +26,7 @@ def verify_text(gt_file_path: Path, text: str, update_gt: bool = UPDATE_GT) -> N
 
 def verify_classification(
     gt_file_path: Path,
-    result: ClassificationResult,
+    result: Classification,
     update_gt: bool = UPDATE_GT,
     key: str = "classification",
 ) -> None:
@@ -53,7 +53,7 @@ def verify_classification(
 
 def verify_detection(
     gt_file_path: Path,
-    result: Iterator[DetectionResult],
+    result: Iterator[Detection],
     update_gt: bool = UPDATE_GT,
     key: str = "detection",
 ) -> None:

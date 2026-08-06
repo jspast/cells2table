@@ -6,7 +6,7 @@ from typing import Any
 
 from cells2table.datamodels import Table
 from cells2table.models.tasks import ClassificationModel, DetectionModel
-from cells2table.models.tasks.detection import DetectionResult, filter_detections
+from cells2table.models.tasks.detection import Detection, filter_detections
 from cells2table.pipelines.base import BasePipeline
 
 logger = logging.getLogger(__name__)
@@ -55,7 +55,7 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
         self,
         image,
         detection_model_idx: int | None = None,
-    ) -> tuple[Table, list[DetectionResult]]:
+    ) -> tuple[Table, list[Detection]]:
         if detection_model_idx is None:
             c = self.classification_model([image])[0]
             logger.info("Image classified as %s with %.4f confidence", c.cls, c.confidence)
