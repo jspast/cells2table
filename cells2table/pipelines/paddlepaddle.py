@@ -69,3 +69,9 @@ class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
                 ).download(local_dir=local_dir)
 
         return path
+
+    @staticmethod
+    def assigned_model_idx(pred_class_id: int) -> int:
+        """Return the index of the appropriate model for the class."""
+
+        return pred_class_id

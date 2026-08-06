@@ -37,7 +37,7 @@ def verify_classification(
         except FileNotFoundError:
             gt_dict = {}
 
-        res = {"class": result.cls, "confidence": round(float(result.confidence), 4)}
+        res = {"class": result.id, "confidence": round(float(result.confidence), 4)}
 
         gt_dict[key] = res
         gt_file_path.write_text(json.dumps(gt_dict), encoding="utf-8")
@@ -47,7 +47,7 @@ def verify_classification(
 
         gt = gt_dict[key]
 
-        assert gt["class"] == result.cls
+        assert gt["class"] == result.id
         assert abs(gt["confidence"] - result.confidence) < CONFIDENCE_TOLERANCE
 
 

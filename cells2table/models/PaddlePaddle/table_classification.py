@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 class PaddlePaddleTableClassificationModel(
     ClassificationModel, ONNXRuntimeModel, OpencvModel, TransformersModel
 ):
-    classes: ClassVar[list[str]] = ["wired", "wireless"]
+    id2label: ClassVar[dict[int, str]] = {0: "wired", 1: "wireless"}
 
     _input_shape = (224, 224)
 
@@ -128,8 +128,8 @@ class PaddlePaddleTableClassificationModel(
         return cv2.dnn.blobFromImagesWithParams(cropped_imgs, params)
 
     @classmethod
-    def _onnx_postprocess(cls, pred: Sequence[Sequence[np.float32]]) -> list[Classification]:
-        return [Classification(max(p), cls.classes[np.argmax(p)]) for p in pred]
+    def _postprocess(cls, pred: Sequence[Sequence[np.float32]]) -> list[Classification]:
+        return [Classification(max(p), int(np.argmax(p))) for p in pred]
 
     def _onnxruntime_run(self, input: Iterable[NDArray[np.uint8]]) -> list[Classification]:
         logger.debug("Started preprocessing")
@@ -145,7 +145,7 @@ class PaddlePaddleTableClassificationModel(
         logger.debug("Done running the model")
         logger.debug("Started postprocessing")
 
-        result = self._onnx_postprocess(output)  # type: ignore
+        result = self._postprocess(output)  # type: ignore
 
         logger.debug("Done postprocessing")
 
@@ -165,7 +165,7 @@ class PaddlePaddleTableClassificationModel(
         logger.debug("Done running the model")
         logger.debug("Started postprocessing")
 
-        result = self._onnx_postprocess(output)  # type: ignore
+        result = self._postprocess(output)  # type: ignore
 
         logger.debug("Done postprocessing")
 
@@ -190,9 +190,9 @@ class PaddlePaddleTableClassificationModel(
 
         logits = output.last_hidden_state
 
-        probs = F.softmax(logits, dim=-1).detach()
+        probs = F.softmax(logits, dim=-1).detach().numpy()
 
-        result = [Classification(max(p), self.classes[np.argmax(p.numpy())]) for p in probs]
+        result = self._postprocess(probs)
 
         logger.debug("Done postprocessing")
 
