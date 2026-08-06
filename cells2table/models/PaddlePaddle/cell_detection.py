@@ -156,7 +156,7 @@ class PaddlePaddleCellDetectionModel(
         logger.debug("Started postprocessing")
 
         result = self._transformers_processor.post_process_object_detection(
-            output, target_sizes=[img.shape[:2] for img in input]
+            output, conf_threshold, target_sizes=[img.shape[:2] for img in input]
         )
 
         generators = []
