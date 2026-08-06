@@ -41,7 +41,7 @@ class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
         local_dir: Path | str | None = None,
     ) -> Path:
         match runtime:
-            case InferenceRuntime.ONNX | InferenceRuntime.OPENCV:
+            case InferenceRuntime.ONNXRUNTIME | InferenceRuntime.OPENCV:
                 pipeline_dir = None if local_dir is None else Path(local_dir) / cls._onnx_dirname
                 path = combine_download_options(
                     [

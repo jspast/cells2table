@@ -4,7 +4,7 @@ from pathlib import Path
 
 import cv2
 
-from cells2table.pipelines import DefaultPipeline
+from cells2table.pipelines import DefaultTablePipeline
 from cells2table.utils.visualize import show_image, visualize_table
 
 logger = logging.getLogger(__name__)
@@ -21,7 +21,9 @@ def download() -> None:
 
     args = parser.parse_args()
 
-    DefaultPipeline.download(runtime=DefaultPipeline._default_runtime, local_dir=args.local_dir)
+    DefaultTablePipeline.download(
+        runtime=DefaultTablePipeline._default_runtime, local_dir=args.local_dir
+    )
 
 
 def main() -> None:
@@ -53,7 +55,7 @@ def main() -> None:
         str(image.dtype),
     )
 
-    table_pipeline = DefaultPipeline(args.models_path, args.runtime)
+    table_pipeline = DefaultTablePipeline(args.models_path, args.runtime)
     tables = table_pipeline([image])
 
     for table in tables:

@@ -24,7 +24,7 @@ except ImportError:
     raise ImportError("docling is not installed. Unable to initialize plugin.")
 
 from cells2table.datamodels import Table as PluginTable
-from cells2table.pipelines import DefaultPipeline
+from cells2table.pipelines import DefaultTablePipeline
 from cells2table.utils.inference import InferenceRuntime
 from cells2table.utils.visualize import rgb_to_bgr
 
@@ -170,12 +170,12 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
         if self.enabled:
             if artifacts_path is None:
                 models_path = None
-            elif (artifacts_path / DefaultPipeline._onnx_dirname).exists():
-                models_path = artifacts_path / DefaultPipeline._onnx_dirname
+            elif (artifacts_path / DefaultTablePipeline._onnx_dirname).exists():
+                models_path = artifacts_path / DefaultTablePipeline._onnx_dirname
             else:
                 models_path = artifacts_path
 
-            self.pipeline = DefaultPipeline(models_path, options.runtime)
+            self.pipeline = DefaultTablePipeline(models_path, options.runtime)
 
             self.options = options
 

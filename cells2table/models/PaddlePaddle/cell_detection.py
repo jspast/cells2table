@@ -38,7 +38,7 @@ class PaddlePaddleCellDetectionModel(
         model_path: Path | str | None = None,
     ) -> None:
         match runtime:
-            case InferenceRuntime.ONNX:
+            case InferenceRuntime.ONNXRUNTIME:
                 self._onnxruntime_init(model_path)
                 self._run_fn = self._onnxruntime_run
             case InferenceRuntime.OPENCV:
@@ -143,14 +143,15 @@ class PaddlePaddleCellDetectionModel(
     ) -> list[Iterator[Detection]]:
         logger.debug("Started preprocessing")
 
-        inputs = self._transformers_processor(images=input, return_tensors="pt").to(  # ty:ignore[invalid-argument-type]
-            self._transformers_model.device  # ty:ignore[unresolved-attribute]
-        )
+        inputs = self._transformers_processor(
+            images=input,  # ty:ignore[invalid-argument-type]
+            return_tensors="pt",
+        ).to(self._transformers_model.device)
 
         logger.debug("Done preprocessing")
         logger.debug("Started running the model")
 
-        output = self._transformers_model(**inputs)  # ty:ignore[call-non-callable]
+        output = self._transformers_model(**inputs)
 
         logger.debug("Done running the model")
         logger.debug("Started postprocessing")

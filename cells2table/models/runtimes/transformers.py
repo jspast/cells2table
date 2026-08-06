@@ -2,10 +2,16 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, ClassVar
 
+from cells2table.utils.inference import InferenceRuntime, enabled_inference_runtimes
+
 try:
     from transformers import PreTrainedModel
+
+    HAS_TRANSFORMERS = True
+    enabled_inference_runtimes.append(InferenceRuntime.TRANSFORMERS)
+
 except ImportError:
-    PreTrainedModel = None
+    HAS_TRANSFORMERS = False
 
 
 from cells2table.models.tasks.base import BaseModel

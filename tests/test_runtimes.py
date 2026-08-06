@@ -4,7 +4,7 @@ import cv2
 import pytest
 from numpy.typing import NDArray
 
-from cells2table.pipelines import DefaultPipeline
+from cells2table.pipelines import DefaultTablePipeline
 from cells2table.pipelines.classification_detection import ClassificationDetectionPipeline
 from cells2table.utils.inference import InferenceRuntime
 from tests.gt_utils import verify_classification, verify_detection
@@ -12,17 +12,17 @@ from tests.gt_utils import verify_classification, verify_detection
 
 @pytest.fixture
 def opencv_pipeline() -> ClassificationDetectionPipeline:
-    return DefaultPipeline(runtime=InferenceRuntime.OPENCV)
+    return DefaultTablePipeline(runtime=InferenceRuntime.OPENCV)
 
 
 @pytest.fixture
 def onnx_pipeline() -> ClassificationDetectionPipeline:
-    return DefaultPipeline(runtime=InferenceRuntime.ONNX)
+    return DefaultTablePipeline(runtime=InferenceRuntime.ONNXRUNTIME)
 
 
 @pytest.fixture
 def transformers_pipeline() -> ClassificationDetectionPipeline:
-    return DefaultPipeline(runtime=InferenceRuntime.TRANSFORMERS)
+    return DefaultTablePipeline(runtime=InferenceRuntime.TRANSFORMERS)
 
 
 @pytest.fixture

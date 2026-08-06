@@ -2,10 +2,16 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, ClassVar
 
+from cells2table.utils.inference import InferenceRuntime, enabled_inference_runtimes
+
 try:
     import onnxruntime as ort
+
+    HAS_ONNXRUNTIME = True
+    enabled_inference_runtimes.append(InferenceRuntime.ONNXRUNTIME)
+
 except ImportError:
-    ort = None  # ty:ignore[invalid-assignment]
+    HAS_ONNXRUNTIME = False
 
 from cells2table.models.tasks.base import BaseModel
 from cells2table.utils.download import DownloadOption, select_download_option
