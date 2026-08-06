@@ -215,8 +215,6 @@ class PaddlePaddleCellDetectionModel(
 
 
 class PaddlePaddleWiredCellDetectionModel(PaddlePaddleCellDetectionModel):
-    classes: ClassVar[list[str]] = ["wired"]
-
     _onnx_path: ClassVar[str] = "wired_table_cell_det.onnx"
     _onnx_download_options: ClassVar[list[DownloadOption]] = [
         DownloadOption(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, (_onnx_path,)),
@@ -229,8 +227,6 @@ class PaddlePaddleWiredCellDetectionModel(PaddlePaddleCellDetectionModel):
 
 
 class PaddlePaddleWirelessCellDetectionModel(PaddlePaddleCellDetectionModel):
-    classes: ClassVar[list[str]] = ["wireless"]
-
     _onnx_path: ClassVar[str] = "wireless_table_cell_det.onnx"
     _onnx_download_options: ClassVar[list[DownloadOption]] = [
         DownloadOption(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, (_onnx_path,)),

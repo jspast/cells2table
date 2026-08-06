@@ -25,26 +25,26 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
     def __call__(self, input: Iterable[Any], conf_threshold: float = 0.5, **kwargs) -> list[Table]:
         """Run the pipeline."""
 
-        cls_images = [[] for c in self.classification_model.classes]
-        cls_detections = [[] for c in self.classification_model.classes]
-        cls_current_idx = [0 for c in self.classification_model.classes]
+        cls_images = [[] for c in self.classification_model.id2label]
+        cls_detections = [[] for c in self.classification_model.id2label]
+        cls_current_idx = [0 for c in self.classification_model.id2label]
         output = []
 
         cls_result = self.classification_model(input)
 
         # Run the classification model for each image
         for i, (img, p) in enumerate(zip(input, cls_result)):
-            cls_images[self.assigned_model_idx(p.cls, self.detection_models)].append(img)
-            logger.info("Image %d classified as %s with %.4f confidence", i, p.cls, p.confidence)
+            cls_images[self.assigned_model_idx(p.id)].append(img)
+            logger.info("Image %d classified as %s with %.4f confidence", i, p.id, p.confidence)
 
         # Run the detection model for each image
-        for i in range(len(self.classification_model.classes)):
+        for i in range(len(self.classification_model.id2label)):
             if len(cls_images[i]):
                 cls_detections[i] = self.detection_models[i](cls_images[i], conf_threshold)
 
         # Combine results
         for i in range(len(cls_result)):
-            model_idx = self.assigned_model_idx(cls_result[i].cls, self.detection_models)
+            model_idx = self.assigned_model_idx(cls_result[i].id)
             cells_det = cls_detections[model_idx][cls_current_idx[model_idx]]
             cls_current_idx[model_idx] += 1
             output.append(Table.from_detections(cells_det))
@@ -58,9 +58,9 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
     ) -> tuple[Table, list[Detection]]:
         if detection_model_idx is None:
             c = self.classification_model([image])[0]
-            logger.info("Image classified as %s with %.4f confidence", c.cls, c.confidence)
+            logger.info("Image classified as %s with %.4f confidence", c.id, c.confidence)
 
-            model_idx = self.assigned_model_idx(c.cls, self.detection_models)
+            model_idx = self.assigned_model_idx(c.id)
         else:
             model_idx = detection_model_idx
 
@@ -72,11 +72,6 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
         return t, d_list
 
     @staticmethod
-    def assigned_model_idx(pred_cls: str, models: list[DetectionModel]) -> int:
-        """Return the index of the first model appropriate for the class."""
-
-        for idx, model in enumerate(models):
-            if pred_cls in model.classes:
-                return idx
-
-        raise ValueError(f"No model can be assigned for class {pred_cls}")
+    @abstractmethod
+    def assigned_model_idx(pred_class_id: int) -> int:
+        """Return the index of the appropriate model for the class."""

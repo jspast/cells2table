@@ -9,13 +9,13 @@ from cells2table.models.tasks.base import BaseModel, Prediction
 class Classification(Prediction):
     """Result type for classification models."""
 
-    cls: str
+    id: int
 
 
 class ClassificationModel(BaseModel, ABC):
     """Base interface for table classification models."""
 
-    classes: ClassVar[list[str]]
+    id2label: ClassVar[dict[int, str]]
 
     @abstractmethod
     def __call__(self, input: Any) -> list[Classification]:
