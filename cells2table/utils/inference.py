@@ -5,6 +5,9 @@ logger = logging.getLogger(__name__)
 
 
 class InferenceRuntime(StrEnum):
-    ONNX = "onnxruntime"
+    ONNXRUNTIME = "onnxruntime"
     OPENCV = "opencv"
     TRANSFORMERS = "transformers"
+
+
+enabled_inference_runtimes: list[InferenceRuntime] = [InferenceRuntime.OPENCV]

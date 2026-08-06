@@ -1,4 +1,4 @@
-from .paddlepaddle import PaddlePaddleTablePipeline
-from .paddlepaddle import PaddlePaddleTablePipeline as DefaultPipeline
+from .paddlepaddle_table import PaddlePaddleTablePipeline
+from .paddlepaddle_table import PaddlePaddleTablePipeline as DefaultTablePipeline
 
-__all__ = ["DefaultPipeline", "PaddlePaddleTablePipeline"]
+__all__ = ["DefaultTablePipeline", "PaddlePaddleTablePipeline"]
