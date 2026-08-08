@@ -1,8 +1,11 @@
+from collections.abc import Iterator
+
 import cv2
 import numpy as np
 from numpy.typing import NDArray
 
 from cells2table.datamodels import Table
+from cells2table.models.tasks import ClassifiedDetection, Detection
 
 
 def bgr_to_rgb(image: NDArray[np.uint8]) -> NDArray[np.uint8]:
@@ -61,5 +64,46 @@ def visualize_table(
             cv2.FontFace("uni"),
             14,
         )
+
+    return img
+
+
+def visualize_detections(
+    image: NDArray[np.uint8],
+    detections: Iterator[Detection],
+    id2label: dict[int, str] | None = None,
+    color=(0, 255, 0),
+    thickness=2,
+) -> NDArray[np.uint8]:
+    """Simple detection visualization on top of the image.
+
+    In case detections are classified, the label will be printed for each.
+
+    Args:
+        image: A cv2 BGR image.
+        detections: The detections to draw on top of the image.
+        color: The color of the detection overlays.
+        thickness: The thickness of the overlay lines.
+    """
+    img = image.copy()
+
+    for det in detections:
+        cv2.rectangle(
+            img,
+            (round(det.bbox[0]), round(det.bbox[1])),
+            (round(det.bbox[2]), round(det.bbox[3])),
+            color,
+            thickness,
+        )
+
+        if isinstance(det, ClassifiedDetection) and id2label is not None:
+            cv2.putText(
+                img,
+                id2label[det.id],
+                (round(det.bbox[0]), round(det.bbox[1]) + 10),
+                (128, 192, 0),
+                cv2.FontFace("uni"),
+                14,
+            )
 
     return img

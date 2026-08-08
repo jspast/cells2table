@@ -7,9 +7,7 @@ import cv2
 import numpy as np
 from numpy.typing import NDArray
 
-from cells2table.models.runtimes.onnxruntime import ONNXRuntimeModel
-from cells2table.models.runtimes.opencv import OpencvModel
-from cells2table.models.runtimes.transformers import TransformersModel
+from cells2table.models.runtimes import ONNXRuntimeModel, OpenCVModel, TransformersModel
 from cells2table.models.tasks import Detection, DetectionModel
 from cells2table.utils.download import DownloadOption, DownloadPlatform
 from cells2table.utils.inference import InferenceRuntime
@@ -20,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 class PaddlePaddleCellDetectionModel(
-    DetectionModel, ONNXRuntimeModel, OpencvModel, TransformersModel
+    DetectionModel, ONNXRuntimeModel, OpenCVModel, TransformersModel
 ):
     """Table cell detection model from PaddlePaddle."""
 
@@ -171,10 +169,11 @@ class PaddlePaddleCellDetectionModel(
 
         return generators
 
-    def _onnx_preprocess(self, input: Sequence[NDArray[np.uint8]]) -> NDArray:
+    @classmethod
+    def _onnx_preprocess(cls, input: Sequence[NDArray[np.uint8]]) -> NDArray:
         params = cv2.dnn.Image2BlobParams(
             scalefactor=1.0 / 255.0,
-            size=(640, 640),
+            size=cls._input_shape,
             swapRB=False,
             ddepth=cv2.CV_32F,
             datalayout=cv2.DNN_LAYOUT_NCHW,

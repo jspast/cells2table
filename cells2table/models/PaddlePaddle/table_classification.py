@@ -7,9 +7,7 @@ import cv2
 import numpy as np
 from numpy.typing import NDArray
 
-from cells2table.models.runtimes.onnxruntime import ONNXRuntimeModel
-from cells2table.models.runtimes.opencv import OpencvModel
-from cells2table.models.runtimes.transformers import TransformersModel
+from cells2table.models.runtimes import ONNXRuntimeModel, OpenCVModel, TransformersModel
 from cells2table.models.tasks import Classification, ClassificationModel
 from cells2table.utils.download import DownloadOption, DownloadPlatform
 from cells2table.utils.inference import InferenceRuntime
@@ -20,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 class PaddlePaddleTableClassificationModel(
-    ClassificationModel, ONNXRuntimeModel, OpencvModel, TransformersModel
+    ClassificationModel, ONNXRuntimeModel, OpenCVModel, TransformersModel
 ):
     id2label: ClassVar[dict[int, str]] = {0: "wired", 1: "wireless"}
 
@@ -72,7 +70,8 @@ class PaddlePaddleTableClassificationModel(
     def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[Classification]:
         return self._run_fn(input)
 
-    def _onnx_preprocess(self, input: Iterable[NDArray[np.uint8]]) -> NDArray:
+    @classmethod
+    def _onnx_preprocess(cls, input: Iterable[NDArray[np.uint8]]) -> NDArray:
         """PP-LCNet image preprocessing pipeline.
 
         Args:
