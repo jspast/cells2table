@@ -1,0 +1,219 @@
+import logging
+from collections.abc import Iterator, Sequence
+from pathlib import Path
+from typing import ClassVar, override
+
+import cv2
+import numpy as np
+from numpy.typing import NDArray
+
+from cells2table.models.runtimes import ONNXRuntimeModel, TransformersModel
+from cells2table.models.tasks import ClassifiedDetection, ClassifiedDetectionModel
+from cells2table.utils.download import DownloadOption, DownloadPlatform
+from cells2table.utils.inference import InferenceRuntime
+
+logger = logging.getLogger(__name__)
+
+
+class PaddlePaddleLayoutModel(ClassifiedDetectionModel, ONNXRuntimeModel, TransformersModel):
+    """Layout detection model from PaddlePaddle.
+
+    OpenCV fails to run the ONNX model as of Aug 2026.
+    """
+
+    _max_detections = 300
+    _input_shape = (800, 800)
+
+    _onnx_input_names = ("im_shape", "image", "scale_factor")
+    _onnx_output_names = ("fetch_name_0", "fetch_name_1", "fetch_name_2")
+
+    _default_runtime = InferenceRuntime.ONNXRUNTIME
+
+    _onnx_repo: ClassVar[str] = "PaddlePaddle/PP-DocLayoutV3_onnx"
+    _onnx_path: ClassVar[str] = "inference.onnx"
+    _onnx_download_options: ClassVar[list[DownloadOption]] = [
+        DownloadOption(DownloadPlatform.HUGGINGFACE, _onnx_repo, (_onnx_path,)),
+    ]
+
+    _transformers_path: ClassVar[str] = "PaddlePaddle/PP-DocLayoutV3_safetensors"
+    _transformers_download_options: ClassVar[list[DownloadOption]] = [
+        DownloadOption(DownloadPlatform.HUGGINGFACE, _transformers_path),
+    ]
+
+    id2label: ClassVar[dict[int, str]] = {
+        0: "abstract",
+        1: "algorithm",
+        2: "aside_text",
+        3: "chart",
+        4: "content",
+        5: "display_formula",
+        6: "doc_title",
+        7: "figure_title",
+        8: "footer",
+        9: "footer_image",
+        10: "footnote",
+        11: "formula_number",
+        12: "header",
+        13: "header_image",
+        14: "image",
+        15: "inline_formula",
+        16: "number",
+        17: "paragraph_title",
+        18: "reference",
+        19: "reference_content",
+        20: "seal",
+        21: "table",
+        22: "text",
+        23: "vertical_text",
+        24: "vision_footnote",
+    }
+
+    def __init__(
+        self,
+        runtime: InferenceRuntime = _default_runtime,
+        model_path: Path | str | None = None,
+    ) -> None:
+        match runtime:
+            case InferenceRuntime.ONNXRUNTIME:
+                self._onnxruntime_init(model_path)
+                self._run_fn = self._onnxruntime_run
+            case InferenceRuntime.TRANSFORMERS:
+                self._transformers_init(model_path)
+                self._run_fn = self._transformers_run
+            case _:
+                raise ValueError(f"Unsupported runtime '{runtime}' for model {self.__class__}")
+
+    @override
+    def _transformers_init(self, model_path: Path | str | None = None) -> None:
+        super()._transformers_init(model_path=model_path)
+
+        from transformers import PPDocLayoutV3ForObjectDetection, PPDocLayoutV3ImageProcessor
+
+        self._transformers_model = PPDocLayoutV3ForObjectDetection.from_pretrained(
+            self._transformers_path
+        )
+        self._transformers_processor = PPDocLayoutV3ImageProcessor.from_pretrained(
+            self._transformers_path
+        )
+
+    def __call__(
+        self,
+        input: Sequence[NDArray[np.uint8]],
+        conf_threshold: float = 0.5,
+    ) -> list[Iterator[ClassifiedDetection]]:
+        return self._run_fn(input, conf_threshold)
+
+    @classmethod
+    def _onnx_preprocess(cls, input: Sequence[NDArray[np.uint8]]) -> NDArray:
+        params = cv2.dnn.Image2BlobParams(
+            scalefactor=1.0 / 255.0,
+            size=cls._input_shape,
+            swapRB=False,
+            ddepth=cv2.CV_32F,
+            datalayout=cv2.DNN_LAYOUT_NCHW,
+            mode=cv2.dnn.DNN_PMODE_NULL,
+        )
+
+        return cv2.dnn.blobFromImagesWithParams(input, params)
+
+    @classmethod
+    def _onnx_postprocess(
+        cls,
+        pred: Sequence,
+        scale_factors: Sequence[tuple[int, int] | NDArray],
+        conf_threshold: float,
+    ) -> list[Iterator[ClassifiedDetection]]:
+        last_cell_idx = 0
+        cells = pred[0]
+
+        generators = []
+
+        for i, count in enumerate(pred[1]):
+            c = cells[last_cell_idx : last_cell_idx + count]
+            c = c[c[:, 1] > conf_threshold]
+            last_cell_idx += count
+
+            if not c.size:
+                generators.append(iter([]))
+                continue
+
+            sx, sy = scale_factors[i]
+            ids = c[:, 0]
+            scores = c[:, 1]
+            boxes = c[:, 2:]
+            boxes[:, [0, 2]] *= sy
+            boxes[:, [1, 3]] *= sx
+
+            generators.append(
+                (ClassifiedDetection(score, box, id) for score, box, id in zip(scores, boxes, ids))
+            )
+
+        return generators
+
+    def _onnxruntime_run(
+        self,
+        input: Sequence[NDArray[np.uint8]],
+        conf_threshold: float = 0.5,
+    ) -> list[Iterator[ClassifiedDetection]]:
+        logger.debug("Started preprocessing")
+
+        original_shapes = []
+        scale_factors = []
+        for img in input:
+            original_shape = img.shape[:2]
+            original_shapes.append(original_shape)
+            scale_factors.append(tuple(original_shape[i] / self._input_shape[i] for i in range(2)))
+
+        imgs = self._onnx_preprocess(input)
+
+        input_dict = dict(zip(self._onnx_input_names, [original_shapes, imgs, scale_factors]))
+
+        logger.debug("Done preprocessing")
+        logger.debug("Started running the model")
+
+        output = self._onnxruntime_session.run(self._onnx_output_names, input_dict)
+
+        logger.debug("Done running the model")
+        logger.debug("Started postprocessing")
+
+        result = self._onnx_postprocess(output, scale_factors, conf_threshold)
+
+        logger.debug("Done postprocessing")
+
+        return result
+
+    def _transformers_run(
+        self,
+        input: Sequence[NDArray[np.uint8]],
+        conf_threshold: float = 0.5,
+    ) -> list[Iterator[ClassifiedDetection]]:
+        logger.debug("Started preprocessing")
+
+        inputs = self._transformers_processor(
+            images=input,  # ty:ignore[invalid-argument-type]
+            return_tensors="pt",
+        ).to(self._transformers_model.device)
+
+        logger.debug("Done preprocessing")
+        logger.debug("Started running the model")
+
+        output = self._transformers_model(**inputs)
+
+        logger.debug("Done running the model")
+        logger.debug("Started postprocessing")
+
+        result = self._transformers_processor.post_process_object_detection(
+            output, conf_threshold, target_sizes=[img.shape[:2] for img in input]
+        )
+
+        # TODO: Extract reading order
+        generators = []
+        for res in result:
+            generators.append(
+                ClassifiedDetection(score.item(), box.detach().numpy(), class_id.item())
+                for score, box, class_id in zip(res["scores"], res["boxes"], res["labels"])
+            )
+
+        logger.debug("Done postprocessing")
+
+        return generators

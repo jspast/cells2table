@@ -15,10 +15,17 @@ class Detection(Prediction):
     bbox: np.ndarray
 
 
+@dataclass(frozen=True, slots=True)
+class ClassifiedDetection(Detection):
+    """Result type for a detection with a class."""
+
+    id: int
+
+
 def filter_detections(
-    detections: Iterable[Detection],
+    detections: Iterable[Detection | ClassifiedDetection],
     conf_threshold: float,
-) -> list[Detection]:
+) -> list[Detection | ClassifiedDetection]:
     return [d for d in detections if d.confidence > conf_threshold]
 
 
@@ -31,4 +38,16 @@ class DetectionModel(BaseModel, ABC):
         input: Any,
         conf_threshold: float = 0.5,
     ) -> list[Iterator[Detection]]:
+        pass
+
+
+class ClassifiedDetectionModel(BaseModel, ABC):
+    """Base interface for detection with classes models."""
+
+    @abstractmethod
+    def __call__(
+        self,
+        input: Any,
+        conf_threshold: float = 0.5,
+    ) -> list[Iterator[ClassifiedDetection]]:
         pass

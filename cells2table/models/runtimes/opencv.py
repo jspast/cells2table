@@ -8,7 +8,7 @@ from cells2table.models.tasks.base import BaseModel
 from cells2table.utils.download import DownloadOption, select_download_option
 
 
-class OpencvModel(BaseModel, ABC):
+class OpenCVModel(BaseModel, ABC):
     """Base interface for OpenCV models."""
 
     _onnx_path: ClassVar[str]

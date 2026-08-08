@@ -28,7 +28,8 @@ cells2table = "cells2table.cli:main"
 cells2table-download = "cells2table.cli:download"
 
 [project.entry-points.docling]
-cells2table = "cells2table.docling"
+cells2table = "cells2table.docling.table"
+ppdoclayoutv3 = "cells2table.docling.layout"
 
 [project.optional-dependencies]
 huggingface = [

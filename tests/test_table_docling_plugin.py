@@ -16,8 +16,8 @@ from docling.document_converter import (
 from cells2table.docling import (
     CustomDoclingTableStructureModel,
     CustomDoclingTableStructureOptions,
-    table_structure_engines,
 )
+from cells2table.docling.table import table_structure_engines
 
 from .gt_utils import verify_text
 
