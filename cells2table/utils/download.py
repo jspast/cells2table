@@ -10,7 +10,17 @@ class DownloadPlatform(StrEnum):
     HUGGINGFACE = "huggingface"
 
 
-enabled_download_platforms: set[DownloadPlatform] = {DownloadPlatform.HUGGINGFACE}
+enabled_download_platforms: set[DownloadPlatform] = set()
+
+try:
+    from huggingface_hub import snapshot_download, try_to_load_from_cache
+    from huggingface_hub.utils import disable_progress_bars
+
+    HAS_HUGGINGFACE = True
+    enabled_download_platforms.add(DownloadPlatform.HUGGINGFACE)
+
+except ImportError:
+    HAS_HUGGINGFACE = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -49,7 +59,13 @@ def select_download_option(supported: list[DownloadOption]) -> DownloadOption:
             if p == o.platform:
                 return o
 
-    raise (ValueError("No supported download option found. Check enabled_download_platforms."))
+    raise (
+        ValueError(
+            "No supported download option found.\n"
+            f"No supported platform { {p.platform for p in supported} } "
+            f"is available ({enabled_download_platforms})."
+        )
+    )
 
 
 def hf_download(
@@ -59,12 +75,6 @@ def hf_download(
     local_dir: Path | str | None = None,
 ) -> Path:
     """Download a repository from Hugging Face and return its path."""
-
-    try:
-        from huggingface_hub import snapshot_download, try_to_load_from_cache
-        from huggingface_hub.utils import disable_progress_bars
-    except ImportError:
-        raise ImportError("huggingface_hub is not installed. Unable to download the model.")
 
     disable_progress_bars()
 
