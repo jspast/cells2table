@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 class PaddlePaddleCellDetectionModel(
-    DetectionModel, ONNXRuntimeModel, OpenCVModel, TransformersModel
+    DetectionModel, OpenCVModel, ONNXRuntimeModel, TransformersModel
 ):
     """Table cell detection model from PaddlePaddle."""
 
@@ -28,14 +28,14 @@ class PaddlePaddleCellDetectionModel(
     _onnx_input_names = ("im_shape", "image", "scale_factor")
     _onnx_output_names = ("fetch_name_0", "fetch_name_1")
 
-    _default_runtime = InferenceRuntime.OPENCV
-
     def __init__(
         self,
-        runtime: InferenceRuntime = _default_runtime,
         model_path: Path | str | None = None,
+        runtime: InferenceRuntime | None = None,
     ) -> None:
-        match runtime:
+        super().__init__(model_path, runtime)
+
+        match self._runtime:
             case InferenceRuntime.ONNXRUNTIME:
                 self._onnxruntime_init(model_path)
                 self._run_fn = self._onnxruntime_run

@@ -15,7 +15,7 @@ from cells2table.utils.inference import InferenceRuntime
 logger = logging.getLogger(__name__)
 
 
-class PaddlePaddleLayoutModel(ClassifiedDetectionModel, ONNXRuntimeModel, TransformersModel):
+class PaddlePaddleLayoutModel(ClassifiedDetectionModel, TransformersModel, ONNXRuntimeModel):
     """Layout detection model from PaddlePaddle.
 
     OpenCV fails to run the ONNX model as of Aug 2026.
@@ -26,8 +26,6 @@ class PaddlePaddleLayoutModel(ClassifiedDetectionModel, ONNXRuntimeModel, Transf
 
     _onnx_input_names = ("im_shape", "image", "scale_factor")
     _onnx_output_names = ("fetch_name_0", "fetch_name_1", "fetch_name_2")
-
-    _default_runtime = InferenceRuntime.ONNXRUNTIME
 
     _onnx_repo: ClassVar[str] = "PaddlePaddle/PP-DocLayoutV3_onnx"
     _onnx_path: ClassVar[str] = "inference.onnx"
@@ -70,10 +68,12 @@ class PaddlePaddleLayoutModel(ClassifiedDetectionModel, ONNXRuntimeModel, Transf
 
     def __init__(
         self,
-        runtime: InferenceRuntime = _default_runtime,
         model_path: Path | str | None = None,
+        runtime: InferenceRuntime | None = None,
     ) -> None:
-        match runtime:
+        super().__init__(model_path, runtime)
+
+        match self._runtime:
             case InferenceRuntime.ONNXRUNTIME:
                 self._onnxruntime_init(model_path)
                 self._run_fn = self._onnxruntime_run
@@ -81,7 +81,9 @@ class PaddlePaddleLayoutModel(ClassifiedDetectionModel, ONNXRuntimeModel, Transf
                 self._transformers_init(model_path)
                 self._run_fn = self._transformers_run
             case _:
-                raise ValueError(f"Unsupported runtime '{runtime}' for model {self.__class__}")
+                raise ValueError(
+                    f"Unsupported runtime '{self._runtime}' for model {self.__class__}"
+                )
 
     @override
     def _transformers_init(self, model_path: Path | str | None = None) -> None:

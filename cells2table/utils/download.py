@@ -10,7 +10,7 @@ class DownloadPlatform(StrEnum):
     HUGGINGFACE = "huggingface"
 
 
-enabled_download_platforms: list[DownloadPlatform] = [DownloadPlatform.HUGGINGFACE]
+enabled_download_platforms: set[DownloadPlatform] = {DownloadPlatform.HUGGINGFACE}
 
 
 @dataclass(frozen=True, slots=True)

@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 class PaddlePaddleTableClassificationModel(
-    ClassificationModel, ONNXRuntimeModel, OpenCVModel, TransformersModel
+    ClassificationModel, OpenCVModel, ONNXRuntimeModel, TransformersModel
 ):
     id2label: ClassVar[dict[int, str]] = {0: "wired", 1: "wireless"}
 
@@ -36,14 +36,14 @@ class PaddlePaddleTableClassificationModel(
         DownloadOption(DownloadPlatform.HUGGINGFACE, _transformers_path),
     ]
 
-    _default_runtime = InferenceRuntime.OPENCV
-
     def __init__(
         self,
-        runtime: InferenceRuntime = _default_runtime,
         model_path: Path | str | None = None,
+        runtime: InferenceRuntime | None = None,
     ) -> None:
-        match runtime:
+        super().__init__(model_path, runtime)
+
+        match self._runtime:
             case InferenceRuntime.ONNXRUNTIME:
                 self._onnxruntime_init(model_path)
                 self._run_fn = self._onnxruntime_run

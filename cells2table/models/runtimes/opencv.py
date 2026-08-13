@@ -6,6 +6,7 @@ import cv2
 
 from cells2table.models.tasks.base import BaseModel
 from cells2table.utils.download import DownloadOption, select_download_option
+from cells2table.utils.inference import InferenceRuntime
 
 
 class OpenCVModel(BaseModel, ABC):
@@ -24,6 +25,12 @@ class OpenCVModel(BaseModel, ABC):
     @classmethod
     def _onnx_download(cls, *, local_dir: Path | str | None = None) -> Path:
         return select_download_option(cls._onnx_download_options).download(local_dir=local_dir)
+
+    @classmethod
+    def supported_inference_runtimes(cls) -> list[InferenceRuntime]:
+        runtimes = super().supported_inference_runtimes()
+        runtimes.insert(0, InferenceRuntime.OPENCV)
+        return runtimes
 
     @abstractmethod
     def _opencv_run(self, input: Any):
