@@ -94,7 +94,7 @@ class CustomDoclingLayoutModel(BaseLayoutModel):
         else:
             models_path = artifacts_path
 
-        self.model = PaddlePaddleLayoutModel(options.runtime, models_path)
+        self.model = PaddlePaddleLayoutModel(models_path, options.runtime)
 
     @classmethod
     def get_options_type(cls) -> type[CustomDoclingLayoutOptions]:

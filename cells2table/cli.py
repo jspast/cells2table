@@ -1,5 +1,7 @@
 import argparse
 import logging
+import os
+import platform
 from pathlib import Path
 
 import cv2
@@ -12,16 +14,28 @@ from cells2table.utils.visualize import show_image, visualize_detections, visual
 logger = logging.getLogger(__name__)
 
 
+def fix_cv2_qt_warnings() -> None:
+    if platform.system() == "Linux":
+        os.environ["QT_QPA_FONTDIR"] = "/usr/share/fonts"
+        os.environ["QT_QPA_PLATFORM"] = "xcb"
+        os.environ["XDG_SESSION_TYPE"] = "x11"
+
+
+def setup_logging(level: logging._Level = logging.INFO) -> None:
+    format = "%(asctime)s\t%(levelname)s\t%(name)s: %(message)s"
+    logging.basicConfig(level=level, format=format)
+
+
 def download() -> None:
     """Download default pipeline models."""
 
-    log_format = "%(asctime)s\t%(levelname)s\t%(name)s: %(message)s"
-    logging.basicConfig(level=logging.INFO, format=log_format)
-
     parser = argparse.ArgumentParser()
     parser.add_argument("--local-dir", type=Path, default=None, help="Path to download models to")
+    parser.add_argument("-log", "--loglevel", default=logging.INFO, help="Logging level to use")
 
     args = parser.parse_args()
+
+    setup_logging(args.loglevel)
 
     DefaultTablePipeline.download(
         runtime=DefaultTablePipeline._default_runtime, local_dir=args.local_dir
@@ -31,8 +45,7 @@ def download() -> None:
 def main() -> None:
     """Basic CLI program for testing."""
 
-    log_format = "%(asctime)s\t%(levelname)s\t%(name)s: %(message)s"
-    logging.basicConfig(level=logging.INFO, format=log_format)
+    fix_cv2_qt_warnings()
 
     parser = argparse.ArgumentParser(description="Load an image from a given path using OpenCV")
     parser.add_argument("image_path", type=Path, help="Path to the image file")
@@ -47,8 +60,17 @@ def main() -> None:
         help="Inference runtime to use",
         choices=enabled_inference_runtimes,
     )
+    parser.add_argument(
+        "-log",
+        "--loglevel",
+        default=logging.INFO,
+        help="Logging level to use",
+        choices=logging.getLevelNamesMapping().keys(),
+    )
 
     args = parser.parse_args()
+
+    setup_logging(args.loglevel)
 
     if not args.image_path.exists():
         raise FileNotFoundError(f"File does not exist: {args.image_path}")
@@ -74,8 +96,7 @@ def main() -> None:
             show_image(visualize_table(image, table))  # ty:ignore[invalid-argument-type]
 
     elif args.task[0].upper() == "L":
-        runtime = PaddlePaddleLayoutModel._default_runtime if args.runtime is None else args.runtime
-        layout_model = PaddlePaddleLayoutModel(runtime, args.models_path)
+        layout_model = PaddlePaddleLayoutModel(args.models_path, args.runtime)
         layouts = layout_model([image])  # ty: ignore[invalid-argument-type]
 
         for detections in layouts:

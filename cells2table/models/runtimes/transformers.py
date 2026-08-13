@@ -8,7 +8,7 @@ try:
     from transformers import PreTrainedModel
 
     HAS_TRANSFORMERS = True
-    enabled_inference_runtimes.append(InferenceRuntime.TRANSFORMERS)
+    enabled_inference_runtimes.add(InferenceRuntime.TRANSFORMERS)
 
 except ImportError:
     HAS_TRANSFORMERS = False
@@ -34,6 +34,12 @@ class TransformersModel(BaseModel, ABC):
         return select_download_option(cls._transformers_download_options).download(
             local_dir=local_dir
         )
+
+    @classmethod
+    def supported_inference_runtimes(cls) -> list[InferenceRuntime]:
+        runtimes = super().supported_inference_runtimes()
+        runtimes.insert(0, InferenceRuntime.TRANSFORMERS)
+        return runtimes
 
     @abstractmethod
     def _transformers_run(self, input: Any):

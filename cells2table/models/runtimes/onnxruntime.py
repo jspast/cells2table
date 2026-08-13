@@ -8,7 +8,7 @@ try:
     import onnxruntime as ort
 
     HAS_ONNXRUNTIME = True
-    enabled_inference_runtimes.append(InferenceRuntime.ONNXRUNTIME)
+    enabled_inference_runtimes.add(InferenceRuntime.ONNXRUNTIME)
 
 except ImportError:
     HAS_ONNXRUNTIME = False
@@ -44,6 +44,12 @@ class ONNXRuntimeModel(BaseModel, ABC):
     @classmethod
     def _onnx_download(cls, *, local_dir: Path | str | None = None) -> Path:
         return select_download_option(cls._onnx_download_options).download(local_dir=local_dir)
+
+    @classmethod
+    def supported_inference_runtimes(cls) -> list[InferenceRuntime]:
+        runtimes = super().supported_inference_runtimes()
+        runtimes.insert(0, InferenceRuntime.ONNXRUNTIME)
+        return runtimes
 
     @abstractmethod
     def _onnxruntime_run(self, input: Any):
