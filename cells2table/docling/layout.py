@@ -22,7 +22,7 @@ except ImportError:
 
 from cells2table.models.PaddlePaddle import PaddlePaddleLayoutModel
 from cells2table.models.tasks import ClassifiedDetection
-from cells2table.utils.inference import InferenceRuntime
+from cells2table.utils.inference import InferenceRuntime, select_inference_runtime
 
 _log = logging.getLogger(__name__)
 
@@ -42,8 +42,13 @@ class CustomDoclingLayoutOptions(BaseLayoutOptions):
     )
 
     runtime: Annotated[
-        InferenceRuntime, Field(description="Inference runtime to use. Defaults to ONNX Runtime.")
-    ] = InferenceRuntime.ONNXRUNTIME
+        InferenceRuntime,
+        Field(description="Inference runtime to use. Defaults to Transformers, if available."),
+    ] = Field(
+        default_factory=lambda: select_inference_runtime(
+            PaddlePaddleLayoutModel.supported_inference_runtimes()
+        )
+    )
 
 
 class CustomDoclingLayoutModel(BaseLayoutModel):

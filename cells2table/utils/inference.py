@@ -10,7 +10,7 @@ class InferenceRuntime(StrEnum):
     TRANSFORMERS = "transformers"
 
 
-enabled_inference_runtimes: set[InferenceRuntime] = {InferenceRuntime.OPENCV}
+enabled_inference_runtimes: set[InferenceRuntime] = set()
 
 
 def select_inference_runtime(supported: list[InferenceRuntime]) -> InferenceRuntime:

@@ -14,10 +14,7 @@ classifiers = [
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
 ]
-dependencies = [
-  "numpy (>=2.2.0,<3.0.0)",
-  "opencv-python (>=5.0.0.0,<6.0.0.0)",
-]
+dependencies = ["numpy (>=2.2.0,<3.0.0)"]
 
 [project.urls]
 Homepage = "https://github.com/jspast/cells2table"
@@ -36,11 +33,13 @@ huggingface = [
   "huggingface-hub (>=0.36.0,<2.0.0)",
 ]
 onnxruntime = ["onnxruntime (>=1.23.2,<2.0.0)"]
+opencv = ["opencv-python (>=5.0.0.0,<6.0.0.0)"]
+opencv-headless = ["opencv-python-headless (>=5.0.0.0,<6.0.0.0)"]
 transformers = ["transformers (>=5.8.1,<6.0.0)"]
 
 [dependency-groups]
 dev = [
-  "cells2table[onnxruntime,transformers]",
+  "cells2table[onnxruntime,transformers,opencv]",
   "docling (>=2.66.0,<3.0.0)",
   "pytest (>=7.0,<10.0)",
   "ruff (>=0.5.0,<1.0.0)",
@@ -59,9 +58,18 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 100
 
+[tool.ty.terminal]
+output-format = "concise"
+
 [tool.uv]
 package = true
-prerelease = "if-necessary-or-explicit"
+prerelease = "if-necessary"
+conflicts = [
+  [
+    { extra = "opencv-headless" },
+    { extra = "opencv" },
+  ]
+]
 
 [tool.uv.build-backend]
 module-name = "cells2table"

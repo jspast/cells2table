@@ -2,7 +2,16 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, ClassVar
 
-import cv2
+from cells2table.utils.inference import InferenceRuntime, enabled_inference_runtimes
+
+try:
+    import cv2
+
+    HAS_OPENCV = True
+    enabled_inference_runtimes.add(InferenceRuntime.OPENCV)
+
+except ImportError:
+    HAS_OPENCV = False
 
 from cells2table.models.tasks.base import BaseModel
 from cells2table.utils.download import DownloadOption, select_download_option
