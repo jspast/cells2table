@@ -13,17 +13,38 @@ logger = logging.getLogger(__name__)
 
 
 class ClassificationDetectionPipeline(BasePipeline, ABC):
-    """Base class for standard classification and detection pipelines."""
+    """Base class for standard classification and detection pipelines.
+
+    This pipeline first classifies each input image to select appropriate
+    detection model, then runs detection on the classified images, and finally
+    builds table structures from the detections.
+
+    Attributes:
+        classification_model: Model for table type classification.
+        detection_models: List of detection models.
+    """
 
     classification_model: ClassificationModel
     detection_models: list[DetectionModel]
 
     @abstractmethod
     def __init__(self, models_path: Path | str | None = None) -> None:
-        """Initialize the models."""
+        """Initialize the pipeline models.
+
+        Args:
+            models_path: Path to directory containing model weights.
+        """
 
     def __call__(self, input: Iterable[Any], conf_threshold: float = 0.5, **kwargs) -> list[Table]:
-        """Run the pipeline."""
+        """Run the pipeline on input images.
+
+        Args:
+            input: Iterable of input images (BGR format, uint8).
+            conf_threshold: Confidence threshold for detections (0-1).
+
+        Returns:
+            List of Table objects with computed structure.
+        """
 
         cls_images = [[] for c in self.classification_model.id2label]
         cls_detections = [[] for c in self.classification_model.id2label]
@@ -56,6 +77,15 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
         image,
         detection_model_idx: int | None = None,
     ) -> tuple[Table, list[Detection]]:
+        """Debug pipeline by returning unfiltered detections.
+
+        Args:
+            image: Input image.
+            detection_model_idx: Force specific detection model. If None, use classifier.
+
+        Returns:
+            Tuple of (Table with threshold filtering, all raw detections).
+        """
         if detection_model_idx is None:
             c = self.classification_model([image])[0]
             logger.info("Image classified as %s with %.4f confidence", c.id, c.confidence)
@@ -74,4 +104,11 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
     @staticmethod
     @abstractmethod
     def assigned_model_idx(pred_class_id: int) -> int:
-        """Return the index of the appropriate model for the class."""
+        """Map classification result to detection model index.
+
+        Args:
+            pred_class_id: Class ID from classification model.
+
+        Returns:
+            Index of detection model to use.
+        """
