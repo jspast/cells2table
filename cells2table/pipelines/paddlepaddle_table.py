@@ -11,7 +11,14 @@ from cells2table.utils.inference import InferenceRuntime, select_inference_runti
 
 
 class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
-    """A table pipeline combining PaddlePaddle classification and detection models."""
+    """Complete table detection pipeline using PaddlePaddle models.
+
+    This pipeline combines table classification (wired vs. wireless) with
+    cell detection.
+
+    The wired detection model is used for tables with visible borders,
+    while the wireless model is used for tables without visible borders.
+    """
 
     _default_runtime = InferenceRuntime.OPENCV
 
@@ -22,7 +29,15 @@ class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
         models_path: Path | str | None = None,
         runtime: InferenceRuntime | None = None,
     ) -> None:
-        """Initialize models from the provided path or download them."""
+        """Initialize pipeline with PaddlePaddle models.
+
+        Args:
+            models_path: Path to directory with model weights.
+            runtime: Inference runtime (onnxruntime, opencv, or transformers). If None, auto-selected.
+
+        Raises:
+            ValueError: If no inference runtime is available.
+        """
 
         runtime = (
             select_inference_runtime(
@@ -46,6 +61,15 @@ class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
         runtime: InferenceRuntime,
         local_dir: Path | str | None = None,
     ) -> Path:
+        """Download models from HuggingFace.
+
+        Args:
+            runtime: Inference runtime (determines model format).
+            local_dir: Custom download directory.
+
+        Returns:
+            Path to downloaded model directory.
+        """
         match runtime:
             case InferenceRuntime.ONNXRUNTIME | InferenceRuntime.OPENCV:
                 pipeline_dir = None if local_dir is None else Path(local_dir) / cls._onnx_dirname
@@ -78,6 +102,13 @@ class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
 
     @staticmethod
     def assigned_model_idx(pred_class_id: int) -> int:
-        """Return the index of the appropriate model for the class."""
+        """Map classification result to detection model.
+
+        Args:
+            pred_class_id: Class ID (0=wired, 1=wireless).
+
+        Returns:
+            Detection model index (0 for wired, 1 for wireless).
+        """
 
         return pred_class_id

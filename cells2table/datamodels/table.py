@@ -9,6 +9,16 @@ from cells2table.models.tasks import Detection
 
 @dataclass(slots=True)
 class Cell:
+    """A single cell in a table structure.
+
+    Attributes:
+        bbox: Bounding box coordinates.
+        row: Row index (0-based).
+        col: Column index (0-based).
+        row_span: Number of rows spanned.
+        col_span: Number of columns spanned.
+    """
+
     bbox: BoundingBox
     row: int
     col: int
@@ -17,29 +27,78 @@ class Cell:
 
 
 def sort_cells_index_by_top(cells: list[Cell]) -> list[int]:
+    """Sort cell indices by top coordinate.
+
+    Args:
+        cells: List of Cell objects.
+
+    Returns:
+        Indices sorted by top coordinate.
+    """
     return sorted(range(len(cells)), key=lambda i: cells[i].bbox.t)
 
 
 def sort_cells_index_by_bottom(cells: list[Cell]) -> list[int]:
+    """Sort cell indices by bottom coordinate.
+
+    Args:
+        cells: List of Cell objects.
+
+    Returns:
+        Indices sorted by bottom coordinate.
+    """
     return sorted(range(len(cells)), key=lambda i: cells[i].bbox.b)
 
 
 def sort_cells_index_by_left(cells: list[Cell]) -> list[int]:
+    """Sort cell indices by left coordinate.
+
+    Args:
+        cells: List of Cell objects.
+
+    Returns:
+        Indices sorted by left coordinate.
+    """
     return sorted(range(len(cells)), key=lambda i: cells[i].bbox.l)
 
 
 def sort_cells_index_by_right(cells: list[Cell]) -> list[int]:
+    """Sort cell indices by right coordinate.
+
+    Args:
+        cells: List of Cell objects.
+
+    Returns:
+        Indices sorted by right coordinate.
+    """
     return sorted(range(len(cells)), key=lambda i: cells[i].bbox.r)
 
 
 @dataclass(slots=True)
 class Table:
+    """Table structure with cell layout.
+
+    Attributes:
+        cells: List of cells in the table.
+        num_rows: Number of rows in the table.
+        num_cols: Number of columns in the table.
+    """
+
     cells: list[Cell] = field(default_factory=list)
     num_rows: int = 0
     num_cols: int = 0
 
     @classmethod
     def from_detections(cls, cells_det: Iterable[Detection], tolerance: float = 10) -> Table:
+        """Create a Table from cell detections.
+
+        Args:
+            cells_det: Iterable of Detection objects with cell bboxes.
+            tolerance: Pixel tolerance for grouping cells into rows/columns.
+
+        Returns:
+            Table with computed structure.
+        """
         table = cls()
 
         for cell_det in cells_det:
@@ -51,10 +110,20 @@ class Table:
         return table
 
     def compute_structure(self, tolerance: float) -> None:
+        """Compute row and column structure.
+
+        Args:
+            tolerance: Pixel tolerance for grouping cells.
+        """
         self.compute_cells_row(tolerance)
         self.compute_cells_col(tolerance)
 
     def compute_cells_row(self, tolerance: float) -> None:
+        """Compute row assignments and spans.
+
+        Args:
+            tolerance: Pixel tolerance for grouping cells into rows.
+        """
         indices = sort_cells_index_by_top(self.cells)
 
         spos = None  # Spatial position
@@ -91,6 +160,11 @@ class Table:
         self.num_rows = lpos + 1
 
     def compute_cells_col(self, tolerance: float) -> None:
+        """Compute column assignments and spans.
+
+        Args:
+            tolerance: Pixel tolerance for grouping cells into columns.
+        """
         indices = sort_cells_index_by_left(self.cells)
 
         spos = None  # Spatial position
