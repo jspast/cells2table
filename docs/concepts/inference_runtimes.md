@@ -16,7 +16,7 @@ Although untested, enabled ONNX Runtime builds should allow running on GPUs.
 
 ONNX inference using OpenCV's DNN module.
 
-### Transformers (Hugging Face)
+## Transformers (Hugging Face)
 
 **Extra**: `transformers`
 

@@ -1,14 +1,12 @@
 [project]
 name = "cells2table"
-version = "0.4.1"
+version = "0.5.0"
 description = "Table image parsing with cell detection models"
 readme = "README.md"
 requires-python = ">=3.12,<4.0"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [
-  { name = "jspast", email = "140563347+jspast@users.noreply.github.com" }
-]
+authors = [{ name = "jspast", email = "140563347+jspast@users.noreply.github.com" }]
 keywords = ["docling", "plugin"]
 classifiers = [
   "Operating System :: OS Independent",
@@ -29,9 +27,7 @@ cells2table = "cells2table.docling.table"
 ppdoclayoutv3 = "cells2table.docling.layout"
 
 [project.optional-dependencies]
-huggingface = [
-  "huggingface-hub (>=0.36.0,<2.0.0)",
-]
+huggingface = ["huggingface-hub (>=0.36.0,<2.0.0)"]
 onnxruntime = ["onnxruntime (>=1.23.2,<2.0.0)"]
 opencv = ["opencv-python (>=5.0.0.0,<6.0.0.0)"]
 opencv-headless = ["opencv-python-headless (>=5.0.0.0,<6.0.0.0)"]
