@@ -94,8 +94,16 @@ class CustomDoclingLayoutModel(BaseLayoutModel):
 
         if artifacts_path is None:
             models_path = None
-        # elif (artifacts_path / DefaultTablePipeline._onnx_dirname).exists():
-        #     models_path = artifacts_path / DefaultTablePipeline._onnx_dirname
+        elif (
+            options.runtime != InferenceRuntime.TRANSFORMERS
+            and (artifacts_path / PaddlePaddleLayoutModel._onnx_dirname).exists()
+        ):
+            models_path = artifacts_path / PaddlePaddleLayoutModel._onnx_dirname
+        elif (
+            options.runtime == InferenceRuntime.TRANSFORMERS
+            and (artifacts_path / PaddlePaddleLayoutModel._transformers_dirname).exists()
+        ):
+            models_path = artifacts_path / PaddlePaddleLayoutModel._transformers_dirname
         else:
             models_path = artifacts_path
 

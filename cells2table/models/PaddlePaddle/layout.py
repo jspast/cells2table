@@ -32,11 +32,13 @@ class PaddlePaddleLayoutModel(ClassifiedDetectionModel, TransformersModel, ONNXR
     _onnx_download_options: ClassVar[list[DownloadOption]] = [
         DownloadOption(DownloadPlatform.HUGGINGFACE, _onnx_repo, (_onnx_path,)),
     ]
+    _onnx_dirname = "PaddlePaddle--PP-DocLayoutV3_onnx"
 
-    _transformers_path: ClassVar[str] = "PaddlePaddle/PP-DocLayoutV3_safetensors"
+    _transformers_repo: ClassVar[str] = "PaddlePaddle/PP-DocLayoutV3_safetensors"
     _transformers_download_options: ClassVar[list[DownloadOption]] = [
-        DownloadOption(DownloadPlatform.HUGGINGFACE, _transformers_path),
+        DownloadOption(DownloadPlatform.HUGGINGFACE, _transformers_repo),
     ]
+    _transformers_dirname = "PaddlePaddle--PP-DocLayoutV3_safetensors"
 
     id2label: ClassVar[dict[int, str]] = {
         0: "abstract",
@@ -91,12 +93,8 @@ class PaddlePaddleLayoutModel(ClassifiedDetectionModel, TransformersModel, ONNXR
 
         from transformers import PPDocLayoutV3ForObjectDetection, PPDocLayoutV3ImageProcessor
 
-        self._transformers_model = PPDocLayoutV3ForObjectDetection.from_pretrained(
-            self._transformers_path
-        )
-        self._transformers_processor = PPDocLayoutV3ImageProcessor.from_pretrained(
-            self._transformers_path
-        )
+        self._transformers_model = PPDocLayoutV3ForObjectDetection.from_pretrained(self.model_path)
+        self._transformers_processor = PPDocLayoutV3ImageProcessor.from_pretrained(self.model_path)
 
     def __call__(
         self,
