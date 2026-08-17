@@ -170,8 +170,14 @@ class CustomDoclingTableStructureModel(BaseTableStructureModel):
         if self.enabled:
             if artifacts_path is None:
                 models_path = None
-            elif (artifacts_path / DefaultTablePipeline._onnx_dirname).exists():
+            elif (
+                options.runtime != InferenceRuntime.TRANSFORMERS
+                and (artifacts_path / DefaultTablePipeline._onnx_dirname).exists()
+            ):
                 models_path = artifacts_path / DefaultTablePipeline._onnx_dirname
+            elif options.runtime == InferenceRuntime.TRANSFORMERS:
+                # TODO: Transformers needs multiple repos, will not work with a single path
+                models_path = None
             else:
                 models_path = artifacts_path
 

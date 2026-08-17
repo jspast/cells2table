@@ -12,8 +12,6 @@ from cells2table.models.tasks import Detection, DetectionModel
 from cells2table.utils.download import DownloadOption, DownloadPlatform
 from cells2table.utils.inference import InferenceRuntime
 
-HF_REPO_ID = "jspast/paddlepaddle-table-models-onnx"
-
 logger = logging.getLogger(__name__)
 
 
@@ -52,8 +50,8 @@ class PaddlePaddleCellDetectionModel(
 
         from transformers import RTDetrForObjectDetection, RTDetrImageProcessor
 
-        self._transformers_model = RTDetrForObjectDetection.from_pretrained(self._transformers_path)
-        self._transformers_processor = RTDetrImageProcessor.from_pretrained(self._transformers_path)
+        self._transformers_model = RTDetrForObjectDetection.from_pretrained(self.model_path)
+        self._transformers_processor = RTDetrImageProcessor.from_pretrained(self.model_path)
 
     def __call__(
         self,
@@ -215,24 +213,26 @@ class PaddlePaddleCellDetectionModel(
 
 
 class PaddlePaddleWiredCellDetectionModel(PaddlePaddleCellDetectionModel):
+    _onnx_repo: ClassVar[str] = "jspast/paddlepaddle-table-models-onnx"
     _onnx_path: ClassVar[str] = "wired_table_cell_det.onnx"
     _onnx_download_options: ClassVar[list[DownloadOption]] = [
-        DownloadOption(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, (_onnx_path,)),
+        DownloadOption(DownloadPlatform.HUGGINGFACE, _onnx_repo, (_onnx_path,)),
     ]
 
-    _transformers_path: ClassVar[str] = "PaddlePaddle/RT-DETR-L_wired_table_cell_det_safetensors"
+    _transformers_repo: ClassVar[str] = "PaddlePaddle/RT-DETR-L_wired_table_cell_det_safetensors"
     _transformers_download_options: ClassVar[list[DownloadOption]] = [
-        DownloadOption(DownloadPlatform.HUGGINGFACE, _transformers_path),
+        DownloadOption(DownloadPlatform.HUGGINGFACE, _transformers_repo),
     ]
 
 
 class PaddlePaddleWirelessCellDetectionModel(PaddlePaddleCellDetectionModel):
+    _onnx_repo: ClassVar[str] = "jspast/paddlepaddle-table-models-onnx"
     _onnx_path: ClassVar[str] = "wireless_table_cell_det.onnx"
     _onnx_download_options: ClassVar[list[DownloadOption]] = [
-        DownloadOption(DownloadPlatform.HUGGINGFACE, HF_REPO_ID, (_onnx_path,)),
+        DownloadOption(DownloadPlatform.HUGGINGFACE, _onnx_repo, (_onnx_path,)),
     ]
 
-    _transformers_path: ClassVar[str] = "PaddlePaddle/RT-DETR-L_wireless_table_cell_det_safetensors"
+    _transformers_repo: ClassVar[str] = "PaddlePaddle/RT-DETR-L_wireless_table_cell_det_safetensors"
     _transformers_download_options: ClassVar[list[DownloadOption]] = [
-        DownloadOption(DownloadPlatform.HUGGINGFACE, _transformers_path),
+        DownloadOption(DownloadPlatform.HUGGINGFACE, _transformers_repo),
     ]

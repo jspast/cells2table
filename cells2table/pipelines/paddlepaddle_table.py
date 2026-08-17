@@ -49,6 +49,10 @@ class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
 
         models_path = self.download(runtime) if models_path is None else Path(models_path)
 
+        # TODO: Transformers needs multiple repos, will not work with a single path
+        if runtime == InferenceRuntime.TRANSFORMERS:
+            models_path = None
+
         self.classification_model = PaddlePaddleTableClassificationModel(models_path, runtime)
         self.detection_models = [
             PaddlePaddleWiredCellDetectionModel(models_path, runtime),
