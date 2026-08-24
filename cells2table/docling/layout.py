@@ -109,6 +109,8 @@ class CustomDoclingLayoutModel(BaseLayoutModel):
 
         self.model = PaddlePaddleLayoutModel(models_path, options.runtime)
 
+        self.scale = 2.0  # Scale up layout input images to 144 dpi
+
     @classmethod
     def get_options_type(cls) -> type[CustomDoclingLayoutOptions]:
         return CustomDoclingLayoutOptions
@@ -129,8 +131,7 @@ class CustomDoclingLayoutModel(BaseLayoutModel):
             if not page._backend.is_valid():
                 continue
 
-            # TODO: Ideally we should get the image with it's min size equal to the model input
-            page_image = page.get_image(scale=1.5)
+            page_image = page.get_image(scale=self.scale)
             if page_image is None:
                 continue
 
