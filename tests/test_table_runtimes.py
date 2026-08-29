@@ -11,13 +11,13 @@ from tests.gt_utils import verify_classification, verify_detection
 
 
 @pytest.fixture
-def opencv_pipeline() -> ClassificationDetectionPipeline:
-    return DefaultTablePipeline(runtime=InferenceRuntime.OPENCV)
+def onnxruntime_pipeline() -> ClassificationDetectionPipeline:
+    return DefaultTablePipeline(runtime=InferenceRuntime.ONNXRUNTIME)
 
 
 @pytest.fixture
-def onnx_pipeline() -> ClassificationDetectionPipeline:
-    return DefaultTablePipeline(runtime=InferenceRuntime.ONNXRUNTIME)
+def opencv_pipeline() -> ClassificationDetectionPipeline:
+    return DefaultTablePipeline(runtime=InferenceRuntime.OPENCV)
 
 
 @pytest.fixture
@@ -40,13 +40,42 @@ def gt_file_path() -> Path:
     return Path(__file__).parent / "data" / "gt" / "wired.json"
 
 
+def test_onnxruntime_classification(
+    onnxruntime_pipeline: ClassificationDetectionPipeline,
+    test_image: NDArray,
+    gt_file_path: Path,
+) -> None:
+    result = onnxruntime_pipeline.classification_model([test_image])
+    verify_classification(gt_file_path, result[0])
+
+
+def test_onnxruntime_detection_wired(
+    onnxruntime_pipeline: ClassificationDetectionPipeline,
+    test_image: NDArray,
+    gt_file_path: Path,
+) -> None:
+    model = onnxruntime_pipeline.detection_models[0]
+    result = model([test_image])
+    verify_detection(gt_file_path, result[0], key="detection_wired")
+
+
+def test_onnxruntime_detection_wireless(
+    onnxruntime_pipeline: ClassificationDetectionPipeline,
+    test_image: NDArray,
+    gt_file_path: Path,
+) -> None:
+    model = onnxruntime_pipeline.detection_models[1]
+    result = model([test_image])
+    verify_detection(gt_file_path, result[0], key="detection_wireless")
+
+
 def test_opencv_classification(
     opencv_pipeline: ClassificationDetectionPipeline,
     test_image: NDArray,
     gt_file_path: Path,
 ) -> None:
     result = opencv_pipeline.classification_model([test_image])
-    verify_classification(gt_file_path, result[0])
+    verify_classification(gt_file_path, result[0], False)
 
 
 def test_opencv_detection_wired(
@@ -56,7 +85,7 @@ def test_opencv_detection_wired(
 ) -> None:
     model = opencv_pipeline.detection_models[0]
     result = model([test_image])
-    verify_detection(gt_file_path, result[0], key="detection_wired")
+    verify_detection(gt_file_path, result[0], False, key="detection_wired")
 
 
 def test_opencv_detection_wireless(
@@ -66,44 +95,15 @@ def test_opencv_detection_wireless(
 ) -> None:
     model = opencv_pipeline.detection_models[1]
     result = model([test_image])
-    verify_detection(gt_file_path, result[0], key="detection_wireless")
-
-
-def test_onnx_classification(
-    onnx_pipeline: ClassificationDetectionPipeline,
-    test_image: NDArray,
-    gt_file_path: Path,
-) -> None:
-    result = onnx_pipeline.classification_model([test_image])
-    verify_classification(gt_file_path, result[0], False)
-
-
-def test_onnx_detection_wired(
-    onnx_pipeline: ClassificationDetectionPipeline,
-    test_image: NDArray,
-    gt_file_path: Path,
-) -> None:
-    model = onnx_pipeline.detection_models[0]
-    result = model([test_image])
-    verify_detection(gt_file_path, result[0], False, key="detection_wired")
-
-
-def test_onnx_detection_wireless(
-    onnx_pipeline: ClassificationDetectionPipeline,
-    test_image: NDArray,
-    gt_file_path: Path,
-) -> None:
-    model = onnx_pipeline.detection_models[1]
-    result = model([test_image])
     verify_detection(gt_file_path, result[0], False, key="detection_wireless")
 
 
 def test_transformers_classification(
-    onnx_pipeline: ClassificationDetectionPipeline,
+    onnxruntime_pipeline: ClassificationDetectionPipeline,
     test_image: NDArray,
     gt_file_path: Path,
 ) -> None:
-    result = onnx_pipeline.classification_model([test_image])
+    result = onnxruntime_pipeline.classification_model([test_image])
     verify_classification(gt_file_path, result[0], False)
 
 

@@ -1,6 +1,6 @@
 import logging
 from abc import ABC, abstractmethod
-from collections.abc import Iterable
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
@@ -35,11 +35,11 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
             models_path: Path to directory containing model weights.
         """
 
-    def __call__(self, input: Iterable[Any], conf_threshold: float = 0.5, **kwargs) -> list[Table]:
+    def __call__(self, input: Sequence[Any], conf_threshold: float = 0.5, **kwargs) -> list[Table]:
         """Run the pipeline on input images.
 
         Args:
-            input: Iterable of input images (BGR format, uint8).
+            input: Sequence of input images (BGR format, uint8).
             conf_threshold: Confidence threshold for detections (0-1).
 
         Returns:

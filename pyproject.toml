@@ -1,6 +1,6 @@
 [project]
 name = "cells2table"
-version = "0.5.2"
+version = "0.6.0"
 description = "Table image parsing with cell detection models"
 readme = "README.md"
 requires-python = ">=3.12,<4.0"
@@ -37,7 +37,6 @@ transformers = ["transformers (>=5.8.1,<6.0.0)"]
 dev = [
   "cells2table[onnxruntime,transformers,opencv]",
   "docling (>=2.66.0,<3.0.0)",
-  "mkdocstrings-python (>=2.0.5,<3.0.0)",
   "pytest (>=7.0,<10.0)",
   "ruff (>=0.5.0,<1.0.0)",
   "torch (>=2.11.0,<3.0.0)",

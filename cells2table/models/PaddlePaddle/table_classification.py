@@ -1,5 +1,5 @@
 import logging
-from collections.abc import Iterable, Sequence
+from collections.abc import Sequence
 from pathlib import Path
 from typing import ClassVar, override
 
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 class PaddlePaddleTableClassificationModel(
-    ClassificationModel, OpenCVModel, ONNXRuntimeModel, TransformersModel
+    ClassificationModel, ONNXRuntimeModel, OpenCVModel, TransformersModel
 ):
     id2label: ClassVar[dict[int, str]] = {0: "wired", 1: "wireless"}
 
@@ -62,15 +62,15 @@ class PaddlePaddleTableClassificationModel(
         self._transformers_model = PPLCNetForImageClassification.from_pretrained(self.model_path)
         self._transformers_processor = PPLCNetImageProcessor.from_pretrained(self.model_path)
 
-    def __call__(self, input: Iterable[NDArray[np.uint8]]) -> list[Classification]:
+    def __call__(self, input: Sequence[NDArray[np.uint8]]) -> list[Classification]:
         return self._run_fn(input)
 
     @classmethod
-    def _onnx_preprocess(cls, input: Iterable[NDArray[np.uint8]]) -> NDArray:
+    def _onnx_preprocess(cls, input: Sequence[NDArray[np.uint8]]) -> NDArray:
         """PP-LCNet image preprocessing pipeline.
 
         Args:
-            input: iterable of HxWxC uint8 images (C=3, assumed BGR).
+            input: Sequence of HxWxC uint8 images (C=3, assumed BGR).
 
         Output:
             list of CxHxW float32 tensors (BGR order), normalized with PP-LCNet mean/std.
@@ -78,29 +78,12 @@ class PaddlePaddleTableClassificationModel(
         resize_short = 256  # shorter edge after resize
         crop_size = 224  # center crop size
 
-        cropped_imgs: list[NDArray] = []
+        mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
+        std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
 
-        scalefactor = (
-            1.0 / (255.0 * 0.229),  # B
-            1.0 / (255.0 * 0.224),  # G
-            1.0 / (255.0 * 0.225),  # R
-        )
-        mean = (
-            0.485 * 255.0,  # B
-            0.456 * 255.0,  # G
-            0.406 * 255.0,  # R
-        )
+        out = np.empty((len(input), 3, crop_size, crop_size), dtype=np.float32)
 
-        params = cv2.dnn.Image2BlobParams(
-            scalefactor=scalefactor,
-            mean=mean,
-            swapRB=False,
-            ddepth=cv2.CV_32F,
-            datalayout=cv2.DNN_LAYOUT_NCHW,
-        )
-
-        for img in input:
-            # Validate and coerce to expected dtype/layout (HWC, uint8, 3 channels)
+        for i, img in enumerate(input):
             if img.ndim != 3 or img.shape[2] != 3:
                 raise ValueError(f"Expected HxWx3 image, got shape={img.shape}")
             if img.dtype != np.uint8:
@@ -115,17 +98,19 @@ class PaddlePaddleTableClassificationModel(
             # Center-crop
             top = (new_size[1] - crop_size) // 2
             left = (new_size[0] - crop_size) // 2
-            cropped = resized[top : top + crop_size, left : left + crop_size, :]
+            cropped = resized[top : top + crop_size, left : left + crop_size]
 
-            cropped_imgs.append(cropped)
+            out[i] = (
+                cropped.transpose(2, 0, 1).astype(np.float32) / 255.0 - mean[:, None, None]
+            ) / std[:, None, None]
 
-        return cv2.dnn.blobFromImagesWithParams(cropped_imgs, params)
+        return out
 
     @classmethod
     def _postprocess(cls, pred: Sequence[Sequence[np.float32]]) -> list[Classification]:
         return [Classification(max(p), int(np.argmax(p))) for p in pred]
 
-    def _onnxruntime_run(self, input: Iterable[NDArray[np.uint8]]) -> list[Classification]:
+    def _onnxruntime_run(self, input: Sequence[NDArray[np.uint8]]) -> list[Classification]:
         logger.debug("Started preprocessing")
         images = self._onnx_preprocess(input)
 
@@ -145,7 +130,7 @@ class PaddlePaddleTableClassificationModel(
 
         return result
 
-    def _opencv_run(self, input: Iterable[NDArray[np.uint8]]) -> list[Classification]:
+    def _opencv_run(self, input: Sequence[NDArray[np.uint8]]) -> list[Classification]:
         logger.debug("Started preprocessing")
 
         images = self._onnx_preprocess(input)
@@ -165,7 +150,7 @@ class PaddlePaddleTableClassificationModel(
 
         return result
 
-    def _transformers_run(self, input: Iterable[NDArray[np.uint8]]) -> list[Classification]:
+    def _transformers_run(self, input: Sequence[NDArray[np.uint8]]) -> list[Classification]:
         logger.debug("Started preprocessing")
 
         import torch.nn.functional as F
