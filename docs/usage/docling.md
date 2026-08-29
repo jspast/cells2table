@@ -42,7 +42,15 @@ docling --allow-external-plugins --table-structure-engine=cells2table --layout-e
 
 Using from Python is also easy:
 
-``` python hl_lines="7-9"
+``` python hl_lines="15-17"
+from docling.datamodel.base_models import InputFormat
+from docling.datamodel.pipeline_options import PdfPipelineOptions
+from docling.document_converter import (
+    DocumentConverter,
+    ImageFormatOption,
+    PdfFormatOption,
+)
+
 from cells2table.docling import (
     CustomDoclingLayoutOptions,
     CustomDoclingTableStructureOptions,

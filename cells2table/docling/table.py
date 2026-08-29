@@ -152,8 +152,8 @@ class CustomDoclingTableStructureOptions(BaseTableStructureOptions):
     )
 
     runtime: Annotated[
-        InferenceRuntime, Field(description="Inference runtime to use. Defaults to OpenCV.")
-    ] = InferenceRuntime.OPENCV
+        InferenceRuntime, Field(description="Inference runtime to use. Defaults to ONNXRuntime.")
+    ] = DefaultTablePipeline._default_runtime
 
 
 class CustomDoclingTableStructureModel(BaseTableStructureModel):

@@ -2,12 +2,8 @@
 
 Document layout detection model for identifying page elements.
 
-- **Supported Runtimes**: Transformers, ONNX Runtime
+- **Supported Runtimes**: ONNX Runtime, Transformers
 - **Original model source**: https://huggingface.co/PaddlePaddle/PP-DocLayoutV3
-
-!!! warning
-
-    ONNX runtime support is experimental and outputs **differ significantly** from Transformers.
 
 !!! note
 

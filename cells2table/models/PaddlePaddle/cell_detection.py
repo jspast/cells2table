@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 class PaddlePaddleCellDetectionModel(
-    DetectionModel, OpenCVModel, ONNXRuntimeModel, TransformersModel
+    DetectionModel, ONNXRuntimeModel, OpenCVModel, TransformersModel
 ):
     """Table cell detection model from PaddlePaddle."""
 
@@ -169,16 +169,13 @@ class PaddlePaddleCellDetectionModel(
 
     @classmethod
     def _onnx_preprocess(cls, input: Sequence[NDArray[np.uint8]]) -> NDArray:
-        params = cv2.dnn.Image2BlobParams(
-            scalefactor=1.0 / 255.0,
-            size=cls._input_shape,
-            swapRB=False,
-            ddepth=cv2.CV_32F,
-            datalayout=cv2.DNN_LAYOUT_NCHW,
-            mode=cv2.dnn.DNN_PMODE_NULL,
-        )
+        out = np.empty((len(input), 3, cls._input_shape[0], cls._input_shape[1]), dtype=np.float32)
 
-        return cv2.dnn.blobFromImagesWithParams(input, params)
+        for i, img in enumerate(input):
+            resized = cv2.resize(img, cls._input_shape, interpolation=cv2.INTER_CUBIC)
+            out[i] = resized.transpose(2, 0, 1) * (1.0 / 255.0)
+
+        return out
 
     @classmethod
     def _onnx_postprocess(

@@ -20,7 +20,7 @@ class PaddlePaddleTablePipeline(ClassificationDetectionPipeline):
     while the wireless model is used for tables without visible borders.
     """
 
-    _default_runtime = InferenceRuntime.OPENCV
+    _default_runtime = InferenceRuntime.ONNXRUNTIME
 
     _onnx_dirname = "jspast--paddlepaddle-table-models-onnx"
 
