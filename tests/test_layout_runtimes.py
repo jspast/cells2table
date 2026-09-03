@@ -45,7 +45,7 @@ def test_onnxruntime(
     verify_classifieddetection(gt_file_path, result[0], key="detection")
 
 
-def test_transformers_detection_wired(
+def test_transformers(
     transformers_model: ClassifiedDetectionModel,
     test_image: NDArray,
     gt_file_path: Path,

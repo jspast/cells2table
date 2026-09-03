@@ -124,7 +124,6 @@ class CustomDoclingLayoutModel(BaseLayoutModel):
         pages = list(pages)
 
         page_images: list[np.ndarray] = []
-        image_page: list[int] = []
 
         for i, page in enumerate(pages):
             assert page._backend is not None
@@ -135,8 +134,7 @@ class CustomDoclingLayoutModel(BaseLayoutModel):
             if page_image is None:
                 continue
 
-            page_images.append(np.array(page_image, copy=True))
-            image_page.append(i)
+            page_images.append(np.asarray(page_image))
 
         if len(page_images) == 0:
             return []
@@ -148,8 +146,8 @@ class CustomDoclingLayoutModel(BaseLayoutModel):
             page.predictions.layout or LayoutPrediction() for page in pages
         ]
 
-        for page_id, image, out in zip(image_page, page_images, output):
-            page = pages[page_id]
+        for page_num, (image, out) in enumerate(zip(page_images, output)):
+            page = pages[page_num]
             clusters = self._predictions_to_clusters(page=page, image=image, detections=out)
 
             if settings.debug.visualize_raw_layout:
@@ -159,7 +157,7 @@ class CustomDoclingLayoutModel(BaseLayoutModel):
 
             # Emit raw clusters; post-processing and layout_score are
             # handled by the downstream LayoutPostprocessingModel stage.
-            predictions[page_id] = LayoutPrediction(clusters=clusters)
+            predictions[page_num] = LayoutPrediction(clusters=clusters)
 
         for page, prediction in zip(pages, predictions):
             page.predictions.layout = prediction

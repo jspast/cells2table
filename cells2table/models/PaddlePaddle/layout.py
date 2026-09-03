@@ -154,13 +154,8 @@ class PaddlePaddleLayoutModel(ClassifiedDetectionModel, ONNXRuntimeModel, Transf
     ) -> list[Iterator[ClassifiedDetection]]:
         logger.debug("Started preprocessing")
 
-        original_shapes = []
-        scale_factors = []
-        for img in input:
-            original_shape = img.shape[:2]
-            original_shapes.append(original_shape)
-            scale_factors.append(tuple(original_shape[i] / self._input_shape[i] for i in range(2)))
-
+        original_shapes = np.asarray([img.shape[:2] for img in input], dtype=np.float32)
+        scale_factors = original_shapes / np.asarray(self._input_shape, dtype=np.float32)
         imgs = self._onnx_preprocess(input)
 
         input_dict = dict(zip(self._onnx_input_names, [original_shapes, imgs, scale_factors]))
