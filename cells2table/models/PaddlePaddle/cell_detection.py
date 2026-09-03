@@ -67,13 +67,8 @@ class PaddlePaddleCellDetectionModel(
     ) -> list[Iterator[Detection]]:
         logger.debug("Started preprocessing")
 
-        original_shapes = []
-        scale_factors = []
-        for img in input:
-            original_shape = img.shape[:2]
-            original_shapes.append(original_shape)
-            scale_factors.append(tuple(original_shape[i] / self._input_shape[i] for i in range(2)))
-
+        original_shapes = np.asarray([img.shape[:2] for img in input], dtype=np.float32)
+        scale_factors = original_shapes / np.asarray(self._input_shape, dtype=np.float32)
         imgs = self._onnx_preprocess(input)
 
         input_dict = dict(zip(self._onnx_input_names, [original_shapes, imgs, scale_factors]))
@@ -99,20 +94,13 @@ class PaddlePaddleCellDetectionModel(
     ) -> list[Iterator[Detection]]:
         logger.debug("Started preprocessing")
 
-        original_shapes = []
-        scale_factors = []
-        for img in input:
-            original_shape = img.shape[:2]
-            original_shapes.append(original_shape)
-            scale_factor = np.array(
-                tuple(original_shape[i] / self._input_shape[i] for i in range(2))
-            )
-            scale_factors.append(scale_factor)
-
+        original_shapes = np.asarray([img.shape[:2] for img in input], dtype=np.float32)
+        scale_factors = original_shapes / np.asarray(self._input_shape, dtype=np.float32)
         imgs = self._onnx_preprocess(input)
-        self._opencv_net.setInput(np.array(original_shapes, dtype=np.float32), name="im_shape")
+
+        self._opencv_net.setInput(original_shapes, name="im_shape")
         self._opencv_net.setInput(imgs, name="image")
-        self._opencv_net.setInput(np.array(scale_factors), name="scale_factor")
+        self._opencv_net.setInput(scale_factors, name="scale_factor")
 
         logger.debug("Done preprocessing")
         logger.debug("Started running the model")

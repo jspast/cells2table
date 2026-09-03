@@ -78,19 +78,15 @@ def build_docling_table(
     scale: float,
     textcell_overlap: float = 0.3,
 ) -> Table:
-    cells: list[dict] = []
-
-    for cell in table.cells:
-        docling_cell_bbox: dict = {
-            "l": cell.bbox.l / scale + table_cluster.bbox.l,
-            "t": cell.bbox.t / scale + table_cluster.bbox.t,
-            "r": cell.bbox.r / scale + table_cluster.bbox.l,
-            "b": cell.bbox.b / scale + table_cluster.bbox.t,
-            "token": "",
-        }
-
-        docling_cell: dict = {
-            "bbox": docling_cell_bbox,
+    cells = [
+        {
+            "bbox": {
+                "l": cell.bbox.l / scale + table_cluster.bbox.l,
+                "t": cell.bbox.t / scale + table_cluster.bbox.t,
+                "r": cell.bbox.r / scale + table_cluster.bbox.l,
+                "b": cell.bbox.b / scale + table_cluster.bbox.t,
+                "token": "",
+            },
             "row_span": cell.row_span,
             "col_span": cell.col_span,
             "start_row_offset_idx": cell.row,
@@ -100,28 +96,27 @@ def build_docling_table(
             "column_header": False,
             "row_header": False,
             "row_section": False,
+            "text": "",
         }
-        cells.append(docling_cell)
+        for cell in table.cells
+    ]
 
     cell_matches = [
-        (element, BoundingBox.model_validate(element["bbox"]))
-        for element in cells
-        if element["bbox"] is not None
+        (cell, BoundingBox.model_validate(cell["bbox"]))
+        for cell in cells
+        if cell["bbox"] is not None
     ]
     matched_texts = _match_texts(
         [bbox for _, bbox in cell_matches],
         table_cluster.cells,
         textcell_overlap,
     )
-    for (element, bbox), text in zip(cell_matches, matched_texts):
-        element["text"] = text
+    for (cell, bbox), text in zip(cell_matches, matched_texts):
+        cell["text"] = text
         if not text.strip() and page._backend:
-            element["text"] = page._backend.get_text_in_rect(bbox)
+            cell["text"] = page._backend.get_text_in_rect(bbox)
 
-    table_cells: list[TableCell] = []
-    for element in cells:
-        tc = TableCell.model_validate(element)
-        table_cells.append(tc)
+    table_cells = [TableCell.model_validate(c) for c in cells]
 
     docling_table = Table(
         otsl_seq=[],

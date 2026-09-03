@@ -1,6 +1,6 @@
 import logging
 from abc import ABC, abstractmethod
-from collections.abc import Sequence
+from collections.abc import Iterable, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -35,7 +35,9 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
             models_path: Path to directory containing model weights.
         """
 
-    def __call__(self, input: Sequence[Any], conf_threshold: float = 0.5, **kwargs) -> list[Table]:
+    def __call__(
+        self, input: Sequence[Any], conf_threshold: float = 0.5, **kwargs
+    ) -> Iterable[Table]:
         """Run the pipeline on input images.
 
         Args:
@@ -43,20 +45,24 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
             conf_threshold: Confidence threshold for detections (0-1).
 
         Returns:
-            List of Table objects with computed structure.
+            Iterable of Table objects with computed structure.
         """
 
-        cls_images = [[] for c in self.classification_model.id2label]
-        cls_detections = [[] for c in self.classification_model.id2label]
-        cls_current_idx = [0 for c in self.classification_model.id2label]
-        output = []
+        cls_images = [[] for _ in self.classification_model.id2label]
+        cls_detections = [[] for _ in self.classification_model.id2label]
+        cls_current_idx = [0 for _ in self.classification_model.id2label]
 
         cls_result = self.classification_model(input)
 
         # Run the classification model for each image
         for i, (img, p) in enumerate(zip(input, cls_result)):
             cls_images[self.assigned_model_idx(p.id)].append(img)
-            logger.info("Image %d classified as %s with %.4f confidence", i, p.id, p.confidence)
+            logger.info(
+                "Image %d classified as '%s' with %.4f confidence",
+                i,
+                self.classification_model.id2label[p.id],
+                p.confidence,
+            )
 
         # Run the detection model for each image
         for i in range(len(self.classification_model.id2label)):
@@ -68,9 +74,7 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
             model_idx = self.assigned_model_idx(cls_result[i].id)
             cells_det = cls_detections[model_idx][cls_current_idx[model_idx]]
             cls_current_idx[model_idx] += 1
-            output.append(Table.from_detections(cells_det))
-
-        return output
+            yield Table.from_detections(cells_det)
 
     def debug(
         self,
@@ -88,7 +92,11 @@ class ClassificationDetectionPipeline(BasePipeline, ABC):
         """
         if detection_model_idx is None:
             c = self.classification_model([image])[0]
-            logger.info("Image classified as %s with %.4f confidence", c.id, c.confidence)
+            logger.info(
+                "Image classified as '%s' with %.4f confidence",
+                self.classification_model.id2label[c.id],
+                c.confidence,
+            )
 
             model_idx = self.assigned_model_idx(c.id)
         else:
