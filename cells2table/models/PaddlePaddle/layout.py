@@ -25,14 +25,14 @@ class PaddlePaddleLayoutModel(ClassifiedDetectionModel, ONNXRuntimeModel, Transf
     _input_shape = (800, 800)
 
     _onnx_input_names = ("im_shape", "image", "scale_factor")
-    _onnx_output_names = ("fetch_name_0", "fetch_name_1", "fetch_name_2")
+    _onnx_output_names = ("fetch_name_0", "fetch_name_1")
 
-    _onnx_repo: ClassVar[str] = "PaddlePaddle/PP-DocLayoutV3_onnx"
-    _onnx_path: ClassVar[str] = "inference.onnx"
+    _onnx_repo: ClassVar[str] = "jspast/PP-DocLayoutV3_nomask_onnx"
+    _onnx_path: ClassVar[str] = "pp-doclayoutv3_nomask.onnx"
     _onnx_download_options: ClassVar[list[DownloadOption]] = [
         DownloadOption(DownloadPlatform.HUGGINGFACE, _onnx_repo, (_onnx_path,)),
     ]
-    _onnx_dirname = "PaddlePaddle--PP-DocLayoutV3_onnx"
+    _onnx_dirname = "jspast--PP-DocLayoutV3_nomask_onnx"
 
     _transformers_repo: ClassVar[str] = "PaddlePaddle/PP-DocLayoutV3_safetensors"
     _transformers_download_options: ClassVar[list[DownloadOption]] = [
