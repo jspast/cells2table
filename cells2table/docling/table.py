@@ -1,7 +1,7 @@
 import os
 from collections.abc import Iterable, Sequence
 from pathlib import Path
-from typing import Annotated, ClassVar, Literal
+from typing import Annotated, ClassVar
 
 import numpy
 
@@ -133,7 +133,7 @@ def build_docling_table(
 
 
 class CustomDoclingTableStructureOptions(BaseTableStructureOptions):
-    kind: ClassVar[Literal["cells2table"]] = "cells2table"
+    kind: ClassVar[str] = "cells2table"
 
     confidence_threshold: Annotated[
         float,

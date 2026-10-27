@@ -2,7 +2,7 @@ import logging
 import os
 from collections.abc import Iterator, Sequence
 from pathlib import Path
-from typing import Annotated, ClassVar, Literal
+from typing import Annotated, ClassVar
 
 import numpy as np
 
@@ -28,7 +28,7 @@ _log = logging.getLogger(__name__)
 
 
 class CustomDoclingLayoutOptions(BaseLayoutOptions):
-    kind: ClassVar[Literal["ppdoclayoutv3"]] = "ppdoclayoutv3"
+    kind: ClassVar[str] = "ppdoclayoutv3"
 
     confidence_threshold: Annotated[
         float,
