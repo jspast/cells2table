@@ -8,7 +8,7 @@ site_author = "jspast"
 
 repo_url = "https://github.com/jspast/cells2table"
 repo_name = "jspast/cells2table"
-# edit_uri = "edit/main/docs/"
+edit_uri = "edit/main/docs/"
 
 docs_dir = "docs"
 site_dir = "site"
