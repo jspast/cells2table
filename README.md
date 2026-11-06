@@ -23,3 +23,26 @@ uv add cells2table
 ## Usage
 
 Check the [documentation](https://jspast.github.io/cells2table/).
+
+## Citation
+
+``` bibtex
+@InProceedings{Pastorello2027TableStructureRecognition,
+  author    = {Pastorello, Jo{\~a}o Speranza and
+               Tamiosso, Gustavo Lopes and
+               de Oliveira, Gabriel Bauer and
+               Geiger, Albert and
+               da Silveira, Evandro Dalbosco and
+               Balreira, Dennis Giovani and
+               Tavares, Anderson Rocha},
+  editor    = {Recamonde-Mendoza, Mariana and Barros, Rodrigo C.},
+  title     = {Efficient Table Structure Recognition via Deep Learning and Lightweight Heuristics},
+  booktitle = {Intelligent Systems},
+  year      = {2027},
+  publisher = {Springer Nature Switzerland},
+  address   = {Cham},
+  pages     = {643--657},
+  isbn      = {978-3-032-39895-6},
+  doi       = {10.1007/978-3-032-39895-6_43}
+}
+```
